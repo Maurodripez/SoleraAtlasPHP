@@ -1,0 +1,40 @@
+[
+    {
+        "numSiniestro": "1234",
+        "fechaSiniestro": "2020-12-12",
+        "numPoliza": "12345",
+        "cobertura": "DM",
+        "afectado": "A",
+        "nomAsegurado": "Marin",
+        "regimen": "Persona fisica",
+        "telefonoPrincipal": "2342525235",
+        "telefonoSec": "13537656",
+        "correo": "sdad@sdfs.com",
+        "marca": "suzuki",
+        "tipo": "ignis",
+        "modelo": "2019",
+        "numSerie": "23425636756585856",
+        "ciudad": "Chiapas",
+        "fechaDecreto": "2022-12-11",
+        "taller": "Tlalpan"
+    },
+    {
+        "numSiniestro": "2343",
+        "fechaSiniestro": "2020-10-12",
+        "numPoliza": "45646",
+        "cobertura": "DM",
+        "afectado": "A",
+        "nomAsegurado": "Martha",
+        "regimen": "Persona fisica",
+        "telefonoPrincipal": "457576",
+        "telefonoSec": "67976967",
+        "correo": "sdadasd@sdfs.com",
+        "marca": "toyota",
+        "tipo": "yris",
+        "modelo": "2019",
+        "numSerie": "89080776868",
+        "ciudad": "Puebla",
+        "fechaDecreto": "2022-10-11",
+        "taller": "Benito Juarez"
+    }
+]

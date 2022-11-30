@@ -1,0 +1,8 @@
+#mapaMexico {
+  width: 800px;
+  height: 500px;
+  fill: rgb(166, 166, 166);
+}
+.divMapaMexico :hover {
+  fill: rgb(0, 55, 255);
+}

@@ -1,0 +1,150 @@
+#card0a2D {
+    background-color: #d2d6de;
+  }
+  #card3a5D {
+    background-color: #dff0d8;
+  }
+  #card6a14D {
+    background-color: #fcf8e3;
+  }
+  #cardMas15D {
+    background-color: #f2dede;
+  }
+  #card0a2M {
+    background-color: #d2d6de;
+  }
+  #card3a5M {
+    background-color: #dff0d8;
+  }
+  #card6a14M {
+    background-color: #fcf8e3;
+  }
+  #cardMas15M {
+    background-color: #f2dede;
+  }
+  body {
+    background-color: #f5f5f5;
+  }
+  #txtBuscar0a2 {
+    background-color: #a1a4ab;
+    border: none;
+  }
+  #txtBuscar0a2:hover {
+    background-color: #7988ad;
+  }
+  #txtBuscar3a5 {
+    background-color: #afbdaa;
+    border: none;
+  }
+  #txtBuscar3a5:hover {
+    background-color: #95c285;
+  }
+  #txtBuscar6a14 {
+    background-color: #c9c5b5;
+    border: none;
+  }
+  #txtBuscar6a14:hover {
+    background-color: #ccbe87;
+  }
+  #txtBuscarMas15 {
+    background-color: #bfafaf;
+    border: none;
+  }
+  #txtBuscarMas15:hover {
+    background-color: #bb8282;
+  }
+  #btnMsg0a2 {
+    background-color: #a1a4ab;
+    border: none;
+  }
+  #btnMsg0a2:hover {
+    background-color: #7988ad;
+  }
+  #btnMsg3a5 {
+    background-color: #afbdaa;
+    border: none;
+  }
+  #btnMsg3a5:hover {
+    background-color: #95c285;
+  }
+  #btnMsg6a14 {
+    background-color: #c9c5b5;
+    border: none;
+  }
+  #btnMsg6a14:hover {
+    background-color: #ccbe87;
+  }
+  #btnMsgMas15 {
+    background-color: #bfafaf;
+    border: none;
+  }
+  #btnMsgMas15:hover {
+    background-color: #bb8282;
+  }
+  .acordeonPrincipal {
+    background-color: #d2d6de;
+  }
+  .tablasPrincipales {
+    background-color: #9896c7;
+  }
+  #TablaPGeneral {
+    background-color: #ffffff;
+  }
+  .letreroCedula {
+    background-color: #605ca8;
+    color: #ffffff;
+  }
+  #btnDocsMostrar{
+    background-color:#008d4c;
+  }
+  #encabezadoTabla{
+    background-color: #605ca8;
+    color: #ffffff;
+  }
+  #seccionBotones{
+    background-color: #605ca8;
+    color: #ffffff;
+  }
+#encabezadoDatos{
+  font-size: 30px;
+}
+.fechaInput {
+  border: none;
+}
+.fSeguimientoClass{
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.SiniestrosDesglozados{
+  border: none;
+  padding: 0%;
+}
+#svgCardCheck{
+  padding: 0%;
+  margin:0%;
+  border: none;
+}
+.letrerosDias{
+  padding: 0%;
+  border: none;
+}
+.fondodesglozados{
+  background-color: transparent;
+  border: none;
+}
+.accordion-button{
+  background-color: #d2d6de;
+}
+#SeleccionaCalendario{
+  padding: 0%;
+  border:none;
+  fill: none;
+}
+.btnSeleccionar{
+  border-color: #ced4da;
+}

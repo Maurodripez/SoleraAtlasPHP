@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+#foliosGrafica {
+  max-width: 600px auto;
+  margin: 35px auto;
+}
+#seguimientosGrafica {
+  margin: 35px auto;
+  padding-right: 30px;
+}
+#foliosEntregados{
+  max-width: auto;
+}
+#disPorDias {
+  max-width: 650px;
+  margin: 35px auto;
+}
+#docsGrafica {
+  max-width: 600px auto;
+  margin: 35px auto;
+}
