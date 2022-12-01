@@ -1,10 +1,5 @@
 var contador = 0;
 var contadorSeg = 0;
-window.addEventListener("load", function () {
-  valoresSesiones();
-  recargarSiniestros();
-  //muestra los dias paasados por documentos
-});
 function buscarDatos() {
   txtFechaCarga = document.getElementById("txtFechaCarga").value;
   txtEstacion = document.getElementById("txtEstacion").value;
@@ -437,7 +432,7 @@ function InsertarSeguimiento() {
       fechaFactServ: document.getElementById("txtFechaFactServ").value,
       fechaTermino: document.getElementById("txtFechaTermino").value,
       idRegistro: document.getElementById("idOculto").value,
-      usuario: document.getElementById("UsuarioActivo").textContent,
+      //usuario: document.getElementById("UsuarioActivo").textContent,
     },
     success: function (result) {
       alert(result);
@@ -538,7 +533,7 @@ function guardarDocsAprobados(id) {
     },
   });
 }
-function valoresSesiones() {
+/*function valoresSesiones() {
   let sesion = document.getElementById("UsuarioActivo").textContent;
   $.ajax({
     method: "POST",
@@ -561,9 +556,9 @@ function valoresSesiones() {
       }
     },
   });
-}
-function validarEliminar() {
-  let sesion = document.getElementById("UsuarioActivo").textContent;
+}*/
+/*function validarEliminar() {
+  //let sesion = document.getElementById("UsuarioActivo").textContent;
   $.ajax({
     method: "POST",
     url: "../ValidarSesiones",
@@ -577,7 +572,7 @@ function validarEliminar() {
       }
     },
   });
-}
+}*/
 function controlPaginado() {
   //funcion para controlar el pagina de los resultados
   let paginaMas = document.getElementById("botonClickMas");
@@ -789,31 +784,24 @@ function mostrarHistorico() {
   });
 }
 function mostrarTabla(result) {
+  console.log(result);
   //funcion para generar talbas en automatico con lo resultados
   let tablaDatos = document.getElementById("DatosTabla");
-  let sinDiagonal = result.split("/_-");
   $(".tablaActual").remove();
   $(".tBody").remove();
-  let resultado = (sinDiagonal.length - 1) / 10;
-  let cantidadTablas;
-  if (resultado % 1 == 0) {
-    cantidadTablas = resultado;
-  } else {
-    cantidadTablas = Math.trunc((sinDiagonal.length - 1) / 10) + 2;
-  }
   let numeroTBody = 0;
   let tblBody = new Array();
   tblBody[numeroTBody] = document.createElement("tbody");
   tblBody[numeroTBody].setAttribute("class", "tBody");
   tblBody[numeroTBody].setAttribute("id", "tBody:" + numeroTBody);
   tablaDatos.appendChild(tblBody[numeroTBody]);
-  for (let i = 0; i < sinDiagonal.length - 1; i++) {
-    let sinComas = sinDiagonal[i].split("-_/");
+
+  for (let i in result.Siniestros) {
     if (i % 9 == 0 && i != 0) {
       // Creando los 'td' que almacenará cada parte de la información del usuario actual
       let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
       <button type='button' id=${
-        sinComas[0] + ",Eliminar"
+        result.Siniestros[i].idRegistro + ",Eliminar"
       } class='btnEliminar btn btn-danger'
       onclick='eliminarSiniestro(this.id)' style='display:none'>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -825,7 +813,7 @@ function mostrarTabla(result) {
       <line x1="14" y1="11" x2="14" y2="17"></line>
       </svg></button>
       <button type='button' id=${
-        sinComas[0]
+        result.Siniestros[i].idRegistro
       } class='btn btn-primary' data-bs-toggle='modal'
       data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
       width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
@@ -835,18 +823,18 @@ function mostrarTabla(result) {
       0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
       </svg></button>
     </div></td>`;
-      registro = `<td style='font-size: 14px' class='tablaActual'>${sinComas[0]}</td>`;
-      siniestro = `<td style='font-size: 14px' class='tablaActual'>${sinComas[1]}</td>`;
-      poliza = `<td style='font-size: 14px' class='tablaActual'>${sinComas[2]}</td>`;
-      marca = `<td style='font-size: 14px' class='tablaActual'>${sinComas[3]}</td>`;
-      tipo = `<td style='font-size: 14px' class='tablaActual'>${sinComas[4]}</td>`;
-      serie = `<td style='font-size: 14px' class='tablaActual'>${sinComas[5]}</td>`;
-      carga = `<td style='font-size: 14px' class='tablaActual'>${sinComas[6]}</td>`;
-      estacion = `<td style='font-size: 14px' class='tablaActual'>${sinComas[7]}</td>`;
-      estatus = `<td style='font-size: 14px' class='tablaActual'>${sinComas[8]}</td>`;
-      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${sinComas[9]}</td>`;
-      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${sinComas[10]}</td>`;
-      estado = `<td style='font-size: 14px' class='tablaActual'>${sinComas[11]}</td>`;
+      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
+      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
+      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
+      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
+      tipo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
+      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
+      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
+      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusSeguimientoSin}</td>`;
+      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
       tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
         btnGrupo +
         registro +
@@ -872,7 +860,7 @@ function mostrarTabla(result) {
       // Creando los 'td' que almacenará cada parte de la información del usuario actual
       let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
       <button type='button' id=${
-        sinComas[0] + ",Eliminar"
+        result.Siniestros[i].marca + ",Eliminar"
       } class='btnEliminar btn btn-danger'
       onclick='eliminarSiniestro(this.id)' style='display:none'>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -884,7 +872,7 @@ function mostrarTabla(result) {
       <line x1="14" y1="11" x2="14" y2="17"></line>
       </svg></button>
       <button type='button' id=${
-        sinComas[0]
+        result.Siniestros[i].marca
       } class='btn btn-primary' data-bs-toggle='modal'
       data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
       width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
@@ -894,18 +882,18 @@ function mostrarTabla(result) {
       0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
       </svg></button>
     </div></td>`;
-      let registro = `<td style='font-size: 14px' class='tablaActual'>${sinComas[0]}</td>`;
-      let siniestro = `<td style='font-size: 14px' class='tablaActual'>${sinComas[1]}</td>`;
-      let poliza = `<td style='font-size: 14px' class='tablaActual'>${sinComas[2]}</td>`;
-      let marca = `<td style='font-size: 14px' class='tablaActual'>${sinComas[3]}</td>`;
-      let tipo = `<td style='font-size: 14px' class='tablaActual'>${sinComas[4]}</td>`;
-      let serie = `<td style='font-size: 14px' class='tablaActual'>${sinComas[5]}</td>`;
-      let carga = `<td style='font-size: 14px' class='tablaActual'>${sinComas[6]}</td>`;
-      let estacion = `<td style='font-size: 14px' class='tablaActual'>${sinComas[7]}</td>`;
-      let estatus = `<td style='font-size: 14px' class='tablaActual'>${sinComas[8]}</td>`;
-      let porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${sinComas[9]}</td>`;
-      let porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${sinComas[10]}</td>`;
-      let estado = `<td style='font-size: 14px' class='tablaActual'>${sinComas[11]}</td>`;
+      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
+      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
+      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
+      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
+      tipo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
+      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
+      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
+      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusSeguimientoSin}</td>`;
+      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
       tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
         btnGrupo +
         registro +
@@ -923,7 +911,7 @@ function mostrarTabla(result) {
       }</tr>`;
     }
   }
-  validarEliminar();
+  //validarEliminar();
 }
 function tablaSeguimiento() {
   $.ajax({
@@ -1054,7 +1042,7 @@ function asignarIntegrador() {
       accion: "AsignarIntegrador",
       integrador: document.getElementById("txtIntegrador").value,
       idRegistro: document.getElementById("idOculto").value,
-      usuario: document.getElementById("UsuarioActivo").textContent,
+      // usuario: document.getElementById("UsuarioActivo").textContent,
     },
   }).done(function (result) {
     alert(result);
@@ -1116,15 +1104,15 @@ function funcionAjaxParaFiltros(filtro, getId) {
   $.ajax({
     method: "POST",
     url: "../../php/mostrarSiniestrosDias.php",
+    dataType: "json",
     data: {
       mayor: sinComas[0],
       menor: sinComas[1],
       accion: filtro,
     },
-    success: function (result) {
-      console.log(result);
-      mostrarTabla(result);
-    },
+  }).done(function (result) {
+    console.log(result);
+    mostrarTabla(result);
   });
 }
 function exportarUsuarios() {

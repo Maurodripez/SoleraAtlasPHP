@@ -7,7 +7,11 @@ function leerArchivo(e) {
     lector.onload = function (e) {
       let contenido = e.target.result;
       let contenidoJson = JSON.parse(contenido);
-      for (let i of contenidoJson) {
+      console.log(contenidoJson);
+      for (let i of contenidoJson){
+        console.log(i.numPoliza);
+      }
+     /* for (let i of contenidoJson) {
         $.ajax({
           method: "POST",
           url: "../CargarSiniestro",
@@ -34,7 +38,7 @@ function leerArchivo(e) {
             console.log(result);
           },
         });
-      }
+      }*/
       mostrarContenido(contenido);
     };
     lector.readAsText(archivo);
@@ -42,7 +46,6 @@ function leerArchivo(e) {
   document
     .getElementById("file-input")
     .addEventListener("change", leerArchivo, false);
-    alert("wer");
   const excelInput = document.getElementById("LeerExcel");
   excelInput.addEventListener("change", async function () {
     const contenido = await readXlsxFile(excelInput.files[0]);

@@ -1,11 +1,14 @@
 <?php      
-    $host = "localhost";  
-    $user = "root";  
-    $password = '';  
-    $db_name = "soleraatlas";  
-      
-    $con = mysqli_connect($host, $user, $password, $db_name);  
-    if(mysqli_connect_errno()) {  
-        die("Failed to connect with MySQL: ". mysqli_connect_error());  
-    }  
-?>  
+$DBhost = "localhost";
+$DBuser = "root";
+$DBpass = "";
+$DBname = "soleraatlas";
+
+try{
+ 
+ $DBcon = new PDO("mysql:host=$DBhost;dbname=$DBname",$DBuser,$DBpass);
+ $DBcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}catch(PDOException $ex){
+ 
+ die($ex->getMessage());
+}

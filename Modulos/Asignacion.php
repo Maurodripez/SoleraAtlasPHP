@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  <%@ page contentType="text/html; charset=UTF-8" %>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +12,6 @@
 </head>
 
 <body class="p-2">
-  <b style="display: none" id="UsuarioActivo"><%= (String) session.getAttribute("sesionUsuario") %></b>
   <div class="card" style="width: 40rem;">
     <div class="card-body">
       <h5 class="card-title">Asignacion de Siniestros</h5>
