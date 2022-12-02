@@ -1,50 +1,249 @@
 var contador = 0;
 var contadorSeg = 0;
-function buscarDatos() {
-  txtFechaCarga = document.getElementById("txtFechaCarga").value;
-  txtEstacion = document.getElementById("txtEstacion").value;
-  if (txtEstacion == "Selecciona...") {
-    txtEstacion = "";
-  }
-  txtEstatus = document.getElementById("txtEstatus").value;
-  if (txtEstatus == "Selecciona...") {
-    txtEstatus = "";
-  }
-  txtSubEstatus = document.getElementById("txtSubEstatus").value;
-  if (txtSubEstatus == "Selecciona...") {
-    txtSubEstatus = "";
-  }
-  txtFechaSeguimiento = document.getElementById("txtFechaSeguimiento").value;
-  txtRegion = document.getElementById("txtRegion").value;
-  if (txtRegion == "Selecciona...") {
-    txtRegion = "";
-  }
-  txtEstado = document.getElementById("txtEstado").value;
-  if (txtEstado == "Selecciona...") {
-    txtEstado = "";
-  }
-  txtCobertura = document.getElementById("txtCobertura").value;
-  if (txtCobertura == "Selecciona...") {
-    txtCobertura = "";
-  }
+function busquedaFiltro(thisValue, accion) {
   $.ajax({
-    url: "../ControladorMostrarDatos",
+    method: "POST",
+    url: "../../php/Busquedas.php",
+    dataType: "json",
     data: {
-      accion: "mostrarTabla",
-      fechaCarga: txtFechaCarga,
-      estacion: txtEstacion,
-      estatus: txtEstatus,
-      subEstatus: txtSubEstatus,
-      fechaSeguimiento: txtFechaSeguimiento,
-      region: txtRegion,
-      estado: txtEstado,
-      cobertura: txtCobertura,
+      filtro: thisValue,
+      columna:"idRegistro",
+      accion,
     },
     success: function (result) {
+      console.log(result);
       mostrarTabla(result);
-      buscarDatosExportar();
     },
   });
+}
+function mostrarTabla(result) {
+  //funcion para generar talbas en automatico con lo resultados
+  let tablaDatos = document.getElementById("DatosTabla");
+  $(".tablaActual").remove();
+  $(".tBody").remove();
+  let numeroTBody = 0;
+  let tblBody = new Array();
+  tblBody[numeroTBody] = document.createElement("tbody");
+  tblBody[numeroTBody].setAttribute("class", "tBody");
+  tblBody[numeroTBody].setAttribute("id", "tBody:" + numeroTBody);
+  tablaDatos.appendChild(tblBody[numeroTBody]);
+
+  for (let i in result.Siniestros) {
+    if (i % 9 == 0 && i != 0) {
+      // Creando los 'td' que almacenará cada parte de la información del usuario actual
+      let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
+      <button type='button' id=${
+        result.Siniestros[i].idRegistro + ",Eliminar"
+      } class='btnEliminar btn btn-danger'
+      onclick='eliminarSiniestro(this.id)' style='display:none'>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round" class="feather feather-trash-2">
+      <polyline points="3 6 5 6 21 6"></polyline>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      <line x1="10" y1="11" x2="10" y2="17"></line>
+      <line x1="14" y1="11" x2="14" y2="17"></line>
+      </svg></button>
+      <button type='button' id=${
+        result.Siniestros[i].idRegistro
+      } class='btn btn-primary' data-bs-toggle='modal'
+      data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
+      width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+      <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 
+      1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+      <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 
+      0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
+      </svg></button>
+    </div></td>`;
+      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
+      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
+      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
+      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      modelo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
+      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
+      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
+      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
+      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusOperativo}</td>`;
+      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeDocs}</td>`;
+      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeTotal}</td>`;
+      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
+      tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
+        btnGrupo +
+        registro +
+        siniestro +
+        poliza +
+        marca +
+        modelo +
+        serie +
+        carga +
+        estacion +
+        estatus +
+        estado +
+        porcentajeDocs +
+        porcentajeTotal
+      }</tr>`;
+      numeroTBody += 1;
+      tblBody[numeroTBody] = document.createElement("tbody");
+      tblBody[numeroTBody].setAttribute("class", "tBody");
+      tblBody[numeroTBody].setAttribute("id", "tBody:" + numeroTBody);
+      tblBody[numeroTBody].style.display = "none";
+      tablaDatos.appendChild(tblBody[numeroTBody]);
+    } else {
+      // Creando los 'td' que almacenará cada parte de la información del usuario actual
+      let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
+      <button type='button' id=${
+        result.Siniestros[i].marca + ",Eliminar"
+      } class='btnEliminar btn btn-danger'
+      onclick='eliminarSiniestro(this.id)' style='display:none'>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round" class="feather feather-trash-2">
+      <polyline points="3 6 5 6 21 6"></polyline>
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      <line x1="10" y1="11" x2="10" y2="17"></line>
+      <line x1="14" y1="11" x2="14" y2="17"></line>
+      </svg></button>
+      <button type='button' id=${
+        result.Siniestros[i].marca
+      } class='btn btn-primary' data-bs-toggle='modal'
+      data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
+      width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+      <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 
+      1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+      <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 
+      0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
+      </svg></button>
+    </div></td>`;
+      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
+      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
+      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
+      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      modelo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
+      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
+      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
+      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
+      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusOperativo}</td>`;
+      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeDocs}%</td>`;
+      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeTotal}%</td>`;
+      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
+      tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
+        btnGrupo +
+        registro +
+        siniestro +
+        poliza +
+        marca +
+        modelo +
+        serie +
+        carga +
+        estacion +
+        estatus +
+        estado +
+        porcentajeDocs +
+        porcentajeTotal
+      }</tr>`;
+    }
+  }
+  //validarEliminar();
+}
+function datosPorDefecto() {
+  $.ajax({
+    method: "POST",
+    url: "../../php/mostrarSiniestrosDias.php",
+    dataType: "json",
+    data: {
+      accion: "datosPorDefecto",
+    },
+  }).done(function (result) {
+    mostrarTabla(result);
+  });
+}
+function busquedaPorDias(getId) {
+  let checkTerminados = document.getElementById("terminadosBtn");
+  let checkSeguimiento = document.getElementById("enSeguimientoBtn");
+  let checkIncorrectos = document.getElementById("datosIncorrectosBtn");
+  if (
+    checkTerminados.checked == true &&
+    checkSeguimiento.checked == true &&
+    checkIncorrectos.checked == true
+  ) {
+    funcionAjaxParaFiltros("3Checked", getId);
+  } else if (
+    checkTerminados.checked == true &&
+    checkSeguimiento.checked == true
+  ) {
+    funcionAjaxParaFiltros("terminadoSeguimiento", getId);
+  } else if (
+    checkTerminados.checked == true &&
+    checkIncorrectos.checked == true
+  ) {
+    funcionAjaxParaFiltros("terminadoIncorrecto", getId);
+  } else if (
+    checkSeguimiento.checked == true &&
+    checkIncorrectos.checked == true
+  ) {
+    funcionAjaxParaFiltros("seguimientoIncorrecto", getId);
+  } else if (checkTerminados.checked == true) {
+    funcionAjaxParaFiltros("terminado", getId);
+  } else if (checkSeguimiento.checked == true) {
+    funcionAjaxParaFiltros("seguimiento", getId);
+  } else if (checkIncorrectos.checked == true) {
+    funcionAjaxParaFiltros("incorrectos", getId);
+  } else if (
+    checkTerminados.checked == false &&
+    checkSeguimiento.checked == false &&
+    checkIncorrectos.checked == false
+  ) {
+    funcionAjaxParaFiltros("3Checked", getId);
+  }
+}
+function buscarDatos() {
+  $.ajax({
+    method: "POST",
+    url: "../../php/FuncionConsultas.php",
+    dataType: "json",
+    data: {
+      accion: "Hola",
+    },
+    success: function (result) {
+      console.log(result);
+      mostrarTabla(result);
+    },
+  });
+}
+////////////////////////////
+
+function busquedaConFiltros() {
+  let checkTerminados = document.getElementById("terminadosBtn");
+  let checkSeguimiento = document.getElementById("enSeguimientoBtn");
+  let checkIncorrectos = document.getElementById("datosIncorrectosBtn");
+  if (
+    checkTerminados.checked == true &&
+    checkSeguimiento.checked == true &&
+    checkIncorrectos.checked == true
+  ) {
+    funcionAjaxParaFiltros("3Checked");
+  } else if (
+    checkTerminados.checked == true &&
+    checkSeguimiento.checked == true
+  ) {
+    funcionAjaxParaFiltros("terminadoSeguimiento");
+  } else if (
+    checkTerminados.checked == true &&
+    checkIncorrectos.checked == true
+  ) {
+    funcionAjaxParaFiltros("terminadoIncorrecto");
+  } else if (
+    checkSeguimiento.checked == true &&
+    checkIncorrectos.checked == true
+  ) {
+    funcionAjaxParaFiltros("seguimientoIncorrecto");
+  } else if (checkTerminados.checked == true) {
+    funcionAjaxParaFiltros("terminado");
+  } else if (checkSeguimiento.checked == true) {
+    funcionAjaxParaFiltros("seguimiento");
+  } else if (checkIncorrectos.checked == true) {
+    funcionAjaxParaFiltros("incorrectos");
+  }
 }
 function cambiarNombre(get) {
   /////se recibe el parametro id
@@ -441,6 +640,7 @@ function InsertarSeguimiento() {
   });
 }
 $(document).ready(function () {
+  datosPorDefecto();
   estaciones();
   controlPaginado();
   //funcion para limpiar el regitro
@@ -692,57 +892,6 @@ function recargarSiniestros() {
     },
   });
 }
-function busquedaGeneral(thisValue) {
-  $.ajax({
-    method: "POST",
-    url: "../BusquedaGeneral",
-    data: {
-      filtro: thisValue,
-    },
-    success: function (result) {
-      mostrarTabla(result);
-    },
-  });
-}
-function busquedaPorDias(getId) {
-  let checkTerminados = document.getElementById("terminadosBtn");
-  let checkSeguimiento = document.getElementById("enSeguimientoBtn");
-  let checkIncorrectos = document.getElementById("datosIncorrectosBtn");
-  if (
-    checkTerminados.checked == true &&
-    checkSeguimiento.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("3Checked", getId);
-  } else if (
-    checkTerminados.checked == true &&
-    checkSeguimiento.checked == true
-  ) {
-    funcionAjaxParaFiltros("terminadoSeguimiento", getId);
-  } else if (
-    checkTerminados.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("terminadoIncorrecto", getId);
-  } else if (
-    checkSeguimiento.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("seguimientoIncorrecto", getId);
-  } else if (checkTerminados.checked == true) {
-    funcionAjaxParaFiltros("terminado", getId);
-  } else if (checkSeguimiento.checked == true) {
-    funcionAjaxParaFiltros("seguimiento", getId);
-  } else if (checkIncorrectos.checked == true) {
-    funcionAjaxParaFiltros("incorrectos", getId);
-  } else if (
-    checkTerminados.checked == false &&
-    checkSeguimiento.checked == false &&
-    checkIncorrectos.checked == false
-  ) {
-    funcionAjaxParaFiltros("3Checked", getId);
-  }
-}
 function enviarImagenes() {
   let imagen;
   imagen = new FormData(document.getElementById("archivoCargado"));
@@ -782,136 +931,6 @@ function mostrarHistorico() {
     let usuario = `<td class='historicoTablaDatos'>${sinCodificar[2]}</td>`;
     tabla.innerHTML += `<tr>${fechaCarga + estatus + usuario}</tr>`;
   });
-}
-function mostrarTabla(result) {
-  console.log(result);
-  //funcion para generar talbas en automatico con lo resultados
-  let tablaDatos = document.getElementById("DatosTabla");
-  $(".tablaActual").remove();
-  $(".tBody").remove();
-  let numeroTBody = 0;
-  let tblBody = new Array();
-  tblBody[numeroTBody] = document.createElement("tbody");
-  tblBody[numeroTBody].setAttribute("class", "tBody");
-  tblBody[numeroTBody].setAttribute("id", "tBody:" + numeroTBody);
-  tablaDatos.appendChild(tblBody[numeroTBody]);
-
-  for (let i in result.Siniestros) {
-    if (i % 9 == 0 && i != 0) {
-      // Creando los 'td' que almacenará cada parte de la información del usuario actual
-      let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
-      <button type='button' id=${
-        result.Siniestros[i].idRegistro + ",Eliminar"
-      } class='btnEliminar btn btn-danger'
-      onclick='eliminarSiniestro(this.id)' style='display:none'>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" class="feather feather-trash-2">
-      <polyline points="3 6 5 6 21 6"></polyline>
-      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-      <line x1="10" y1="11" x2="10" y2="17"></line>
-      <line x1="14" y1="11" x2="14" y2="17"></line>
-      </svg></button>
-      <button type='button' id=${
-        result.Siniestros[i].idRegistro
-      } class='btn btn-primary' data-bs-toggle='modal'
-      data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
-      width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
-      <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 
-      1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
-      <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 
-      0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
-      </svg></button>
-    </div></td>`;
-      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
-      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
-      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
-      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
-      tipo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
-      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
-      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
-      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusSeguimientoSin}</td>`;
-      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
-      tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
-        btnGrupo +
-        registro +
-        siniestro +
-        poliza +
-        marca +
-        tipo +
-        serie +
-        carga +
-        estacion +
-        estatus +
-        porcentajeDocs +
-        porcentajeTotal +
-        estado
-      }</tr>`;
-      numeroTBody += 1;
-      tblBody[numeroTBody] = document.createElement("tbody");
-      tblBody[numeroTBody].setAttribute("class", "tBody");
-      tblBody[numeroTBody].setAttribute("id", "tBody:" + numeroTBody);
-      tblBody[numeroTBody].style.display = "none";
-      tablaDatos.appendChild(tblBody[numeroTBody]);
-    } else {
-      // Creando los 'td' que almacenará cada parte de la información del usuario actual
-      let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
-      <button type='button' id=${
-        result.Siniestros[i].marca + ",Eliminar"
-      } class='btnEliminar btn btn-danger'
-      onclick='eliminarSiniestro(this.id)' style='display:none'>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" class="feather feather-trash-2">
-      <polyline points="3 6 5 6 21 6"></polyline>
-      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-      <line x1="10" y1="11" x2="10" y2="17"></line>
-      <line x1="14" y1="11" x2="14" y2="17"></line>
-      </svg></button>
-      <button type='button' id=${
-        result.Siniestros[i].marca
-      } class='btn btn-primary' data-bs-toggle='modal'
-      data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
-      width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
-      <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 
-      1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
-      <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 
-      0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
-      </svg></button>
-    </div></td>`;
-      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
-      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
-      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
-      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
-      tipo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
-      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
-      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
-      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusSeguimientoSin}</td>`;
-      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
-      tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
-        btnGrupo +
-        registro +
-        siniestro +
-        poliza +
-        marca +
-        tipo +
-        serie +
-        carga +
-        estacion +
-        estatus +
-        porcentajeDocs +
-        porcentajeTotal +
-        estado
-      }</tr>`;
-    }
-  }
-  //validarEliminar();
 }
 function tablaSeguimiento() {
   $.ajax({
@@ -1066,39 +1085,6 @@ function consultausuarios() {
     }
   });
 }
-function busquedaConFiltros() {
-  let checkTerminados = document.getElementById("terminadosBtn");
-  let checkSeguimiento = document.getElementById("enSeguimientoBtn");
-  let checkIncorrectos = document.getElementById("datosIncorrectosBtn");
-  if (
-    checkTerminados.checked == true &&
-    checkSeguimiento.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("3Checked");
-  } else if (
-    checkTerminados.checked == true &&
-    checkSeguimiento.checked == true
-  ) {
-    funcionAjaxParaFiltros("terminadoSeguimiento");
-  } else if (
-    checkTerminados.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("terminadoIncorrecto");
-  } else if (
-    checkSeguimiento.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("seguimientoIncorrecto");
-  } else if (checkTerminados.checked == true) {
-    funcionAjaxParaFiltros("terminado");
-  } else if (checkSeguimiento.checked == true) {
-    funcionAjaxParaFiltros("seguimiento");
-  } else if (checkIncorrectos.checked == true) {
-    funcionAjaxParaFiltros("incorrectos");
-  }
-}
 function funcionAjaxParaFiltros(filtro, getId) {
   let sinComas = getId.split(",");
   $.ajax({
@@ -1111,7 +1097,6 @@ function funcionAjaxParaFiltros(filtro, getId) {
       accion: filtro,
     },
   }).done(function (result) {
-    console.log(result);
     mostrarTabla(result);
   });
 }

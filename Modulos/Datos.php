@@ -332,29 +332,67 @@
                 aria-labelledby="panelsStayOpen-headingTwo">
                 <div class="accordion-body">
                     <!--inicia el despliegue de opciones-->
-                    <div class="row 1">
+                    <div class="row">
                         <div class="col">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text fw-bold" for="inputGroupSelect01">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                        class="bi bi-calendar-check p-1" viewBox="0 0 16 16">
-                                        <path
-                                            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                        <path
-                                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                                    </svg>
-                                    Fecha Carga
-                                </label>
-                                <select class="filtrosBusqueda form-select">
-                                    <option selected>Selecciona...</option>
-                                    <option value="Hoy">Hoy</option>
-                                    <option value="Ayer">Ayer</option>
-                                    <option value="Ultimos 7 Dias">Ultimos 7 Dias</option>
-                                    <option value="Ultimos 30 Dias">Ultimos 30 Dias</option>
-                                    <option value="Mes Anterior">Mes Anterior</option>
-                                    <option value="" class="calendario date">
-                                    </option>
-                                </select>
+                            <div class="btn-group btn-sm dropup-center dropup">
+                                <button type="button" class="btn" id="FechaCargaBtn">
+                                    <label class="input-group-text fw-bold" for="btnSeleccionaCarga">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                            fill="currentColor" class="bi bi-calendar-check p-1" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                            <path
+                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                        </svg>
+                                        Fecha de Carga
+                                    </label>
+                                </button>
+                                <button id="btnSeleccionaCarga" type="button"
+                                    class="btnSeleccionar btn-sm btn dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>Selecciona...</span>
+                                </button>
+                                <ul id="txtFechaCarga" class="dropdown-menu">
+                                    <div class="calendario date col px-md-3">
+                                        <label class="input-group-text fw-bold" for="fechaCargaInicio">
+                                            Fecha Inicio
+                                        </label>
+                                        <div class="input-group-sm input-group mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-calendar-check p-1"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                                <path
+                                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                            </svg>
+                                            <input id="fechaCargaInicio" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
+                                                type="text" class="form-control input-group-append" placeholder="Fecha"
+                                                name="txtFechaCarga">
+                                        </div>
+                                    </div>
+                                    <div class="calendario date col px-md-3">
+                                        <label class="input-group-text fw-bold" for="fechaCargaFinal">
+                                            Fecha Final
+                                        </label>
+                                        <div class="input-group-sm input-group mb-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-calendar-check p-1"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                                <path
+                                                    d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                            </svg>
+                                            <input id="fechaCargaFinal" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
+                                                type="text" class="form-control input-group-append" placeholder="Fecha"
+                                                name="txtFechaCarga">
+                                        </div>
+                                    </div>
+                                    <a style="display: none" id="btnDescargarExcel"
+                                        href="http://localhost:8080/SoleraWeb/json/siniestros.xls"
+                                        download="Reporte.xls">descargar</a>
+                                </ul>
                             </div>
                         </div>
                         <div class="col">
@@ -708,8 +746,9 @@
                             <!--se implementa el boton busqueda general-->
                             <form class="form-search float-end">
                                 <div class="input-group">
-                                    <input id="txtBtnGeneralBuscar" onkeyup="busquedaGeneral(this.value)"
-                                        class="form-control" placeholder="Buscar" type="text" />
+                                    <input id="txtBtnGeneralBuscar"
+                                        onkeyup="busquedaFiltro(this.value,'BusquedaGeneral')" class="form-control"
+                                        placeholder="Buscar" type="text" />
                                 </div>
                             </form>
                         </div>
@@ -722,14 +761,14 @@
                                 <th scope="col">Siniestro</th>
                                 <th scope="col">Poliza</th>
                                 <th scope="col">Marca</th>
-                                <th scope="col">Tipo</th>
+                                <th scope="col">Modelo</th>
                                 <th scope="col">Numero de Serie</th>
                                 <th scope="col">Fecha carga</th>
                                 <th scope="col">Estacion</th>
                                 <th scope="col">Estatus</th>
+                                <th scope="col">Estado</th>
                                 <th scope="col">% Docs</th>
                                 <th scope="col">% Total</th>
-                                <th scope="col">Estado</th>
                             </tr>
                         </thead>
                         <thead id="seccionBotones">
@@ -747,7 +786,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bRegistro" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bRegistro" onkeyup="busquedaFiltro(this.value,'BusquedaId')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -759,7 +798,8 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bSiniestro" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bSiniestro"
+                                                    onkeyup="busquedaFiltro(this.value,'BusquedaSiniestro')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -771,7 +811,8 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bPoliza" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bPoliza"
+                                                    onkeyup="busquedaFiltro(this.value,'BusquedaPoliza')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -783,7 +824,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bMarca" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bMarca" onkeyup="busquedaFiltro(this.value,'BusquedaMarca')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -795,7 +836,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bTipo" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bTipo" onkeyup="busquedaFiltro(this.value,'BusquedaTipo')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -807,7 +848,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bSerie" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bSerie" onkeyup="busquedaFiltro(this.value,'BusquedaSerie')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -819,7 +860,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bCarga" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bCarga" onkeyup="busquedaFiltro(this.value,'BusquedaFecha')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -831,7 +872,8 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bEstacion" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bEstacion"
+                                                    onkeyup="busquedaFiltro(this.value,'BusquedaEstacion')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -843,7 +885,8 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bEstatus" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bEstatus"
+                                                    onkeyup="busquedaFiltro(this.value,'BusquedaEstatus')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -855,7 +898,8 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bDocumentos" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bEstado"
+                                                    onkeyup="busquedaFiltro(this.value,'BusquedaEstado')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -867,7 +911,8 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bTotal" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bDocumentos"
+                                                    onkeyup="busquedaFiltro(this.value,'BusquedaDocs')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -879,7 +924,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bEstado" onkeyup="busquedaParticular(this.id,this.value)"
+                                                <input id="bTotal" onkeyup="busquedaFiltro(this.value,'BusquedaTotal')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -2372,18 +2417,19 @@
             </div>
         </div>
     </div>
-</div>
-        <script>
-            $(".calendario").datepicker({
-                timepicker: false,
-                datepicker: true,
-                format: "yyyy-mm-dd",
-                value: "2022-09-14",
-                weeks: true,
-            });
-        </script>
-        <script src="./js/datos.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    </div>
+    <script>
+        $(".calendario").datepicker({
+            timepicker: false,
+            datepicker: true,
+            format: "yyyy-mm-dd",
+            value: "2022-09-14",
+            weeks: true,
+        });
+    </script>
+    <script src="./js/datos.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js">
+    </script>
 </body>
 
 </html>

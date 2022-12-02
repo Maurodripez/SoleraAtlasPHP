@@ -145,6 +145,11 @@
   border:none;
   fill: none;
 }
+#FechaCargaBtn{
+  padding: 0%;
+  border:none;
+  fill: none;
+}
 .btnSeleccionar{
   border-color: #ced4da;
 }

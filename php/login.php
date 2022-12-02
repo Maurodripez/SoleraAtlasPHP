@@ -10,10 +10,9 @@ $sql->bindPAram(":p", $password);
 $sql->execute();
 $usuario = $sql->fetch(PDO::FETCH_ASSOC);
 if ($sql) {
-    echo "conexion exitosa";
     $_SESSION['usuario'] = $username;
     $_SESSION['password'] = $password;
-    //header('Location: ../Principal.html');
+    header('Location: ../Principal.html');
 } else {
     echo "error al iniciar Sesion";
 }

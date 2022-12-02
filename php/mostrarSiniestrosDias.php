@@ -1,155 +1,93 @@
 <?php
-require "./Conexion.php";
+include "./FuncionesSQL.php";
 $mayor = $_POST['mayor'];
 $menor = $_POST['menor'];
 $accion = $_POST['accion'];
 switch ($accion) {
     case "3Checked":
         $sql = "select idRegistro,"
-            . " numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusSeguimientoSin from"
-            . " infosiniestro, infoauto, estadoproceso,fechasseguimiento as fs where fs.fkidRegistro=idRegistro and idRegistro=infoauto.fkidRegistro "
+            . " numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo,porcentajeDocs,porcentajeTotal from"
+            . " docsaprobadosatlas,infosiniestro, infoauto, estadoproceso,fechasseguimiento as fs where fs.fkidRegistro=idRegistro and idRegistro=infoauto.fkidRegistro "
             . " and idRegistro=fkIdRegistroEstadoProceso and (datediff(CURDATE(), fechaSeguimiento)>='$mayor' "
-            . " and datediff(CURDATE(), fechaSeguimiento)<'$menor')";
-        $stmt = $DBcon->prepare($sql);
-        $stmt->execute();
-
-        $userData = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $userData['Siniestros'][] = $row;
-        }
-
-        echo json_encode($userData);
+            . " and datediff(CURDATE(), fechaSeguimiento)<'$menor') and fkDocsAtlas=idRegistro";
+        ConsultasSelect($sql);
         break;
     case "terminadoSeguimiento":
         $sql = "select"
-            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusSeguimientoSin"
-            . " from documentosaprobados, infosiniestro, infoauto, estadoproceso,fechasseguimiento as fs"
-            . " where fs.fkidRegistro=idRegistro and idRegistro=fkIdRegistroDocsAprobados and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso "
+            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo,porcentajeDocs,porcentajeTotal"
+            . " from docsaprobadosatlas, infosiniestro, infoauto, estadoproceso,fechasseguimiento as fs"
+            . " where fs.fkidRegistro=idRegistro and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso "
             . " and (datediff(CURDATE(), fs.fechaSeguimiento)>='$mayor' and datediff(CURDATE(), fs.fechaSeguimiento)<'$menor')"
-            . " and (estatusSeguimientoSin='TOTAL DE DOCUMENTOS' or estatusSeguimientoSin='TERMINADO POR PROCESO COMPLETO' or  estatusSeguimientoSin='TERMINADO ENTREGA ORIGINALES EN OFICINA'"
-            . " or  estatusSeguimientoSin='CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)'"
-            . " or estatusSeguimientoSin='CASO REABIERTO' or  estatusSeguimientoSin='CON CONTACTO SIN DOCUMENTOS' "
-            . " or  estatusSeguimientoSin='DE 1 A 3 DOCUMENTOS' or  estatusSeguimientoSin='DE 4 A 6 DOCUMENTOS' or  estatusSeguimientoSin='DE 7 A 10 DOCUMENTOS'"
-            . " or  estatusSeguimientoSin='NUEVO' or  estatusSeguimientoSin='SIN CONTACTO')";
-        $stmt = $DBcon->prepare($sql);
-        $stmt->execute();
-
-        $userData = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $userData['Siniestros'][] = $row;
-        }
-
-        echo json_encode($userData);
+            . " and (estatusOperativo='TOTAL DE DOCUMENTOS' or estatusOperativo='TERMINADO POR PROCESO COMPLETO' or  estatusOperativo='TERMINADO ENTREGA ORIGINALES EN OFICINA'"
+            . " or  estatusOperativo='CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)'"
+            . " or estatusOperativo='CASO REABIERTO' or  estatusOperativo='CON CONTACTO SIN DOCUMENTOS' "
+            . " or  estatusOperativo='DE 1 A 3 DOCUMENTOS' or  estatusOperativo='DE 4 A 6 DOCUMENTOS' or  estatusOperativo='DE 7 A 10 DOCUMENTOS'"
+            . " or  estatusOperativo='NUEVO' or  estatusOperativo='SIN CONTACTO') and fkDocsAtlas=idRegistro";
+        ConsultasSelect($sql);
         break;
     case "terminadoIncorrecto":
         $sql = "select"
-            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusSeguimientoSin"
-            . " from fechasseguimiento as fs,documentosaprobados, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro"
-            . " and idRegistro=fkIdRegistroDocsAprobados and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
+            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo,porcentajeDocs,porcentajeTotal"
+            . " from docsaprobadosatlas,fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro"
+            . " and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
             . " and (datediff(CURDATE(), fechaSeguimiento)>='$mayor' and datediff(CURDATE(), fechaSeguimiento)<'$menor')"
-            . " and (estatusSeguimientoSin='TOTAL DE DOCUMENTOS' or estatusSeguimientoSin='TERMINADO POR PROCESO COMPLETO' or  estatusSeguimientoSin='TERMINADO ENTREGA ORIGINALES EN OFICINA'"
-            . " or  estatusSeguimientoSin='CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)' or estatusSeguimientoSin='CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)'"
-            . " or  estatusSeguimientoSin='CON CONTACTO SIN COOPERACION DEL CLIENTE' "
-            . " or  estatusSeguimientoSin='DATOS INCORRECTOS' or  estatusSeguimientoSin='SIN CONTACTO EN 30 DIAS')";
-        $stmt = $DBcon->prepare($sql);
-        $stmt->execute();
-
-        $userData = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $userData['Siniestros'][] = $row;
-        }
-
-        echo json_encode($userData);
+            . " and (estatusOperativo='TOTAL DE DOCUMENTOS' or estatusOperativo='TERMINADO POR PROCESO COMPLETO' or  estatusOperativo='TERMINADO ENTREGA ORIGINALES EN OFICINA'"
+            . " or  estatusOperativo='CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)' or estatusOperativo='CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)'"
+            . " or  estatusOperativo='CON CONTACTO SIN COOPERACION DEL CLIENTE' "
+            . " or  estatusOperativo='DATOS INCORRECTOS' or  estatusOperativo='SIN CONTACTO EN 30 DIAS') and fkDocsAtlas=idRegistro";
+        ConsultasSelect($sql);
         break;
     case "seguimientoIncorrecto":
         $sql = "select"
-            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusSeguimientoSin"
-            . " from fechasseguimiento as fs,documentosaprobados, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro"
-            . " and idRegistro=fkIdRegistroDocsAprobados and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
+            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo,porcentajeDocs,porcentajeTotal"
+            . " from docsaprobadosatlas,fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro"
+            . " and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
             . " and (datediff(CURDATE(), fechaSeguimiento)>='$mayor' and datediff(CURDATE(), fechaSeguimiento)<'$menor')"
-            . " and (estatusSeguimientoSin='CASO REABIERTO' or  estatusSeguimientoSin='CON CONTACTO SIN DOCUMENTOS' "
-            . " or  estatusSeguimientoSin='DE 1 A 3 DOCUMENTOS' or  estatusSeguimientoSin='DE 4 A 6 DOCUMENTOS' or  estatusSeguimientoSin='DE 7 A 10 DOCUMENTOS'"
-            . " or  estatusSeguimientoSin='NUEVO' or  estatusSeguimientoSin='SIN CONTACTO' or estatusSeguimientoSin='CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)'"
-            . " or  estatusSeguimientoSin='CON CONTACTO SIN COOPERACION DEL CLIENTE' "
-            . " or  estatusSeguimientoSin='DATOS INCORRECTOS' or  estatusSeguimientoSin='SIN CONTACTO EN 30 DIAS')";
-        $stmt = $DBcon->prepare($sql);
-        $stmt->execute();
-
-        $userData = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $userData['Siniestros'][] = $row;
-        }
-
-        echo json_encode($userData);
+            . " and (estatusOperativo='CASO REABIERTO' or  estatusOperativo='CON CONTACTO SIN DOCUMENTOS' "
+            . " or  estatusOperativo='DE 1 A 3 DOCUMENTOS' or  estatusOperativo='DE 4 A 6 DOCUMENTOS' or  estatusOperativo='DE 7 A 10 DOCUMENTOS'"
+            . " or  estatusOperativo='NUEVO' or  estatusOperativo='SIN CONTACTO' or estatusOperativo='CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)'"
+            . " or  estatusOperativo='CON CONTACTO SIN COOPERACION DEL CLIENTE' "
+            . " or  estatusOperativo='DATOS INCORRECTOS' or  estatusOperativo='SIN CONTACTO EN 30 DIAS') and fkDocsAtlas=idRegistro";
+        ConsultasSelect($sql);
         break;
     case "terminado":
         $sql = "select"
-            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusSeguimientoSin"
-            . " from fechasseguimiento as fs,documentosaprobados, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
-            . " and idRegistro=fkIdRegistroDocsAprobados and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso "
+            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo,porcentajeDocs,porcentajeTotal"
+            . " from docsaprobadosatlas, fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
+            . " and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso "
             . " and (datediff(CURDATE(), fechaSeguimiento)>='$mayor' and datediff(CURDATE(), fechaSeguimiento)<'$menor')"
-            . " and (estatusSeguimientoSin='TOTAL DE DOCUMENTOS' or estatusSeguimientoSin='TERMINADO POR PROCESO COMPLETO'"
-            . " or  estatusSeguimientoSin='TERMINADO ENTREGA ORIGINALES EN OFICINA' "
-            . " or  estatusSeguimientoSin='CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)')";
-        $stmt = $DBcon->prepare($sql);
-        $stmt->execute();
-
-        $userData = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $userData['Siniestros'][] = $row;
-        }
-        echo json_encode($userData);
+            . " and (estatusOperativo='TOTAL DE DOCUMENTOS' or estatusOperativo='TERMINADO POR PROCESO COMPLETO'"
+            . " or  estatusOperativo='TERMINADO ENTREGA ORIGINALES EN OFICINA' "
+            . " or  estatusOperativo='CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)') and fkDocsAtlas=idRegistro";
+        ConsultasSelect($sql);
         break;
     case "seguimiento":
         $sql = "select"
-            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusSeguimientoSin"
-            . " from fechasseguimiento as fs,documentosaprobados, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
-            . " and idRegistro=fkIdRegistroDocsAprobados and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
+            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo,porcentajeDocs,porcentajeTotal"
+            . " from docsaprobadosatlas, fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
+            . " and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
             . " and (datediff(CURDATE(), fechaSeguimiento)>='$mayor' and datediff(CURDATE(), fechaSeguimiento)<'$menor')"
-            . " and (estatusSeguimientoSin='CASO REABIERTO' or  estatusSeguimientoSin='CON CONTACTO SIN DOCUMENTOS' "
-            . " or  estatusSeguimientoSin='DE 1 A 3 DOCUMENTOS' or  estatusSeguimientoSin='DE 4 A 6 DOCUMENTOS' or  estatusSeguimientoSin='DE 7 A 10 DOCUMENTOS'"
-            . " or  estatusSeguimientoSin='NUEVO' or  estatusSeguimientoSin='SIN CONTACTO')";
-        $stmt = $DBcon->prepare($sql);
-        $stmt->execute();
-
-        $userData = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $userData['Siniestros'][] = $row;
-        }
-
-        echo json_encode($userData);
+            . " and (estatusOperativo='CASO REABIERTO' or  estatusOperativo='CON CONTACTO SIN DOCUMENTOS' "
+            . " or  estatusOperativo='DE 1 A 3 DOCUMENTOS' or  estatusOperativo='DE 4 A 6 DOCUMENTOS' or  estatusOperativo='DE 7 A 10 DOCUMENTOS'"
+            . " or  estatusOperativo='NUEVO' or  estatusOperativo='SIN CONTACTO') and fkDocsAtlas=idRegistro";
+        ConsultasSelect($sql);
         break;
     case "incorrectos":
-        $sql = "select factura, poder, identificacion, situacion, curp, estadoDoc, tenencia, baja, tarjeta, polizaDoc, comprobante,"
-            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusSeguimientoSin"
-            . " from fechasseguimiento as fs,documentosaprobados, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
-            . " and idRegistro=fkIdRegistroDocsAprobados and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
+        $sql = "select"
+            . " idRegistro, numSiniestro, poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo"
+            . " from fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
+            . " and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso"
             . " and (datediff(CURDATE(), fechaSeguimiento)>='$mayor' and datediff(CURDATE(), fechaSeguimiento)<'$menor')"
-            . " and (estatusSeguimientoSin='CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)' "
-            . " or  estatusSeguimientoSin='CON CONTACTO SIN COOPERACION DEL CLIENTE' "
-            . " or  estatusSeguimientoSin='DATOS INCORRECTOS' or  estatusSeguimientoSin='SIN CONTACTO EN 30 DIAS')";
-        $stmt = $DBcon->prepare($sql);
-        $stmt->execute();
-
-        $userData = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-            $userData['Siniestros'][] = $row;
-        }
-
-        echo json_encode($userData);
+            . " and (estatusOperativo='CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)' "
+            . " or  estatusOperativo='CON CONTACTO SIN COOPERACION DEL CLIENTE' "
+            . " or  estatusOperativo='DATOS INCORRECTOS' or  estatusOperativo='SIN CONTACTO EN 30 DIAS')";
+        ConsultasSelect($sql);
+        break;
+    case "datosPorDefecto":
+        $sql = "select porcentajeDocs,porcentajeTotal,idRegistro, numSiniestro, "
+            . " poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo"
+            . " from docsaprobadosatlas, fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
+            . " and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso and fkDocsAtlas=idRegistro";
+        ConsultasSelect($sql);
         break;
 }
