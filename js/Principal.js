@@ -29,25 +29,6 @@ function controlIframe(txtIframe) {
       break;
   }
 }
-function valoresSesiones() {
-  let sesion = document.getElementById("UsuarioActivo").textContent;
-  $.ajax({
-    method: "POST",
-    url: "ValidarSesiones",
-    data: {
-      accion: "ValidarUsuario",
-      usuario: sesion,
-    },
-    success: function (result) {
-      if (result != "root" && result != "supervisor") {
-        let crearUsuarios = document.getElementById("CrearUsuario");
-        crearUsuarios.style = "display:none";
-        let asignacion = document.getElementById("Asignacion");
-        asignacion.style = "display:none";
-      }
-    },
-  });
-}
 function openNav() {
   document.getElementById("sideNavigation").style.width = "250px";
   document.getElementById("sideNavigation").style.marginTop = "55px";
@@ -59,5 +40,4 @@ function closeNav() {
   document.getElementById("main").style.marginLeft = "0";
 }
 window.addEventListener("load", function () {
-  valoresSesiones();
 });

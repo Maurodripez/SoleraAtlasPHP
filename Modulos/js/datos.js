@@ -1,17 +1,16 @@
 var contador = 0;
 var contadorSeg = 0;
-function busquedaFiltro(thisValue, accion) {
+function busquedaFiltro(thisValue, accion, columna) {
   $.ajax({
     method: "POST",
     url: "../../php/Busquedas.php",
     dataType: "json",
     data: {
       filtro: thisValue,
-      columna:"idRegistro",
+      columna,
       accion,
     },
     success: function (result) {
-      console.log(result);
       mostrarTabla(result);
     },
   });
@@ -55,18 +54,18 @@ function mostrarTabla(result) {
       0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
       </svg></button>
     </div></td>`;
-      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
-      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
-      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
-      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      modelo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
-      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
-      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
-      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
-      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusOperativo}</td>`;
-      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeDocs}</td>`;
-      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeTotal}</td>`;
-      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
+      registro = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
+      siniestro = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
+      poliza = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
+      marca = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      modelo = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
+      serie = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
+      carga = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
+      estacion = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
+      estatus = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].estatusOperativo}</td>`;
+      porcentajeDocs = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].porcentajeDocs}</td>`;
+      porcentajeTotal = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].porcentajeTotal}</td>`;
+      estado = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
       tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
         btnGrupo +
         registro +
@@ -92,7 +91,7 @@ function mostrarTabla(result) {
       // Creando los 'td' que almacenará cada parte de la información del usuario actual
       let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
       <button type='button' id=${
-        result.Siniestros[i].marca + ",Eliminar"
+        result.Siniestros[i].idRegistro + ",Eliminar"
       } class='btnEliminar btn btn-danger'
       onclick='eliminarSiniestro(this.id)' style='display:none'>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -104,7 +103,7 @@ function mostrarTabla(result) {
       <line x1="14" y1="11" x2="14" y2="17"></line>
       </svg></button>
       <button type='button' id=${
-        result.Siniestros[i].marca
+        result.Siniestros[i].idRegistro
       } class='btn btn-primary' data-bs-toggle='modal'
       data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
       width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
@@ -114,18 +113,18 @@ function mostrarTabla(result) {
       0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
       </svg></button>
     </div></td>`;
-      registro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
-      siniestro = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
-      poliza = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
-      marca = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
-      modelo = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
-      serie = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
-      carga = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
-      estacion = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
-      estatus = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estatusOperativo}</td>`;
-      porcentajeDocs = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeDocs}%</td>`;
-      porcentajeTotal = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].porcentajeTotal}%</td>`;
-      estado = `<td style='font-size: 14px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
+      registro = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].idRegistro}</td>`;
+      siniestro = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].numSiniestro}</td>`;
+      poliza = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].poliza}</td>`;
+      marca = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].marca}</td>`;
+      modelo = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].modelo}</td>`;
+      serie = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].numSerie}</td>`;
+      carga = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].fechaCarga}</td>`;
+      estacion = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].estacionProceso}</td>`;
+      estatus = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].estatusOperativo}</td>`;
+      porcentajeDocs = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].porcentajeDocs}%</td>`;
+      porcentajeTotal = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].porcentajeTotal}%</td>`;
+      estado = `<td style='font-size: 13px' class='tablaActual'>${result.Siniestros[i].estado}</td>`;
       tblBody[numeroTBody].innerHTML += `<tr class='tablaActual'>${
         btnGrupo +
         registro +
@@ -154,6 +153,7 @@ function datosPorDefecto() {
       accion: "datosPorDefecto",
     },
   }).done(function (result) {
+    console.log(result);
     mostrarTabla(result);
   });
 }
@@ -197,12 +197,50 @@ function busquedaPorDias(getId) {
   }
 }
 function buscarDatos() {
+  let fechaCargaInicio = document.getElementById("fechaCargaInicio").value;
+  let fechaCargaFinal = document.getElementById("fechaCargaFinal").value;
+  let fechaSegInicio = document.getElementById("fechaSegInicio").value;
+  let fechaSegFinal = document.getElementById("fechaSegFinal").value;
+  txtEstacion = document.getElementById("txtEstacion").value;
+  if (txtEstacion == "Selecciona...") {
+    txtEstacion = "";
+  }
+  txtEstatus = document.getElementById("txtEstatus").value;
+  if (txtEstatus == "Selecciona...") {
+    txtEstatus = "";
+  }
+  txtSubEstatus = document.getElementById("txtSubEstatus").value;
+  if (txtSubEstatus == "Selecciona...") {
+    txtSubEstatus = "";
+  }
+  txtRegion = document.getElementById("txtRegion").value;
+  if (txtRegion == "Selecciona...") {
+    txtRegion = "";
+  }
+  txtEstado = document.getElementById("txtEstado").value;
+  if (txtEstado == "Selecciona...") {
+    txtEstado = "";
+  }
+  txtCobertura = document.getElementById("txtCobertura").value;
+  if (txtCobertura == "Selecciona...") {
+    txtCobertura = "";
+  }
   $.ajax({
     method: "POST",
-    url: "../../php/FuncionConsultas.php",
+    url: "../../php/Busquedas.php",
     dataType: "json",
     data: {
-      accion: "Hola",
+      accion: "BusquedaFechasyMas",
+      fechaCargaInicio,
+      fechaCargaFinal,
+      fechaSegInicio,
+      fechaSegFinal,
+      txtEstacion,
+      txtEstatus,
+      txtSubEstatus,
+      txtRegion,
+      txtEstado,
+      txtCobertura,
     },
     success: function (result) {
       console.log(result);
@@ -210,8 +248,18 @@ function buscarDatos() {
     },
   });
 }
+function descargar() {
+  $.ajax({
+    method: "POST",
+    url: "../../php/descargar.php",
+    data: {
+      accion: "Descargar",
+    },
+  }).done(function (result) {
+    console.log(result);
+  });
+}
 ////////////////////////////
-
 function busquedaConFiltros() {
   let checkTerminados = document.getElementById("terminadosBtn");
   let checkSeguimiento = document.getElementById("enSeguimientoBtn");

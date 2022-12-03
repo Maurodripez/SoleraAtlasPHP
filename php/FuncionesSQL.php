@@ -1,15 +1,16 @@
 <?php
-function ConsultasSelect($sql){
+function ConsultasSelect($sql)
+{
     require "./Conexion.php";
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
 
-    $userData = array();
+    $datos = array();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-        $userData['Siniestros'][] = $row;
+        $datos['Siniestros'][] = $row;
+        $datosExportar[] = $row;
     }
-
-    echo json_encode($userData);
+    echo json_encode($datos);
 }

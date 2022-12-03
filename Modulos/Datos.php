@@ -709,13 +709,7 @@
                         <button id="limpiarRegistro" type="button" class="btn btn-primary">
                             Limpiar
                         </button>
-                        <button id="exportarTabla" onclick="buscarDatosExportar()" type="button"
-                            class="btn btn-primary">
-                            Buscar exportar
-                        </button>
-                        <button id="exportarTabla" onclick="exportarGrande()" type="button" class="btn btn-primary">
-                            Exportar
-                        </button>
+                        <a href="../php/descargar.php?file=Siniestros.csv" download="Siniestro.xls" class="btn btn-primary" role="button">Exportar</a>
                     </div>
                 </div>
             </div>
@@ -747,7 +741,7 @@
                             <form class="form-search float-end">
                                 <div class="input-group">
                                     <input id="txtBtnGeneralBuscar"
-                                        onkeyup="busquedaFiltro(this.value,'BusquedaGeneral')" class="form-control"
+                                        onkeyup="busquedaFiltro(this.value,'BusquedaGeneral','General')" class="form-control"
                                         placeholder="Buscar" type="text" />
                                 </div>
                             </form>
@@ -786,7 +780,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bRegistro" onkeyup="busquedaFiltro(this.value,'BusquedaId')"
+                                                <input id="bRegistro" onkeyup="busquedaFiltro(this.value,'Busqueda','idRegistro')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -799,7 +793,7 @@
                                         <form class="form-search float-end">
                                             <div class="input-group">
                                                 <input id="bSiniestro"
-                                                    onkeyup="busquedaFiltro(this.value,'BusquedaSiniestro')"
+                                                    onkeyup="busquedaFiltro(this.value,'Busqueda','numSiniestro')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -812,7 +806,7 @@
                                         <form class="form-search float-end">
                                             <div class="input-group">
                                                 <input id="bPoliza"
-                                                    onkeyup="busquedaFiltro(this.value,'BusquedaPoliza')"
+                                                    onkeyup="busquedaFiltro(this.value,'Busqueda','poliza')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -824,7 +818,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bMarca" onkeyup="busquedaFiltro(this.value,'BusquedaMarca')"
+                                                <input id="bMarca" onkeyup="busquedaFiltro(this.value,'Busqueda','marca')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -836,7 +830,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bTipo" onkeyup="busquedaFiltro(this.value,'BusquedaTipo')"
+                                                <input id="bTipo" onkeyup="busquedaFiltro(this.value,'Busqueda','tipo')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -848,7 +842,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bSerie" onkeyup="busquedaFiltro(this.value,'BusquedaSerie')"
+                                                <input id="bSerie" onkeyup="busquedaFiltro(this.value,'Busqueda','numSerie')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -860,7 +854,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bCarga" onkeyup="busquedaFiltro(this.value,'BusquedaFecha')"
+                                                <input id="bCarga" onkeyup="busquedaFiltro(this.value,'Busqueda','fechaCarga')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -873,7 +867,7 @@
                                         <form class="form-search float-end">
                                             <div class="input-group">
                                                 <input id="bEstacion"
-                                                    onkeyup="busquedaFiltro(this.value,'BusquedaEstacion')"
+                                                    onkeyup="busquedaFiltro(this.value,'Busqueda','estacionProceso')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -886,7 +880,7 @@
                                         <form class="form-search float-end">
                                             <div class="input-group">
                                                 <input id="bEstatus"
-                                                    onkeyup="busquedaFiltro(this.value,'BusquedaEstatus')"
+                                                    onkeyup="busquedaFiltro(this.value,'Busqueda','estatusOperativo')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -899,7 +893,7 @@
                                         <form class="form-search float-end">
                                             <div class="input-group">
                                                 <input id="bEstado"
-                                                    onkeyup="busquedaFiltro(this.value,'BusquedaEstado')"
+                                                    onkeyup="busquedaFiltro(this.value,'Busqueda','estado')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -912,7 +906,7 @@
                                         <form class="form-search float-end">
                                             <div class="input-group">
                                                 <input id="bDocumentos"
-                                                    onkeyup="busquedaFiltro(this.value,'BusquedaDocs')"
+                                                    onkeyup="busquedaFiltro(this.value,'Busqueda','porcentajeDocs')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
@@ -924,7 +918,7 @@
                                         <!--se implementa el boton busqueda general-->
                                         <form class="form-search float-end">
                                             <div class="input-group">
-                                                <input id="bTotal" onkeyup="busquedaFiltro(this.value,'BusquedaTotal')"
+                                                <input id="bTotal" onkeyup="busquedaFiltro(this.value,'Busqueda','porcentajeTotal')"
                                                     class="busquedaParticular form-control" maxlength="128"
                                                     placeholder="Buscar" size="15" type="text" />
                                             </div>
