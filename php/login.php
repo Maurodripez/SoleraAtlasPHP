@@ -13,7 +13,7 @@ $usuario = $sql->fetch(PDO::FETCH_ASSOC);
 if ($sql->rowCount() == 1) {
     $_SESSION['usuario'] = $username;
     $_SESSION['password'] = $password;
-    header('Location: ../Principal.html');
+    header('Location: ../Principal.php');
 } else {
     header('Location: ../index.html');
 }

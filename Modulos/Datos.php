@@ -26,7 +26,7 @@
     <?php 
     session_start();
     ?>
-    <h1 id="sesionActual" style="display: none"> <?php echo $_SESSION['usuario']; ?></h1>
+    <h1 id="sesionActual" style="display: none"><?php echo $_SESSION['usuario']; ?></h1>
     <div class="row">
         <div class="col text-left display-6 p-2">
             <nav class="navbar bg-light">
@@ -97,19 +97,19 @@
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     Terminados
-                                                    <span id="terminados0a2"
+                                                    <span id="terminadosde0a2"
                                                         class="badge bg-primary rounded-pill"></span>
                                                 </li>
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     En seguimiento
-                                                    <span id="seguimiento0a2"
+                                                    <span id="seguimientode0a2"
                                                         class="badge bg-primary rounded-pill">2</span>
                                                 </li>
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     Incorrectos / Sin contacto
-                                                    <span id="incorrectos0a2"
+                                                    <span id="incorrectosde0a2"
                                                         class="badge bg-primary rounded-pill">1</span>
                                                 </li>
                                             </ul>
@@ -155,19 +155,19 @@
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     Terminados
-                                                    <span id="terminados3a5"
+                                                    <span id="terminadosde3a5"
                                                         class="badge bg-primary rounded-pill">14</span>
                                                 </li>
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     En seguimiento
-                                                    <span id="seguimiento3a5"
+                                                    <span id="seguimientode3a5"
                                                         class="badge bg-primary rounded-pill">2</span>
                                                 </li>
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     Incorrectos / Sin contacto
-                                                    <span id="incorrectos3a5"
+                                                    <span id="incorrectosde3a5"
                                                         class="badge bg-primary rounded-pill">1</span>
                                                 </li>
                                             </ul>
@@ -213,19 +213,19 @@
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     Terminados
-                                                    <span id="terminados6a14"
+                                                    <span id="terminadosde6a14"
                                                         class="badge bg-primary rounded-pill"></span>
                                                 </li>
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     En seguimiento
-                                                    <span id="seguimiento6a14"
+                                                    <span id="seguimientode6a14"
                                                         class="badge bg-primary rounded-pill"></span>
                                                 </li>
                                                 <li style="font-size: 13px"
                                                     class="fondodesglozados list-group-item d-flex justify-content-between align-items-center">
                                                     Incorrectos / Sin contacto
-                                                    <span id="incorrectos6a14"
+                                                    <span id="incorrectosde6a14"
                                                         class="badge bg-primary rounded-pill"></span>
                                                 </li>
                                             </ul>
@@ -308,7 +308,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <button id="txtBuscarMas15" onclick="busquedaPorDias('15,60')"
+                                <button id="txtBuscarMas15" onclick="busquedaPorDias('15,35')"
                                     class="btnDocumentos btn btn-primary" type="button" data-bs-toggle="collapse"
                                     data-bs-target=".collapseresultados" aria-expanded="false"
                                     aria-controls="multiCollapseExample1 multiCollapseExample2">Mostrar
@@ -1881,7 +1881,7 @@
                                                                 d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
                                                         </svg>
                                                         <input id="txtEstacionSoloLectura" type="text"
-                                                            class="form-control" value="22" readonly>
+                                                            class="form-control" value="" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col px-md-3">

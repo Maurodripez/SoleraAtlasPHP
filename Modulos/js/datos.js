@@ -1,7 +1,24 @@
 var contador = 0;
 var contadorSeg = 0;
 $(document).ready(function () {
+  //alert(document.getElementById("sesionActual").textContent);
   datosPorDefecto();
+  cantidadSiniestros(0, 3, "de0a2");
+  cantidadSiniestros(3, 6, "de3a5");
+  cantidadSiniestros(6, 15, "de6a14");
+  cantidadSiniestros(15, 35, "mas15");
+  cantidadSiniestrosDetalles(0, 3, "terminados", "de0a2");
+  cantidadSiniestrosDetalles(0, 3, "seguimiento", "de0a2");
+  cantidadSiniestrosDetalles(0, 3, "incorrectos", "de0a2");
+  cantidadSiniestrosDetalles(3, 6, "terminados", "de3a5");
+  cantidadSiniestrosDetalles(3, 6, "seguimiento", "de3a5");
+  cantidadSiniestrosDetalles(3, 6, "incorrectos", "de3a5");
+  cantidadSiniestrosDetalles(6, 15, "terminados", "de6a14");
+  cantidadSiniestrosDetalles(6, 15, "seguimiento", "de6a14");
+  cantidadSiniestrosDetalles(6, 15, "incorrectos", "de6a14");
+  cantidadSiniestrosDetalles(15, 35, "terminados", "mas15");
+  cantidadSiniestrosDetalles(15, 35, "seguimiento", "mas15");
+  cantidadSiniestrosDetalles(15, 35, "incorrectos", "mas15");
   estaciones();
   controlPaginado();
   //funcion para limpiar el regitro
@@ -9,6 +26,68 @@ $(document).ready(function () {
     $(".filtrosBusqueda").val($(".filtrosBusqueda option:first").val());
   });
 });
+//funcion para sesiones
+function obtenerSesion() {
+  let usuario = document.getElementById("sesionActual").textContent;
+  $.ajax({
+    type: "POST",
+    url: "../../php/ObtenerSesion.php",
+    dataType: "json",
+    data: {
+      accion: "Privilegios",
+      usuario,
+    },
+  }).done(function (result) {
+    if (
+      result.Siniestros[0].privilegios === "root" ||
+      result.Siniestros[0].privilegios === "supervisor"
+    ) {
+      $(".btnEliminar").show(); //muestro mediante clase
+    }
+  });
+}
+//funcion para mostrar la cantidad de siniestros
+function cantidadSiniestros(mayor, menor, idCantidad) {
+  $.ajax({
+    method: "POST",
+    url: "../../php/CantidadSiniestros.php",
+    dataType: "json",
+    data: {
+      accion: "SiniestrosEnRespuesta",
+      mayor,
+      menor,
+    },
+    success: function (result) {
+      // console.log(result);
+      $("#" + idCantidad).html(result.Siniestros[0].conteo);
+    },
+  });
+}
+//funcion para mostrar a detalle el esttus de los siniestros
+function cantidadSiniestrosDetalles(mayor, menor, accion, dias) {
+  $.ajax({
+    method: "POST",
+    url: "../../php/CantidadSiniestrosDetalles/CantidadSiniestrosTerminados.php",
+    dataType: "json",
+    data: {
+      accion,
+      mayor,
+      menor,
+    },
+    success: function (result) {
+      if (accion === "terminados") {
+        document.getElementById(accion + "" + dias).textContent =
+          result.terminados[0].contador;
+      } else if (accion === "seguimiento") {
+        document.getElementById(accion + "" + dias).textContent =
+          result.seguimiento[0].contador;
+      } else if (accion === "incorrectos") {
+        document.getElementById(accion + "" + dias).textContent =
+          result.incorrectos[0].contador;
+      }
+    },
+  });
+}
 function busquedaFiltro(thisValue, accion, columna) {
   $.ajax({
     method: "POST",
@@ -55,7 +134,7 @@ function mostrarTabla(result) {
       <button type='button' id=${
         result.Siniestros[i].idRegistro
       } class='btn btn-primary' data-bs-toggle='modal'
-      data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
+      data-bs-target='#despliegueInfo'  onclick='mostrarInfoSiniestro(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
       width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
       <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 
       1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
@@ -114,7 +193,7 @@ function mostrarTabla(result) {
       <button type='button' id=${
         result.Siniestros[i].idRegistro
       } class='btn btn-primary' data-bs-toggle='modal'
-      data-bs-target='#despliegueInfo'  onclick='cambiarNombre(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
+      data-bs-target='#despliegueInfo'  onclick='mostrarInfoSiniestro(this.id)' value='Editar'><svg xmlns='http://www.w3.org/2000/svg'
       width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
       <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 
       1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
@@ -151,7 +230,7 @@ function mostrarTabla(result) {
       }</tr>`;
     }
   }
-  //validarEliminar();
+  obtenerSesion();
 }
 function datosPorDefecto() {
   $.ajax({
@@ -162,7 +241,6 @@ function datosPorDefecto() {
       accion: "datosPorDefecto",
     },
   }).done(function (result) {
-    console.log(result);
     mostrarTabla(result);
   });
 }
@@ -268,120 +346,115 @@ function descargar() {
     console.log(result);
   });
 }
-////////////////////////////
-function busquedaConFiltros() {
-  let checkTerminados = document.getElementById("terminadosBtn");
-  let checkSeguimiento = document.getElementById("enSeguimientoBtn");
-  let checkIncorrectos = document.getElementById("datosIncorrectosBtn");
-  if (
-    checkTerminados.checked == true &&
-    checkSeguimiento.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("3Checked");
-  } else if (
-    checkTerminados.checked == true &&
-    checkSeguimiento.checked == true
-  ) {
-    funcionAjaxParaFiltros("terminadoSeguimiento");
-  } else if (
-    checkTerminados.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("terminadoIncorrecto");
-  } else if (
-    checkSeguimiento.checked == true &&
-    checkIncorrectos.checked == true
-  ) {
-    funcionAjaxParaFiltros("seguimientoIncorrecto");
-  } else if (checkTerminados.checked == true) {
-    funcionAjaxParaFiltros("terminado");
-  } else if (checkSeguimiento.checked == true) {
-    funcionAjaxParaFiltros("seguimiento");
-  } else if (checkIncorrectos.checked == true) {
-    funcionAjaxParaFiltros("incorrectos");
+function funcionAjaxParaFiltros(filtro, getId) {
+  let sinComas = getId.split(",");
+
+  $.ajax({
+    method: "POST",
+    url: "../../php/mostrarSiniestrosDias.php",
+    dataType: "json",
+    data: {
+      mayor: sinComas[0],
+      menor: sinComas[1],
+      accion: filtro,
+    },
+  }).done(function (result) {
+    mostrarTabla(result);
+  });
+}
+function eliminarSiniestro(getId) {
+  console.log(getId);
+  //funcion para borrar el siniestro
+  let sinComas = getId.split(",");
+  let idEliminar = sinComas[0];
+  let mensaje;
+  let opcion = confirm("Confirma para eliminar siniestro");
+  if (opcion == true) {
+    $.ajax({
+      method: "POST",
+      url: "../../php/EliminarSiniestro.php",
+      data: {
+        idEliminar,
+      },
+    }).done(function (respuesta) {
+      alert(respuesta);
+      contador = 0;
+      paginaActual.textContent = contador;
+      datosPorDefecto();
+    });
+  } else {
+    mensaje = "Movimiento cancelado";
   }
 }
-function cambiarNombre(get) {
+function mostrarInfoSiniestro(get) {
   /////se recibe el parametro id
   let inputNombre = document.getElementById("idOculto"); ////se obtiene el input oculto para cambiar el valor del boton y mandar el formulario ya que java trabaja con los valores y no id
   let inputNombreFk = document.getElementById("fkIdOculto");
   inputNombreFk.value = get;
+
   inputNombre.value = get;
   let idGuardado = get; ///////////se manda el id para hacer la busqueda y mostrar los datos del siniestro
+  console.log(idGuardado);
   $.post({
-    url: "../MostrarDatosServlet",
+    url: "../../php/mostrarDatosSiniestro.php",
+    dataType: "json",
     data: {
-      idGuardadoEnvio: idGuardado,
+      idGuardado,
     },
     success: function (result) {
-      let resultados = "";
-      ///////si en java todo sale correcto, se mandan los resultados y se realiza la obtencion de datos y dividirlos para desplegarlos en pantalla
-      resultados = result.split(","); ///mandamos los datos por nmedio de , y asi poder dividirlos ymandarlos de manera individual
+      ///////si en java todo sale correcto, se mandan los resultados y se realiza la obtencion de datos y dividirlos para desplegarlos en pantalla///mandamos los datos por nmedio de , y asi poder dividirlos ymandarlos de manera individual
       //sebuscan los id para poder modificar su contenido
-      let fechaCarga = document.getElementById("fechaCarga");
-      let numSiniestro = document.getElementById("numSiniestro");
-      let poliza = document.getElementById("poliza");
-      let afectado = document.getElementById("afectado");
-      let tipoDeCaso = document.getElementById("tipoDeCaso");
-      let cobertura = document.getElementById("cobertura");
-      let fechaSiniestro = document.getElementById("fechaSiniestro");
-      let datosAudatex = document.getElementById("datosAudatex");
-      let estado = document.getElementById("estado");
-      let ciudad = document.getElementById("ciudad");
-      let region = document.getElementById("region");
-      let ubicacionTaller = document.getElementById("ubicacionTaller");
-      let financiado = document.getElementById("financiado");
-      let regimenFiscal = document.getElementById("regimenFiscal");
-      let passwordExterno = document.getElementById("passwordExterno");
-      let estatusCliente = document.getElementById("estatusCliente");
-      let comentariosCliente = document.getElementById("comentariosCliente");
-      let marca = document.getElementById("marca");
-      let tipo = document.getElementById("tipo");
-      let modelo = document.getElementById("modelo");
-      let placas = document.getElementById("placas");
-      let numSerie = document.getElementById("numSerie");
-      let valIndemnizacion = document.getElementById("valIndemnizacion");
-      let valComercial = document.getElementById("valComercial");
-      let asegurado = document.getElementById("asegurado");
-      let correo = document.getElementById("correo");
-      let telPrincipal = document.getElementById("telPrincipal");
-      let telSecundario = document.getElementById("telSecundario");
-      let contacto = document.getElementById("contacto");
-      let correoContacto = document.getElementById("correoContacto");
-      let telContacto = document.getElementById("telContacto");
+      document.getElementById("fechaCarga").value =
+        result.Siniestros[0].fechaCarga;
+      document.getElementById("numSiniestro").value =
+        result.Siniestros[0].numSiniestro;
+      document.getElementById("poliza").value = result.Siniestros[0].poliza;
+      document.getElementById("afectado").value = result.Siniestros[0].afectado;
+      document.getElementById("tipoDeCaso").value =
+        result.Siniestros[0].tipoDeCaso;
+      document.getElementById("cobertura").value =
+        result.Siniestros[0].cobertura;
+      document.getElementById("fechaSiniestro").value =
+        result.Siniestros[0].fechaSiniestro;
+      document.getElementById("datosAudatex").value =
+        result.Siniestros[0].datosAudatex;
+      document.getElementById("estado").value = result.Siniestros[0].estado;
+      document.getElementById("ciudad").value = result.Siniestros[0].ciudad;
+      document.getElementById("region").value = result.Siniestros[0].region;
+      document.getElementById("ubicacionTaller").value =
+        result.Siniestros[0].ubicacionTaller;
+      document.getElementById("financiado").value =
+        result.Siniestros[0].financiado;
+      document.getElementById("regimenFiscal").value =
+        result.Siniestros[0].regimenFiscal;
+      document.getElementById("passwordExterno").value =
+        result.Siniestros[0].passwordExterno;
+      document.getElementById("estatusCliente").value =
+        result.Siniestros[0].estatusCliente;
+      document.getElementById("comentariosCliente").value =
+        result.Siniestros[0].comentariosCliente;
+      document.getElementById("marca").value = result.Siniestros[0].marca;
+      document.getElementById("tipo").value = result.Siniestros[0].tipo;
+      document.getElementById("modelo").value = result.Siniestros[0].modelo;
+      document.getElementById("placas").value = result.Siniestros[0].placas;
+      document.getElementById("numSerie").value = result.Siniestros[0].numSerie;
+      document.getElementById("valorIndemnizacion").value =
+        result.Siniestros[0].valorIndemnizacion;
+      document.getElementById("valorComercial").value =
+        result.Siniestros[0].valorComercial;
+      document.getElementById("asegurado").value =
+        result.Siniestros[0].asegurado;
+      document.getElementById("correo").value = result.Siniestros[0].correo;
+      document.getElementById("telPrincipal").value =
+        result.Siniestros[0].telefonoPrincipal;
+      document.getElementById("telSecundario").value =
+        result.Siniestros[0].telefonosecundario;
+      document.getElementById("contacto").value = result.Siniestros[0].contacto;
+      document.getElementById("correoContacto").value =
+        result.Siniestros[0].correoContacto;
+      document.getElementById("telContacto").value =
+        result.Siniestros[0].telContacto;
       //el arreglo que se crea se lo agregagmos a cada boton que hay
-      fechaCarga.value = resultados[0];
-      numSiniestro.value = resultados[1];
-      poliza.value = resultados[2];
-      afectado.value = resultados[3];
-      tipoDeCaso.value = resultados[4];
-      cobertura.value = resultados[5];
-      fechaSiniestro.value = resultados[6];
-      datosAudatex.value = resultados[7];
-      estado.value = resultados[8];
-      ciudad.value = resultados[9];
-      region.value = resultados[10];
-      ubicacionTaller.value = resultados[11];
-      financiado.value = resultados[12];
-      regimenFiscal.value = resultados[13];
-      passwordExterno.value = resultados[14];
-      estatusCliente.value = resultados[15];
-      comentariosCliente.value = resultados[16];
-      marca.value = resultados[17];
-      tipo.value = resultados[19];
-      modelo.value = resultados[18];
-      placas.value = resultados[20];
-      numSerie.value = resultados[21];
-      valIndemnizacion.value = resultados[22];
-      valComercial.value = resultados[23];
-      asegurado.value = resultados[24];
-      correo.value = resultados[25];
-      telPrincipal.value = resultados[26];
-      telSecundario.value = resultados[27];
-      contacto.value = resultados[28];
-      correoContacto.value = resultados[29];
-      telContacto.value = resultados[30];
     },
   });
   mostrarHistorico();
@@ -393,6 +466,7 @@ function cambiarNombre(get) {
   docsYaCargados(txtIdRegistro);
   document.getElementById("txtComentSeguimiento").value = "";
 }
+////////////////////////////
 function mostrarDocsAprobados() {
   let porcentaje = 0;
   let txtIdRegistro = document.getElementById("idOculto").value;
@@ -591,83 +665,52 @@ function Limpiarimagen(iframe) {
   imagen.setAttribute("src", "");
 }
 function GuardarRegistros() {
-  if (
-    document.getElementById("fechaCarga").value != "" &&
-    document.getElementById("numSiniestro").value != "" &&
-    document.getElementById("poliza").value != "" &&
-    document.getElementById("afectado").value != "" &&
-    document.getElementById("tipoDeCaso").value != "" &&
-    document.getElementById("cobertura").value != "" &&
-    document.getElementById("fechaSiniestro").value != "" &&
-    document.getElementById("datosAudatex").value != "" &&
-    document.getElementById("estado").value != "" &&
-    document.getElementById("ciudad").value != "" &&
-    document.getElementById("region").value != "" &&
-    document.getElementById("ubicacionTaller").value != "" &&
-    document.getElementById("financiado").value != "" &&
-    document.getElementById("regimenFiscal").value != "" &&
-    document.getElementById("passwordExterno").value != "" &&
-    document.getElementById("estatusCliente").value != "" &&
-    document.getElementById("comentariosCliente").value != "" &&
-    document.getElementById("marca").value != "" &&
-    document.getElementById("tipo").value != "" &&
-    document.getElementById("modelo").value != "" &&
-    document.getElementById("placas").value != "" &&
-    document.getElementById("numSerie").value != "" &&
-    document.getElementById("valIndemnizacion").value != "" &&
-    document.getElementById("valComercial").value != "" &&
-    document.getElementById("asegurado").value != "" &&
-    document.getElementById("correo").value != "" &&
-    document.getElementById("telPrincipal").value != "" &&
-    document.getElementById("telSecundario").value != "" &&
-    document.getElementById("contacto").value != "" &&
-    document.getElementById("correoContacto").value != "" &&
-    document.getElementById("telContacto").value != "" &&
-    document.getElementById("idOculto").value != ""
-  ) {
-    $.ajax({
-      type: "POST",
-      url: "../ObtenerInfoDesplegableServlet",
-      data: {
-        fechaCarga: document.getElementById("fechaCarga").value,
-        numSiniestro: document.getElementById("numSiniestro").value,
-        poliza: document.getElementById("poliza").value,
-        afectado: document.getElementById("afectado").value,
-        tipoDeCaso: document.getElementById("tipoDeCaso").value,
-        cobertura: document.getElementById("cobertura").value,
-        fechaSiniestro: document.getElementById("fechaSiniestro").value,
-        datosAudatex: document.getElementById("datosAudatex").value,
-        estado: document.getElementById("estado").value,
-        ciudad: document.getElementById("ciudad").value,
-        region: document.getElementById("region").value,
-        ubicacionTaller: document.getElementById("ubicacionTaller").value,
-        financiado: document.getElementById("financiado").value,
-        regimenFiscal: document.getElementById("regimenFiscal").value,
-        passwordExterno: document.getElementById("passwordExterno").value,
-        estatusCliente: document.getElementById("estatusCliente").value,
-        comentariosCliente: document.getElementById("comentariosCliente").value,
-        marca: document.getElementById("marca").value,
-        tipo: document.getElementById("tipo").value,
-        modelo: document.getElementById("modelo").value,
-        placas: document.getElementById("placas").value,
-        numSerie: document.getElementById("numSerie").value,
-        valIndemnizacion: document.getElementById("valIndemnizacion").value,
-        valComercial: document.getElementById("valComercial").value,
-        asegurado: document.getElementById("asegurado").value,
-        correo: document.getElementById("correo").value,
-        telPrincipal: document.getElementById("telPrincipal").value,
-        telSecundario: document.getElementById("telSecundario").value,
-        contacto: document.getElementById("contacto").value,
-        correoContacto: document.getElementById("correoContacto").value,
-        telContacto: document.getElementById("telContacto").value,
-        idEditableActual: document.getElementById("idOculto").value,
-      },
-    }).done(function (respuesta) {
-      alert("Guardado con exito");
-    });
-  } else {
-    alert("Por favor, inserta la informacion faltante");
+  if (document.getElementById("valIndemnizacion").value.length > 0) {
+    alert("Contact ");
   }
+  $.ajax({
+    type: "POST",
+    url: "../ObtenerInfoDesplegableServlet",
+    data: {
+      fechaCarga: document.getElementById("fechaCarga").value,
+      numSiniestro: document.getElementById("numSiniestro").value,
+      poliza: document.getElementById("poliza").value,
+      afectado: document.getElementById("afectado").value,
+      tipoDeCaso: document.getElementById("tipoDeCaso").value,
+      cobertura: document.getElementById("cobertura").value,
+      fechaSiniestro: document.getElementById("fechaSiniestro").value,
+      datosAudatex: document.getElementById("datosAudatex").value,
+      estado: document.getElementById("estado").value,
+      ciudad: document.getElementById("ciudad").value,
+      region: document.getElementById("region").value,
+      ubicacionTaller: document.getElementById("ubicacionTaller").value,
+      financiado: document.getElementById("financiado").value,
+      regimenFiscal: document.getElementById("regimenFiscal").value,
+      passwordExterno: document.getElementById("passwordExterno").value,
+      estatusCliente: document.getElementById("estatusCliente").value,
+      comentariosCliente: document.getElementById("comentariosCliente").value,
+      marca: document.getElementById("marca").value,
+      tipo: document.getElementById("tipo").value,
+      modelo: document.getElementById("modelo").value,
+      placas: document.getElementById("placas").value,
+      numSerie: document.getElementById("numSerie").value,
+      valIndemnizacion: document.getElementById("valIndemnizacion").value,
+      valComercial: document.getElementById("valComercial").value,
+      asegurado: document.getElementById("asegurado").value,
+      correo: document.getElementById("correo").value,
+      telPrincipal: document.getElementById("telPrincipal").value,
+      telSecundario: document.getElementById("telSecundario").value,
+      contacto: document.getElementById("contacto").value,
+      correoContacto: document.getElementById("correoContacto").value,
+      telContacto: document.getElementById("telContacto").value,
+      idEditableActual: document.getElementById("idOculto").value,
+    },
+  }).done(function (respuesta) {
+    alert("Guardado con exito");
+  });
+  /*} else {
+    alert("Por favor, inserta la informacion faltante");
+  }*/
 }
 function InsertarSeguimiento() {
   $.ajax({
@@ -693,55 +736,6 @@ function InsertarSeguimiento() {
     success: function (result) {
       alert(result);
       tablaSeguimiento();
-    },
-  });
-}
-function exportTableToExcel(tableID, filename = "") {
-  $(".botonesTabla").remove();
-  let downloadLink;
-  let dataType = "application/vnd.ms-excel";
-  let tableSelect = document.getElementById(tableID);
-  let tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
-
-  // Specify file name
-  filename = filename ? filename + ".xls" : "excel_data.xls";
-
-  // Create download link element
-  downloadLink = document.createElement("a");
-
-  document.body.appendChild(downloadLink);
-
-  if (navigator.msSaveOrOpenBlob) {
-    let blob = new Blob(["ufeff", tableHTML], {
-      type: dataType,
-    });
-    navigator.msSaveOrOpenBlob(blob, filename);
-  } else {
-    // Create a link to the file
-    downloadLink.href = "data:" + dataType + ", " + tableHTML;
-
-    // Setting the file name
-    downloadLink.download = filename;
-
-    //triggering the function
-    downloadLink.click();
-  }
-  recargarSiniestros();
-}
-//funcion para buscar en tiempo real los resultados
-function busquedaParticular(getId, getValue) {
-  let pElement = document.getElementById("paginaActual");
-  console.log(pElement.textContent);
-  console.log(parseInt(pElement.textContent) * 10);
-  $.ajax({
-    method: "POST",
-    url: "../BusquedaParticularDatos",
-    data: {
-      id: getId,
-      valor: getValue,
-    },
-    success: function (result) {
-      mostrarTabla(result);
     },
   });
 }
@@ -781,46 +775,6 @@ function guardarDocsAprobados(id) {
     },
   });
 }
-/*function valoresSesiones() {
-  let sesion = document.getElementById("UsuarioActivo").textContent;
-  $.ajax({
-    method: "POST",
-    url: "../ValidarSesiones",
-    data: {
-      accion: "ValidarUsuario",
-      usuario: sesion,
-    },
-    success: function (result) {
-      if (result === "consulta") {
-        document.getElementById("gDatosBtn").disabled = true;
-        document.getElementById("insertarSeguimiento").disabled = true;
-        document.getElementById("btnAsignarIntegrador").disabled = true;
-        document.getElementById("btnDocsAprobados").disabled = true;
-        document.getElementById("btnSubirDoc").disabled = true;
-        $(".btnEliminarClass").prop("disabled", true);
-        // document.getElementsByClassName("btnEliminarClass").disabled = true;
-      } else if (result === "operador" || result === "integrador") {
-        document.getElementById("fechaCarga").disabled = true;
-      }
-    },
-  });
-}*/
-/*function validarEliminar() {
-  //let sesion = document.getElementById("UsuarioActivo").textContent;
-  $.ajax({
-    method: "POST",
-    url: "../ValidarSesiones",
-    data: {
-      accion: "ValidarUsuario",
-      usuario: sesion,
-    },
-    success: function (result) {
-      if (result == "root" || result == "supervisor") {
-        $(".btnEliminar").show(); //muestro mediante clase
-      }
-    },
-  });
-}*/
 function controlPaginado() {
   //funcion para controlar el pagina de los resultados
   let paginaMas = document.getElementById("botonClickMas");
@@ -872,73 +826,6 @@ function controlPaginado() {
       tBodyActualSeg.style.removeProperty("display");
     }
   };
-}
-function eliminarSiniestro(getId) {
-  //funcion para borrar el siniestro
-  let sinComas = getId.split(",");
-  let idEliminar = sinComas[0];
-  let mensaje;
-  let opcion = confirm("Confirma para eliminar siniestro");
-  if (opcion == true) {
-    $.ajax({
-      method: "POST",
-      url: "../EliminarSiniestro",
-      data: {
-        idEliminar,
-      },
-    }).done(function (respuesta) {
-      alert(respuesta);
-      contador = 0;
-      paginaActual.textContent = contador;
-      recargarSiniestros();
-    });
-  } else {
-    mensaje = "Movimiento cancelado";
-  }
-}
-function recargarSiniestros() {
-  $.ajax({
-    method: "POST",
-    url: "../ControladorMostrarDatos",
-    data: {
-      accion: "MostrarSiniestrosNoDocs",
-      soloDatos: "SoloDatos",
-    },
-    success: function (result) {
-      mostrarTabla(result);
-    },
-  }); //
-  $.ajax({
-    method: "POST",
-    url: "../SiniestrosNoDocs",
-    data: {
-      accion: "SiniestrosEnRespuesta",
-      cero: "0",
-      tres: "3",
-      seis: "6",
-      quince: "15",
-      treinta: "45",
-    },
-    success: function (result) {
-      let sinComas = result.split("/-_");
-      $("#de0a2").html(sinComas[0]);
-      $("#de3a5").html(sinComas[1]);
-      $("#de6a14").html(sinComas[2]);
-      $("#mas15").html(sinComas[3]);
-      document.getElementById("terminados0a2").textContent = sinComas[4];
-      document.getElementById("seguimiento0a2").textContent = sinComas[5];
-      document.getElementById("incorrectos0a2").textContent = sinComas[6];
-      document.getElementById("terminados3a5").textContent = sinComas[7];
-      document.getElementById("seguimiento3a5").textContent = sinComas[8];
-      document.getElementById("incorrectos3a5").textContent = sinComas[9];
-      document.getElementById("terminados6a14").textContent = sinComas[10];
-      document.getElementById("seguimiento6a14").textContent = sinComas[11];
-      document.getElementById("incorrectos6a14").textContent = sinComas[12];
-      document.getElementById("terminadosmas15").textContent = sinComas[13];
-      document.getElementById("seguimientomas15").textContent = sinComas[14];
-      document.getElementById("incorrectosmas15").textContent = sinComas[15];
-    },
-  });
 }
 function enviarImagenes() {
   let imagen;
@@ -1133,51 +1020,12 @@ function consultausuarios() {
     }
   });
 }
-function funcionAjaxParaFiltros(filtro, getId) {
-  let sinComas = getId.split(",");
-  $.ajax({
-    method: "POST",
-    url: "../../php/mostrarSiniestrosDias.php",
-    dataType: "json",
-    data: {
-      mayor: sinComas[0],
-      menor: sinComas[1],
-      accion: filtro,
-    },
-  }).done(function (result) {
-    mostrarTabla(result);
-  });
-}
 function exportarUsuarios() {
   $.ajax({
     method: "POST",
     url: "../ExportarUsuarios",
     data: {},
   });
-}
-function buscarDatosExportar() {
-  if (
-    document.getElementById("fechaSegInicio").value != "" &&
-    document.getElementById("fechaSegFinal").value != ""
-  ) {
-    $.ajax({
-      method: "POST",
-      url: "../exportar",
-      data: {
-        accion: "exportarGrande",
-        fechaInicio: document.getElementById("fechaSegInicio").value,
-        fechaFinal: document.getElementById("fechaSegFinal").value,
-      },
-    }).done(function (result) {
-      console.log(result);
-    });
-  } else {
-    alert("Por favor, selecciona fechas correctas");
-  }
-}
-function exportarGrande() {
-  let descarga = document.getElementById("btnDescargarExcel");
-  descarga.click();
 }
 function estaciones() {
   $("#txtEstatusSeguimiento").change(function () {
