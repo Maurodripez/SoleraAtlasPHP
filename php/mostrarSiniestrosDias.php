@@ -83,11 +83,4 @@ switch ($accion) {
             . " or  estatusOperativo='DATOS INCORRECTOS' or  estatusOperativo='SIN CONTACTO EN 30 DIAS')";
         ConsultasSelect($sql);
         break;
-    case "datosPorDefecto":
-        $sql = "select porcentajeDocs,porcentajeTotal,idRegistro, numSiniestro, "
-            . " poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo"
-            . " from docsaprobadosatlas, fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
-            . " and idRegistro= infoauto.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso and fkDocsAtlas=idRegistro";
-        ConsultasSelect($sql);
-        break;
 }

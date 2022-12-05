@@ -709,7 +709,7 @@
                         <button id="limpiarRegistro" type="button" class="btn btn-primary">
                             Limpiar
                         </button>
-                        <a href="../php/descargar.php?file=Siniestros.csv" download="Siniestro.xls" class="btn btn-primary" role="button">Exportar</a>
+                        <a href="../Excels/Siniestros.xlsx" download="Siniestros.xlsx" class="btn btn-primary" role="button">Exportar</a>
                     </div>
                 </div>
             </div>

@@ -1980,7 +1980,7 @@
                                 <option value="Poliza">Poliza</option>
                                 <option value="Comprobante de domicilio">Comprobante de domicilio</option>
                             </select>
-                            <button onclick="GuardarImagenVideo()">
+                            <button onclick="">
                                 guardar Imagen
                             </button>
                         </div>

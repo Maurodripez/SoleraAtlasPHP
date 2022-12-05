@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
   function mostrarimagenServlet() {
     $.ajax({
       method: "post",
@@ -13,9 +13,9 @@ $(document).ready(function () {
     });
   }
   setInterval(mostrarimagenServlet, 500);
-});
+});*/
 
-function GuardarImagenVideo() {
+/*function GuardarImagenVideo() {
   $.ajax({
     method: "post",
     url: "leerImagenes",
@@ -28,4 +28,4 @@ function GuardarImagenVideo() {
       alert(result);
     },
   });
-}
+}*/

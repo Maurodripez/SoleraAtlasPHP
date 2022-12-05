@@ -553,7 +553,7 @@ function funcionesBoton(getId) {
             let imagen = document.getElementById("docSeleccionado");
             $.ajax({
               method: "POST",
-              url: "leerImagenes",
+              url: "leerImagenes2",
               data: {
                 accion: "traerImagen64",
               },
@@ -627,8 +627,8 @@ function convertirPDF(getId) {
   doc.save("" + sinPuntos[0] + ".pdf");
 }
 window.addEventListener("load", function () {
-  CantMensajes();
-  diasSinRespuesta();
+  //CantMensajes();
+  //diasSinRespuesta();
 });
 function CantMensajes() {
   $.ajax({

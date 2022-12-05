@@ -1,5 +1,14 @@
 var contador = 0;
 var contadorSeg = 0;
+$(document).ready(function () {
+  datosPorDefecto();
+  estaciones();
+  controlPaginado();
+  //funcion para limpiar el regitro
+  $("#limpiarRegistro").click(function () {
+    $(".filtrosBusqueda").val($(".filtrosBusqueda option:first").val());
+  });
+});
 function busquedaFiltro(thisValue, accion, columna) {
   $.ajax({
     method: "POST",
@@ -147,7 +156,7 @@ function mostrarTabla(result) {
 function datosPorDefecto() {
   $.ajax({
     method: "POST",
-    url: "../../php/mostrarSiniestrosDias.php",
+    url: "../../php/BusquedaSinFiltro.php",
     dataType: "json",
     data: {
       accion: "datosPorDefecto",
@@ -227,7 +236,7 @@ function buscarDatos() {
   }
   $.ajax({
     method: "POST",
-    url: "../../php/Busquedas.php",
+    url: "../../php/BusquedaSinFiltro.php",
     dataType: "json",
     data: {
       accion: "BusquedaFechasyMas",
@@ -687,15 +696,6 @@ function InsertarSeguimiento() {
     },
   });
 }
-$(document).ready(function () {
-  datosPorDefecto();
-  estaciones();
-  controlPaginado();
-  //funcion para limpiar el regitro
-  $("#limpiarRegistro").click(function () {
-    $(".filtrosBusqueda").val($(".filtrosBusqueda option:first").val());
-  });
-});
 function exportTableToExcel(tableID, filename = "") {
   $(".botonesTabla").remove();
   let downloadLink;
