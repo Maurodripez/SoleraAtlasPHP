@@ -1,5 +1,6 @@
 var contador = 0;
 var contadorSeg = 0;
+let rutaInicial = "../../php/";
 $(document).ready(function () {
   //alert(document.getElementById("sesionActual").textContent);
   datosPorDefecto();
@@ -21,6 +22,9 @@ $(document).ready(function () {
   cantidadSiniestrosDetalles(15, 35, "incorrectos", "mas15");
   estaciones();
   controlPaginado();
+  enviarImagenes();
+  consultaUsuarios();
+  mostrarDivsModal();
   //funcion para limpiar el regitro
   $("#limpiarRegistro").click(function () {
     $(".filtrosBusqueda").val($(".filtrosBusqueda option:first").val());
@@ -31,7 +35,7 @@ function obtenerSesion() {
   let usuario = document.getElementById("sesionActual").textContent;
   $.ajax({
     type: "POST",
-    url: "../../php/ObtenerSesion.php",
+    url: rutaInicial + "ObtenerSesion.php",
     dataType: "json",
     data: {
       accion: "Privilegios",
@@ -50,7 +54,7 @@ function obtenerSesion() {
 function cantidadSiniestros(mayor, menor, idCantidad) {
   $.ajax({
     method: "POST",
-    url: "../../php/CantidadSiniestros.php",
+    url: rutaInicial + "CantidadSiniestros.php",
     dataType: "json",
     data: {
       accion: "SiniestrosEnRespuesta",
@@ -67,7 +71,9 @@ function cantidadSiniestros(mayor, menor, idCantidad) {
 function cantidadSiniestrosDetalles(mayor, menor, accion, dias) {
   $.ajax({
     method: "POST",
-    url: "../../php/CantidadSiniestrosDetalles/CantidadSiniestrosTerminados.php",
+    url:
+      rutaInicial +
+      "CantidadSiniestrosDetalles/CantidadSiniestrosTerminados.php",
     dataType: "json",
     data: {
       accion,
@@ -88,10 +94,89 @@ function cantidadSiniestrosDetalles(mayor, menor, accion, dias) {
     },
   });
 }
+function estaciones() {
+  $("#txtEstatusSeguimiento").change(function () {
+    let estatus = $("#txtEstatusSeguimiento").val();
+    if (
+      estatus ===
+        "CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)" ||
+      estatus === "CON CONTACTO SIN COOPERACION DEL CLIENTE" ||
+      estatus === "CASO REABIERTO" ||
+      estatus === "CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)" ||
+      estatus === "TERMINADO ENTREGA ORIGINALES EN OFICINA" ||
+      estatus === "TERMINADO POR PROCESO COMPLETO" ||
+      estatus === "TOTAL DE DOCUMENTOS"
+    ) {
+      $("#txtSubEstacion").empty();
+      $("#txtSubEstacion").append(
+        "<option value='Terminado' >Terminado</option>"
+      );
+      document.getElementById("txtEstacionSoloLectura").value = "Terminado";
+    } else if (
+      estatus === "CON CONTACTO SIN DOCUMENTOS" ||
+      estatus === "DE 1 A 3 DOCUMENTOS" ||
+      estatus === "DE 4 A 6 DOCUMENTOS" ||
+      estatus === "DE 7 A 10 DOCUMENTOS" ||
+      estatus === "SIN CONTACTO"
+    ) {
+      $("#txtSubEstacion").empty();
+      $("#txtSubEstacion").append(
+        "<option value='En seguimiento'>En seguimiento</option>"
+      );
+      document.getElementById("txtEstacionSoloLectura").value =
+        "En seguimiento";
+    } else if (
+      estatus === "DATOS INCORRECTOS" ||
+      estatus === "SIN CONTACTO EN 30 DIAS"
+    ) {
+      $("#txtSubEstacion").empty();
+      $("#txtSubEstacion").append(
+        "<option value='Cancelado'>Cancelado</option>"
+      );
+      document.getElementById("txtEstacionSoloLectura").value = "Cancelado";
+    }
+  });
+  let estatus = $("#txtEstatusSeguimiento").val();
+  if (
+    estatus ===
+      "CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)" ||
+    estatus === "CON CONTACTO SIN COOPERACION DEL CLIENTE" ||
+    estatus === "CASO REABIERTO" ||
+    estatus === "CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)" ||
+    estatus === "TERMINADO ENTREGA ORIGINALES EN OFICINA" ||
+    estatus === "TERMINADO POR PROCESO COMPLETO" ||
+    estatus === "TOTAL DE DOCUMENTOS"
+  ) {
+    $("#txtSubEstacion").empty();
+    $("#txtSubEstacion").append(
+      "<option value='Terminado' >Terminado</option>"
+    );
+    document.getElementById("txtEstacionSoloLectura").value = "Terminado";
+  } else if (
+    estatus === "CON CONTACTO SIN DOCUMENTOS" ||
+    estatus === "DE 1 A 3 DOCUMENTOS" ||
+    estatus === "DE 4 A 6 DOCUMENTOS" ||
+    estatus === "DE 7 A 10 DOCUMENTOS" ||
+    estatus === "SIN CONTACTO"
+  ) {
+    $("#txtSubEstacion").empty();
+    $("#txtSubEstacion").append(
+      "<option value='En seguimiento'>En seguimiento</option>"
+    );
+    document.getElementById("txtEstacionSoloLectura").value = "En seguimiento";
+  } else if (
+    estatus === "DATOS INCORRECTOS" ||
+    estatus === "SIN CONTACTO EN 30 DIAS"
+  ) {
+    $("#txtSubEstacion").empty();
+    $("#txtSubEstacion").append("<option value='Cancelado'>Cancelado</option>");
+    document.getElementById("txtEstacionSoloLectura").value = "Cancelado";
+  }
+}
 function busquedaFiltro(thisValue, accion, columna) {
   $.ajax({
     method: "POST",
-    url: "../../php/Busquedas.php",
+    url: rutaInicial + "Busquedas.php",
     dataType: "json",
     data: {
       filtro: thisValue,
@@ -116,7 +201,13 @@ function mostrarTabla(result) {
   tablaDatos.appendChild(tblBody[numeroTBody]);
 
   for (let i in result.Siniestros) {
-    if (i % 9 == 0 && i != 0) {
+    if (i % 10 == 0 && i != 0) {
+      numeroTBody += 1;
+      tblBody[numeroTBody] = document.createElement("tbody");
+      tblBody[numeroTBody].setAttribute("class", "tBody");
+      tblBody[numeroTBody].setAttribute("id", "tBody:" + numeroTBody);
+      tblBody[numeroTBody].style.display = "none";
+      tablaDatos.appendChild(tblBody[numeroTBody]);
       // Creando los 'td' que almacenará cada parte de la información del usuario actual
       let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
       <button type='button' id=${
@@ -169,12 +260,6 @@ function mostrarTabla(result) {
         porcentajeDocs +
         porcentajeTotal
       }</tr>`;
-      numeroTBody += 1;
-      tblBody[numeroTBody] = document.createElement("tbody");
-      tblBody[numeroTBody].setAttribute("class", "tBody");
-      tblBody[numeroTBody].setAttribute("id", "tBody:" + numeroTBody);
-      tblBody[numeroTBody].style.display = "none";
-      tablaDatos.appendChild(tblBody[numeroTBody]);
     } else {
       // Creando los 'td' que almacenará cada parte de la información del usuario actual
       let btnGrupo = `<td><div class="btn-group tablaActual botonesTabla" role="group">
@@ -235,7 +320,7 @@ function mostrarTabla(result) {
 function datosPorDefecto() {
   $.ajax({
     method: "POST",
-    url: "../../php/BusquedaSinFiltro.php",
+    url: rutaInicial + "BusquedaSinFiltro.php",
     dataType: "json",
     data: {
       accion: "datosPorDefecto",
@@ -314,7 +399,7 @@ function buscarDatos() {
   }
   $.ajax({
     method: "POST",
-    url: "../../php/BusquedaSinFiltro.php",
+    url: rutaInicial + "BusquedaSinFiltro.php",
     dataType: "json",
     data: {
       accion: "BusquedaFechasyMas",
@@ -338,7 +423,7 @@ function buscarDatos() {
 function descargar() {
   $.ajax({
     method: "POST",
-    url: "../../php/descargar.php",
+    url: rutaInicial + "descargar.php",
     data: {
       accion: "Descargar",
     },
@@ -351,7 +436,7 @@ function funcionAjaxParaFiltros(filtro, getId) {
 
   $.ajax({
     method: "POST",
-    url: "../../php/mostrarSiniestrosDias.php",
+    url: rutaInicial + "mostrarSiniestrosDias.php",
     dataType: "json",
     data: {
       mayor: sinComas[0],
@@ -372,7 +457,7 @@ function eliminarSiniestro(getId) {
   if (opcion == true) {
     $.ajax({
       method: "POST",
-      url: "../../php/EliminarSiniestro.php",
+      url: rutaInicial + "EliminarSiniestro.php",
       data: {
         idEliminar,
       },
@@ -396,7 +481,7 @@ function mostrarInfoSiniestro(get) {
   let idGuardado = get; ///////////se manda el id para hacer la busqueda y mostrar los datos del siniestro
   console.log(idGuardado);
   $.post({
-    url: "../../php/mostrarDatosSiniestro.php",
+    url: rutaInicial + "mostrarDatosSiniestro.php",
     dataType: "json",
     data: {
       idGuardado,
@@ -445,15 +530,20 @@ function mostrarInfoSiniestro(get) {
       document.getElementById("asegurado").value =
         result.Siniestros[0].asegurado;
       document.getElementById("correo").value = result.Siniestros[0].correo;
-      document.getElementById("telPrincipal").value =
+      document.getElementById("telefonoPrincipal").value =
         result.Siniestros[0].telefonoPrincipal;
-      document.getElementById("telSecundario").value =
+      document.getElementById("telefonosecundario").value =
         result.Siniestros[0].telefonosecundario;
       document.getElementById("contacto").value = result.Siniestros[0].contacto;
       document.getElementById("correoContacto").value =
         result.Siniestros[0].correoContacto;
       document.getElementById("telContacto").value =
         result.Siniestros[0].telContacto;
+      document.getElementById("txtEstatusSeguimiento").value =
+        result.Siniestros[0].estatusSeguimientoSin;
+      estaciones();
+      document.getElementById("divSeguimiento").style.display = "";
+      document.getElementById("divGuardarImagenes").style.display = "none";
       //el arreglo que se crea se lo agregagmos a cada boton que hay
     },
   });
@@ -461,98 +551,376 @@ function mostrarInfoSiniestro(get) {
   let iframe = document.getElementById("iFrameIdentificacion");
   iframe.style.display = "none";
   tablaSeguimiento();
-  consultausuarios();
   let txtIdRegistro = document.getElementById("idOculto").value;
   docsYaCargados(txtIdRegistro);
   document.getElementById("txtComentSeguimiento").value = "";
 }
-////////////////////////////
-function mostrarDocsAprobados() {
-  let porcentaje = 0;
-  let txtIdRegistro = document.getElementById("idOculto").value;
-  let mostrarDocs = "mostrarDocsAprobados";
+function GuardarRegistros() {
   $.ajax({
-    url: "../DocumentosAprobados",
+    type: "POST",
+    url: rutaInicial + "GuardarSeguimiento.php",
     data: {
-      idRegistro: txtIdRegistro,
-      funcARealizar: mostrarDocs,
+      accion: "GuardarSeguimiento",
+      fechaCarga: document.getElementById("fechaCarga").value,
+      numSiniestro: document.getElementById("numSiniestro").value,
+      poliza: document.getElementById("poliza").value,
+      afectado: document.getElementById("afectado").value,
+      tipoDeCaso: document.getElementById("tipoDeCaso").value,
+      cobertura: document.getElementById("cobertura").value,
+      fechaSiniestro: document.getElementById("fechaSiniestro").value,
+      datosAudatex: document.getElementById("datosAudatex").value,
+      estado: document.getElementById("estado").value,
+      ciudad: document.getElementById("ciudad").value,
+      region: document.getElementById("region").value,
+      ubicacionTaller: document.getElementById("ubicacionTaller").value,
+      financiado: document.getElementById("financiado").value,
+      regimenFiscal: document.getElementById("regimenFiscal").value,
+      passwordExterno: document.getElementById("passwordExterno").value,
+      estatusCliente: document.getElementById("estatusCliente").value,
+      comentariosCliente: document.getElementById("comentariosCliente").value,
+      marca: document.getElementById("marca").value,
+      tipo: document.getElementById("tipo").value,
+      modelo: document.getElementById("modelo").value,
+      placas: document.getElementById("placas").value,
+      numSerie: document.getElementById("numSerie").value,
+      valorIndemnizacion: document.getElementById("valorIndemnizacion").value,
+      valorComercial: document.getElementById("valorComercial").value,
+      asegurado: document.getElementById("asegurado").value,
+      correo: document.getElementById("correo").value,
+      telefonoPrincipal: document.getElementById("telefonoPrincipal").value,
+      telefonosecundario: document.getElementById("telefonosecundario").value,
+      contacto: document.getElementById("contacto").value,
+      correoContacto: document.getElementById("correoContacto").value,
+      telContacto: document.getElementById("telContacto").value,
+      idEditableActual: document.getElementById("idOculto").value,
+    },
+  }).done(function (respuesta) {
+    alert(respuesta);
+  });
+}
+function InsertarSeguimiento() {
+  console.log(document.getElementById("txtTipoMensaje").value);
+  let usuario = document.getElementById("sesionActual").textContent;
+  $.ajax({
+    type: "POST",
+    url: rutaInicial + "GuardarSeguimiento.php",
+    data: {
+      accion: "InsertarSeguimiento",
+      estacion: document.getElementById("txtEstacionSoloLectura").value,
+      comentSeguimiento: document.getElementById("txtComentSeguimiento").value,
+      estatusSeguimiento: document.getElementById("txtEstatusSeguimiento")
+        .value,
+      subEstatus: document.getElementById("txtSubEstacion").value,
+      respSolera: document.getElementById("txtRespSolera").value,
+      persContactada: document.getElementById("txtPersContactada").value,
+      tipoPersona: document.getElementById("txtTipoPersona").value,
+      tipoContacto: document.getElementById("txTipoContacto").value,
+      fechaIntExp: document.getElementById("txtFechaIntExp").value,
+      fechaFactServ: document.getElementById("txtFechaFactServ").value,
+      fechaTermino: document.getElementById("txtFechaTermino").value,
+      idEditableActual: document.getElementById("idOculto").value,
+      tipoMensaje: document.getElementById("txtTipoMensaje").value,
+      usuario,
     },
     success: function (result) {
-      resultados = result.split(",");
-      if (resultados[0] == "true") {
+      console.log(result);
+      tablaSeguimiento();
+    },
+  });
+}
+function consultaUsuarios() {
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "DatosAlCargarPagina.php",
+    dataType: "json",
+    data: {
+      accion: "consultaUsuarios",
+    },
+  }).done(function (result) {
+    for (let i in result.Siniestros) {
+      let selectIntegradores = document.getElementById("txtIntegrador");
+      let option = document.createElement("option");
+      option.text = result.Siniestros[i].nombreReal;
+      selectIntegradores.add(option);
+    }
+  });
+}
+function asignarIntegrador() {
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "GuardarSeguimiento.php",
+    data: {
+      accion: "AsignarIntegrador",
+      integrador: document.getElementById("txtIntegrador").value,
+      idRegistro: document.getElementById("idOculto").value,
+      usuario: document.getElementById("sesionActual").textContent,
+    },
+  }).done(function (result) {
+    alert(result);
+    tablaSeguimiento();
+  });
+}
+function guardarDocsAprobados() {
+  let checkboxFactura = document.getElementById("checkboxFactura").checked;
+  let checkboxFacturaAtlas = document.getElementById(
+    "checkboxFacturaAtlas"
+  ).checked;
+  let checkboxSecuencia = document.getElementById("checkboxSecuencia").checked;
+  let checkboxPropiedad = document.getElementById("checkboxPropiedad").checked;
+  let checkboxCopiaPropiedad = document.getElementById(
+    "checkboxCopiaPropiedad"
+  ).checked;
+  let checkboxPedimento = document.getElementById("checkboxPedimento").checked;
+  let checkboxBajadePermiso = document.getElementById(
+    "checkboxBajadePermiso"
+  ).checked;
+  let checkboxRFV = document.getElementById("checkboxRFV").checked;
+  let checkboxVerificacion = document.getElementById(
+    "checkboxVerificacion"
+  ).checked;
+  let checkboxTenencias = document.getElementById("checkboxTenencias").checked;
+  let checkboxFacturaMotor = document.getElementById(
+    "checkboxFacturaMotor"
+  ).checked;
+  let checkboxLlaves = document.getElementById("checkboxLlaves").checked;
+  let checkboxFormatoCliente = document.getElementById(
+    "checkboxFormatoCliente"
+  ).checked;
+  let checkboxLFPDPPP = document.getElementById("checkboxLFPDPPP").checked;
+  let checkboxAveriguacion = document.getElementById(
+    "checkboxAveriguacion"
+  ).checked;
+  let checkboxAcreditacion = document.getElementById(
+    "checkboxAcreditacion"
+  ).checked;
+  let checkboxPFP = document.getElementById("checkboxPFP").checked;
+  let checkboxOtros = document.getElementById("checkboxOtros").checked;
+  let checkboxLiberacion =
+    document.getElementById("checkboxLiberacion").checked;
+  let checkboxCancelacion = document.getElementById(
+    "checkboxCancelacion"
+  ).checked;
+  let idEditableActual = document.getElementById("idOculto").value;
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "GuardarSeguimiento.php",
+    data: {
+      checkboxFactura,
+      checkboxFacturaAtlas,
+      checkboxSecuencia,
+      checkboxPropiedad,
+      checkboxCopiaPropiedad,
+      checkboxPedimento,
+      checkboxBajadePermiso,
+      checkboxRFV,
+      checkboxVerificacion,
+      checkboxTenencias,
+      checkboxFacturaMotor,
+      checkboxLlaves,
+      checkboxFormatoCliente,
+      checkboxLFPDPPP,
+      checkboxAveriguacion,
+      checkboxAcreditacion,
+      checkboxPFP,
+      checkboxOtros,
+      checkboxLiberacion,
+      checkboxCancelacion,
+      idEditableActual,
+      accion: "ValidarDocs",
+    },
+    success: function (resultado) {
+      alert(resultado);
+      mostrarDocsAprobados();
+    },
+  });
+}
+function mostrarDocsAprobados() {
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "MensajesSeguimiento.php",
+    dataType: "json",
+    data: {
+      idRegistro: document.getElementById("idOculto").value,
+      accion: "DocsAprobados",
+    },
+    success: function (result) {
+      console.log(result);
+      if (result.Siniestros[0].factura === "true") {
         document.getElementById("checkboxFactura").checked = true;
-        porcentaje += 9;
       } else {
         document.getElementById("checkboxFactura").checked = false;
       }
-      if (resultados[1] == "true") {
-        document.getElementById("checkboxPoder").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].facturaatlas === "true") {
+        document.getElementById("checkboxFacturaAtlas").checked = true;
       } else {
-        document.getElementById("checkboxPoder").checked = false;
+        document.getElementById("checkboxFacturaAtlas").checked = false;
       }
-      if (resultados[2] == "true") {
-        document.getElementById("checkboxIdentificacion").checked = true;
-        porcentaje += 10;
+      if (result.Siniestros[0].secuencia === "true") {
+        document.getElementById("checkboxSecuencia").checked = true;
       } else {
-        document.getElementById("checkboxIdentificacion").checked = false;
+        document.getElementById("checkboxSecuencia").checked = false;
       }
-      if (resultados[3] == "true") {
-        document.getElementById("checkboxSituacion").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].certificadopropiedad === "true") {
+        document.getElementById("checkboxPropiedad").checked = true;
       } else {
-        document.getElementById("checkboxSituacion").checked = false;
+        document.getElementById("checkboxPropiedad").checked = false;
       }
-      if (resultados[4] == "true") {
-        document.getElementById("checkboxCurp").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].copiacertificado === "true") {
+        document.getElementById("checkboxCopiaPropiedad").checked = true;
       } else {
-        document.getElementById("checkboxCurp").checked = false;
+        document.getElementById("checkboxCopiaPropiedad").checked = false;
       }
-      if (resultados[5] == "true") {
-        document.getElementById("checkboxEstado").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].pedimento === "true") {
+        document.getElementById("checkboxPedimento").checked = true;
       } else {
-        document.getElementById("checkboxEstado").checked = false;
+        document.getElementById("checkboxPedimento").checked = false;
       }
-      if (resultados[6] == "true") {
-        document.getElementById("checkboxTenencia").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].baja === "true") {
+        document.getElementById("checkboxBajadePermiso").checked = true;
       } else {
-        document.getElementById("checkboxTenencia").checked = false;
+        document.getElementById("checkboxBajadePermiso").checked = false;
       }
-      if (resultados[7] == "true") {
-        document.getElementById("checkboxBaja").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].rfv === "true") {
+        document.getElementById("checkboxRFV").checked = true;
       } else {
-        document.getElementById("checkboxBaja").checked = false;
+        document.getElementById("checkboxRFV").checked = false;
       }
-      if (resultados[8] == "true") {
-        document.getElementById("checkboxTarjeta").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].verificacion === "true") {
+        document.getElementById("checkboxVerificacion").checked = true;
       } else {
-        document.getElementById("checkboxTarjeta").checked = false;
+        document.getElementById("checkboxVerificacion").checked = false;
       }
-      if (resultados[8] == "true") {
-        document.getElementById("checkboxPoliza").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].tenencias === "true") {
+        document.getElementById("checkboxTenencias").checked = true;
       } else {
-        document.getElementById("checkboxPoliza").checked = false;
+        document.getElementById("checkboxTenencias").checked = false;
       }
-      if (resultados[8] == "true") {
-        document.getElementById("checkboxComprobante").checked = true;
-        porcentaje += 9;
+      if (result.Siniestros[0].facturamotor === "true") {
+        document.getElementById("checkboxFacturaMotor").checked = true;
       } else {
-        document.getElementById("checkboxComprobante").checked = false;
+        document.getElementById("checkboxFacturaMotor").checked = false;
       }
-      porcentajeBarra = document.getElementById("progresoDocsAprobados");
-      porcentajeBarra.style.width = porcentaje + "%";
-      porcentajeBarra.innerHTML = porcentaje + "%";
+      if (result.Siniestros[0].llaves === "true") {
+        document.getElementById("checkboxLlaves").checked = true;
+      } else {
+        document.getElementById("checkboxLlaves").checked = false;
+      }
+      if (result.Siniestros[0].conoceatucliente === "true") {
+        document.getElementById("checkboxFormatoCliente").checked = true;
+      } else {
+        document.getElementById("checkboxFormatoCliente").checked = false;
+      }
+      if (result.Siniestros[0].consentimiento === "true") {
+        document.getElementById("checkboxLFPDPPP").checked = true;
+      } else {
+        document.getElementById("checkboxLFPDPPP").checked = false;
+      }
+      if (result.Siniestros[0].averiguacionprevia === "true") {
+        document.getElementById("checkboxAveriguacion").checked = true;
+      } else {
+        document.getElementById("checkboxAveriguacion").checked = false;
+      }
+      if (result.Siniestros[0].acreditacion === "true") {
+        document.getElementById("checkboxAcreditacion").checked = true;
+      } else {
+        document.getElementById("checkboxAcreditacion").checked = false;
+      }
+      if (result.Siniestros[0].otros === "true") {
+        document.getElementById("checkboxOtros").checked = true;
+      } else {
+        document.getElementById("checkboxOtros").checked = false;
+      }
+      if (result.Siniestros[0].oficioliberacion === "true") {
+        document.getElementById("checkboxLiberacion").checked = true;
+      } else {
+        document.getElementById("checkboxLiberacion").checked = false;
+      }
+      if (result.Siniestros[0].avisopfp === "true") {
+        document.getElementById("checkboxPFP").checked = true;
+      } else {
+        document.getElementById("checkboxPFP").checked = false;
+      }
+      if (result.Siniestros[0].oficiocancelacion === "true") {
+        document.getElementById("checkboxCancelacion").checked = true;
+      } else {
+        document.getElementById("checkboxCancelacion").checked = false;
+      }
+      let porcentajeBarra = document.getElementById("progresoDocsAprobados");
+      porcentajeBarra.style.width = result.Siniestros[0].porcentajeDocs + "%";
+      porcentajeBarra.innerHTML = result.Siniestros[0].porcentajeDocs + "%";
     },
   });
-  tablaImagenes(txtIdRegistro);
-  docsYaCargados(txtIdRegistro);
+  //tablaImagenes(txtIdRegistro);
+  //docsYaCargados(txtIdRegistro);
 }
+function tablaSeguimiento() {
+  $.ajax({
+    method: "post",
+    url: rutaInicial + "MensajesSeguimiento.php",
+    dataType: "json",
+    data: {
+      accion: "tablaSeguimiento",
+      idRegistro: document.getElementById("idOculto").value,
+    },
+  }).done(function (result) {
+    console.log(result);
+    $(".claseTablaSeguimiento").remove();
+    let numeroTBody = 0;
+    let tblBody = new Array();
+    tblBody[numeroTBody] = document.createElement("tbody");
+    tblBody[numeroTBody].setAttribute("class", "tBodySeg");
+    tblBody[numeroTBody].setAttribute("id", "tBodySeg:" + numeroTBody);
+    let tablaseguimiento = document.getElementById("tablaSeguimientos");
+    tablaseguimiento.appendChild(tblBody[numeroTBody]);
+    for (let i in result.Siniestros) {
+      //console.log("entra");
+      if (i % 5 == 0 && i != 0) {
+        tablaseguimiento.appendChild(tblBody[numeroTBody]);
+        numeroTBody += 1;
+        tblBody[numeroTBody] = document.createElement("tbody");
+        tblBody[numeroTBody].setAttribute("class", "tBodySeg");
+        tblBody[numeroTBody].setAttribute("id", "tBodySeg:" + numeroTBody);
+        tblBody[numeroTBody].style.display = "none";
+        tablaseguimiento.appendChild(tblBody[numeroTBody]);
+        usuario = `<td class='col-1' style='font-size: 11px'>${result.Siniestros[i].usuario}</td>`;
+        tipoMensaje = `<td class='col' style='font-size: 11px'>${result.Siniestros[i].msgInterno}</td>`;
+        fecha = `<td class='col' style='font-size: 11px'>${result.Siniestros[i].fechaseguimiento}</td>`;
+        estatus = `<td class='col' style='font-size: 11px'>${result.Siniestros[i].estatusSeguimiento}</td>`;
+        comentario = `<td class='col' style='font-size: 11px'>${result.Siniestros[i].comentarios}</td>`;
+        tblBody[numeroTBody].innerHTML += `<tr class='claseTablaSeguimiento'>${
+          usuario + tipoMensaje + fecha + estatus + comentario
+        }</tr>`;
+      } else {
+        usuario = `<td class='col-1' style='font-size: 11px'>${result.Siniestros[i].usuario}</td>`;
+        tipoMensaje = `<td class='col' style='font-size: 11px'>${result.Siniestros[i].msgInterno}</td>`;
+        fecha = `<td class='col-2' style='font-size: 11px'>${result.Siniestros[i].fechaseguimiento}</td>`;
+        estatus = `<td class='col' style='font-size: 11px'>${result.Siniestros[i].estatusSeguimiento}</td>`;
+        comentario = `<td class='col' style='font-size: 11px'>${result.Siniestros[i].comentarios}</td>`;
+        tblBody[numeroTBody].innerHTML += `<tr class='claseTablaSeguimiento'>${
+          usuario + tipoMensaje + fecha + estatus + comentario
+        }</tr>`;
+      }
+    }
+  });
+}
+function mostrarDivsModal() {
+  document
+    .getElementById("btnDocsMostrar")
+    .addEventListener("click", function (event) {
+      document.getElementById("divSeguimiento").style.display = "none";
+      document.getElementById("divGuardarImagenes").style.display = "";
+      mostrarDocsAprobados();
+    });
+  document
+    .getElementById("btnSeguimiento")
+    .addEventListener("click", function (event) {
+      document.getElementById("divSeguimiento").style.display = "";
+      document.getElementById("divGuardarImagenes").style.display = "none";
+    });
+}
+/////////////////////////////
+//funciones todavia no utilizadas
+////////////////////////////
 function tablaImagenes(txtIdRegistro) {
   $.ajax({
     url: "../DocumentosAprobados",
@@ -664,117 +1032,6 @@ function Limpiarimagen(iframe) {
   iframe.style.display = "none";
   imagen.setAttribute("src", "");
 }
-function GuardarRegistros() {
-  if (document.getElementById("valIndemnizacion").value.length > 0) {
-    alert("Contact ");
-  }
-  $.ajax({
-    type: "POST",
-    url: "../ObtenerInfoDesplegableServlet",
-    data: {
-      fechaCarga: document.getElementById("fechaCarga").value,
-      numSiniestro: document.getElementById("numSiniestro").value,
-      poliza: document.getElementById("poliza").value,
-      afectado: document.getElementById("afectado").value,
-      tipoDeCaso: document.getElementById("tipoDeCaso").value,
-      cobertura: document.getElementById("cobertura").value,
-      fechaSiniestro: document.getElementById("fechaSiniestro").value,
-      datosAudatex: document.getElementById("datosAudatex").value,
-      estado: document.getElementById("estado").value,
-      ciudad: document.getElementById("ciudad").value,
-      region: document.getElementById("region").value,
-      ubicacionTaller: document.getElementById("ubicacionTaller").value,
-      financiado: document.getElementById("financiado").value,
-      regimenFiscal: document.getElementById("regimenFiscal").value,
-      passwordExterno: document.getElementById("passwordExterno").value,
-      estatusCliente: document.getElementById("estatusCliente").value,
-      comentariosCliente: document.getElementById("comentariosCliente").value,
-      marca: document.getElementById("marca").value,
-      tipo: document.getElementById("tipo").value,
-      modelo: document.getElementById("modelo").value,
-      placas: document.getElementById("placas").value,
-      numSerie: document.getElementById("numSerie").value,
-      valIndemnizacion: document.getElementById("valIndemnizacion").value,
-      valComercial: document.getElementById("valComercial").value,
-      asegurado: document.getElementById("asegurado").value,
-      correo: document.getElementById("correo").value,
-      telPrincipal: document.getElementById("telPrincipal").value,
-      telSecundario: document.getElementById("telSecundario").value,
-      contacto: document.getElementById("contacto").value,
-      correoContacto: document.getElementById("correoContacto").value,
-      telContacto: document.getElementById("telContacto").value,
-      idEditableActual: document.getElementById("idOculto").value,
-    },
-  }).done(function (respuesta) {
-    alert("Guardado con exito");
-  });
-  /*} else {
-    alert("Por favor, inserta la informacion faltante");
-  }*/
-}
-function InsertarSeguimiento() {
-  $.ajax({
-    url: "../GuardarSeguimiento",
-    data: {
-      accion: "guardarSeguimiento",
-      estacion: document.getElementById("txtEstacionSoloLectura").value,
-      comentSeguimiento: document.getElementById("txtComentSeguimiento").value,
-      estatusSeguimiento: document.getElementById("txtEstatusSeguimiento")
-        .value,
-      subEstatus: document.getElementById("txtSubEstacion").value,
-      respSolera: document.getElementById("txtRespSolera").value,
-      persContactada: document.getElementById("txtPersContactada").value,
-      tipoPersona: document.getElementById("txtTipoPersona").value,
-      tipoContacto: document.getElementById("txTipoContacto").value,
-      fechaPrimEnvDocs: document.getElementById("txtFechaPrimEnvDocs").value,
-      fechaIntExp: document.getElementById("txtFechaIntExp").value,
-      fechaFactServ: document.getElementById("txtFechaFactServ").value,
-      fechaTermino: document.getElementById("txtFechaTermino").value,
-      idRegistro: document.getElementById("idOculto").value,
-      //usuario: document.getElementById("UsuarioActivo").textContent,
-    },
-    success: function (result) {
-      alert(result);
-      tablaSeguimiento();
-    },
-  });
-}
-function guardarDocsAprobados(id) {
-  let txtFactura = document.getElementById("checkboxFactura");
-  let txtPoder = document.getElementById("checkboxPoder");
-  let txtIdentificacion = document.getElementById("checkboxIdentificacion");
-  let txtSituacion = document.getElementById("checkboxSituacion");
-  let txtCurp = document.getElementById("checkboxCurp");
-  let txtEstado = document.getElementById("checkboxEstado");
-  let txtTenencia = document.getElementById("checkboxTenencia");
-  let txtBaja = document.getElementById("checkboxBaja");
-  let txtTarjeta = document.getElementById("checkboxTarjeta");
-  let txtPoliza = document.getElementById("checkboxPoliza");
-  let txtComprobante = document.getElementById("checkboxComprobante");
-  let txtIdRegistro = document.getElementById("idOculto");
-  let guardarDocs = "guardarDocsAprobados";
-  $.ajax({
-    url: "../DocumentosAprobados",
-    data: {
-      factura: txtFactura.checked,
-      poder: txtPoder.checked,
-      identificacion: txtIdentificacion.checked,
-      situacion: txtSituacion.checked,
-      curp: txtCurp.checked,
-      estado: txtEstado.checked,
-      tenencia: txtTenencia.checked,
-      baja: txtBaja.checked,
-      tarjeta: txtTarjeta.checked,
-      poliza: txtPoliza.checked,
-      comprobante: txtComprobante.checked,
-      idRegistro: txtIdRegistro.value,
-      funcARealizar: guardarDocs,
-    },
-    success: function (resultado) {
-      alert(resultado);
-    },
-  });
-}
 function controlPaginado() {
   //funcion para controlar el pagina de los resultados
   let paginaMas = document.getElementById("botonClickMas");
@@ -828,25 +1085,27 @@ function controlPaginado() {
   };
 }
 function enviarImagenes() {
-  let imagen;
-  imagen = new FormData(document.getElementById("archivoCargado"));
-  $.ajax({
-    url: "../GuardadoImagenesServlet",
-    method: "post",
-    data: imagen,
-    cache: false,
-    processData: false,
-    contentType: false,
-    success: function (result) {
-      $(".tablaImagenes").remove();
-      mostrarDocsAprobados();
-      alert(result);
-    },
-    error: function () {
-      alert("Servidor anormal, intente nuevamente más tarde ...");
-    },
+  $("#btnSubirDoc").on("click", function () {
+    let formData = new FormData();
+    let files = $("#archivoCargado")[0].files[0];
+    formData.append("file", files);
+    formData.append("idRegistro", 839);
+    $.ajax({
+      url: "upload.php",
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response != 0) {
+          $(".card-img-top").attr("src", response);
+        } else {
+          alert("Formato de imagen incorrecto.");
+        }
+      },
+    });
+    return false;
   });
-  return false;
 }
 function mostrarHistorico() {
   let inputNombreFk = document.getElementById("fkIdOculto").value;
@@ -865,55 +1124,6 @@ function mostrarHistorico() {
     let estatus = `<td class='historicoTablaDatos'>${sinCodificar[1]}</td>`;
     let usuario = `<td class='historicoTablaDatos'>${sinCodificar[2]}</td>`;
     tabla.innerHTML += `<tr>${fechaCarga + estatus + usuario}</tr>`;
-  });
-}
-function tablaSeguimiento() {
-  $.ajax({
-    method: "post",
-    url: "../TablasInteracciones",
-    data: {
-      accion: "tablaSeguimiento",
-      idRegistro: document.getElementById("idOculto").value,
-    },
-  }).done(function (result) {
-    $(".claseTablaSeguimiento").remove();
-    let numeroTBody = 0;
-    let tblBody = new Array();
-    tblBody[numeroTBody] = document.createElement("tbody");
-    tblBody[numeroTBody].setAttribute("class", "tBodySeg");
-    tblBody[numeroTBody].setAttribute("id", "tBodySeg:" + numeroTBody);
-    let tablaseguimiento = document.getElementById("tablaSeguimientos");
-    tablaseguimiento.appendChild(tblBody[numeroTBody]);
-    let sinCodificado = result.split("/_-");
-    for (let i = 0; i < sinCodificado.length - 1; i++) {
-      //console.log("entra");
-      if (i % 5 == 0 && i != 0) {
-        let sinCodificado2 = sinCodificado[i].split("-_/");
-        usuario = `<td style='font-size: 12px'>${sinCodificado2[12]}</td>`;
-        fecha = `<td style='font-size: 12px'>${sinCodificado2[11]}</td>`;
-        estatus = `<td style='font-size: 12px'>${sinCodificado2[2]}</td>`;
-        comentario = `<td style='font-size: 12px'>${sinCodificado2[0]}</td>`;
-        tblBody[numeroTBody].innerHTML += `<tr class='claseTablaSeguimiento'>${
-          usuario + fecha + estatus + comentario
-        }</tr>`;
-        tablaseguimiento.appendChild(tblBody[numeroTBody]);
-        numeroTBody += 1;
-        tblBody[numeroTBody] = document.createElement("tbody");
-        tblBody[numeroTBody].setAttribute("class", "tBodySeg");
-        tblBody[numeroTBody].setAttribute("id", "tBodySeg:" + numeroTBody);
-        tblBody[numeroTBody].style.display = "none";
-        tablaseguimiento.appendChild(tblBody[numeroTBody]);
-      } else {
-        let sinCodificado2 = sinCodificado[i].split("-_/");
-        usuario = `<td style='font-size: 12px'>${sinCodificado2[12]}</td>`;
-        fecha = `<td style='font-size: 12px'>${sinCodificado2[11]}</td>`;
-        estatus = `<td style='font-size: 12px'>${sinCodificado2[2]}</td>`;
-        comentario = `<td style='font-size: 12px'>${sinCodificado2[0]}</td>`;
-        tblBody[numeroTBody].innerHTML += `<tr class='claseTablaSeguimiento'>${
-          usuario + fecha + estatus + comentario
-        }</tr>`;
-      }
-    }
   });
 }
 function docsYaCargados(txtIdRegistro) {
@@ -988,85 +1198,10 @@ function docsYaCargados(txtIdRegistro) {
   });
 }
 //https://datatables.net/
-function asignarIntegrador() {
-  $.ajax({
-    method: "POST",
-    url: "../GuardarSeguimiento",
-    data: {
-      accion: "AsignarIntegrador",
-      integrador: document.getElementById("txtIntegrador").value,
-      idRegistro: document.getElementById("idOculto").value,
-      // usuario: document.getElementById("UsuarioActivo").textContent,
-    },
-  }).done(function (result) {
-    alert(result);
-    tablaSeguimiento();
-  });
-}
-function consultausuarios() {
-  $.ajax({
-    method: "POST",
-    url: "../ConsultaUsuarios",
-    data: {
-      accion: "consultaUsuarios",
-    },
-  }).done(function (response) {
-    let sinCodificado = response.split("/-_");
-    for (let i = 0; i < sinCodificado.length - 1; i++) {
-      let selectIntegradores = document.getElementById("txtIntegrador");
-      let option = document.createElement("option");
-      option.text = sinCodificado[i];
-      selectIntegradores.add(option);
-    }
-  });
-}
 function exportarUsuarios() {
   $.ajax({
     method: "POST",
     url: "../ExportarUsuarios",
     data: {},
-  });
-}
-function estaciones() {
-  $("#txtEstatusSeguimiento").change(function () {
-    let estatus = $("#txtEstatusSeguimiento").val();
-    if (
-      estatus ===
-        "CANCELADO POR ASEGURADORA (DESVIO INTERNO, INVESTIGACION, POLIZA NO PAGADA)" ||
-      estatus === "CON CONTACTO SIN COOPERACION DEL CLIENTE" ||
-      estatus === "CASO REABIERTO" ||
-      estatus === "CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)" ||
-      estatus === "TERMINADO ENTREGA ORIGINALES EN OFICINA" ||
-      estatus === "TERMINADO POR PROCESO COMPLETO" ||
-      estatus === "TOTAL DE DOCUMENTOS"
-    ) {
-      $("#txtSubEstacion").empty();
-      $("#txtSubEstacion").append(
-        "<option value='Terminado' >Terminado</option>"
-      );
-      document.getElementById("txtEstacionSoloLectura").value = "Terminado";
-    } else if (
-      estatus === "CON CONTACTO SIN DOCUMENTOS" ||
-      estatus === "DE 1 A 3 DOCUMENTOS" ||
-      estatus === "DE 4 A 6 DOCUMENTOS" ||
-      estatus === "DE 7 A 10 DOCUMENTOS" ||
-      estatus === "SIN CONTACTO"
-    ) {
-      $("#txtSubEstacion").empty();
-      $("#txtSubEstacion").append(
-        "<option value='En seguimiento'>En seguimiento</option>"
-      );
-      document.getElementById("txtEstacionSoloLectura").value =
-        "En seguimiento";
-    } else if (
-      estatus === "DATOS INCORRECTOS" ||
-      estatus === "SIN CONTACTO EN 30 DIAS"
-    ) {
-      $("#txtSubEstacion").empty();
-      $("#txtSubEstacion").append(
-        "<option value='Cancelado'>Cancelado</option>"
-      );
-      document.getElementById("txtEstacionSoloLectura").value = "Cancelado";
-    }
   });
 }
