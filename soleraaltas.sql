@@ -14,10 +14,64 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Volcando estructura de base de datos para soleraatlas
+CREATE DATABASE IF NOT EXISTS `soleraatlas` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `soleraatlas`;
+
+-- Volcando estructura para tabla soleraatlas.datosvalidados
+CREATE TABLE IF NOT EXISTS `datosvalidados` (
+  `iddatosValidados` int(11) NOT NULL AUTO_INCREMENT,
+  `siniestro` varchar(10) DEFAULT 'false',
+  `poliza` varchar(15) DEFAULT 'false',
+  `nombre` varchar(15) DEFAULT 'false',
+  `telefono` varchar(15) DEFAULT 'false',
+  `correo` varchar(15) DEFAULT 'false',
+  `auto` varchar(15) DEFAULT 'false',
+  `fechaSin` varchar(15) DEFAULT 'false',
+  `tipoAuto` varchar(15) DEFAULT 'false',
+  `serie` varchar(15) DEFAULT 'false',
+  `placas` varchar(15) DEFAULT 'false',
+  `fkIdRegistroValidados` int(11) DEFAULT NULL,
+  PRIMARY KEY (`iddatosValidados`),
+  KEY `fkIdRegistroValidados` (`fkIdRegistroValidados`),
+  CONSTRAINT `fkIdRegistroValidados` FOREIGN KEY (`fkIdRegistroValidados`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.datosvalidados: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla soleraatlas.docsaprobadosatlas
+CREATE TABLE IF NOT EXISTS `docsaprobadosatlas` (
+  `iddocumentosaprobados` int(11) NOT NULL AUTO_INCREMENT,
+  `factura` varchar(5) DEFAULT 'false',
+  `secuencia` varchar(5) DEFAULT 'false',
+  `certificadopropiedad` varchar(5) DEFAULT 'false',
+  `copiacertificado` varchar(5) DEFAULT 'false',
+  `pedimento` varchar(5) DEFAULT 'false',
+  `rfv` varchar(5) DEFAULT 'false',
+  `verificacion` varchar(5) DEFAULT 'false',
+  `baja` varchar(5) DEFAULT 'false',
+  `conoceatucliente` varchar(45) DEFAULT 'false',
+  `consentimiento` varchar(45) DEFAULT 'false',
+  `averiguacionprevia` varchar(45) DEFAULT 'false',
+  `avisopfp` varchar(45) DEFAULT 'false',
+  `otros` varchar(45) DEFAULT 'false',
+  `oficioliberacion` varchar(45) DEFAULT 'false',
+  `oficiocancelacion` varchar(45) DEFAULT 'false',
+  `porcentajeDocs` int(11) DEFAULT 0,
+  `porcentajeTotal` int(11) DEFAULT 0,
+  `facturamotor` varchar(5) DEFAULT 'false',
+  `llaves` varchar(5) DEFAULT 'false',
+  `fkDocsAtlas` int(11) DEFAULT NULL,
+  `facturaatlas` varchar(45) DEFAULT 'false',
+  `acreditacion` varchar(45) DEFAULT 'false',
+  `tenencias` varchar(45) DEFAULT 'false',
+  PRIMARY KEY (`iddocumentosaprobados`),
+  KEY `fkIdRegistroDocsAprobados` (`fkDocsAtlas`)
+) ENGINE=InnoDB AUTO_INCREMENT=864 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.docsaprobadosatlas: ~184 rows (aproximadamente)
-REPLACE INTO `docsaprobadosatlas` (`iddocumentosaprobados`, `factura`, `secuencia`, `certificadopropiedad`, `copiacertificado`, `pedimento`, `rfv`, `verificacion`, `baja`, `conoceatucliente`, `consentimiento`, `averiguacionprevia`, `avisopfp`, `otros`, `oficioliberacion`, `oficiocancelacion`, `porcentajeDocs`, `porcentajeTotal`, `facturamotor`, `llaves`, `fkDocsAtlas`, `facturaatlas`, `acreditacion`, `tenencias`) VALUES
+INSERT INTO `docsaprobadosatlas` (`iddocumentosaprobados`, `factura`, `secuencia`, `certificadopropiedad`, `copiacertificado`, `pedimento`, `rfv`, `verificacion`, `baja`, `conoceatucliente`, `consentimiento`, `averiguacionprevia`, `avisopfp`, `otros`, `oficioliberacion`, `oficiocancelacion`, `porcentajeDocs`, `porcentajeTotal`, `facturamotor`, `llaves`, `fkDocsAtlas`, `facturaatlas`, `acreditacion`, `tenencias`) VALUES
 	(2, 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'true', 'true', 'false', 'false', 'false', 75, 50, 'true', 'true', 839, 'true', 'false', 'true'),
 	(5, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 837, 'false', 'false', 'false'),
 	(6, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 841, 'false', 'false', 'false'),
@@ -200,10 +254,30 @@ REPLACE INTO `docsaprobadosatlas` (`iddocumentosaprobados`, `factura`, `secuenci
 	(862, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1334, 'false', 'false', 'false'),
 	(863, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1335, 'false', 'false', 'false');
 
+-- Volcando estructura para tabla soleraatlas.encuestaplataforma
+CREATE TABLE IF NOT EXISTS `encuestaplataforma` (
+  `idencuestaPlataforma` int(11) NOT NULL AUTO_INCREMENT,
+  `accesible` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idencuestaPlataforma`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.encuestaplataforma: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla soleraatlas.estadoproceso
+CREATE TABLE IF NOT EXISTS `estadoproceso` (
+  `idProceso` int(11) NOT NULL AUTO_INCREMENT,
+  `estacionProceso` varchar(450) DEFAULT NULL,
+  `estatusOperativo` varchar(450) DEFAULT 'Nuevo',
+  `subEstatusProceso` varchar(45) DEFAULT 'Nuevo, activacion por proceso normal',
+  `usuarioSeguimiento` varchar(450) DEFAULT NULL,
+  `fkIdRegistroEstadoProceso` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idProceso`),
+  KEY `fkIdRegistro` (`fkIdRegistroEstadoProceso`),
+  CONSTRAINT `fkIdRegistro` FOREIGN KEY (`fkIdRegistroEstadoProceso`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.estadoproceso: ~182 rows (aproximadamente)
-REPLACE INTO `estadoproceso` (`idProceso`, `estacionProceso`, `estatusOperativo`, `subEstatusProceso`, `usuarioSeguimiento`, `fkIdRegistroEstadoProceso`) VALUES
+INSERT INTO `estadoproceso` (`idProceso`, `estacionProceso`, `estatusOperativo`, `subEstatusProceso`, `usuarioSeguimiento`, `fkIdRegistroEstadoProceso`) VALUES
 	(1, 'En seguimiento', 'DE 4 A 6 DOCUMENTOS', 'En seguimiento', 'Mauricio Rodriguez', 839),
 	(5, 'Cancelado', 'DATOS INCORRECTOS', 'Nuevo, activacion por proceso normal', NULL, 837),
 	(6, 'En seguimiento', 'SIN CONTACTO', 'Nuevo, activacion por proceso normal', NULL, 840),
@@ -386,10 +460,38 @@ REPLACE INTO `estadoproceso` (`idProceso`, `estacionProceso`, `estatusOperativo`
 	(184, 'Terminado', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', 'Terminado', 'Marisol Zarza Flores', 1310),
 	(185, 'Terminado', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', 'Terminado', 'Marisol Zarza Flores', 1311);
 
+-- Volcando estructura para tabla soleraatlas.fechasseguimiento
+CREATE TABLE IF NOT EXISTS `fechasseguimiento` (
+  `idFechasseguimiento` int(11) NOT NULL AUTO_INCREMENT,
+  `fechaSeguimiento` datetime DEFAULT NULL,
+  `fechaContactoCliente` date DEFAULT NULL,
+  `fechaPrimerEnvioDoc` date DEFAULT NULL,
+  `fechaIntegracionexpedienteCompleto` date DEFAULT NULL,
+  `fechaTermino` date DEFAULT NULL,
+  `contactoFinal` date DEFAULT NULL,
+  `siClienteOtro` varchar(45) DEFAULT NULL,
+  `numDatosincorrectos` varchar(45) DEFAULT NULL,
+  `fecharecepcionDocOriginales` datetime DEFAULT NULL,
+  `fechaPago` datetime DEFAULT NULL,
+  `docCompletosCorrectos` varchar(45) DEFAULT NULL,
+  `noindicaFaltantes` varchar(45) DEFAULT NULL,
+  `importePagado` varchar(45) DEFAULT NULL,
+  `comentarios` varchar(45) DEFAULT NULL,
+  `detalles` varchar(45) DEFAULT NULL,
+  `linea` varchar(45) DEFAULT NULL,
+  `guia` varchar(45) DEFAULT NULL,
+  `refactura` varchar(45) DEFAULT NULL,
+  `aviso` varchar(45) DEFAULT NULL,
+  `fkidRegistro` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idFechasseguimiento`),
+  KEY `fkIdRegistroFechaseguimiento` (`fkidRegistro`),
+  CONSTRAINT `fkIdRegistroFechaseguimiento` FOREIGN KEY (`fkidRegistro`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.fechasseguimiento: ~179 rows (aproximadamente)
-REPLACE INTO `fechasseguimiento` (`idFechasseguimiento`, `fechaSeguimiento`, `fechaContactoCliente`, `fechaPrimerEnvioDoc`, `fechaIntegracionexpedienteCompleto`, `fechaTermino`, `contactoFinal`, `siClienteOtro`, `numDatosincorrectos`, `fecharecepcionDocOriginales`, `fechaPago`, `docCompletosCorrectos`, `noindicaFaltantes`, `importePagado`, `comentarios`, `detalles`, `linea`, `guia`, `refactura`, `aviso`, `fkidRegistro`) VALUES
+INSERT INTO `fechasseguimiento` (`idFechasseguimiento`, `fechaSeguimiento`, `fechaContactoCliente`, `fechaPrimerEnvioDoc`, `fechaIntegracionexpedienteCompleto`, `fechaTermino`, `contactoFinal`, `siClienteOtro`, `numDatosincorrectos`, `fecharecepcionDocOriginales`, `fechaPago`, `docCompletosCorrectos`, `noindicaFaltantes`, `importePagado`, `comentarios`, `detalles`, `linea`, `guia`, `refactura`, `aviso`, `fkidRegistro`) VALUES
 	(3, '2022-10-28 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 837),
-	(5, '2022-12-07 11:27:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 839),
+	(5, '2022-12-08 10:26:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 839),
 	(6, '2022-11-02 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 840),
 	(7, '2022-11-02 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 841),
 	(8, '2022-11-25 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 842),
@@ -568,178 +670,208 @@ REPLACE INTO `fechasseguimiento` (`idFechasseguimiento`, `fechaSeguimiento`, `fe
 	(181, '2022-11-25 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1334),
 	(182, '2022-11-25 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1335);
 
--- Volcando datos para la tabla soleraatlas.imagenes: ~173 rows (aproximadamente)
-REPLACE INTO `imagenes` (`idimagenes`, `nombreImagen`, `rutaImagen`, `fkImagen`, `fechaCarga`, `nombreOriginal`) VALUES
-	(27, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Factura-original-1-FACTURA.pdf', 963, '2022-11-10', 'Factura-original-1-FACTURA.pdf'),
-	(28, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Poder-notarial-3-PODER NOTARIAL.pdf', 963, '2022-11-10', 'Poder-notarial-3-PODER NOTARIAL.pdf'),
-	(29, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Identificacion-oficial-4-INE APODERADO.pdf', 963, '2022-11-10', 'Identificacion-oficial-4-INE APODERADO.pdf'),
-	(30, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Constancia-SF-5-CONSTANCIA DE SITUACION FISCAL.pdf', 963, '2022-11-10', 'Constancia-SF-5-CONSTANCIA DE SITUACION FISCAL.pdf'),
-	(31, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Baja-de-placas-8-BAJA DE PLACAS.PDF', 963, '2022-11-10', 'Baja-de-placas-8-BAJA DE PLACAS.PDF'),
-	(32, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Tenencias-7-REFRENDOS.pdf', 963, '2022-11-10', 'Tenencias-7-REFRENDOS.pdf'),
-	(33, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Estado-de-cuenta-9-ESTADO DE CUENTA.pdf', 963, '2022-11-10', 'Estado-de-cuenta-9-ESTADO DE CUENTA.pdf'),
-	(34, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Comprobante-de-domicilio-10-COMPROBANTE DE DOMICILIO.pdf', 963, '2022-11-10', 'Comprobante-de-domicilio-10-COMPROBANTE DE DOMICILIO.pdf'),
-	(35, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Poliza-11-POLIZA.pdf', 963, '2022-11-10', 'Poliza-11-POLIZA.pdf'),
-	(36, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Curp-CURP APODERADO.pdf', 963, '2022-11-10', 'Curp-CURP APODERADO.pdf'),
-	(37, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Factura-original-FACTURA.pdf', 982, '2022-11-10', 'Factura-original-FACTURA.pdf'),
-	(38, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Documentos-adicionales-PEDIMENTO.pdf', 982, '2022-11-10', 'Documentos-adicionales-PEDIMENTO.pdf'),
-	(39, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Documentos-adicionales-6-ACTA CONSTITUTIVA.pdf', 963, '2022-11-10', 'Documentos-adicionales-6-ACTA CONSTITUTIVA.pdf'),
-	(44, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Factura-original-FACTURA.pdf', 964, '2022-11-10', 'Factura-original-FACTURA.pdf'),
-	(45, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Poder-notarial-PODER.pdf', 964, '2022-11-10', 'Poder-notarial-PODER.pdf'),
-	(46, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Identificacion-oficial-INE APODERADA.pdf', 964, '2022-11-10', 'Identificacion-oficial-INE APODERADA.pdf'),
-	(47, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Constancia-SF-RFC.pdf', 964, '2022-11-10', 'Constancia-SF-RFC.pdf'),
-	(48, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Curp-CURP.pdf', 964, '2022-11-10', 'Curp-CURP.pdf'),
-	(49, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Estado-de-cuenta-ESTADO DE CUENTA.pdf', 964, '2022-11-10', 'Estado-de-cuenta-ESTADO DE CUENTA.pdf'),
-	(50, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Tenencias-TENENCIAS.pdf', 964, '2022-11-10', 'Tenencias-TENENCIAS.pdf'),
-	(51, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Poliza-POLIZA.pdf', 964, '2022-11-10', 'Poliza-POLIZA.pdf'),
-	(52, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf', 964, '2022-11-10', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf'),
-	(53, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Documentos-adicionales-REFACTURA.pdf', 964, '2022-11-10', 'Documentos-adicionales-REFACTURA.pdf'),
-	(55, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Identificacion-oficial-INE NUEVA KARLA (1).pdf', 883, '2022-11-10', 'Identificacion-oficial-INE NUEVA KARLA (1).pdf'),
-	(56, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Constancia-SF-Constancia de Situacion Fiscal - TECO.pdf', 883, '2022-11-10', 'Constancia-SF-Constancia de Situacion Fiscal - TECO.pdf'),
-	(57, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Curp-CURP-LOLK950408MJCPPR05 (1) (1).pdf', 883, '2022-11-10', 'Curp-CURP-LOLK950408MJCPPR05 (1) (1).pdf'),
-	(58, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Poliza-POLIZA.pdf', 883, '2022-11-10', 'Poliza-POLIZA.pdf'),
-	(60, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-PAGO DE POLIZA.pdf', 883, '2022-11-10', 'Documentos-adicionales-PAGO DE POLIZA.pdf'),
-	(61, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-01-RENOV-TECOLOTLÁN-VH-2019.pdf', 883, '2022-11-10', 'Documentos-adicionales-01-RENOV-TECOLOTLÁN-VH-2019.pdf'),
-	(62, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Tenencias-2022.pdf', 883, '2022-11-10', 'Tenencias-2022.pdf'),
-	(63, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-ANEXO A- VH RENOVACIÓN TECOLOTLÁN 2019.pdf', 883, '2022-11-10', 'Documentos-adicionales-ANEXO A- VH RENOVACIÓN TECOLOTLÁN 2019.pdf'),
-	(64, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-Constancia de mayoría - Mpio Tecolotlán.pdf', 883, '2022-11-10', 'Documentos-adicionales-Constancia de mayoría - Mpio Tecolotlán.pdf'),
-	(66, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Documentos-adicionales-FACTURA 2.jpeg', 1315, '2022-11-10', 'Documentos-adicionales-FACTURA 2.jpeg'),
-	(68, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Factura-original-FACTURA.jpeg', 1314, '2022-11-10', 'Factura-original-FACTURA.jpeg'),
-	(69, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Poder-notarial-NOTARIO 3.jpeg', 1314, '2022-11-10', 'Poder-notarial-NOTARIO 3.jpeg'),
-	(70, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Constancia-SF-RFC 1.jpeg', 1314, '2022-11-10', 'Constancia-SF-RFC 1.jpeg'),
-	(71, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Documentos-adicionales-DOCUMENTO BANCARIO PARA ANA .jpeg', 1314, '2022-11-10', 'Documentos-adicionales-DOCUMENTO BANCARIO PARA ANA .jpeg'),
-	(72, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Identificacion-oficial-INE.pdf', 1314, '2022-11-10', 'Identificacion-oficial-INE.pdf'),
-	(73, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Curp-CURP.jpeg', 1314, '2022-11-10', 'Curp-CURP.jpeg'),
-	(74, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Estado-de-cuenta-ESTADO DE CUENTA .jpeg', 1314, '2022-11-10', 'Estado-de-cuenta-ESTADO DE CUENTA .jpeg'),
-	(75, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Tenencias-TENENCIAS.pdf', 1314, '2022-11-10', 'Tenencias-TENENCIAS.pdf'),
-	(76, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Baja-de-placas-BAJA .jpeg', 1314, '2022-11-10', 'Baja-de-placas-BAJA .jpeg'),
-	(77, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Poliza-POLIZA 1.jpeg', 1314, '2022-11-10', 'Poliza-POLIZA 1.jpeg'),
-	(78, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO .jpeg', 1314, '2022-11-10', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO .jpeg'),
-	(79, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Documentos-adicionales-VERIFICACION .jpeg', 1314, '2022-11-10', 'Documentos-adicionales-VERIFICACION .jpeg'),
-	(80, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Documentos-adicionales-NOTARIO 1.jpeg', 1314, '2022-11-10', 'Documentos-adicionales-NOTARIO 1.jpeg'),
-	(81, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Constancia-SF-CONSTANCIA SITUACION FISCAL.pdf', 914, '2022-11-12', 'Constancia-SF-CONSTANCIA SITUACION FISCAL.pdf'),
-	(82, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Factura-original-FACTURA.pdf', 914, '2022-11-12', 'Factura-original-FACTURA.pdf'),
-	(83, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Identificacion-oficial-INE APODERADO.pdf', 914, '2022-11-12', 'Identificacion-oficial-INE APODERADO.pdf'),
-	(84, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Poder-notarial-PODER NOTARIAL LUIS ALEJANDRO REVELES ALATORRE.pdf', 914, '2022-11-12', 'Poder-notarial-PODER NOTARIAL LUIS ALEJANDRO REVELES ALATORRE.pdf'),
-	(85, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Factura-original-1.FACTURA.pdf', 975, '2022-11-12', 'Factura-original-1.FACTURA.pdf'),
-	(86, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Identificacion-oficial-2.INE FRONTAL.pdf', 975, '2022-11-12', 'Identificacion-oficial-2.INE FRONTAL.pdf'),
-	(87, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf', 975, '2022-11-12', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf'),
-	(88, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Curp-CURP.pdf', 975, '2022-11-12', 'Curp-CURP.pdf'),
-	(89, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Documentos-adicionales-CARTA FACTURA.pdf', 891, '2022-11-14', 'Documentos-adicionales-CARTA FACTURA.pdf'),
-	(90, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Documentos-adicionales-FACTURA.pdf', 891, '2022-11-14', 'Documentos-adicionales-FACTURA.pdf'),
-	(91, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Tarjeta-de-circulacion-TARJETA DE CIRCULACION 2017.pdf', 891, '2022-11-14', 'Tarjeta-de-circulacion-TARJETA DE CIRCULACION 2017.pdf'),
-	(92, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Tenencias-TENENCIAS 15, 16 Y 17..pdf', 891, '2022-11-14', 'Tenencias-TENENCIAS 15, 16 Y 17..pdf'),
-	(93, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Documentos-adicionales-FACTURAS.pdf', 1315, '2022-11-14', 'Documentos-adicionales-FACTURAS.pdf'),
-	(94, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Curp-CURP.jpg', 1315, '2022-11-14', 'Curp-CURP.jpg'),
-	(95, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Factura-original-FACTURAS.pdf', 1315, '2022-11-14', 'Factura-original-FACTURAS.pdf'),
-	(96, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Tenencias-2022.jpg', 1315, '2022-11-14', 'Tenencias-2022.jpg'),
-	(97, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.jpg', 1315, '2022-11-14', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.jpg'),
-	(98, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/897/Tenencias-TENENCIAS 15, 16 Y 17..pdf', 897, '2022-11-14', 'Tenencias-TENENCIAS 15, 16 Y 17..pdf'),
-	(99, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/RFC-RFC.pdf', 1315, '2022-11-14', 'RFC-RFC.pdf'),
-	(100, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Identificacion-oficial-INE.pdf', 1315, '2022-11-14', 'Identificacion-oficial-INE.pdf'),
-	(101, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Documentos-adicionales-PAGO DE POLIZA.jpeg', 1315, '2022-11-14', 'Documentos-adicionales-PAGO DE POLIZA.jpeg'),
-	(102, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1316/Documentos-adicionales-1316.pdf', 1316, '2022-11-17', 'Documentos-adicionales-1316.pdf'),
-	(103, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Curp-882', 882, '2022-11-17', 'Curp-882'),
-	(104, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Estado-de-cuenta-882', 882, '2022-11-17', 'Estado-de-cuenta-882'),
-	(105, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Documentos-adicionales-882', 882, '2022-11-17', 'Documentos-adicionales-882'),
-	(106, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Factura-original-882', 882, '2022-11-17', 'Factura-original-882'),
-	(107, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Identificacion-oficial-882', 882, '2022-11-17', 'Identificacion-oficial-882'),
-	(108, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Tenencias-882', 882, '2022-11-17', 'Tenencias-882'),
-	(109, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Baja-de-placas-882', 882, '2022-11-17', 'Baja-de-placas-882'),
-	(110, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Poliza-882', 882, '2022-11-17', 'Poliza-882'),
-	(111, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Comprobante-de-domicilio-882', 882, '2022-11-17', 'Comprobante-de-domicilio-882'),
-	(112, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/882/RFC-882', 882, '2022-11-17', 'RFC-882'),
-	(113, 'Selecciona...', '/home/admin/Documentos/SoleraWeb/web/documentos/1327/Selecciona...-1327', 1327, '2022-11-19', 'Selecciona...-1327'),
-	(114, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/1327/Tarjeta-de-circulacion-1327', 1327, '2022-11-19', 'Tarjeta-de-circulacion-1327'),
-	(115, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1327/Tenencias-1327', 1327, '2022-11-19', 'Tenencias-1327'),
-	(116, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Factura-original-1317', 1317, '2022-11-22', 'Factura-original-1317'),
-	(117, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Identificacion-oficial-1317', 1317, '2022-11-22', 'Identificacion-oficial-1317'),
-	(118, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Curp-1317', 1317, '2022-11-22', 'Curp-1317'),
-	(119, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Estado-de-cuenta-1317', 1317, '2022-11-22', 'Estado-de-cuenta-1317'),
-	(120, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Tenencias-1317', 1317, '2022-11-22', 'Tenencias-1317'),
-	(121, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Baja-de-placas-1317', 1317, '2022-11-22', 'Baja-de-placas-1317'),
-	(122, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Poliza-1317', 1317, '2022-11-22', 'Poliza-1317'),
-	(123, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/comprobante.pdf', 1317, '2022-11-22', 'comprobante.pdf'),
-	(124, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/RFC-1317', 1317, '2022-11-22', 'RFC-1317'),
-	(125, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Factura-original-877', 877, '2022-11-22', 'Factura-original-877'),
-	(126, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Poder-notarial-877', 877, '2022-11-22', 'Poder-notarial-877'),
-	(127, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Identificacion-oficial-877', 877, '2022-11-22', 'Identificacion-oficial-877'),
-	(128, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Constancia-SF-877', 877, '2022-11-22', 'Constancia-SF-877'),
-	(129, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Estado-de-cuenta-877', 877, '2022-11-22', 'Estado-de-cuenta-877'),
-	(130, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Tenencias-877', 877, '2022-11-22', 'Tenencias-877'),
-	(131, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Baja-de-placas-877', 877, '2022-11-22', 'Baja-de-placas-877'),
-	(132, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Poliza-877', 877, '2022-11-22', 'Poliza-877'),
-	(133, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Documentos-adicionales-877', 877, '2022-11-22', 'Documentos-adicionales-877'),
-	(134, 'Selecciona...', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Selecciona...-982', 982, '2022-11-23', 'Selecciona...-982'),
-	(135, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Documentos-adicionales-982', 982, '2022-11-23', 'Documentos-adicionales-982'),
-	(136, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Baja-de-placas-982', 982, '2022-11-23', 'Baja-de-placas-982'),
-	(137, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Tenencias-982', 982, '2022-11-23', 'Tenencias-982'),
-	(138, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Tarjeta-de-circulacion-982', 982, '2022-11-23', 'Tarjeta-de-circulacion-982'),
-	(139, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Identificacion-oficial-982', 982, '2022-11-23', 'Identificacion-oficial-982'),
-	(140, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Constancia-SF-982', 982, '2022-11-23', 'Constancia-SF-982'),
-	(141, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Curp-982', 982, '2022-11-23', 'Curp-982'),
-	(142, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Estado-de-cuenta-982', 982, '2022-11-23', 'Estado-de-cuenta-982'),
-	(143, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Comprobante-de-domicilio-982', 982, '2022-11-23', 'Comprobante-de-domicilio-982'),
-	(157, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/curp-1323.pdf', 1323, '2022-11-23', 'curp-1323.pdf'),
-	(160, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323TENENCIAS.pdf', 1323, '2022-11-23', '1323TENENCIAS.pdf'),
-	(161, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323INE SERGIO ACEVES (2).pdf', 1323, '2022-11-23', '1323INE SERGIO ACEVES (2).pdf'),
-	(162, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323REFACTURA.pdf', 1323, '2022-11-23', '1323REFACTURA.pdf'),
-	(163, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/13230818_001.pdf', 1323, '2022-11-23', '13230818_001.pdf'),
-	(164, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323COMP DOMC.pdf', 1323, '2022-11-23', '1323COMP DOMC.pdf'),
-	(165, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323EDO DE CTA.pdf', 1323, '2022-11-23', '1323EDO DE CTA.pdf'),
-	(166, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/877/877CURP_ JESUS ARTEAGA HERNANDEZ.pdf', 877, '2022-11-24', '877CURP_ JESUS ARTEAGA HERNANDEZ.pdf'),
-	(167, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/877/877COMPROBANTE DE DOMICILIO HELM.pdf', 877, '2022-11-24', '877COMPROBANTE DE DOMICILIO HELM.pdf'),
-	(168, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844factura endosada.pdf', 844, '2022-11-24', '844factura endosada.pdf'),
-	(169, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844INE.pdf', 844, '2022-11-24', '844INE.pdf'),
-	(170, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844CURP.pdf', 844, '2022-11-24', '844CURP.pdf'),
-	(171, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844contrato bancario 1.jfif', 844, '2022-11-24', '844contrato bancario 1.jfif'),
-	(172, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844TENENCIAS.pdf', 844, '2022-11-24', '844TENENCIAS.pdf'),
-	(173, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844BAJA.pdf', 844, '2022-11-24', '844BAJA.pdf'),
-	(174, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844POLIZA.pdf', 844, '2022-11-24', '844POLIZA.pdf'),
-	(175, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844COMPROBANTE DE DOMICILIO.pdf', 844, '2022-11-24', '844COMPROBANTE DE DOMICILIO.pdf'),
-	(176, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844constancia situación fiscal morgan.pdf', 844, '2022-11-24', '844constancia situación fiscal morgan.pdf'),
-	(177, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844CONTRATO BANCARIO .pdf', 844, '2022-11-24', '844CONTRATO BANCARIO .pdf'),
-	(178, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/891/891ESTADO DE CUENTA.pdf', 891, '2022-11-24', '891ESTADO DE CUENTA.pdf'),
-	(179, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/891/891INE.pdf', 891, '2022-11-24', '891INE.pdf'),
-	(180, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/891/891COMPROBANTE DE DOMICILIO.pdf', 891, '2022-11-24', '891COMPROBANTE DE DOMICILIO.pdf'),
-	(181, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326CONSTACIADESITUACIONFISCAL.pdf', 1326, '2022-11-24', '1326CONSTACIADESITUACIONFISCAL.pdf'),
-	(182, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326INE MARBA.pdf', 1326, '2022-11-24', '1326INE MARBA.pdf'),
-	(183, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326BAJA DE PALACAS .jpeg', 1326, '2022-11-24', '1326BAJA DE PALACAS .jpeg'),
-	(184, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TARJETA DE CIRCULACION ANV .jpeg', 1326, '2022-11-24', '1326TARJETA DE CIRCULACION ANV .jpeg'),
-	(185, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TARJETA DE CIRCULACION REV .jpeg', 1326, '2022-11-24', '1326TARJETA DE CIRCULACION REV .jpeg'),
-	(186, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326PEDIMENTO .jpeg', 1326, '2022-11-24', '1326PEDIMENTO .jpeg'),
-	(187, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TITULO DE PROPIEDAD .jpeg', 1326, '2022-11-24', '1326TITULO DE PROPIEDAD .jpeg'),
-	(188, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TITULO DE PROPIEDAD REV .jpeg', 1326, '2022-11-24', '1326TITULO DE PROPIEDAD REV .jpeg'),
-	(190, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1329/1329WhatsApp-Image-2022-11-24-at-3.10.49-PM.jpeg', 1329, '2022-11-24', '1329WhatsApp-Image-2022-11-24-at-3.10.49-PM.jpeg'),
-	(191, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1329/1329ACUSE.pdf', 1329, '2022-11-24', '1329ACUSE.pdf'),
-	(192, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332FACTURA-1.jpeg', 1332, '2022-11-24', '1332FACTURA-1.jpeg'),
-	(193, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332FACTURA-2.jpeg', 1332, '2022-11-24', '1332FACTURA-2.jpeg'),
-	(194, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332INE.pdf', 1332, '2022-11-24', '1332INE.pdf'),
-	(195, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332CURP_SOAN910227HJCLLX02.pdf', 1332, '2022-11-24', '1332CURP_SOAN910227HJCLLX02.pdf'),
-	(196, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332CONTRATO-BANCARIO-1.jpeg', 1332, '2022-11-24', '1332CONTRATO-BANCARIO-1.jpeg'),
-	(197, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332TENENCIAS.pdf', 1332, '2022-11-24', '1332TENENCIAS.pdf'),
-	(198, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332TARJETA-CIRCULACION.pdf', 1332, '2022-11-24', '1332TARJETA-CIRCULACION.pdf'),
-	(199, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332COMPROBANTE-DE-DOMICILIO-.jpeg', 1332, '2022-11-24', '1332COMPROBANTE-DE-DOMICILIO-.jpeg'),
-	(200, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332LICENCIA.pdf', 1332, '2022-11-24', '1332LICENCIA.pdf'),
-	(201, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326CURP_MABM730627MMCRRR04-2021.pdf', 1326, '2022-11-25', '1326CURP_MABM730627MMCRRR04-2021.pdf'),
-	(202, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326edocta.pdf', 1326, '2022-11-25', '1326edocta.pdf'),
-	(203, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326poliza-003788781.pdf', 1326, '2022-11-25', '1326poliza-003788781.pdf'),
-	(204, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326recibo-gas.pdf', 1326, '2022-11-25', '1326recibo-gas.pdf'),
-	(205, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971FACTURA.pdf', 971, '2022-11-25', '971FACTURA.pdf'),
-	(206, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971INE.pdf', 971, '2022-11-25', '971INE.pdf'),
-	(207, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971RFC.pdf', 971, '2022-11-25', '971RFC.pdf'),
-	(208, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971ESTADO-DE-CUENTA-.jpeg', 971, '2022-11-25', '971ESTADO-DE-CUENTA-.jpeg'),
-	(209, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971COMPROBANTE-DE-DOMICILIO.jpeg', 971, '2022-11-25', '971COMPROBANTE-DE-DOMICILIO.jpeg'),
-	(210, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333FACTURA.pdf', 1333, '2022-11-25', '1333FACTURA.pdf'),
-	(211, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333INE.pdf', 1333, '2022-11-25', '1333INE.pdf'),
-	(212, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333CURP.jpeg', 1333, '2022-11-25', '1333CURP.jpeg'),
-	(213, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333TENENCIAS-2016-A-2021,-2-ENTIDADES.pdf', 1333, '2022-11-25', '1333TENENCIAS-2016-A-2021,-2-ENTIDADES.pdf'),
-	(214, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333COMPROBANTE-DE-DOMICILIO-.pdf', 1333, '2022-11-25', '1333COMPROBANTE-DE-DOMICILIO-.pdf'),
-	(215, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333FACTURA-DE-CUSTODIA-DE-LA-UNIDAD.pdf', 1333, '2022-11-25', '1333FACTURA-DE-CUSTODIA-DE-LA-UNIDAD.pdf'),
-	(216, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333FACTURA-DE-GRUA.pdf', 1333, '2022-11-25', '1333FACTURA-DE-GRUA.pdf'),
-	(217, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323BAJA-DE-PLACAS.jpeg', 1323, '2022-11-25', '1323BAJA-DE-PLACAS.jpeg');
+-- Volcando estructura para tabla soleraatlas.imagenes
+CREATE TABLE IF NOT EXISTS `imagenes` (
+  `idimagenes` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreImagen` varchar(200) DEFAULT NULL,
+  `rutaImagen` varchar(300) DEFAULT NULL,
+  `fkImagen` int(11) NOT NULL,
+  `fechaCarga` datetime DEFAULT NULL,
+  `nombreOriginal` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idimagenes`),
+  KEY `fkIdRegistroImagenes` (`fkImagen`),
+  CONSTRAINT `fkIdRegistroImagenes` FOREIGN KEY (`fkImagen`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla soleraatlas.imagenes: ~168 rows (aproximadamente)
+INSERT INTO `imagenes` (`idimagenes`, `nombreImagen`, `rutaImagen`, `fkImagen`, `fechaCarga`, `nombreOriginal`) VALUES
+	(27, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Factura-original-1-FACTURA.pdf', 963, '2022-11-10 00:00:00', 'Factura-original-1-FACTURA.pdf'),
+	(28, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Poder-notarial-3-PODER NOTARIAL.pdf', 963, '2022-11-10 00:00:00', 'Poder-notarial-3-PODER NOTARIAL.pdf'),
+	(29, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Identificacion-oficial-4-INE APODERADO.pdf', 963, '2022-11-10 00:00:00', 'Identificacion-oficial-4-INE APODERADO.pdf'),
+	(30, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Constancia-SF-5-CONSTANCIA DE SITUACION FISCAL.pdf', 963, '2022-11-10 00:00:00', 'Constancia-SF-5-CONSTANCIA DE SITUACION FISCAL.pdf'),
+	(31, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Baja-de-placas-8-BAJA DE PLACAS.PDF', 963, '2022-11-10 00:00:00', 'Baja-de-placas-8-BAJA DE PLACAS.PDF'),
+	(32, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Tenencias-7-REFRENDOS.pdf', 963, '2022-11-10 00:00:00', 'Tenencias-7-REFRENDOS.pdf'),
+	(33, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Estado-de-cuenta-9-ESTADO DE CUENTA.pdf', 963, '2022-11-10 00:00:00', 'Estado-de-cuenta-9-ESTADO DE CUENTA.pdf'),
+	(34, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Comprobante-de-domicilio-10-COMPROBANTE DE DOMICILIO.pdf', 963, '2022-11-10 00:00:00', 'Comprobante-de-domicilio-10-COMPROBANTE DE DOMICILIO.pdf'),
+	(35, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Poliza-11-POLIZA.pdf', 963, '2022-11-10 00:00:00', 'Poliza-11-POLIZA.pdf'),
+	(36, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Curp-CURP APODERADO.pdf', 963, '2022-11-10 00:00:00', 'Curp-CURP APODERADO.pdf'),
+	(37, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Factura-original-FACTURA.pdf', 982, '2022-11-10 00:00:00', 'Factura-original-FACTURA.pdf'),
+	(38, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Documentos-adicionales-PEDIMENTO.pdf', 982, '2022-11-10 00:00:00', 'Documentos-adicionales-PEDIMENTO.pdf'),
+	(39, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Documentos-adicionales-6-ACTA CONSTITUTIVA.pdf', 963, '2022-11-10 00:00:00', 'Documentos-adicionales-6-ACTA CONSTITUTIVA.pdf'),
+	(44, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Factura-original-FACTURA.pdf', 964, '2022-11-10 00:00:00', 'Factura-original-FACTURA.pdf'),
+	(45, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Poder-notarial-PODER.pdf', 964, '2022-11-10 00:00:00', 'Poder-notarial-PODER.pdf'),
+	(46, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Identificacion-oficial-INE APODERADA.pdf', 964, '2022-11-10 00:00:00', 'Identificacion-oficial-INE APODERADA.pdf'),
+	(47, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Constancia-SF-RFC.pdf', 964, '2022-11-10 00:00:00', 'Constancia-SF-RFC.pdf'),
+	(48, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Curp-CURP.pdf', 964, '2022-11-10 00:00:00', 'Curp-CURP.pdf'),
+	(49, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Estado-de-cuenta-ESTADO DE CUENTA.pdf', 964, '2022-11-10 00:00:00', 'Estado-de-cuenta-ESTADO DE CUENTA.pdf'),
+	(50, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Tenencias-TENENCIAS.pdf', 964, '2022-11-10 00:00:00', 'Tenencias-TENENCIAS.pdf'),
+	(51, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Poliza-POLIZA.pdf', 964, '2022-11-10 00:00:00', 'Poliza-POLIZA.pdf'),
+	(52, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf', 964, '2022-11-10 00:00:00', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf'),
+	(53, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/964/Documentos-adicionales-REFACTURA.pdf', 964, '2022-11-10 00:00:00', 'Documentos-adicionales-REFACTURA.pdf'),
+	(55, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Identificacion-oficial-INE NUEVA KARLA (1).pdf', 883, '2022-11-10 00:00:00', 'Identificacion-oficial-INE NUEVA KARLA (1).pdf'),
+	(56, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Constancia-SF-Constancia de Situacion Fiscal - TECO.pdf', 883, '2022-11-10 00:00:00', 'Constancia-SF-Constancia de Situacion Fiscal - TECO.pdf'),
+	(57, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Curp-CURP-LOLK950408MJCPPR05 (1) (1).pdf', 883, '2022-11-10 00:00:00', 'Curp-CURP-LOLK950408MJCPPR05 (1) (1).pdf'),
+	(58, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Poliza-POLIZA.pdf', 883, '2022-11-10 00:00:00', 'Poliza-POLIZA.pdf'),
+	(60, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-PAGO DE POLIZA.pdf', 883, '2022-11-10 00:00:00', 'Documentos-adicionales-PAGO DE POLIZA.pdf'),
+	(61, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-01-RENOV-TECOLOTLÁN-VH-2019.pdf', 883, '2022-11-10 00:00:00', 'Documentos-adicionales-01-RENOV-TECOLOTLÁN-VH-2019.pdf'),
+	(62, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Tenencias-2022.pdf', 883, '2022-11-10 00:00:00', 'Tenencias-2022.pdf'),
+	(63, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-ANEXO A- VH RENOVACIÓN TECOLOTLÁN 2019.pdf', 883, '2022-11-10 00:00:00', 'Documentos-adicionales-ANEXO A- VH RENOVACIÓN TECOLOTLÁN 2019.pdf'),
+	(64, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/883/Documentos-adicionales-Constancia de mayoría - Mpio Tecolotlán.pdf', 883, '2022-11-10 00:00:00', 'Documentos-adicionales-Constancia de mayoría - Mpio Tecolotlán.pdf'),
+	(66, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Documentos-adicionales-FACTURA 2.jpeg', 1315, '2022-11-10 00:00:00', 'Documentos-adicionales-FACTURA 2.jpeg'),
+	(68, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Factura-original-FACTURA.jpeg', 1314, '2022-11-10 00:00:00', 'Factura-original-FACTURA.jpeg'),
+	(69, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Poder-notarial-NOTARIO 3.jpeg', 1314, '2022-11-10 00:00:00', 'Poder-notarial-NOTARIO 3.jpeg'),
+	(70, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Constancia-SF-RFC 1.jpeg', 1314, '2022-11-10 00:00:00', 'Constancia-SF-RFC 1.jpeg'),
+	(71, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Documentos-adicionales-DOCUMENTO BANCARIO PARA ANA .jpeg', 1314, '2022-11-10 00:00:00', 'Documentos-adicionales-DOCUMENTO BANCARIO PARA ANA .jpeg'),
+	(72, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Identificacion-oficial-INE.pdf', 1314, '2022-11-10 00:00:00', 'Identificacion-oficial-INE.pdf'),
+	(73, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Curp-CURP.jpeg', 1314, '2022-11-10 00:00:00', 'Curp-CURP.jpeg'),
+	(74, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Estado-de-cuenta-ESTADO DE CUENTA .jpeg', 1314, '2022-11-10 00:00:00', 'Estado-de-cuenta-ESTADO DE CUENTA .jpeg'),
+	(75, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Tenencias-TENENCIAS.pdf', 1314, '2022-11-10 00:00:00', 'Tenencias-TENENCIAS.pdf'),
+	(76, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Baja-de-placas-BAJA .jpeg', 1314, '2022-11-10 00:00:00', 'Baja-de-placas-BAJA .jpeg'),
+	(77, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Poliza-POLIZA 1.jpeg', 1314, '2022-11-10 00:00:00', 'Poliza-POLIZA 1.jpeg'),
+	(78, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO .jpeg', 1314, '2022-11-10 00:00:00', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO .jpeg'),
+	(79, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Documentos-adicionales-VERIFICACION .jpeg', 1314, '2022-11-10 00:00:00', 'Documentos-adicionales-VERIFICACION .jpeg'),
+	(80, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1314/Documentos-adicionales-NOTARIO 1.jpeg', 1314, '2022-11-10 00:00:00', 'Documentos-adicionales-NOTARIO 1.jpeg'),
+	(81, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Constancia-SF-CONSTANCIA SITUACION FISCAL.pdf', 914, '2022-11-12 00:00:00', 'Constancia-SF-CONSTANCIA SITUACION FISCAL.pdf'),
+	(82, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Factura-original-FACTURA.pdf', 914, '2022-11-12 00:00:00', 'Factura-original-FACTURA.pdf'),
+	(83, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Identificacion-oficial-INE APODERADO.pdf', 914, '2022-11-12 00:00:00', 'Identificacion-oficial-INE APODERADO.pdf'),
+	(84, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/914/Poder-notarial-PODER NOTARIAL LUIS ALEJANDRO REVELES ALATORRE.pdf', 914, '2022-11-12 00:00:00', 'Poder-notarial-PODER NOTARIAL LUIS ALEJANDRO REVELES ALATORRE.pdf'),
+	(85, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Factura-original-1.FACTURA.pdf', 975, '2022-11-12 00:00:00', 'Factura-original-1.FACTURA.pdf'),
+	(86, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Identificacion-oficial-2.INE FRONTAL.pdf', 975, '2022-11-12 00:00:00', 'Identificacion-oficial-2.INE FRONTAL.pdf'),
+	(87, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf', 975, '2022-11-12 00:00:00', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.pdf'),
+	(88, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/975/Curp-CURP.pdf', 975, '2022-11-12 00:00:00', 'Curp-CURP.pdf'),
+	(89, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Documentos-adicionales-CARTA FACTURA.pdf', 891, '2022-11-14 00:00:00', 'Documentos-adicionales-CARTA FACTURA.pdf'),
+	(90, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Documentos-adicionales-FACTURA.pdf', 891, '2022-11-14 00:00:00', 'Documentos-adicionales-FACTURA.pdf'),
+	(91, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Tarjeta-de-circulacion-TARJETA DE CIRCULACION 2017.pdf', 891, '2022-11-14 00:00:00', 'Tarjeta-de-circulacion-TARJETA DE CIRCULACION 2017.pdf'),
+	(92, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/891/Tenencias-TENENCIAS 15, 16 Y 17..pdf', 891, '2022-11-14 00:00:00', 'Tenencias-TENENCIAS 15, 16 Y 17..pdf'),
+	(93, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Documentos-adicionales-FACTURAS.pdf', 1315, '2022-11-14 00:00:00', 'Documentos-adicionales-FACTURAS.pdf'),
+	(94, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Curp-CURP.jpg', 1315, '2022-11-14 00:00:00', 'Curp-CURP.jpg'),
+	(95, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Factura-original-FACTURAS.pdf', 1315, '2022-11-14 00:00:00', 'Factura-original-FACTURAS.pdf'),
+	(96, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Tenencias-2022.jpg', 1315, '2022-11-14 00:00:00', 'Tenencias-2022.jpg'),
+	(97, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.jpg', 1315, '2022-11-14 00:00:00', 'Comprobante-de-domicilio-COMPROBANTE DE DOMICILIO.jpg'),
+	(98, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/897/Tenencias-TENENCIAS 15, 16 Y 17..pdf', 897, '2022-11-14 00:00:00', 'Tenencias-TENENCIAS 15, 16 Y 17..pdf'),
+	(99, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/RFC-RFC.pdf', 1315, '2022-11-14 00:00:00', 'RFC-RFC.pdf'),
+	(100, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Identificacion-oficial-INE.pdf', 1315, '2022-11-14 00:00:00', 'Identificacion-oficial-INE.pdf'),
+	(101, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1315/Documentos-adicionales-PAGO DE POLIZA.jpeg', 1315, '2022-11-14 00:00:00', 'Documentos-adicionales-PAGO DE POLIZA.jpeg'),
+	(102, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1316/Documentos-adicionales-1316.pdf', 1316, '2022-11-17 00:00:00', 'Documentos-adicionales-1316.pdf'),
+	(103, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Curp-882', 882, '2022-11-17 00:00:00', 'Curp-882'),
+	(104, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Estado-de-cuenta-882', 882, '2022-11-17 00:00:00', 'Estado-de-cuenta-882'),
+	(105, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Documentos-adicionales-882', 882, '2022-11-17 00:00:00', 'Documentos-adicionales-882'),
+	(106, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Factura-original-882', 882, '2022-11-17 00:00:00', 'Factura-original-882'),
+	(107, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Identificacion-oficial-882', 882, '2022-11-17 00:00:00', 'Identificacion-oficial-882'),
+	(108, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Tenencias-882', 882, '2022-11-17 00:00:00', 'Tenencias-882'),
+	(109, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Baja-de-placas-882', 882, '2022-11-17 00:00:00', 'Baja-de-placas-882'),
+	(110, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Poliza-882', 882, '2022-11-17 00:00:00', 'Poliza-882'),
+	(111, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/882/Comprobante-de-domicilio-882', 882, '2022-11-17 00:00:00', 'Comprobante-de-domicilio-882'),
+	(112, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/882/RFC-882', 882, '2022-11-17 00:00:00', 'RFC-882'),
+	(113, 'Selecciona...', '/home/admin/Documentos/SoleraWeb/web/documentos/1327/Selecciona...-1327', 1327, '2022-11-19 00:00:00', 'Selecciona...-1327'),
+	(114, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/1327/Tarjeta-de-circulacion-1327', 1327, '2022-11-19 00:00:00', 'Tarjeta-de-circulacion-1327'),
+	(115, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1327/Tenencias-1327', 1327, '2022-11-19 00:00:00', 'Tenencias-1327'),
+	(116, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Factura-original-1317', 1317, '2022-11-22 00:00:00', 'Factura-original-1317'),
+	(117, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Identificacion-oficial-1317', 1317, '2022-11-22 00:00:00', 'Identificacion-oficial-1317'),
+	(118, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Curp-1317', 1317, '2022-11-22 00:00:00', 'Curp-1317'),
+	(119, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Estado-de-cuenta-1317', 1317, '2022-11-22 00:00:00', 'Estado-de-cuenta-1317'),
+	(120, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Tenencias-1317', 1317, '2022-11-22 00:00:00', 'Tenencias-1317'),
+	(121, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Baja-de-placas-1317', 1317, '2022-11-22 00:00:00', 'Baja-de-placas-1317'),
+	(122, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/Poliza-1317', 1317, '2022-11-22 00:00:00', 'Poliza-1317'),
+	(123, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/comprobante.pdf', 1317, '2022-11-22 00:00:00', 'comprobante.pdf'),
+	(124, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/1317/RFC-1317', 1317, '2022-11-22 00:00:00', 'RFC-1317'),
+	(125, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Factura-original-877', 877, '2022-11-22 00:00:00', 'Factura-original-877'),
+	(126, 'Poder notarial', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Poder-notarial-877', 877, '2022-11-22 00:00:00', 'Poder-notarial-877'),
+	(127, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Identificacion-oficial-877', 877, '2022-11-22 00:00:00', 'Identificacion-oficial-877'),
+	(128, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Constancia-SF-877', 877, '2022-11-22 00:00:00', 'Constancia-SF-877'),
+	(129, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Estado-de-cuenta-877', 877, '2022-11-22 00:00:00', 'Estado-de-cuenta-877'),
+	(130, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Tenencias-877', 877, '2022-11-22 00:00:00', 'Tenencias-877'),
+	(131, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Baja-de-placas-877', 877, '2022-11-22 00:00:00', 'Baja-de-placas-877'),
+	(132, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Poliza-877', 877, '2022-11-22 00:00:00', 'Poliza-877'),
+	(133, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/877/Documentos-adicionales-877', 877, '2022-11-22 00:00:00', 'Documentos-adicionales-877'),
+	(134, 'Selecciona...', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Selecciona...-982', 982, '2022-11-23 00:00:00', 'Selecciona...-982'),
+	(135, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Documentos-adicionales-982', 982, '2022-11-23 00:00:00', 'Documentos-adicionales-982'),
+	(136, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Baja-de-placas-982', 982, '2022-11-23 00:00:00', 'Baja-de-placas-982'),
+	(137, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Tenencias-982', 982, '2022-11-23 00:00:00', 'Tenencias-982'),
+	(138, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Tarjeta-de-circulacion-982', 982, '2022-11-23 00:00:00', 'Tarjeta-de-circulacion-982'),
+	(139, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Identificacion-oficial-982', 982, '2022-11-23 00:00:00', 'Identificacion-oficial-982'),
+	(140, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Constancia-SF-982', 982, '2022-11-23 00:00:00', 'Constancia-SF-982'),
+	(141, 'Curp', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Curp-982', 982, '2022-11-23 00:00:00', 'Curp-982'),
+	(142, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Estado-de-cuenta-982', 982, '2022-11-23 00:00:00', 'Estado-de-cuenta-982'),
+	(143, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/982/Comprobante-de-domicilio-982', 982, '2022-11-23 00:00:00', 'Comprobante-de-domicilio-982'),
+	(157, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/curp-1323.pdf', 1323, '2022-11-23 00:00:00', 'curp-1323.pdf'),
+	(160, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323TENENCIAS.pdf', 1323, '2022-11-23 00:00:00', '1323TENENCIAS.pdf'),
+	(161, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323INE SERGIO ACEVES (2).pdf', 1323, '2022-11-23 00:00:00', '1323INE SERGIO ACEVES (2).pdf'),
+	(162, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323REFACTURA.pdf', 1323, '2022-11-23 00:00:00', '1323REFACTURA.pdf'),
+	(163, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/13230818_001.pdf', 1323, '2022-11-23 00:00:00', '13230818_001.pdf'),
+	(164, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323COMP DOMC.pdf', 1323, '2022-11-23 00:00:00', '1323COMP DOMC.pdf'),
+	(165, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323EDO DE CTA.pdf', 1323, '2022-11-23 00:00:00', '1323EDO DE CTA.pdf'),
+	(166, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/877/877CURP_ JESUS ARTEAGA HERNANDEZ.pdf', 877, '2022-11-24 00:00:00', '877CURP_ JESUS ARTEAGA HERNANDEZ.pdf'),
+	(167, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/877/877COMPROBANTE DE DOMICILIO HELM.pdf', 877, '2022-11-24 00:00:00', '877COMPROBANTE DE DOMICILIO HELM.pdf'),
+	(168, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844factura endosada.pdf', 844, '2022-11-24 00:00:00', '844factura endosada.pdf'),
+	(169, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844INE.pdf', 844, '2022-11-24 00:00:00', '844INE.pdf'),
+	(170, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844CURP.pdf', 844, '2022-11-24 00:00:00', '844CURP.pdf'),
+	(171, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844contrato bancario 1.jfif', 844, '2022-11-24 00:00:00', '844contrato bancario 1.jfif'),
+	(172, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844TENENCIAS.pdf', 844, '2022-11-24 00:00:00', '844TENENCIAS.pdf'),
+	(173, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844BAJA.pdf', 844, '2022-11-24 00:00:00', '844BAJA.pdf'),
+	(174, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844POLIZA.pdf', 844, '2022-11-24 00:00:00', '844POLIZA.pdf'),
+	(175, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844COMPROBANTE DE DOMICILIO.pdf', 844, '2022-11-24 00:00:00', '844COMPROBANTE DE DOMICILIO.pdf'),
+	(176, 'RFC', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844constancia situación fiscal morgan.pdf', 844, '2022-11-24 00:00:00', '844constancia situación fiscal morgan.pdf'),
+	(177, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/844/844CONTRATO BANCARIO .pdf', 844, '2022-11-24 00:00:00', '844CONTRATO BANCARIO .pdf'),
+	(178, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/891/891ESTADO DE CUENTA.pdf', 891, '2022-11-24 00:00:00', '891ESTADO DE CUENTA.pdf'),
+	(179, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/891/891INE.pdf', 891, '2022-11-24 00:00:00', '891INE.pdf'),
+	(180, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/891/891COMPROBANTE DE DOMICILIO.pdf', 891, '2022-11-24 00:00:00', '891COMPROBANTE DE DOMICILIO.pdf'),
+	(181, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326CONSTACIADESITUACIONFISCAL.pdf', 1326, '2022-11-24 00:00:00', '1326CONSTACIADESITUACIONFISCAL.pdf'),
+	(182, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326INE MARBA.pdf', 1326, '2022-11-24 00:00:00', '1326INE MARBA.pdf'),
+	(183, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326BAJA DE PALACAS .jpeg', 1326, '2022-11-24 00:00:00', '1326BAJA DE PALACAS .jpeg'),
+	(184, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TARJETA DE CIRCULACION ANV .jpeg', 1326, '2022-11-24 00:00:00', '1326TARJETA DE CIRCULACION ANV .jpeg'),
+	(185, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TARJETA DE CIRCULACION REV .jpeg', 1326, '2022-11-24 00:00:00', '1326TARJETA DE CIRCULACION REV .jpeg'),
+	(186, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326PEDIMENTO .jpeg', 1326, '2022-11-24 00:00:00', '1326PEDIMENTO .jpeg'),
+	(187, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TITULO DE PROPIEDAD .jpeg', 1326, '2022-11-24 00:00:00', '1326TITULO DE PROPIEDAD .jpeg'),
+	(188, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326TITULO DE PROPIEDAD REV .jpeg', 1326, '2022-11-24 00:00:00', '1326TITULO DE PROPIEDAD REV .jpeg'),
+	(190, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1329/1329WhatsApp-Image-2022-11-24-at-3.10.49-PM.jpeg', 1329, '2022-11-24 00:00:00', '1329WhatsApp-Image-2022-11-24-at-3.10.49-PM.jpeg'),
+	(191, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1329/1329ACUSE.pdf', 1329, '2022-11-24 00:00:00', '1329ACUSE.pdf'),
+	(192, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332FACTURA-1.jpeg', 1332, '2022-11-24 00:00:00', '1332FACTURA-1.jpeg'),
+	(193, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332FACTURA-2.jpeg', 1332, '2022-11-24 00:00:00', '1332FACTURA-2.jpeg'),
+	(194, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332INE.pdf', 1332, '2022-11-24 00:00:00', '1332INE.pdf'),
+	(195, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332CURP_SOAN910227HJCLLX02.pdf', 1332, '2022-11-24 00:00:00', '1332CURP_SOAN910227HJCLLX02.pdf'),
+	(196, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332CONTRATO-BANCARIO-1.jpeg', 1332, '2022-11-24 00:00:00', '1332CONTRATO-BANCARIO-1.jpeg'),
+	(197, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332TENENCIAS.pdf', 1332, '2022-11-24 00:00:00', '1332TENENCIAS.pdf'),
+	(198, 'Tarjeta de circulacion', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332TARJETA-CIRCULACION.pdf', 1332, '2022-11-24 00:00:00', '1332TARJETA-CIRCULACION.pdf'),
+	(199, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332COMPROBANTE-DE-DOMICILIO-.jpeg', 1332, '2022-11-24 00:00:00', '1332COMPROBANTE-DE-DOMICILIO-.jpeg'),
+	(200, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1332/1332LICENCIA.pdf', 1332, '2022-11-24 00:00:00', '1332LICENCIA.pdf'),
+	(201, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326CURP_MABM730627MMCRRR04-2021.pdf', 1326, '2022-11-25 00:00:00', '1326CURP_MABM730627MMCRRR04-2021.pdf'),
+	(202, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326edocta.pdf', 1326, '2022-11-25 00:00:00', '1326edocta.pdf'),
+	(203, 'Poliza', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326poliza-003788781.pdf', 1326, '2022-11-25 00:00:00', '1326poliza-003788781.pdf'),
+	(204, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1326/1326recibo-gas.pdf', 1326, '2022-11-25 00:00:00', '1326recibo-gas.pdf'),
+	(205, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971FACTURA.pdf', 971, '2022-11-25 00:00:00', '971FACTURA.pdf'),
+	(206, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971INE.pdf', 971, '2022-11-25 00:00:00', '971INE.pdf'),
+	(207, 'Constancia SF', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971RFC.pdf', 971, '2022-11-25 00:00:00', '971RFC.pdf'),
+	(208, 'Estado de cuenta', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971ESTADO-DE-CUENTA-.jpeg', 971, '2022-11-25 00:00:00', '971ESTADO-DE-CUENTA-.jpeg'),
+	(209, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/971/971COMPROBANTE-DE-DOMICILIO.jpeg', 971, '2022-11-25 00:00:00', '971COMPROBANTE-DE-DOMICILIO.jpeg'),
+	(210, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333FACTURA.pdf', 1333, '2022-11-25 00:00:00', '1333FACTURA.pdf'),
+	(211, 'Identificacion oficial', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333INE.pdf', 1333, '2022-11-25 00:00:00', '1333INE.pdf'),
+	(212, 'curp', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333CURP.jpeg', 1333, '2022-11-25 00:00:00', '1333CURP.jpeg'),
+	(213, 'Tenencias', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333TENENCIAS-2016-A-2021,-2-ENTIDADES.pdf', 1333, '2022-11-25 00:00:00', '1333TENENCIAS-2016-A-2021,-2-ENTIDADES.pdf'),
+	(214, 'Comprobante de domicilio', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333COMPROBANTE-DE-DOMICILIO-.pdf', 1333, '2022-11-25 00:00:00', '1333COMPROBANTE-DE-DOMICILIO-.pdf'),
+	(215, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333FACTURA-DE-CUSTODIA-DE-LA-UNIDAD.pdf', 1333, '2022-11-25 00:00:00', '1333FACTURA-DE-CUSTODIA-DE-LA-UNIDAD.pdf'),
+	(216, 'Documentos adicionales', '/home/admin/Documentos/SoleraWeb/web/documentos/1333/1333FACTURA-DE-GRUA.pdf', 1333, '2022-11-25 00:00:00', '1333FACTURA-DE-GRUA.pdf'),
+	(217, 'Baja de placas', '/home/admin/Documentos/SoleraWeb/web/documentos/1323/1323BAJA-DE-PLACAS.jpeg', 1323, '2022-11-25 00:00:00', '1323BAJA-DE-PLACAS.jpeg'),
+	(240, '20221208191801.png', '../Documentos/Ids/839/20221208191801.png', 839, '2022-12-08 13:18:01', 'Factura original');
+
+-- Volcando estructura para tabla soleraatlas.infoauto
+CREATE TABLE IF NOT EXISTS `infoauto` (
+  `idAuto` int(11) NOT NULL AUTO_INCREMENT,
+  `marca` varchar(30) DEFAULT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `modelo` varchar(45) DEFAULT NULL,
+  `numSerie` varchar(45) DEFAULT NULL,
+  `valorIndemnizacion` varchar(45) DEFAULT NULL,
+  `fkIdRegistro` int(11) DEFAULT NULL,
+  `valorComercial` varchar(45) DEFAULT NULL,
+  `placas` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idAuto`),
+  KEY `fkIdRegistro3` (`fkIdRegistro`),
+  CONSTRAINT `fkIdRegistro3` FOREIGN KEY (`fkIdRegistro`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla soleraatlas.infoauto: ~184 rows (aproximadamente)
-REPLACE INTO `infoauto` (`idAuto`, `marca`, `tipo`, `modelo`, `numSerie`, `valorIndemnizacion`, `fkIdRegistro`, `valorComercial`, `placas`) VALUES
+INSERT INTO `infoauto` (`idAuto`, `marca`, `tipo`, `modelo`, `numSerie`, `valorIndemnizacion`, `fkIdRegistro`, `valorComercial`, `placas`) VALUES
 	(2, 'CHEVROLET', '2018', 'AVEO', 'LSGHD52H3JD100308', '2', 837, '1', NULL),
 	(3, 'YAMAHA', '2018', 'T110', 'LL8UE0811JB535377', '100', 839, '200', '1234'),
 	(6, 'LIFAN', '2017', 'FL200', 'LF3UCM409HA000144', NULL, 840, NULL, NULL),
@@ -922,10 +1054,38 @@ REPLACE INTO `infoauto` (`idAuto`, `marca`, `tipo`, `modelo`, `numSerie`, `valor
 	(184, 'HYUNDAI', 'I-10 COLOR GRIS', '2015', 'MALA75NC5FM115272', 'null', 1334, 'null', 'null'),
 	(185, 'VOLVO', 'CX40  NEGRO ', '2022', 'YV1XZEDA8N2654416', 'null', 1335, 'null', 'null');
 
+-- Volcando estructura para tabla soleraatlas.infocarga
+CREATE TABLE IF NOT EXISTS `infocarga` (
+  `idinfocarga` int(11) NOT NULL AUTO_INCREMENT,
+  `fuente` varchar(45) DEFAULT NULL,
+  `archivo` varchar(45) DEFAULT NULL,
+  `tipoCedula` varchar(45) DEFAULT NULL,
+  `fkIdRegistro` int(45) DEFAULT NULL,
+  PRIMARY KEY (`idinfocarga`),
+  KEY `fkIdRegistroCarga` (`fkIdRegistro`),
+  CONSTRAINT `fkIdRegistroCarga` FOREIGN KEY (`fkIdRegistro`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.infocarga: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla soleraatlas.infocliente
+CREATE TABLE IF NOT EXISTS `infocliente` (
+  `idCliente` int(11) NOT NULL AUTO_INCREMENT,
+  `telefonoPrincipal` varchar(15) NOT NULL,
+  `telefonosecundario` varchar(15) DEFAULT NULL,
+  `contacto` varchar(45) DEFAULT NULL,
+  `correo` varchar(45) DEFAULT NULL,
+  `fkIdRegistro` int(11) DEFAULT NULL,
+  `asegurado` varchar(200) NOT NULL,
+  `correoContacto` varchar(100) DEFAULT NULL,
+  `telContacto` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idCliente`),
+  KEY `fkIdRegistroinfoCliente` (`fkIdRegistro`),
+  CONSTRAINT `fkIdRegistroinfoCliente` FOREIGN KEY (`fkIdRegistro`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.infocliente: ~184 rows (aproximadamente)
-REPLACE INTO `infocliente` (`idCliente`, `telefonoPrincipal`, `telefonosecundario`, `contacto`, `correo`, `fkIdRegistro`, `asegurado`, `correoContacto`, `telContacto`) VALUES
+INSERT INTO `infocliente` (`idCliente`, `telefonoPrincipal`, `telefonosecundario`, `contacto`, `correo`, `fkIdRegistro`, `asegurado`, `correoContacto`, `telContacto`) VALUES
 	(2, '5546026059', 'SD', '1212', '022', 839, 'RAFAEL SANCHEZ2', 'err', '456'),
 	(5, '3326009442', 'SD', NULL, '0', 837, 'GUSTAVO VAZQUEZ', NULL, NULL),
 	(6, '3141743906', 'SD', NULL, 'SINCORREO@GMAIL.COM', 840, 'LUIS RAMNADO RAMOS SUAREZ', NULL, NULL),
@@ -1108,8 +1268,37 @@ REPLACE INTO `infocliente` (`idCliente`, `telefonoPrincipal`, `telefonosecundari
 	(184, '3312221495', '0', 'null', 'SD', 1334, 'HUGO MENDOZA LOPEZ', 'null', 'null'),
 	(185, 'SD', '3314666986', 'GABRIEL DE PAVIA ', 'SINCORREO@GMAIL.COM', 1335, 'TECNOLOGIA AUTOMOTRIZ MINERVA  S.A. DE C.V.', 'null', 'null');
 
+-- Volcando estructura para tabla soleraatlas.infosiniestro
+CREATE TABLE IF NOT EXISTS `infosiniestro` (
+  `idRegistro` int(11) NOT NULL AUTO_INCREMENT,
+  `numSiniestro` varchar(100) DEFAULT 'SD',
+  `poliza` varchar(100) DEFAULT 'SD',
+  `afectado` varchar(100) DEFAULT 'SD',
+  `tipoDeCaso` varchar(100) DEFAULT 'SD',
+  `cobertura` varchar(100) DEFAULT 'SD',
+  `fechaSiniestro` date DEFAULT NULL,
+  `estado` varchar(100) DEFAULT 'N/D',
+  `ciudad` varchar(45) DEFAULT NULL,
+  `region` varchar(200) DEFAULT 'N/D',
+  `ubicacionTaller` varchar(100) DEFAULT 'SD',
+  `financiado` varchar(100) DEFAULT 'SD',
+  `regimenFiscal` varchar(100) DEFAULT 'SD',
+  `estatusCliente` varchar(200) DEFAULT 'Sin Estatus',
+  `comentariosCliente` varchar(500) CHARACTER SET utf8 DEFAULT 'ninguno',
+  `datosAudatex` varchar(45) DEFAULT 'Sin Datos',
+  `passwordExterno` varchar(45) DEFAULT 'Sin Password',
+  `fechaCarga` date DEFAULT NULL,
+  `fechaDecreto` date DEFAULT NULL,
+  `usuarioCarga` varchar(100) DEFAULT 'NULSDL',
+  `estatusSeguimientoSin` varchar(450) DEFAULT 'SIN CONTACTO',
+  `usuarioAsignadoSin` varchar(450) DEFAULT 'SD',
+  `fechaAsignacion` datetime DEFAULT NULL,
+  `agente` varchar(250) DEFAULT 'SD',
+  PRIMARY KEY (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=1336 DEFAULT CHARSET=utf8mb4 COMMENT='tabla para la informacion del siniestro';
+
 -- Volcando datos para la tabla soleraatlas.infosiniestro: ~184 rows (aproximadamente)
-REPLACE INTO `infosiniestro` (`idRegistro`, `numSiniestro`, `poliza`, `afectado`, `tipoDeCaso`, `cobertura`, `fechaSiniestro`, `estado`, `ciudad`, `region`, `ubicacionTaller`, `financiado`, `regimenFiscal`, `estatusCliente`, `comentariosCliente`, `datosAudatex`, `passwordExterno`, `fechaCarga`, `fechaDecreto`, `usuarioCarga`, `estatusSeguimientoSin`, `usuarioAsignadoSin`, `fechaAsignacion`, `agente`) VALUES
+INSERT INTO `infosiniestro` (`idRegistro`, `numSiniestro`, `poliza`, `afectado`, `tipoDeCaso`, `cobertura`, `fechaSiniestro`, `estado`, `ciudad`, `region`, `ubicacionTaller`, `financiado`, `regimenFiscal`, `estatusCliente`, `comentariosCliente`, `datosAudatex`, `passwordExterno`, `fechaCarga`, `fechaDecreto`, `usuarioCarga`, `estatusSeguimientoSin`, `usuarioAsignadoSin`, `fechaAsignacion`, `agente`) VALUES
 	(837, '42172278', '0', 'A', 'Colision', 'DM', '2022-10-22', 'Aguascalientes', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'Auto online', 'Si', 'Persona fisica', 'Documento incorrecto', 'ninguno2', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
 	(839, '42129149', '00000000', 'A', 'Incendio', 'DM', '2022-10-22', 'Zacatecas', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'Auto online', 'No', 'Persona moral', 'Pendiente', 'ninguno34', 'Sin Datos', 'Sin Password2', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
 	(840, '42152626', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
@@ -1292,8 +1481,21 @@ REPLACE INTO `infosiniestro` (`idRegistro`, `numSiniestro`, `poliza`, `afectado`
 	(1334, '422A3406', '3870599', 'A', 'Colision', 'DM', '2022-10-18', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-10-18', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
 	(1335, '42250137', '3922504', 'A', 'Colision', 'DM', '2022-06-11', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-06-11', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD');
 
+-- Volcando estructura para tabla soleraatlas.insertarregistros
+CREATE TABLE IF NOT EXISTS `insertarregistros` (
+  `idInsertarRegistros` int(11) NOT NULL AUTO_INCREMENT,
+  `respuestaSolera` varchar(12) DEFAULT NULL,
+  `personaContactada` varchar(45) DEFAULT NULL,
+  `tipoPersona` varchar(45) DEFAULT NULL,
+  `contactoSeguimiento` varchar(45) DEFAULT NULL,
+  `fkIdRegistroInsertar` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idInsertarRegistros`),
+  KEY `fkIdRegistroInsertar` (`fkIdRegistroInsertar`),
+  CONSTRAINT `fkIdRegistroInsertar` FOREIGN KEY (`fkIdRegistroInsertar`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.insertarregistros: ~182 rows (aproximadamente)
-REPLACE INTO `insertarregistros` (`idInsertarRegistros`, `respuestaSolera`, `personaContactada`, `tipoPersona`, `contactoSeguimiento`, `fkIdRegistroInsertar`) VALUES
+INSERT INTO `insertarregistros` (`idInsertarRegistros`, `respuestaSolera`, `personaContactada`, `tipoPersona`, `contactoSeguimiento`, `fkIdRegistroInsertar`) VALUES
 	(1, NULL, NULL, NULL, NULL, 839),
 	(5, NULL, NULL, NULL, NULL, 837),
 	(6, NULL, NULL, NULL, NULL, 841),
@@ -1474,8 +1676,21 @@ REPLACE INTO `insertarregistros` (`idInsertarRegistros`, `respuestaSolera`, `per
 	(182, NULL, NULL, NULL, NULL, 1334),
 	(183, NULL, NULL, NULL, NULL, 1335);
 
+-- Volcando estructura para tabla soleraatlas.mensajesseguimientos
+CREATE TABLE IF NOT EXISTS `mensajesseguimientos` (
+  `idmensajesSeguimientos` int(11) NOT NULL AUTO_INCREMENT,
+  `fkmensgSeguimientos` int(11) DEFAULT NULL,
+  `mensajes` varchar(1000) DEFAULT NULL,
+  `usuario` varchar(45) DEFAULT NULL,
+  `fechaMensaje` datetime DEFAULT NULL,
+  `respondido` varchar(2) DEFAULT 'no',
+  PRIMARY KEY (`idmensajesSeguimientos`),
+  KEY `fkIdRegistroMensajes` (`fkmensgSeguimientos`),
+  CONSTRAINT `fkIdRegistroMensajes` FOREIGN KEY (`fkmensgSeguimientos`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=1503 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.mensajesseguimientos: ~1,492 rows (aproximadamente)
-REPLACE INTO `mensajesseguimientos` (`idmensajesSeguimientos`, `fkmensgSeguimientos`, `mensajes`, `usuario`, `fechaMensaje`, `respondido`) VALUES
+INSERT INTO `mensajesseguimientos` (`idmensajesSeguimientos`, `fkmensgSeguimientos`, `mensajes`, `usuario`, `fechaMensaje`, `respondido`) VALUES
 	(1, 844, 'mensaje respondido', 'admin', '2022-11-02 09:25:48', 'si'),
 	(2, 844, 'mensaje respondido', 'admin', '2022-11-02 09:26:45', 'si'),
 	(3, 844, 'mensaje respondido', 'admin', '2022-11-02 09:27:47', 'si'),
@@ -2942,8 +3157,21 @@ REPLACE INTO `mensajesseguimientos` (`idmensajesSeguimientos`, `fkmensgSeguimien
 	(1501, 839, 'eetfh', 'Mauricio Rodriguez', '2022-12-06 12:53:05', 'si'),
 	(1502, 839, 'eetfh', 'Mauricio Rodriguez', '2022-12-06 12:57:15', 'si');
 
+-- Volcando estructura para tabla soleraatlas.seguimiento
+CREATE TABLE IF NOT EXISTS `seguimiento` (
+  `idSeguimiento` int(11) NOT NULL AUTO_INCREMENT,
+  `fkIdUsuario` int(11) DEFAULT NULL,
+  `fechaModificacion` date DEFAULT NULL,
+  `tipoModificacion` varchar(45) DEFAULT NULL,
+  `comentariosSeguimiento` varchar(100) DEFAULT NULL,
+  `fkIdRegistroSeguimiento` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idSeguimiento`),
+  KEY `fkIdRegistroSeguimiento` (`fkIdRegistroSeguimiento`),
+  CONSTRAINT `fkIdRegistroSeguimiento` FOREIGN KEY (`fkIdRegistroSeguimiento`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.seguimiento: ~182 rows (aproximadamente)
-REPLACE INTO `seguimiento` (`idSeguimiento`, `fkIdUsuario`, `fechaModificacion`, `tipoModificacion`, `comentariosSeguimiento`, `fkIdRegistroSeguimiento`) VALUES
+INSERT INTO `seguimiento` (`idSeguimiento`, `fkIdUsuario`, `fechaModificacion`, `tipoModificacion`, `comentariosSeguimiento`, `fkIdRegistroSeguimiento`) VALUES
 	(1, NULL, NULL, NULL, NULL, 839),
 	(5, NULL, NULL, NULL, NULL, 837),
 	(6, NULL, NULL, NULL, NULL, 841),
@@ -3124,8 +3352,34 @@ REPLACE INTO `seguimiento` (`idSeguimiento`, `fkIdUsuario`, `fechaModificacion`,
 	(182, NULL, NULL, NULL, NULL, 1334),
 	(183, NULL, NULL, NULL, NULL, 1335);
 
+-- Volcando estructura para tabla soleraatlas.seguimientoprincipal
+CREATE TABLE IF NOT EXISTS `seguimientoprincipal` (
+  `fkIdRegistroSegPrincipal` int(11) DEFAULT NULL,
+  `usuario` varchar(450) DEFAULT NULL,
+  `fechaseguimiento` datetime DEFAULT NULL,
+  `estatusSeguimiento` varchar(450) DEFAULT 'Sin cambios',
+  `comentarios` varchar(1000) DEFAULT 'Sin comentarios',
+  `idseguimientoPrincipal` int(11) NOT NULL AUTO_INCREMENT,
+  `estacionPrincipal` varchar(45) DEFAULT NULL,
+  `subEstatus` varchar(45) DEFAULT NULL,
+  `respuestaSolera` varchar(450) DEFAULT 'Sin cambios',
+  `personaContactada` varchar(450) DEFAULT 'Sin cambios',
+  `tipodePersona` varchar(450) DEFAULT 'Sin cambios',
+  `contacto` varchar(450) DEFAULT 'Sin cambios',
+  `integraciondeexpediente` varchar(45) DEFAULT 'Sin cambios',
+  `facturaciondeservicio` varchar(45) DEFAULT 'Sin cambios',
+  `termino` varchar(45) DEFAULT 'Sin cambios',
+  `fechaasigncion` varchar(45) DEFAULT NULL,
+  `usuarioAsignado` varchar(450) DEFAULT NULL,
+  `numSiniestro` varchar(45) DEFAULT NULL,
+  `msgInterno` varchar(10) DEFAULT 'Interno',
+  PRIMARY KEY (`idseguimientoPrincipal`),
+  KEY `fkIdRegistroSegPrincipal` (`fkIdRegistroSegPrincipal`),
+  CONSTRAINT `fkIdRegistroSegPrincipal` FOREIGN KEY (`fkIdRegistroSegPrincipal`) REFERENCES `infosiniestro` (`idRegistro`)
+) ENGINE=InnoDB AUTO_INCREMENT=3720 DEFAULT CHARSET=utf8mb4;
+
 -- Volcando datos para la tabla soleraatlas.seguimientoprincipal: ~2,915 rows (aproximadamente)
-REPLACE INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fechaseguimiento`, `estatusSeguimiento`, `comentarios`, `idseguimientoPrincipal`, `estacionPrincipal`, `subEstatus`, `respuestaSolera`, `personaContactada`, `tipodePersona`, `contacto`, `integraciondeexpediente`, `facturaciondeservicio`, `termino`, `fechaasigncion`, `usuarioAsignado`, `numSiniestro`, `msgInterno`) VALUES
+INSERT INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fechaseguimiento`, `estatusSeguimiento`, `comentarios`, `idseguimientoPrincipal`, `estacionPrincipal`, `subEstatus`, `respuestaSolera`, `personaContactada`, `tipodePersona`, `contacto`, `integraciondeexpediente`, `facturaciondeservicio`, `termino`, `fechaasigncion`, `usuarioAsignado`, `numSiniestro`, `msgInterno`) VALUES
 	(837, 'Ivet Gonz lez', '2022-10-28 00:00:00', 'DATOS INCORRECTOS', 'SE CIERRA SINIESTRO YA QUE EN GEAS NO HAY DATO ADICIONAL Y EN GOOGLE NO APARECE EMPRESA', 84, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, '42172278', NULL),
 	(837, 'Ivet Gonz lez', '2022-10-27 00:00:00', 'SIN CONTACTO', 'NO SE CUENTA CO DATOS ADICIONALES EN GEAS, PENDIENTE DE CIERRE', 85, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, '42172278', NULL),
 	(837, 'Teresa Medina', '2022-10-26 00:00:00', 'SIN CONTACTO', 'PROPORCIONA COORDINACION EL MISO TELEFONO DEL HOSPITAL ARBOLEDAS, NO CONOCEN A LOS TITULARES Y TAMPOCO LA UNIDAD', 86, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, '42172278', NULL),
@@ -4790,8 +5044,7 @@ REPLACE INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fec
 	(958, 'Teresa Medina ', '2022-11-10 16:37:27', 'DE 1 A 3 DOCUMENTOS', 'SE MARCA SIN EXITO, COMENTA POR WHATS QUE EN CUANTO LE COMPARTAN LOS DOCUMENTOS LOS ENVIA', 2404, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
 	(844, 'Teresa Medina ', '2022-11-10 17:04:07', 'DE 7 A 10 DOCUMENTOS', 'SE GENERA NUEVA CITA PARA EL LUNES A LAS 16 HORAS CON TERESA DOMINGUEZ', 2405, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, '042183705-001', NULL),
 	(964, 'Teresa Medina ', '2022-11-10 17:06:17', 'DE 7 A 10 DOCUMENTOS', 'COMENTA QUE EL LUNES REALIZARAN LA BAJA', 2406, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
-	(876, 'Teresa Medina ', '2022-11-10 17:09:27', 'DE 7 A 10 DOCUMENTOS', '	SE MARCA PERO NO CONTESTA, MARCAR MAS TARDE', 2407, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL);
-REPLACE INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fechaseguimiento`, `estatusSeguimiento`, `comentarios`, `idseguimientoPrincipal`, `estacionPrincipal`, `subEstatus`, `respuestaSolera`, `personaContactada`, `tipodePersona`, `contacto`, `integraciondeexpediente`, `facturaciondeservicio`, `termino`, `fechaasigncion`, `usuarioAsignado`, `numSiniestro`, `msgInterno`) VALUES
+	(876, 'Teresa Medina ', '2022-11-10 17:09:27', 'DE 7 A 10 DOCUMENTOS', '	SE MARCA PERO NO CONTESTA, MARCAR MAS TARDE', 2407, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
 	(935, 'Teresa Medina ', '2022-11-10 17:10:26', 'DE 7 A 10 DOCUMENTOS', '	EN ESPERA DE SU BAJA', 2408, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
 	(954, 'Teresa Medina ', '2022-11-10 17:11:28', 'DE 7 A 10 DOCUMENTOS', '	EN ESPERA DE SU BAJA', 2409, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
 	(890, 'Teresa Medina ', '2022-11-10 17:12:47', 'CON CONTACTO SIN DOCUMENTOS', '	NO SE REALIZARA LLAMADA HASTA EL LUNES', 2410, 'Selecciona...', 'null', 'Atendido', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
@@ -6068,12 +6321,23 @@ REPLACE INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fec
 	(839, 'Mauricio Rodriguez', '2022-12-07 09:34:57', 'DE 1 A 3 DOCUMENTOS', '', 3714, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
 	(839, 'Mauricio Rodriguez', '2022-12-07 09:35:12', 'DE 4 A 6 DOCUMENTOS', '', 3715, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
 	(839, 'Mauricio Rodriguez', '2022-12-07 11:26:43', 'DE 4 A 6 DOCUMENTOS', 'eerrrerrewrrwwewe', 3716, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
-	(839, 'Mauricio Rodriguez', '2022-12-07 11:27:33', 'DE 4 A 6 DOCUMENTOS', 'edgdsgdfcbtrhtr', 3717, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno');
+	(839, 'Mauricio Rodriguez', '2022-12-07 11:27:33', 'DE 4 A 6 DOCUMENTOS', 'edgdsgdfcbtrhtr', 3717, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-08 10:24:34', 'DE 4 A 6 DOCUMENTOS', 'erwrwwerwr', 3718, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-08 10:26:03', 'DE 4 A 6 DOCUMENTOS', 'ffdf', 3719, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno');
+
+-- Volcando estructura para tabla soleraatlas.usuarios
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `idUsuarios` int(25) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(20) DEFAULT NULL,
+  `contrasena` varchar(30) DEFAULT NULL,
+  `privilegios` varchar(45) DEFAULT NULL,
+  `nombreReal` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idUsuarios`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla soleraatlas.usuarios: ~6 rows (aproximadamente)
-REPLACE INTO `usuarios` (`idUsuarios`, `usuario`, `contrasena`, `privilegios`, `nombreReal`) VALUES
-	(1, 'admin', '1234', 'root', 'Mauricio Rodriguez');
-REPLACE INTO `usuarios` (`idUsuarios`, `usuario`, `contrasena`, `privilegios`, `nombreReal`) VALUES
+INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `contrasena`, `privilegios`, `nombreReal`) VALUES
+	(1, 'admin', '1234', 'root', 'Mauricio Rodriguez'),
 	(4, 'tmedina', 'M3d1n453452018?', 'operador', 'Teresa Medina '),
 	(5, 'mzarza', 'Mzarza2022?', 'operador', 'Marisol Zarza Flores'),
 	(6, 'igonzalez', 'gonzalez', 'supervisor', 'Ivet Gonzalez'),

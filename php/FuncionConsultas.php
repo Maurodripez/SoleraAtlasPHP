@@ -1,6 +1,5 @@
 <?php
 require "./FuncionesSQL.php";
-$fechaCargaInicio;
 $sql = "select idRegistro, numSiniestro, poliza, marca, modelo, numSerie, fechaCarga, estacionProceso,estatusOperativo,"
     . " porcentajeDocs,porcentajeTotal,estado from fechasseguimiento as fs,docsaprobadosatlas, infosiniestro, infoauto as ia, estadoproceso where"
     . " idRegistro=ia.fkIdRegistro and idRegistro=fkIdRegistroEstadoProceso and fkDocsAtlas=idRegistro and fs.fkidRegistro=idRegistro"

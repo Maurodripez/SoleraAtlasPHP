@@ -41,17 +41,15 @@ function closeNav() {
   document.getElementById("main").style.marginLeft = "0";
 }
 function obtenerSesion() {
-  let usuario = document.getElementById("sesionActual").textContent;
   $.ajax({
     type: "POST",
     url: "../../php/ObtenerSesion.php",
     dataType: "json",
     data: {
       accion: "Privilegios",
-      usuario,
     },
   }).done(function (result) {
-    if (result.Siniestros[0].privilegios!="root" || result.Siniestros[0].privilegios!="supervisor") {
+    if (result.Siniestros[0].privilegios!="root" && result.Siniestros[0].privilegios!="supervisor") {
       document.getElementById("Asignacion").style.display="none";
       document.getElementById("Reporte").style.display="none";
       document.getElementById("Encuesta").style.display="none";

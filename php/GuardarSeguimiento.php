@@ -1,7 +1,9 @@
 <?php
+session_start();
 include "./FuncionesSQL.php";
 $idEditableActual = $_POST["idEditableActual"];
 $accion = $_POST["accion"];
+$usuario = $_SESSION['usuario'];
 switch ($accion) {
     case "GuardarSeguimiento": {
             $infoSiniestro = [
@@ -65,7 +67,6 @@ switch ($accion) {
             break;
         }
     case "InsertarSeguimiento": {
-            $usuario = $_POST["usuario"];
             $estatusSeguimiento = $_POST["estatusSeguimiento"];
             $comentarios = $_POST["comentSeguimiento"];
             $estacion = $_POST["estacion"];
@@ -114,6 +115,7 @@ switch ($accion) {
                 $sql = "UPDATE docsaprobadosatlas SET porcentajeTotal = '0' WHERE fkDocsAtlas=$idEditableActual";
                 ActualizarSiniestro($sql);
             }
+            echo "Seguimiento guardado";
             break;
         }
     case "AsignarIntegrador": {

@@ -2,7 +2,7 @@ var contador = 0;
 var contadorSeg = 0;
 let rutaInicial = "../../php/";
 $(document).ready(function () {
-  //alert(document.getElementById("sesionActual").textContent);
+  obtenerSesion();
   datosPorDefecto();
   cantidadSiniestros(0, 3, "de0a2");
   cantidadSiniestros(3, 6, "de3a5");
@@ -32,14 +32,12 @@ $(document).ready(function () {
 });
 //funcion para sesiones
 function obtenerSesion() {
-  let usuario = document.getElementById("sesionActual").textContent;
   $.ajax({
     type: "POST",
     url: rutaInicial + "ObtenerSesion.php",
     dataType: "json",
     data: {
       accion: "Privilegios",
-      usuario,
     },
   }).done(function (result) {
     if (
@@ -479,9 +477,8 @@ function mostrarInfoSiniestro(get) {
 
   inputNombre.value = get;
   let idGuardado = get; ///////////se manda el id para hacer la busqueda y mostrar los datos del siniestro
-  console.log(idGuardado);
   $.post({
-    url: rutaInicial + "mostrarDatosSiniestro.php",
+    url: rutaInicial + "MostrarDatosSiniestro.php",
     dataType: "json",
     data: {
       idGuardado,
@@ -547,12 +544,12 @@ function mostrarInfoSiniestro(get) {
       //el arreglo que se crea se lo agregagmos a cada boton que hay
     },
   });
-  mostrarHistorico();
+  tablaSeguimiento();
   let iframe = document.getElementById("iFrameIdentificacion");
   iframe.style.display = "none";
-  tablaSeguimiento();
   let txtIdRegistro = document.getElementById("idOculto").value;
-  docsYaCargados(txtIdRegistro);
+  tablaImagenes(txtIdRegistro);
+  //docsYaCargados(txtIdRegistro);
   document.getElementById("txtComentSeguimiento").value = "";
 }
 function GuardarRegistros() {
@@ -599,8 +596,6 @@ function GuardarRegistros() {
   });
 }
 function InsertarSeguimiento() {
-  console.log(document.getElementById("txtTipoMensaje").value);
-  let usuario = document.getElementById("sesionActual").textContent;
   $.ajax({
     type: "POST",
     url: rutaInicial + "GuardarSeguimiento.php",
@@ -620,10 +615,9 @@ function InsertarSeguimiento() {
       fechaTermino: document.getElementById("txtFechaTermino").value,
       idEditableActual: document.getElementById("idOculto").value,
       tipoMensaje: document.getElementById("txtTipoMensaje").value,
-      usuario,
     },
     success: function (result) {
-      console.log(result);
+      alert(result);
       tablaSeguimiento();
     },
   });
@@ -744,7 +738,6 @@ function mostrarDocsAprobados() {
       accion: "DocsAprobados",
     },
     success: function (result) {
-      console.log(result);
       if (result.Siniestros[0].factura === "true") {
         document.getElementById("checkboxFactura").checked = true;
       } else {
@@ -850,7 +843,6 @@ function mostrarDocsAprobados() {
       porcentajeBarra.innerHTML = result.Siniestros[0].porcentajeDocs + "%";
     },
   });
-  //tablaImagenes(txtIdRegistro);
   //docsYaCargados(txtIdRegistro);
 }
 function tablaSeguimiento() {
@@ -863,7 +855,6 @@ function tablaSeguimiento() {
       idRegistro: document.getElementById("idOculto").value,
     },
   }).done(function (result) {
-    console.log(result);
     $(".claseTablaSeguimiento").remove();
     let numeroTBody = 0;
     let tblBody = new Array();
@@ -873,9 +864,7 @@ function tablaSeguimiento() {
     let tablaseguimiento = document.getElementById("tablaSeguimientos");
     tablaseguimiento.appendChild(tblBody[numeroTBody]);
     for (let i in result.Siniestros) {
-      //console.log("entra");
       if (i % 5 == 0 && i != 0) {
-        tablaseguimiento.appendChild(tblBody[numeroTBody]);
         numeroTBody += 1;
         tblBody[numeroTBody] = document.createElement("tbody");
         tblBody[numeroTBody].setAttribute("class", "tBodySeg");
@@ -918,28 +907,85 @@ function mostrarDivsModal() {
       document.getElementById("divGuardarImagenes").style.display = "none";
     });
 }
+function enviarImagenes() {
+  $("#btnSubirDoc").on("click", function () {
+    let idRegistro = document.getElementById("idOculto").value;
+    let nombreArchivo = document.getElementById("tipoArchivoCargado").value;
+    let formData = new FormData();
+    let files = $("#archivoCargado")[0].files[0];
+    formData.append("file", files);
+    $.ajax({
+      url:
+        rutaInicial +
+        `upload.php?idRegistro=${idRegistro}&nombreArchivo=${nombreArchivo}`,
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        alert(response);
+        let txtIdRegistro = document.getElementById("idOculto").value;
+        tablaImagenes(txtIdRegistro);
+      },
+    });
+    return false;
+  });
+}
+function mostrarImagenSelect(getId) {
+  let sinComas = getId.split(",");
+  let iframe = document.getElementById("iFrameIdentificacion");
+  let direccionId = document.getElementById("idOculto").value;
+  iframe.src = "../../Documentos/Ids/" + direccionId + "/" + sinComas[2] + "";
+  iframe.style.display = "";
+}
+function eliminarImagen(getId) {
+  if (window.confirm("Eliminar imagen?")) {
+    let sinComas = getId.split(",");
+    $.ajax({
+      method: "POST",
+      url: rutaInicial + "ConsultaImagenes.php",
+      data: {
+        accion: "EliminarImagenes",
+        idRegistro: sinComas[1],
+        nombreArchivo: sinComas[2],
+      },
+    })
+      .done(function (result) {
+        alert(result);
+        let txtIdRegistro = document.getElementById("idOculto").value;
+        tablaImagenes(txtIdRegistro);
+        let iframe = document.getElementById("iFrameIdentificacion");
+        iframe.src = "";
+        iframe.style.display = "";
+      })
+      .fail(function () {
+        alert("Error al eliminar imagen");
+      });
+  }
+}
 /////////////////////////////
 //funciones todavia no utilizadas
 ////////////////////////////
 function tablaImagenes(txtIdRegistro) {
   $.ajax({
-    url: "../DocumentosAprobados",
+    method: "POST",
+    url: rutaInicial + "ConsultaImagenes.php",
+    dataType: "json",
     data: {
-      funcARealizar: "mostrarTabla",
+      accion: "TablaImagenes",
       idRegistro: txtIdRegistro,
     },
     success: function (result) {
+      console.log(result);
       $(".tablaImagenes").remove();
-      let sinCodificado = result.split("/_-");
-      for (let i = 0; i < sinCodificado.length - 1; i++) {
-        let sinCodificado2 = sinCodificado[i].split("-_/");
+      for (let i in result.Siniestros) {
         let tablaImagenes = document.getElementById("mostrarTablaImagenes");
         let btnGrupo = `<td><div class='btn-group tablaActual botonesTabla' role='group'>
-        <button id='Ver,${sinCodificado2[0]},${sinCodificado2[3]}'
-        onclick='funcionesBoton(this.id)' type='button' class='btn btn-primary'>Ver</button>
-        <button id='Pdf,${sinCodificado2[0]},${sinCodificado2[3]},${sinCodificado2[4]}'
+        <button id='Ver,${result.Siniestros[i].fkImagen},${result.Siniestros[i].nombreImagen}'
+        onclick='mostrarImagenSelect(this.id)' type='button' class='btn btn-primary'>Ver</button>
+        <button id='Pdf,${result.Siniestros[i].fkImagen},${result.Siniestros[i].nombreImagen}'
         onclick='convertirPDF(this.id)' type='button' class='btn btn-primary'>Pdf</button>
-        <a href='./documentos/${sinCodificado2[4]}/${sinCodificado2[3]}' download='cute.jpg'>
+        <a href='./documentos/${result.Siniestros[i].fkImagen}/${result.Siniestros[i].fkImagen}' download='cute.jpg'>
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'
         stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'
         class='feather feather-download'>
@@ -947,11 +993,11 @@ function tablaImagenes(txtIdRegistro) {
         <polyline points='7 10 12 15 17 10'></polyline>
         <line x1='12' y1='15' x2='12' y2='3'></line>
         </svg></a>
-        <button id='Eliminar,${sinCodificado2[0]},${sinCodificado2[3]},${sinCodificado2[4]}'
-        onclick='funcionesBoton(this.id)' type='button' class='btnEliminarClass btn btn-danger'>Eliminar</button>
+        <button id='Eliminar,${result.Siniestros[i].fkImagen},${result.Siniestros[i].nombreImagen}'
+        onclick='eliminarImagen(this.id)' type='button' class='btnEliminarClass btn btn-danger'>Eliminar</button>
         </div></td>`;
-        let archivo = `<td>${sinCodificado2[1]}</td>`;
-        let fechaCarga = `<td>${sinCodificado2[2]}</td>`;
+        let archivo = `<td>${result.Siniestros[i].nombreOriginal}</td>`;
+        let fechaCarga = `<td>${result.Siniestros[i].fechaCarga}</td>`;
         tablaImagenes.innerHTML += `<tr class='tablaImagenes'>${
           btnGrupo + archivo + fechaCarga
         }</tr>`;
@@ -959,79 +1005,18 @@ function tablaImagenes(txtIdRegistro) {
     },
   });
 }
-function funcionesBoton(getId) {
-  let sinComas = getId.split(",");
-  let sinPuntos = getId.split(".");
-  let iframe = document.getElementById("iFrameIdentificacion");
-  switch (sinComas[0]) {
-    case "Ver":
-      iframe.style.display = "none";
-      $.ajax({
-        method: "POST",
-        url: "../FuncionesBtnDocs",
-        data: {
-          accion: "Ver",
-        },
-        success: function (result) {
-          mostrarImagenSelect(result, sinPuntos, sinComas, iframe);
-        },
-      });
-      break;
-    case "Eliminar":
-      $.ajax({
-        method: "POST",
-        url: "../FuncionesBtnDocs",
-        data: {
-          accion: "Eliminar",
-          fkId: sinComas[3],
-          nombreArchivo: sinComas[2],
-          idImagen: sinComas[1],
-        },
-        success: function (result) {
-          alert(result);
-          $(".tablaImagenes").remove();
-          let txtIdRegistro = document.getElementById("idOculto").value;
-          tablaImagenes(txtIdRegistro); //se manda de nueva la funcion para actualizar las imagene que estan borradas
-          Limpiarimagen(iframe);
-        },
-      });
-      break;
-  }
+function convertirPDF() {
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "ConsultaImagenes.php",
+    data: {
+      accion: "ConvertirPDF",
+    },
+  }).done(function (result) {
+    console.log(result);
+  });
 }
-function mostrarImagenSelect(result, sinPuntos, sinComas, iframe) {
-  let direccionId = document.getElementById("idOculto").value;
-  if (sinPuntos[1] === "txt") {
-    let imagen = document.getElementById("docSeleccionado");
-    $.ajax({
-      method: "POST",
-      url: "../leerImagenes",
-      data: {
-        accion: "traerImagen64",
-      },
-      success: function (result) {
-        iframe.style.display = "none";
-        imagen.src = result;
-      },
-    });
-  } else if (sinPuntos[1] === "pdf" || sinPuntos[1] === "docx") {
-    iframe.src = "../documentos/" + direccionId + "/" + sinComas[2] + "";
-    iframe.style.display = "";
-  } else {
-    let imagen = document.getElementById("docSeleccionado");
-    iframe.style.display = "none";
-    imagen.setAttribute(
-      "src",
-      "../documentos/" + direccionId + "/" + sinComas[2] + ""
-    );
-  }
-}
-function Limpiarimagen(iframe) {
-  iframe.src = "";
-  iframe.style.display = "none";
-  let imagen = document.getElementById("docSeleccionado");
-  iframe.style.display = "none";
-  imagen.setAttribute("src", "");
-}
+
 function controlPaginado() {
   //funcion para controlar el pagina de los resultados
   let paginaMas = document.getElementById("botonClickMas");
@@ -1084,30 +1069,7 @@ function controlPaginado() {
     }
   };
 }
-function enviarImagenes() {
-  $("#btnSubirDoc").on("click", function () {
-    let formData = new FormData();
-    let files = $("#archivoCargado")[0].files[0];
-    formData.append("file", files);
-    formData.append("idRegistro", 839);
-    $.ajax({
-      url: "upload.php",
-      type: "post",
-      data: formData,
-      contentType: false,
-      processData: false,
-      success: function (response) {
-        if (response != 0) {
-          $(".card-img-top").attr("src", response);
-        } else {
-          alert("Formato de imagen incorrecto.");
-        }
-      },
-    });
-    return false;
-  });
-}
-function mostrarHistorico() {
+/*function mostrarHistorico() {
   let inputNombreFk = document.getElementById("fkIdOculto").value;
   let tabla = document.getElementById("ResultadoHistorico");
   $.ajax({
@@ -1125,8 +1087,8 @@ function mostrarHistorico() {
     let usuario = `<td class='historicoTablaDatos'>${sinCodificar[2]}</td>`;
     tabla.innerHTML += `<tr>${fechaCarga + estatus + usuario}</tr>`;
   });
-}
-function docsYaCargados(txtIdRegistro) {
+}*/
+/*function docsYaCargados(txtIdRegistro) {
   selectaOcultar = document.getElementById("selectFactura");
   selectaOcultar.disabled = false;
   selectaOcultar = document.getElementById("selectPoder");
@@ -1196,7 +1158,7 @@ function docsYaCargados(txtIdRegistro) {
       }
     }
   });
-}
+}*/
 //https://datatables.net/
 function exportarUsuarios() {
   $.ajax({
@@ -1204,4 +1166,14 @@ function exportarUsuarios() {
     url: "../ExportarUsuarios",
     data: {},
   });
+}
+function convertir() {
+  var pdf = new jsPDF();
+  pdf.text(20, 20, "Agregar imagenes a un PDF!");
+  /// Codigo para agregar una imagen
+  var image1 = new Image();
+  image1.src = "./20221208191801.png"; /// URL de la imagen
+  pdf.addImage(image1, "PNG", 25, 30, 170, 180); // Agregar la imagen al PDF (X, Y, Width, Height)
+  /////
+  pdf.save("mipdf.pdf");
 }

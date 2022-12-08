@@ -19,14 +19,14 @@
     <script src="../Desplegables/libs/js/bootstrap-datepicker.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+        <script src="../js/jspdf.min.js"></script>
     <link rel="stylesheet" href="./css/Datos.css">
 </head>
 
 <body>
-    <?php 
-    session_start();
-    ?>
-    <h1 id="sesionActual" style="display: none"><?php echo $_SESSION['usuario']; ?></h1>
+    <button onclick="convertir()" class="btn-primary">
+        apruetame
+    </button>
     <div class="row">
         <div class="col text-left display-6 p-2">
             <nav class="navbar bg-light">
@@ -1831,9 +1831,6 @@
                                                         <th class="col-6">Comentario</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="tBodyTablaSeguimiento">
-
-                                                </tbody>
                                             </table>
                                             <div class="row">
                                                 <p style="display: none" id="paginaActualSeg" name="uno">0</p>

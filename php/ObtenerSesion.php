@@ -1,11 +1,12 @@
 <?php
+session_start();
 require "./Conexion.php";
 require "./FuncionesSQL.php";
 $accion = $_POST["accion"];
-$usuario = $_POST["usuario"];
+$usuarioActivo = $_SESSION['usuario'];
 switch ($accion) {
     case "Privilegios": {
-            $sql = "select privilegios from usuarios where usuario='$usuario'";
+            $sql = "select privilegios from usuarios where usuario='$usuarioActivo'";
             break;
         }
     case "NombreReal": {
