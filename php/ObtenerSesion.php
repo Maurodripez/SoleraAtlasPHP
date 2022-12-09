@@ -1,6 +1,5 @@
 <?php
 session_start();
-require "./Conexion.php";
 require "./FuncionesSQL.php";
 $accion = $_POST["accion"];
 $usuarioActivo = $_SESSION['usuario'];

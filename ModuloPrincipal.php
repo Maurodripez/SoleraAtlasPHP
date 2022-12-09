@@ -21,11 +21,6 @@
 </head>
 
 <body>
-    <?php 
-    session_start();
-    ?>
-  <h1 id="titulo" style="display: none"> <?php echo $_SESSION['usuario']; ?></h1> 
-
     <div class="row">
         <div class="col text-left display-6 p-2">
             <nav class="navbar bg-light">

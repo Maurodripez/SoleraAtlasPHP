@@ -14,10 +14,6 @@
 </head>
 
 <body>
-  <?php 
-  session_start();
-  ?>
-  <h1 id="sesionActual" style="display: none"><?php echo $_SESSION['usuario']; ?></h1>
   <div id="sideNavigation" class="sidenav font-size: 1.6rem" style="background-color: #222d32 !important">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="col-md-2" style="padding: 0;">

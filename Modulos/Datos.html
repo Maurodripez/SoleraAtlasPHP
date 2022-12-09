@@ -19,14 +19,11 @@
     <script src="../Desplegables/libs/js/bootstrap-datepicker.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
-        <script src="../js/jspdf.min.js"></script>
+    <script src="../js/jspdf.debug.js"></script>
     <link rel="stylesheet" href="./css/Datos.css">
 </head>
 
 <body>
-    <button onclick="convertir()" class="btn-primary">
-        apruetame
-    </button>
     <div class="row">
         <div class="col text-left display-6 p-2">
             <nav class="navbar bg-light">
@@ -711,6 +708,108 @@
                         </button>
                         <a href="../Excels/Siniestros.xlsx" download="Siniestros.xlsx" class="btn btn-primary"
                             role="button">Exportar</a>
+                        <button id="btnMovimientos" onclick="mostrarMovimientos()" type="button" class="btn btn-primary"
+                            data-bs-toggle="modal" data-bs-target="#movimientosUsuarios">
+                            Movimientos
+                        </button>
+                    </div>
+                    <div class="modal fade" id="movimientosUsuarios" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                        Movimientos
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <table id="TablaReporte"
+                                            class="table-responsive table-bordered table-sm table-striped table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Usuario</th>
+                                                    <th>Domingo</th>
+                                                    <th>Lunes</th>
+                                                    <th>Martes</th>
+                                                    <th>Miercoles</th>
+                                                    <th>Jueves</th>
+                                                    <th>Viernes</th>
+                                                    <th>Sabado</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="calendario date col-3 pt-2">
+                                            <label class="input-group-text fw-bold" for="fechaInicioUsuarios">
+                                                Fecha inicio
+                                            </label>
+                                            <div class="input-group-sm input-group mb-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                    fill="currentColor" class="bi bi-calendar-check p-1"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                                    <path
+                                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                                </svg>
+                                                <input id="fechaInicioUsuarios" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
+                                                    type="text" class="form-control input-group-append"
+                                                    placeholder="Fecha" />
+                                            </div>
+                                        </div>
+                                        <div class="calendario date col-3 pt-2">
+                                            <label class="input-group-text fw-bold" for="fechaFinalUsuarios">
+                                                Fecha Final
+                                            </label>
+                                            <div class="input-group-sm input-group mb-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                    fill="currentColor" class="bi bi-calendar-check p-1"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                                    <path
+                                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                                </svg>
+                                                <input id="fechaFinalUsuarios" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
+                                                    type="text" class="form-control input-group-append"
+                                                    placeholder="Fecha" />
+                                            </div>
+                                        </div>
+                                        <div class="col-2 pt-4">
+                                            <button onclick="busquedaReporte()" id="buscarReporte"
+                                                class="btn btn-primary">
+                                                Buscar
+                                            </button>
+                                        </div>
+                                        <div class="col pt-4">
+                                            <button onclick="mostrarMovimientos()" id="exportarReporte"
+                                                class="btn btn-primary">
+                                                Limpiar
+                                            </button>
+                                        </div>
+                                        <div class="col pt-4">
+                                            <button onclick="ExportarExcelJava()" id="exportarReporte"
+                                                class="btn btn-primary">
+                                                Exportar
+                                            </button>
+                                            <a style="display: none" id="btnDescargarExcel"
+                                                href="http://localhost:8080/SoleraWeb/json/datos.xls"
+                                                download="Reporte.xls">descargar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -729,14 +828,6 @@
                 <div class="accordion-body">
                     <!--inicio de acordeon para mostrar tabla de resutlados-->
                     <div class="row">
-                        <div class="botoncantidadResultados col-lg-2">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Resultados</option>
-                                <option value="1">5</option>
-                                <option value="2">10</option>
-                                <option value="3">20</option>
-                            </select>
-                        </div>
                         <div class="col p-2" name="SearchButtonGeneral">
                             <!--se implementa el boton busqueda general-->
                             <form class="form-search float-end">
@@ -766,14 +857,142 @@
                                 <th scope="col">% Total</th>
                             </tr>
                         </thead>
+                        <!-- Modal -->
+                        <div class="modal fade" id="AgregarSiniestro" tabindex="-1"
+                            aria-labelledby="AgregarSiniestroLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="AgregarSiniestroLabel">Agregar Siniestro</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addNumSiniestro" class="form-label">Numero de
+                                                    siniestro</label>
+                                                <input class="form-control" id="addNumSiniestro">
+                                            </div>
+                                            <div class="calendario date col">
+                                                <label for="addFechaSiniestro" class="form-label">Fecha del
+                                                    siniestro</label>
+                                                <input class="form-control input-group-append" id="addFechaSiniestro">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+
+                                                <label for="addPoliza" class="form-label">Numero de poliza</label>
+                                                <input class="form-control" id="addPoliza">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addCobertura" class="form-label">Cobertura</label>
+                                                <input class="form-control" id="addCobertura">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addAfectado" class="form-label">Afectado</label>
+                                                <input class="form-control" id="addAfectado">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addAsegurado" class="form-label">Asegurado</label>
+                                                <input class="form-control" id="addAsegurado">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addRegimen" class="form-label">Regimen fiscal</label>
+                                                <input class="form-control" id="addRegimen">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addAgente" class="form-label">Agente</label>
+                                                <input class="form-control" id="addAgente">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addTelefono" class="form-label">Telefono</label>
+                                                <input class="form-control" id="addTelefono">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addTelefonoAlt" class="form-label">Telefono alterno</label>
+                                                <input class="form-control" id="addTelefonoAlt">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addCorreo" class="form-label">Correo</label>
+                                                <input class="form-control" id="addCorreo">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addMarca" class="form-label">Marca</label>
+                                                <input class="form-control" id="addMarca">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addTipo" class="form-label">Tipo</label>
+                                                <input class="form-control" id="addTipo">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addModelo" class="form-label">Modelo</label>
+                                                <input class="form-control" id="addModelo">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addNumSerie" class="form-label">Numero de serie</label>
+                                                <input class="form-control" id="addNumSerie">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addCiudad" class="form-label">Ciudad</label>
+                                                <input class="form-control" id="addCiudad">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="calendario date col">
+                                                <label for="addFechaDecretacion" class="form-label">Fecha de
+                                                    decretacion</label>
+                                                <input class="form-control input-group-append" id="addFechaDecretacion">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addUbicacion" class="form-label">Ubicacion de taller</label>
+                                                <input class="form-control" id="addUbicacion">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="addValComercial" class="form-label">Valor comercial</label>
+                                                <input class="form-control" id="addValComercial">
+                                            </div>
+                                            <div class="col">
+                                                <label for="addValIndemnizacion" class="form-label">Valor
+                                                    indemnizacion</label>
+                                                <input class="form-control" id="addValIndemnizacion">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button onclick="agregarSiniestro()" type="button"
+                                            class="btn btn-primary">Guardar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <thead id="seccionBotones">
                             <div class="row">
                                 <td>
                                     <div class="col-2" name="SearchButtonGeneral">
-                                        <!--se implementa el boton busqueda general-->
-                                        <form class="form-search float-end">
-                                            <div class="input-group"></div>
-                                        </form>
+                                        <button data-bs-toggle="modal" data-bs-target="#AgregarSiniestro" type="button"
+                                            class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                            </svg></button>
                                     </div>
                                 </td>
                                 <td>
@@ -2381,48 +2600,67 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
-                                            <select id="tipoArchivoCargado" name="tipoArchivo" class="form-select form-select-sm"
-                                                aria-label="Default select example">
+                                            <select id="tipoArchivoCargado" name="tipoArchivo"
+                                                class="form-select form-select-sm" aria-label="Default select example">
                                                 <option selected>Selecciona...</option>
-                                                <option id="selectFactura" value="Factura original">Factura
-                                                    original</option>
-                                                <option id="selectPoder" value="Poder notarial">Poder
-                                                    notarial
+                                                <option id="selectFactura" value="Factura">Factura</option>
+                                                <option id="selectfacturaAtlas"
+                                                    value="Factura a favor de Seguros Atlas">Factura a favor de Seguros
+                                                    Atlas</option>
+                                                <option id="selectSecuencia" value="Secuencia de facturas"> Secuencia de
+                                                    facturas
                                                 </option>
-                                                <option id="selectIdenti" value="Identificacion oficial">
-                                                    Identificacion oficial
+                                                <option id="selectCertificado" value="Certificado Propiedad">
+                                                    Certificado Propiedad</option>
+                                                <option id="selectCertificadoCopia" value="Copia certificado propiedad">
+                                                    Copia certificado propiedad</option>
+                                                <option id="selectPedimento" value="Pedimento de Importacion"> Pedimento
+                                                    de Importacion</option>
+                                                <option id="selectR.F.V." value=" R.F.V."> R.F.V.
                                                 </option>
-                                                <option id="selectConstancia" value="Constancia SF">
-                                                    Constancia
-                                                    SF</option>
-                                                <option id="selectCurp" value="Curp">Curp</option>
-                                                <option id="selectEstado" value="Estado de cuenta">Estado de
-                                                    cuenta</option>
-                                                <option id="selectTenencia" value="Tenencias">Tenencias
+                                                <option id="selectBajaPermiso" value="Baja de permiso de internacion">
+                                                    Baja de permiso de internacion
                                                 </option>
-                                                <option id="selectbaja" value="Baja de placas">Baja de
-                                                    placas
+                                                <option id="selectVerificacion" value="Verificacion">
+                                                    Verificacion
                                                 </option>
-                                                <option id="selectTarjeta" value="Tarjeta de circulacion">
-                                                    Tarjeta de circulacion
+                                                <option id="selectTenencias" value="Tenencias">Tenencias</option>
+                                                <option id="selectMotor" value="Factura del motor">
+                                                    Factura del motor</option>
+                                                <option id="selectLlaves" value="Llaves">
+                                                    Llaves
                                                 </option>
-                                                <option id="selectPoliza" value="Poliza">Poliza</option>
-                                                <option id="selectCompro" value="Comprobante de domicilio">
-                                                    Comprobante de
-                                                    domicilio</option>
-                                                <option id="selectTarjeta" value="RFC">
-                                                    RFC
+                                                <option id="selectConoce" value="Formato conoce a tu cliente">
+                                                    Formato conoce a tu cliente
                                                 </option>
-                                                <option id="selectTarjeta" value="Documentos adicionales">
-                                                    Documentos adicionales
+                                                <option id="selectLFPDPPP" value="Consentimiento LFPDPPP">
+                                                    Consentimiento LFPDPPP
                                                 </option>
-
+                                                <option id="selectAveriguacion" value="Averiguación previa">
+                                                    Averiguación previa
+                                                </option>
+                                                <option id="selectAcreditacion" value="Acreditacion de propiedad">
+                                                    Acreditacion de propiedad
+                                                </option>
+                                                <option id="selectPFP" value="Aviso a PFP">
+                                                    Aviso a PFP
+                                                </option>
+                                                <option id="selectOtros" value="Otros">
+                                                    Otros
+                                                </option>
+                                                <option id="selectOficioLiberacion" value="Oficio de liberacion">
+                                                    Oficio de liberacion
+                                                </option>
+                                                <option id="selectOficioCancelacion"
+                                                    value="Oficio de cancelacion del robo">
+                                                    Oficio de cancelacion del robo
+                                                </option>
                                             </select>
                                         </div>
 
                                         <div class="col-6">
-                                            <input id="archivoCargado" name="imagen" class="form-control form-control-sm"
-                                                type="file">
+                                            <input id="archivoCargado" name="imagen"
+                                                class="form-control form-control-sm" type="file">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -2447,6 +2685,16 @@
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
                                 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
+                                    <button type="button" id="btnDescargarEnZip" class="btn btn-success">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                                            fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1
+                                                 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                                        </svg>
+                                    </button>
+                                    <a style="display: none" id="linkDescargarZip"
+                                        href='../Documentos/Ids/archivosZip/documentos.zip'>documentos.zip</a>
                                     <table class="table table-hover col float-end text-center">
                                         <thead>
                                             <tr>

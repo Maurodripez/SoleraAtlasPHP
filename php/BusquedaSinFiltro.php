@@ -3,7 +3,7 @@ include "./FuncionesSQL.php";
 include "./FuncionesExportar.php";
 $accion = $_POST['accion'];
 switch ($accion) {
-    case "datosPorDefecto":{
+    case "datosPorDefecto": {
             $sql = "select porcentajeDocs,porcentajeTotal,idRegistro, numSiniestro, "
                 . " poliza, marca, modelo, numSerie,estado, fechaCarga, estacionProceso,estatusOperativo"
                 . " from docsaprobadosatlas, fechasseguimiento as fs, infosiniestro, infoauto, estadoproceso where fs.fkidRegistro=idRegistro "
@@ -11,7 +11,7 @@ switch ($accion) {
             ConsultasSelect($sql);
             break;
         }
-    case "BusquedaFechasyMas":{
+    case "BusquedaFechasyMas": {
             $fechaCargaInicio = $_POST["fechaCargaInicio"];
             $fechaCargaFinal = $_POST["fechaCargaFinal"];
             $fechaSegInicio = $_POST["fechaSegInicio"];
@@ -49,6 +49,12 @@ switch ($accion) {
                 . " and fechaSeguimiento>='$fechaSegInicio' and fechaSeguimiento<='$fechaSegFinal' and region like '%$txtRegion%' and cobertura like '%$txtCobertura%'";
 
             ExportarSiniestros($sqlExport);
+            ConsultasSelect($sql);
+            break;
+        }
+    case "docsYaCargados": {
+            $txtIdRegistro = $_POST["txtIdRegistro"];
+            $sql = "SELECT nombreOriginal FROM imagenes where fkImagen=$txtIdRegistro";
             ConsultasSelect($sql);
             break;
         }

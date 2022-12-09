@@ -42,3 +42,16 @@ function ObtenerValorSql($sql){
         return $row[0];
       }
 }
+function ConsultasSelects($sql){
+    require "./Conexion.php";
+    $stmt = $DBcon->prepare($sql);
+    $stmt->execute();
+
+    $datos = array();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        $datos['Resultados'][] = $row;
+    }
+    echo json_encode($datos);
+}

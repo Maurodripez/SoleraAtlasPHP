@@ -24,6 +24,7 @@ $(document).ready(function () {
   controlPaginado();
   enviarImagenes();
   consultaUsuarios();
+  descargarEnZip();
   mostrarDivsModal();
   //funcion para limpiar el regitro
   $("#limpiarRegistro").click(function () {
@@ -549,7 +550,7 @@ function mostrarInfoSiniestro(get) {
   iframe.style.display = "none";
   let txtIdRegistro = document.getElementById("idOculto").value;
   tablaImagenes(txtIdRegistro);
-  //docsYaCargados(txtIdRegistro);
+  docsYaCargados(txtIdRegistro);
   document.getElementById("txtComentSeguimiento").value = "";
 }
 function GuardarRegistros() {
@@ -843,7 +844,8 @@ function mostrarDocsAprobados() {
       porcentajeBarra.innerHTML = result.Siniestros[0].porcentajeDocs + "%";
     },
   });
-  //docsYaCargados(txtIdRegistro);
+  let txtIdRegistro = document.getElementById("idOculto").value;
+  docsYaCargados(txtIdRegistro);
 }
 function tablaSeguimiento() {
   $.ajax({
@@ -963,9 +965,39 @@ function eliminarImagen(getId) {
       });
   }
 }
-/////////////////////////////
-//funciones todavia no utilizadas
-////////////////////////////
+function descargarEnZip() {
+  let btnDescargaZip = document.getElementById("btnDescargarEnZip");
+  btnDescargaZip.addEventListener("click", function (event) {
+    event.preventDefault();
+    let idRegistro = document.getElementById("idOculto").value;
+    $.ajax({
+      method: "POST",
+      url: "../../Documentos/Ids/DescargarDocumentos.php",
+      data: {
+        idRegistro,
+      },
+    }).done(function () {
+      let btnDescargar = document.getElementById("linkDescargarZip");
+      btnDescargar.click();
+      console.log("entra");
+    });
+  });
+}
+function convertirPDF(getId) {
+  let sinComas = getId.split(",");
+  let extension = sinComas[2];
+  if (extension.split(".").pop() === "pdf") {
+    alert("No se puede convertir, ya es un archivo PDF");
+    return;
+  }
+  var pdf = new jsPDF();
+  /// Codigo para agregar una imagen
+  var image1 = new Image();
+  image1.src = `../Documentos/Ids/${sinComas[1]}/${sinComas[2]}`; /// URL de la imagen
+  pdf.addImage(image1, "", 25, 30, 170, 180); // Agregar la imagen al PDF (X, Y, Width, Height)
+  /////
+  pdf.save("descarga.pdf");
+}
 function tablaImagenes(txtIdRegistro) {
   $.ajax({
     method: "POST",
@@ -976,7 +1008,6 @@ function tablaImagenes(txtIdRegistro) {
       idRegistro: txtIdRegistro,
     },
     success: function (result) {
-      console.log(result);
       $(".tablaImagenes").remove();
       for (let i in result.Siniestros) {
         let tablaImagenes = document.getElementById("mostrarTablaImagenes");
@@ -985,7 +1016,7 @@ function tablaImagenes(txtIdRegistro) {
         onclick='mostrarImagenSelect(this.id)' type='button' class='btn btn-primary'>Ver</button>
         <button id='Pdf,${result.Siniestros[i].fkImagen},${result.Siniestros[i].nombreImagen}'
         onclick='convertirPDF(this.id)' type='button' class='btn btn-primary'>Pdf</button>
-        <a href='./documentos/${result.Siniestros[i].fkImagen}/${result.Siniestros[i].fkImagen}' download='cute.jpg'>
+        <a class='btn btn-success' href='../../Documentos/Ids/${result.Siniestros[i].fkImagen}/${result.Siniestros[i].nombreImagen}' download='${result.Siniestros[i].nombreImagen}'>
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'
         stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'
         class='feather feather-download'>
@@ -994,7 +1025,15 @@ function tablaImagenes(txtIdRegistro) {
         <line x1='12' y1='15' x2='12' y2='3'></line>
         </svg></a>
         <button id='Eliminar,${result.Siniestros[i].fkImagen},${result.Siniestros[i].nombreImagen}'
-        onclick='eliminarImagen(this.id)' type='button' class='btnEliminarClass btn btn-danger'>Eliminar</button>
+        onclick='eliminarImagen(this.id)' type='button' class='btnEliminarClass btn btn-danger'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0
+        0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59
+        0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 
+        .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1
+        .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+        </svg>
+        </button>
         </div></td>`;
         let archivo = `<td>${result.Siniestros[i].nombreOriginal}</td>`;
         let fechaCarga = `<td>${result.Siniestros[i].fechaCarga}</td>`;
@@ -1005,18 +1044,6 @@ function tablaImagenes(txtIdRegistro) {
     },
   });
 }
-function convertirPDF() {
-  $.ajax({
-    method: "POST",
-    url: rutaInicial + "ConsultaImagenes.php",
-    data: {
-      accion: "ConvertirPDF",
-    },
-  }).done(function (result) {
-    console.log(result);
-  });
-}
-
 function controlPaginado() {
   //funcion para controlar el pagina de los resultados
   let paginaMas = document.getElementById("botonClickMas");
@@ -1069,111 +1096,213 @@ function controlPaginado() {
     }
   };
 }
-/*function mostrarHistorico() {
-  let inputNombreFk = document.getElementById("fkIdOculto").value;
-  let tabla = document.getElementById("ResultadoHistorico");
-  $.ajax({
-    method: "POST",
-    url: "../TablasInteracciones",
-    data: {
-      accion: "TablaHistorica",
-      inputNombreFk,
-    },
-  }).done(function (respuesta) {
-    $(".historicoTablaDatos").remove();
-    let sinCodificar = respuesta.split("-_/");
-    let fechaCarga = `<td class='historicoTablaDatos'>${sinCodificar[0]}</td>`;
-    let estatus = `<td class='historicoTablaDatos'>${sinCodificar[1]}</td>`;
-    let usuario = `<td class='historicoTablaDatos'>${sinCodificar[2]}</td>`;
-    tabla.innerHTML += `<tr>${fechaCarga + estatus + usuario}</tr>`;
-  });
-}*/
-/*function docsYaCargados(txtIdRegistro) {
+function docsYaCargados(txtIdRegistro) {
   selectaOcultar = document.getElementById("selectFactura");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectPoder");
+  selectaOcultar = document.getElementById("selectfacturaAtlas");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectIdenti");
+  selectaOcultar = document.getElementById("selectSecuencia");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectConstancia");
+  selectaOcultar = document.getElementById("selectCertificado");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectCurp");
+  selectaOcultar = document.getElementById("selectCertificadoCopia");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectEstado");
+  selectaOcultar = document.getElementById("selectPedimento");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectTenencia");
+  selectaOcultar = document.getElementById("selectBajaPermiso");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectbaja");
+  selectaOcultar = document.getElementById("selectR.F.V.");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectTarjeta");
+  selectaOcultar = document.getElementById("selectVerificacion");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectPoliza");
+  selectaOcultar = document.getElementById("selectTenencias");
   selectaOcultar.disabled = false;
-  selectaOcultar = document.getElementById("selectCompro");
+  selectaOcultar = document.getElementById("selectMotor");
+  selectaOcultar.disabled = false;
+  selectaOcultar = document.getElementById("selectLlaves");
+  selectaOcultar.disabled = false;
+  selectaOcultar = document.getElementById("selectConoce");
+  selectaOcultar.disabled = false;
+  selectaOcultar = document.getElementById("selectLFPDPPP");
+  selectaOcultar.disabled = false;
+  selectaOcultar = document.getElementById("selectAveriguacion");
+  selectaOcultar.disabled = false;
+  selectaOcultar = document.getElementById("selectPFP");
+  selectaOcultar.disabled = false;
+  selectaOcultar = document.getElementById("selectOficioLiberacion");
+  selectaOcultar.disabled = false;
+  selectaOcultar = document.getElementById("selectOficioCancelacion");
   selectaOcultar.disabled = false;
   $.ajax({
     method: "POST",
-    url: "../DocumentosAprobados",
+    url: rutaInicial + "BusquedaSinFiltro.php",
+    dataType: "json",
     data: {
       txtIdRegistro,
-      funcARealizar: "docsYaCargados",
+      accion: "docsYaCargados",
     },
   }).done(function (result) {
-    let sinCodificado = result.split("-_/");
     let selectaOcultar;
-    for (let i = 0; i < sinCodificado.length - 1; i++) {
-      if (sinCodificado[i] === "Factura original") {
+    for (let i in result.Siniestros) {
+      if (result.Siniestros[i].nombreOriginal === "Factura") {
         selectaOcultar = document.getElementById("selectFactura");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Poder notarial") {
-        selectaOcultar = document.getElementById("selectPoder");
+      } else if (
+        result.Siniestros[i].nombreOriginal ===
+        "Factura a favor de Seguros Atlas"
+      ) {
+        selectaOcultar = document.getElementById("selectfacturaAtlas");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Identificacion oficial") {
-        selectaOcultar = document.getElementById("selectIdenti");
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Secuencia de facturas"
+      ) {
+        selectaOcultar = document.getElementById("selectSecuencia");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Constancia SF") {
-        selectaOcultar = document.getElementById("selectConstancia");
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Certificado Propiedad"
+      ) {
+        selectaOcultar = document.getElementById("selectCertificado");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Curp") {
-        selectaOcultar = document.getElementById("selectCurp");
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Copia certificado propiedad"
+      ) {
+        selectaOcultar = document.getElementById("selectCertificadoCopia");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Estado de cuenta") {
-        selectaOcultar = document.getElementById("selectEstado");
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Pedimento de Importacion"
+      ) {
+        selectaOcultar = document.getElementById("selectPedimento");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Tenencias") {
-        selectaOcultar = document.getElementById("selectTenencia");
+      } else if (result.Siniestros[i].nombreOriginal === "R.F.V.") {
+        selectaOcultar = document.getElementById("selectR.F.V.");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Baja de placas") {
-        selectaOcultar = document.getElementById("selectbaja");
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Baja de permiso de internacion"
+      ) {
+        selectaOcultar = document.getElementById("selectBajaPermiso");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Tarjeta de circulacion") {
-        selectaOcultar = document.getElementById("selectTarjeta");
+      } else if (result.Siniestros[i].nombreOriginal === "Verificacion") {
+        selectaOcultar = document.getElementById("selectVerificacion");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Poliza") {
-        selectaOcultar = document.getElementById("selectPoliza");
+      } else if (result.Siniestros[i].nombreOriginal === "Tenencias") {
+        selectaOcultar = document.getElementById("selectTenencias");
         selectaOcultar.disabled = true;
-      } else if (sinCodificado[i] === "Comprobante de domicilio") {
-        selectaOcultar = document.getElementById("selectCompro");
+      } else if (result.Siniestros[i].nombreOriginal === "Factura del motor") {
+        selectaOcultar = document.getElementById("selectMotor");
+        selectaOcultar.disabled = true;
+      } else if (result.Siniestros[i].nombreOriginal === "Llaves") {
+        selectaOcultar = document.getElementById("selectLlaves");
+        selectaOcultar.disabled = true;
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Formato conoce a tu cliente"
+      ) {
+        selectaOcultar = document.getElementById("selectConoce");
+        selectaOcultar.disabled = true;
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Consentimiento LFPDPPP"
+      ) {
+        selectaOcultar = document.getElementById("selectLFPDPPP");
+        selectaOcultar.disabled = true;
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Averiguación previa"
+      ) {
+        selectaOcultar = document.getElementById("selectAveriguacion");
+        selectaOcultar.disabled = true;
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Acreditacion de propiedad"
+      ) {
+        selectaOcultar = document.getElementById("selectAcreditacion");
+        selectaOcultar.disabled = true;
+      } else if (result.Siniestros[i].nombreOriginal === "Aviso a PFP") {
+        selectaOcultar = document.getElementById("selectPFP");
+        selectaOcultar.disabled = true;
+      } else if (result.Siniestros[i].nombreOriginal === "Otros") {
+        selectaOcultar = document.getElementById("selectOtros");
+        selectaOcultar.disabled = true;
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Oficio de liberacion"
+      ) {
+        selectaOcultar = document.getElementById("selectOficioLiberacion");
+        selectaOcultar.disabled = true;
+      } else if (
+        result.Siniestros[i].nombreOriginal === "Oficio de cancelacion del robo"
+      ) {
+        selectaOcultar = document.getElementById("selectOficioCancelacion");
         selectaOcultar.disabled = true;
       }
     }
   });
-}*/
-//https://datatables.net/
-function exportarUsuarios() {
+}
+function agregarSiniestro() {
+  let addNumSiniestro = document.getElementById("addNumSiniestro").value;
+  let addFechaSiniestro = document.getElementById("addFechaSiniestro").value;
+  let addPoliza = document.getElementById("addPoliza").value;
+  let addCobertura = document.getElementById("addCobertura").value;
+  let addAfectado = document.getElementById("addAfectado").value;
+  let addAsegurado = document.getElementById("addAsegurado").value;
+  let addRegimen = document.getElementById("addRegimen").value;
+  let addAgente = document.getElementById("addAgente").value;
+  let addTelefono = document.getElementById("addTelefono").value;
+  let addTelefonoAlt = document.getElementById("addTelefonoAlt").value;
+  let addCorreo = document.getElementById("addCorreo").value;
+  let addMarca = document.getElementById("addMarca").value;
+  let addTipo = document.getElementById("addTipo").value;
+  let addModelo = document.getElementById("addModelo").value;
+  let addNumSerie = document.getElementById("addNumSerie").value;
+  let addCiudad = document.getElementById("addCiudad").value;
+  let addFechaDecretacion = document.getElementById(
+    "addFechaDecretacion"
+  ).value;
+  let addUbicacion = document.getElementById("addUbicacion").value;
+  let addValComercial = document.getElementById("addValComercial").value;
+  let addValIndemnizacion = document.getElementById(
+    "addValIndemnizacion"
+  ).value;
   $.ajax({
-    method: "POST",
-    url: "../ExportarUsuarios",
-    data: {},
+    type: "POST",
+    url: rutaInicial + "AgregarSiniestro.php",
+    data: {
+      numSiniestro: addNumSiniestro,
+      fechaSiniestro: addFechaSiniestro,
+      poliza: addPoliza,
+      cobertura: addCobertura,
+      afectado: addAfectado,
+      asegurado: addAsegurado,
+      regimen: addRegimen,
+      agente: addAgente,
+      telefono: addTelefono,
+      telefonoAlt: addTelefonoAlt,
+      correo: addCorreo,
+      marca: addMarca,
+      tipo: addTipo,
+      modelo: addModelo,
+      numSerie: addNumSerie,
+      ciudad: addCiudad,
+      fechaDecretacion: addFechaDecretacion,
+      ubicacion: addUbicacion,
+      valComercial: addValComercial,
+      valIndemnizacion: addValIndemnizacion,
+    },
+  }).done(function (result) {
+    alert(result);
   });
 }
-function convertir() {
-  var pdf = new jsPDF();
-  pdf.text(20, 20, "Agregar imagenes a un PDF!");
-  /// Codigo para agregar una imagen
-  var image1 = new Image();
-  image1.src = "./20221208191801.png"; /// URL de la imagen
-  pdf.addImage(image1, "PNG", 25, 30, 170, 180); // Agregar la imagen al PDF (X, Y, Width, Height)
-  /////
-  pdf.save("mipdf.pdf");
+/////////////////////////////
+//funciones todavia no utilizadas
+////////////////////////////
+function mostrarMovimientos() {
+  let fechaInicio = document.getElementById("fechaInicioUsuarios").value;
+  let fechaFinal = document.getElementById("fechaFinalUsuarios").value;
+  console.log(fechaInicio, fechaFinal);
+
+  $.ajax({
+    type: "POST",
+    url: rutaInicial + "MostrarMovimientos.php",  
+    data: {
+      fechaInicio,
+      fechaFinal,
+    },
+  }).done(function (result) {
+    console.log(result);
+  });
 }
