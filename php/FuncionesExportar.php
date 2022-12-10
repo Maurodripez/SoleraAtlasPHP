@@ -79,3 +79,53 @@ function ExportarSiniestros($sqlExport)
     # Le pasamos la ruta de guardado
     $writer->save('../Excels/Siniestros.xlsx');
 }
+function ExportarMovimientos($sqlExport)
+{
+    $documento = new Spreadsheet();
+    $documento
+        ->getProperties()
+        ->setCreator("SEAS")
+        ->setLastModifiedBy('SEAS')
+        ->setTitle('Archivo exportado desde MySQL')
+        ->setDescription('Movimientos de usuarios');
+
+    # Como ya hay una hoja por defecto, la obtenemos, no la creamos
+    $hojaSiniestros = $documento->getActiveSheet();
+    $hojaSiniestros->setTitle("Movimientos");
+
+    # Escribir encabezado de los productos
+    $encabezado = [
+        "numSiniestro", "poliza", " estado", "ciudad", "region", "estatusCliente", "estatusSeguimiento",
+        "usuario", "fechaseguimiento", "comentarios", "marca", "tipo", "modelo", "numSerie", "asegurado"
+    ];
+    # El último argumento es por defecto A1 pero lo pongo para que se explique mejor
+    $hojaSiniestros->fromArray($encabezado, null, 'A1');
+    require "./Conexion.php";
+    $stmt = $DBcon->prepare($sqlExport, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+    $stmt->execute();
+    # Comenzamos en la 2 porque la 1 es del encabezado
+    $numeroDeFila = 2;
+    while ($siniestros = $stmt->fetchObject()) {
+        # Escribirlos en el documento
+        $hojaSiniestros->setCellValue("A" . $numeroDeFila, $siniestros->numSiniestro);
+        $hojaSiniestros->setCellValue("B" . $numeroDeFila, $siniestros->poliza);
+        $hojaSiniestros->setCellValue("C" . $numeroDeFila, $siniestros->estado);
+        $hojaSiniestros->setCellValue("D" . $numeroDeFila, $siniestros->ciudad);
+        $hojaSiniestros->setCellValue("E" . $numeroDeFila, $siniestros->region);
+        $hojaSiniestros->setCellValue("F" . $numeroDeFila, $siniestros->estatusCliente);
+        $hojaSiniestros->setCellValue("G" . $numeroDeFila, $siniestros->estatusSeguimiento);
+        $hojaSiniestros->setCellValue("H" . $numeroDeFila, $siniestros->usuario);
+        $hojaSiniestros->setCellValue("I" . $numeroDeFila, $siniestros->fechaseguimiento);
+        $hojaSiniestros->setCellValue("J" . $numeroDeFila, $siniestros->comentarios);
+        $hojaSiniestros->setCellValue("K" . $numeroDeFila, $siniestros->marca);
+        $hojaSiniestros->setCellValue("L" . $numeroDeFila, $siniestros->tipo);
+        $hojaSiniestros->setCellValue("M" . $numeroDeFila, $siniestros->modelo);
+        $hojaSiniestros->setCellValue("N" . $numeroDeFila, $siniestros->numSerie);
+        $hojaSiniestros->setCellValue("O" . $numeroDeFila, $siniestros->asegurado);
+        $numeroDeFila++;
+    }
+    # Crear un "escritor"
+    $writer = new Xlsx($documento);
+    # Le pasamos la ruta de guardado
+    $writer->save('../Excels/Movimientos.xlsx');
+}

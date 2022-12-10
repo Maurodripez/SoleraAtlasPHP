@@ -9,23 +9,23 @@ function controlIframe(txtIframe) {
   let iframecontrolador = document.getElementById("controladorIframe");
   switch (txtIframe) {
     case "Home":
-      iframecontrolador.src = "ModuloPrincipal.php";
+      iframecontrolador.src = "ModuloPrincipal.html";
       closeNav();
       break;
     case "datos":
-      iframecontrolador.src = "./Modulos/Datos.php";
+      iframecontrolador.src = "./Modulos/Datos.html";
       closeNav();
       break;
     case "Reporte":
-      iframecontrolador.src = "./Modulos/Reporte.php";
+      iframecontrolador.src = "./Modulos/Reporte.html";
       closeNav();
       break;
     case "Asignacion":
-      iframecontrolador.src = "./Modulos/Asignacion.php";
+      iframecontrolador.src = "./Modulos/Asignacion.html";
       closeNav();
       break;
     case "CrearUsuario":
-      iframecontrolador.src = "./Modulos/CrearUsuario.php";
+      iframecontrolador.src = "./Modulos/CrearUsuario.html";
       closeNav();
       break;
   }

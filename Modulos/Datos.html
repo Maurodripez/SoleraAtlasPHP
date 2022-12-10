@@ -708,7 +708,7 @@
                         </button>
                         <a href="../Excels/Siniestros.xlsx" download="Siniestros.xlsx" class="btn btn-primary"
                             role="button">Exportar</a>
-                        <button id="btnMovimientos" onclick="mostrarMovimientos()" type="button" class="btn btn-primary"
+                        <button id="btnMovimientos" onclick="mostrarMovsPorDefecto()" type="button" class="btn btn-primary"
                             data-bs-toggle="modal" data-bs-target="#movimientosUsuarios">
                             Movimientos
                         </button>
@@ -726,21 +726,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <table id="TablaReporte"
+                                        <table
                                             class="table-responsive table-bordered table-sm table-striped table-hover text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th>Usuario</th>
-                                                    <th>Domingo</th>
-                                                    <th>Lunes</th>
-                                                    <th>Martes</th>
-                                                    <th>Miercoles</th>
-                                                    <th>Jueves</th>
-                                                    <th>Viernes</th>
-                                                    <th>Sabado</th>
-                                                    <th>Total</th>
-                                                </tr>
+                                            <thead id="theadDias">
                                             </thead>
+                                            <tbody id="TablaReporte">
+
+                                            </tbody>
                                         </table>
                                     </div>
                                     <div class="row">
@@ -781,13 +773,13 @@
                                             </div>
                                         </div>
                                         <div class="col-2 pt-4">
-                                            <button onclick="busquedaReporte()" id="buscarReporte"
+                                            <button onclick="mostrarMovimientos()" id="buscarReporte"
                                                 class="btn btn-primary">
                                                 Buscar
                                             </button>
                                         </div>
                                         <div class="col pt-4">
-                                            <button onclick="mostrarMovimientos()" id="exportarReporte"
+                                            <button onclick="mostrarMovsPorDefecto()" id="exportarReporte"
                                                 class="btn btn-primary">
                                                 Limpiar
                                             </button>

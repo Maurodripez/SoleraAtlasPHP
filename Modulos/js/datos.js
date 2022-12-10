@@ -1293,16 +1293,142 @@ function agregarSiniestro() {
 function mostrarMovimientos() {
   let fechaInicio = document.getElementById("fechaInicioUsuarios").value;
   let fechaFinal = document.getElementById("fechaFinalUsuarios").value;
+  $(".theadDias").remove();
+  $(".tablaMovimientos  ").remove();
+  let tablaReporte = document.getElementById("TablaReporte");
+  let theadDias = document.getElementById("theadDias");
   console.log(fechaInicio, fechaFinal);
-
   $.ajax({
     type: "POST",
-    url: rutaInicial + "MostrarMovimientos.php",  
+    url: rutaInicial + "MostrarMovimientos.php",
+    dataType: "json",
     data: {
-      fechaInicio,
-      fechaFinal,
+      accion: "obtenerUsuarios",
     },
   }).done(function (result) {
-    console.log(result);
+    for (let x in result.Siniestros) {
+      //console.log(result.Siniestros[x].nombreReal);
+      let totalMovs = 0;
+      let contadorParaDias = 1;
+      let nombre = `<td>${result.Siniestros[x].nombreReal}</td>`;
+      let cadenaMovs = "";
+      let soloDias = "";
+      let menosDias = 0;
+      let diasSemana = 7;
+      let i = 0;
+      for (i; i < diasSemana; i++) {
+        const dias = [
+          "domingo",
+          "lunes",
+          "martes",
+          "miercoles",
+          "jueves",
+          "viernes",
+          "sabado",
+        ];
+        //obtengo los dias con su nombre
+        const numeroDia = new Date().getDay() - i;
+        let nombreDia = dias[numeroDia];
+        $.ajax({
+          type: "POST",
+          url: rutaInicial + "MostrarMovimientos.php",
+          dataType: "json",
+          data: {
+            nombreDia,
+            fechaInicio,
+            fechaFinal,
+            usuario: result.Siniestros[x].nombreReal,
+            accion: "filtroMovimientos",
+          },
+        }).done(function (result) {
+          soloDias = `<th>${nombreDia}</th>` + soloDias;
+          cadenaMovs =
+            `<td>${result.Siniestros[0].cantMovimientos}</td>` + cadenaMovs;
+          totalMovs += result.Siniestros[0].cantMovimientos;
+          if (menosDias == 6) {
+            //en el ultimo dia entra para asignar a la tabla
+            contadorParaDias += 1;
+            totalMovsformato = `<td>${totalMovs}</td>`;
+            tablaReporte.innerHTML += `<tr class='tablaMovimientos'>${
+              nombre + cadenaMovs + totalMovsformato
+            }</tr>`;
+          }
+          if (contadorParaDias == 2) {
+            $(".theadDias").remove();
+            soloDias = `<th>Usuario</th>` + soloDias + "<th>Total</th>";
+            theadDias.innerHTML += `<tr class='theadDias'>${soloDias}</tr>`;
+          }
+          menosDias += 1;
+        });
+      }
+    }
+  });
+}
+function mostrarMovsPorDefecto() {
+  $(".theadDias").remove();
+  $(".tablaMovimientos  ").remove();
+  let tablaReporte = document.getElementById("TablaReporte");
+  let theadDias = document.getElementById("theadDias");
+  $.ajax({
+    type: "POST",
+    url: rutaInicial + "MostrarMovimientos.php",
+    dataType: "json",
+    data: {
+      accion: "obtenerUsuarios",
+    },
+  }).done(function (result) {
+    for (let x in result.Siniestros) {
+      let totalMovs = 0;
+      let contadorParaDias = 1;
+      let nombre = `<td>${result.Siniestros[x].nombreReal}</td>`;
+      let cadenaMovs = "";
+      let soloDias = "";
+      let menosDias = 0;
+      let diasSemana = 7;
+      let i = 0;
+      for (i; i < diasSemana; i++) {
+        $.ajax({
+          type: "POST",
+          url: rutaInicial + "MostrarMovimientos.php",
+          dataType: "json",
+          data: {
+            restarDias: i,
+            usuario: result.Siniestros[x].nombreReal,
+            accion: "movsPorDefecto",
+          },
+        }).done(function (result) {
+          const dias = [
+            "domingo",
+            "lunes",
+            "martes",
+            "miércoles",
+            "jueves",
+            "viernes",
+            "sábado",
+          ];
+          //obtengo los dias con su nombre
+          const numeroDia = new Date().getDay() - menosDias;
+          const nombreDia = dias[numeroDia];
+          soloDias = `<th>${nombreDia}</th>` + soloDias;
+          cadenaMovs =
+            `<td>${result.Siniestros[0].cantMovimientos}</td>` + cadenaMovs;
+          totalMovs += result.Siniestros[0].cantMovimientos;
+          if (menosDias == 6) {
+            //en el ultimo dia entra para asignar a la tabla
+            contadorParaDias += 1;
+            totalMovsformato = `<td>${totalMovs}</td>`;
+            tablaReporte.innerHTML += `<tr class='tablaMovimientos'>${
+              nombre + cadenaMovs + totalMovsformato
+            }</tr>`;
+          }
+          if (contadorParaDias == 2) {
+            $(".theadDias").remove();
+            soloDias = `<th>Usuario</th>` + soloDias + "<th>Total</th>";
+            theadDias.innerHTML += `<tr class='theadDias'>${soloDias}</tr>`;
+          }
+          menosDias += 1;
+        });
+      }
+    }
   });
 }
