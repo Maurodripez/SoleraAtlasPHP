@@ -1,38 +1,48 @@
 //se llama a la funcion cundo carga la pagina
 //funcion para obtener los siniestros por estdos y cambior los colores en el mapa de la repyublica
-window.addEventListener("load", function () {
-  mostrarMovimientos();
+let rutaInicial = "../../php/GraficasyMapas/";
+
+//funcion para generar mapa y sus cambios de colores
+function datosMapa() {
   $.ajax({
     method: "POST",
-    url: "../MostrarDatosMapas",
+    url: rutaInicial + "InformacionMapas.php",
+    dataType: "json",
     data: {
-      consulta: "cambioColores",
+      accion: "infoMapa",
     },
-    success: function (result) {
-      let cont = 0;
-      let sinComas = result.split(",");
-      let sinEspacios;
-      sinComas.forEach((element) => {
-        cont += 1;
-      });
-      for (let i = 0; i < cont - 1; i += 2) {
-        if (sinComas[i + 1] < 6) {
-          sinEspacios = sinComas[i].replace(/\s+/g, "");
-          //se quitan los espacios de toda la cadena
-          document
-            .getElementById(sinEspacios.toLowerCase())
-            .setAttribute("fill", "#00FF04");
-        } else if (sinComas[i + 1] < 11) {
-          sinEspacios = sinComas[i].replace(/\s+/g, "");
-          document
-            .getElementById(sinEspacios.toLowerCase())
-            .setAttribute("fill", "#FDCB00");
-        }
+  }).done(function (result) {
+    for (let i in result.Estados) {
+      if (
+        result.Estados[i].cantidad <= 4 &&
+        document.getElementById(
+          result.Estados[i].estado.toLowerCase().replace(/\s+/g, "")
+        )
+      ) {
+        document
+          .getElementById(
+            result.Estados[i].estado.toLowerCase().replace(/\s+/g, "")
+          )
+          .setAttribute("fill", "#00FF04");
+      } else if (
+        result.Estados[i].cantidad >= 5 &&
+        document.getElementById(
+          result.Estados[i].estado.toLowerCase().replace(/\s+/g, "")
+        )
+      ) {
+        document
+          .getElementById(
+            result.Estados[i].estado.toLowerCase().replace(/\s+/g, "")
+          )
+          .setAttribute("fill", "#FDCB00");
       }
-    },
+    }
   });
-});
+}
 window.addEventListener("load", function () {
+  datosMapa();
+  mostrarMovimientos();
+  resultadosProcesos();
   $.ajax({
     method: "POST",
     url: "../MostrarDatosMapas",
@@ -92,46 +102,38 @@ function buscarDatos() {
     },
   });
 }
-window.addEventListener("load", function CartasEstacion() {
+function resultadosProcesos() {
   $.ajax({
     method: "POST",
-    url: "../DatosReporte",
+    url: rutaInicial + "InformacionMapas.php",
+    dataType: "json",
     data: {
       accion: "InfoCartas",
     },
     success: function (result) {
-      let sinComas = result.split(",");
-      let cantSiniestro;
-      for (let i = 1; i < sinComas.length; i = i + 2) {
-        if (sinComas[i - 1] > 0) {
-          //se hace para hacer el calculo del procentaje de cada caso
-          cantSiniestro = sinComas[i - 1];
-          sinComas[i - 1] =
-            (sinComas[i - 1] * 100) / sinComas[sinComas.length - 1];
-        }
-        switch (sinComas[i]) {
+      console.log(result);
+      for (let i in result.Estacion) {
+        switch (result.Estacion[i].estacionProceso) {
           case "Nuevo":
-            $("#nuevo").html(sinComas[i - 1] + "%");
+            $("#nuevo").html(result.Estacion[i].conteo);
             break;
-          case "Marcacion":
-            $("#marcacion").html(sinComas[i - 1] + "%");
-            break;
-          case "Proceso":
-            $("#proceso").html(sinComas[i - 1] + "%");
+          case "En seguimiento":
+            console.log(result.Estacion[i].estacionProceso);
+            $("#proceso").html(result.Estacion[i].conteo);
             break;
           case "Cancelado":
-            $("#cancelado").html(sinComas[i - 1] + "%");
-            $("#canceladoTotal").html("Casos: " + cantSiniestro);
+            $("#cancelado").html(result.Estacion[i].conteo);
+           // $("#canceladoTotal").html("Casos: " + cantSiniestro);
             break;
           case "Terminado":
-            $("#terminado").html(sinComas[i - 1] + "%");
-            $("#canceladoTotal").html("Casos: " + cantSiniestro);
+            $("#terminado").html(result.Estacion[i].conteo);
+            //$("#canceladoTotal").html("Casos: " + cantSiniestro);
             break;
         }
       }
     },
   });
-});
+}
 $(document).ready(function () {
   $(".calendario").datepicker({
     timepicker: false,
@@ -1071,23 +1073,23 @@ function tablaReporteGrande(result) {
 }
 function ExportarExcelJava() {
   if (
-    document.getElementById("fechaInicioUsuarios").value != '' &&
-    document.getElementById("fechaFinalUsuarios").value != ''
+    document.getElementById("fechaInicioUsuarios").value != "" &&
+    document.getElementById("fechaFinalUsuarios").value != ""
   ) {
     $.ajax({
       method: "POST",
       url: "../exportar",
       data: {
         accion: "exportarUsuarios",
-        fechaInicio:document.getElementById("fechaInicioUsuarios").value,
-        fechaFinal:document.getElementById("fechaFinalUsuarios").value,
+        fechaInicio: document.getElementById("fechaInicioUsuarios").value,
+        fechaFinal: document.getElementById("fechaFinalUsuarios").value,
       },
     }).done(function (result) {
       console.log(result);
       let descarga = document.getElementById("btnDescargarExcel");
       descarga.click();
     });
-  }else{
+  } else {
     alert("Por favor, selecciona fechas correctas");
   }
 }

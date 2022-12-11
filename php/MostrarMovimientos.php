@@ -2,24 +2,17 @@
 include "./FuncionesSQL.php";
 $accion = $_POST['accion'];
 switch ($accion) {
-    case "filtroMovimientos": {
-            include "./FuncionesExportar.php";
-            $usuario = $_POST["usuario"];
+    case "filtroMovimientos":{
             $fechaInicio = $_POST["fechaInicio"];
             $fechaFinal = $_POST["fechaFinal"];
+            $usuario = $_POST["usuario"];
             $nombreDia = $_POST["nombreDia"];
             $sql = "select count(usuario) as cantMovimientos,DAYNAME(fechaseguimiento) as dia,usuario from seguimientoprincipal"
                 . " where DAYNAME(fechaseguimiento)='$nombreDia' and fechaseguimiento >'$fechaInicio' and fechaseguimiento<='$fechaFinal' and usuario='$usuario'";
-            $sqlExportar = "select isin.numSiniestro, poliza, estado, ciudad, region, estatusCliente,"
-                . " estatusSeguimiento, usuario, sp.fechaseguimiento, sp.comentarios, marca, tipo, modelo, numSerie, asegurado"
-                . " from infosiniestro as isin, infoauto as ia, infocliente as ic, seguimientoprincipal as sp "
-                . " where idRegistro=ia.fkIdRegistro and sp.fkIdRegistroSegPrincipal=idRegistro "
-                . " and idRegistro=ic.fkIdRegistro and fechaSeguimiento>='2022-10-01' and fechaSeguimiento<='2022-12-10'";
             ConsultasSelect($sql);
-            ExportarMovimientos($sqlExportar);
             break;
         }
-    case "movsPorDefecto": {
+    case "movsPorDefecto":{
             $restarDias = $_POST["restarDias"];
             if ($restarDias == 0) {
                 $signo = '+';
@@ -34,9 +27,21 @@ switch ($accion) {
             ConsultasSelect($sql);
             break;
         }
-    case "obtenerUsuarios": {
+    case "obtenerUsuarios":{
             $sql = "SELECT nombreReal FROM usuarios where privilegios='operador'";
             ConsultasSelect($sql);
+            break;
+        }
+    case "ExportarMovimientos":{
+            include "./FuncionesExportar.php";
+            $fechaInicio = $_POST["fechaInicio"];
+            $fechaFinal = $_POST["fechaFinal"];
+            $sqlExportar = "select isin.numSiniestro, poliza, estado, ciudad, region, estatusCliente,"
+                . " estatusSeguimiento, usuario, sp.fechaseguimiento, sp.comentarios, marca, tipo, modelo, numSerie, asegurado"
+                . " from infosiniestro as isin, infoauto as ia, infocliente as ic, seguimientoprincipal as sp "
+                . " where idRegistro=ia.fkIdRegistro and sp.fkIdRegistroSegPrincipal=idRegistro "
+                . " and idRegistro=ic.fkIdRegistro and fechaSeguimiento>='$fechaInicio' and fechaSeguimiento<='$fechaFinal'";
+            ExportarMovimientos($sqlExportar);
             break;
         }
 }

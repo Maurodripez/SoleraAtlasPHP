@@ -1287,9 +1287,6 @@ function agregarSiniestro() {
     alert(result);
   });
 }
-/////////////////////////////
-//funciones todavia no utilizadas
-////////////////////////////
 function mostrarMovimientos() {
   let fechaInicio = document.getElementById("fechaInicioUsuarios").value;
   let fechaFinal = document.getElementById("fechaFinalUsuarios").value;
@@ -1297,7 +1294,6 @@ function mostrarMovimientos() {
   $(".tablaMovimientos  ").remove();
   let tablaReporte = document.getElementById("TablaReporte");
   let theadDias = document.getElementById("theadDias");
-  console.log(fechaInicio, fechaFinal);
   $.ajax({
     type: "POST",
     url: rutaInicial + "MostrarMovimientos.php",
@@ -1341,6 +1337,7 @@ function mostrarMovimientos() {
             accion: "filtroMovimientos",
           },
         }).done(function (result) {
+          console.log(result);
           soloDias = `<th>${nombreDia}</th>` + soloDias;
           cadenaMovs =
             `<td>${result.Siniestros[0].cantMovimientos}</td>` + cadenaMovs;
@@ -1432,3 +1429,27 @@ function mostrarMovsPorDefecto() {
     }
   });
 }
+function exportarMovimientos() {
+  let fechaInicio = document.getElementById("fechaInicioUsuarios").value;
+  let fechaFinal = document.getElementById("fechaFinalUsuarios").value;
+  $.ajax({
+    type: "POST",
+    url: rutaInicial + "MostrarMovimientos.php",
+    data: {
+      accion: "ExportarMovimientos",
+      fechaInicio,
+      fechaFinal,
+    },
+  })
+    .done(function (result) {
+      console.log(result);
+    })
+    .then(() => {
+      let btnDescargar = document.getElementById("btnDescargarMovs");
+      btnDescargar.click();
+    });
+}
+
+/////////////////////////////
+//funciones todavia no utilizadas
+////////////////////////////

@@ -6,15 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Datos</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.2.0/js/tableexport.min.js"
-        integrity="sha512-XmZS54be9JGMZjf+zk61JZaLZyjTRgs41JLSmx5QlIP5F+sSGIyzD2eJyxD4K6kGGr7AsVhaitzZ2WTfzpsQzg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
     </script>
     <script src="../js/jquery-3.6.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    </script>
     <link rel="stylesheet" href="../Desplegables/libs/css/bootstrap-datepicker.css" />
     <script src="../Desplegables/libs/js/bootstrap-datepicker.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -785,13 +780,12 @@
                                             </button>
                                         </div>
                                         <div class="col pt-4">
-                                            <button onclick="ExportarExcelJava()" id="exportarReporte"
+                                            <button onclick="exportarMovimientos()" id="exportarReporte"
                                                 class="btn btn-primary">
                                                 Exportar
                                             </button>
-                                            <a style="display: none" id="btnDescargarExcel"
-                                                href="http://localhost:8080/SoleraWeb/json/datos.xls"
-                                                download="Reporte.xls">descargar</a>
+                                            <a style="display: none" id="btnDescargarMovs"
+                                                href="../Excels/Movimientos.xlsx"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -2758,8 +2752,6 @@
         });
     </script>
     <script src="./js/datos.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js">
-    </script>
 </body>
 
 </html>

@@ -8,7 +8,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../Estilos/reporte.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
@@ -31,116 +30,6 @@
                     <span class="navbar-brand mb-0 h1">Analisis estadistico de movimientos Seguros SOLERA</span>
                 </div>
             </nav>
-        </div>
-        <div class="col-2 pt-3">
-            <!-- Button trigger modal -->
-            <!-- Modal -->
-            <div class="modal fade" id="movimientosUsuarios" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                Movimientos
-                            </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <table id="TablaReporte"
-                                    class="table-responsive table-bordered table-sm table-striped table-hover text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>Usuario</th>
-                                            <th>Domingo</th>
-                                            <th>Lunes</th>
-                                            <th>Martes</th>
-                                            <th>Miercoles</th>
-                                            <th>Jueves</th>
-                                            <th>Viernes</th>
-                                            <th>Sabado</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <div class="calendario date col-3 pt-2">
-                                    <label class="input-group-text fw-bold" for="fechaInicioUsuarios">
-                                        Fecha inicio
-                                    </label>
-                                    <div class="input-group-sm input-group mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                            fill="currentColor" class="bi bi-calendar-check p-1" viewBox="0 0 16 16">
-                                            <path
-                                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                            <path
-                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                                        </svg>
-                                        <input id="fechaInicioUsuarios" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
-                                            type="text" class="form-control input-group-append" placeholder="Fecha" />
-                                    </div>
-                                </div>
-                                <div class="calendario date col-3 pt-2">
-                                    <label class="input-group-text fw-bold" for="fechaFinalUsuarios">
-                                        Fecha Final
-                                    </label>
-                                    <div class="input-group-sm input-group mb-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                            fill="currentColor" class="bi bi-calendar-check p-1" viewBox="0 0 16 16">
-                                            <path
-                                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                            <path
-                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                                        </svg>
-                                        <input id="fechaFinalUsuarios" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
-                                            type="text" class="form-control input-group-append" placeholder="Fecha" />
-                                    </div>
-                                </div>
-                                <div class="col-2 pt-4">
-                                    <button onclick="busquedaReporte()" id="buscarReporte" class="btn btn-primary">
-                                        Buscar
-                                    </button>
-                                </div>
-                                <div class="col pt-4">
-                                    <button onclick="mostrarMovimientos()" id="exportarReporte" class="btn btn-primary">
-                                        Limpiar
-                                    </button>
-                                </div>
-                                <div class="col pt-4">
-                                    <button onclick="ExportarExcelJava()" id="exportarReporte"
-                                        class="btn btn-primary">
-                                        Exportar
-                                    </button>
-                                    <a style="display: none" id="btnDescargarExcel" href="http://localhost:8080/SoleraWeb/json/datos.xls" download="Reporte.xls">descargar</a>
-                                </div>
-                            </div>
-                            <table id="TablaReporteGrande" style="display: none">
-                                <thead>
-                                    <th>Operador</th>
-                                    <th>fecha</th>
-                                    <th>estatus</th>
-                                    <th>comentario</th>
-                                    <th>numero de siniestro</th>
-                                    <th>poliza</th>
-                                    <th>asegurado</th>
-                                    <th>marca</th>
-                                    <th>tipo</th>
-                                    <th>modelo</th>
-                                    <th>numserie</th>
-                                    <th>estado</th>
-                                    <th>region</th>
-                                </thead>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Cerrar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="accordion p-3" id="formularioConsulta">
@@ -438,10 +327,6 @@
                         </button>
                         <button type="button" class="btn btn-primary">Limpiar</button>
                         <button type="button" class="btn btn-primary">Exportar</button>
-                        <button id="btnMovimientos" onclick="mostrarMovimientos()" type="button" class="btn btn-primary"
-                            data-bs-toggle="modal" data-bs-target="#movimientosUsuarios">
-                            Movimientos
-                        </button>
                     </div>
                 </div>
             </div>
@@ -459,230 +344,246 @@
                 <div class="accordion-body">
                     <div class="row">
                         <div class="divMapaMexico col-9">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            width="975.537px" height="654.82px" viewBox="0 0 975.537 654.82" enable-background="new 0 0 975.537 654.82"
-                            xml:space="preserve">
-                            <g id="BASE_MAPA" inkscape:output_extension="org.inkscape.output.svg.inkscape"
-                                xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
-                                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
-                                xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-                                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:version="0.32" inkscape:version="0.46"
-                                sodipodi:docname="Blank map of Mexico.svg">
-                        
-                                <sodipodi:namedview id="base" inkscape:cy="401.39839" inkscape:cx="724.31607" pagecolor="#ffffff"
-                                    bordercolor="#666666" inkscape:zoom="0.70710678" borderopacity="1.0" objecttolerance="10.0"
-                                    gridtolerance="10.0" guidetolerance="10.0" borderlayer="true" showgrid="false"
-                                    inkscape:current-layer="layer4" inkscape:window-y="-4" inkscape:window-x="-4"
-                                    inkscape:showpageshadow="false" inkscape:window-width="1280" inkscape:pageopacity="0.0"
-                                    inkscape:pageshadow="2" inkscape:window-height="744">
-                                </sodipodi:namedview>
-                                <defs>
-                        
-                                    <inkscape:perspective id="perspective47" inkscape:vp_z="974.72998 : 326.815 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 326.815 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="487.36499 : 217.87667 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective26882" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective76809" inkscape:vp_z="454.1705 : 224.86328 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 224.86328 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="227.08525 : 149.90885 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective76559" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective67867" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective2450" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective6125" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective6123" inkscape:vp_z="454.1705 : 224.86328 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 224.86328 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="227.08525 : 149.90885 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective6121" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective6119" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                        
-                                    <inkscape:perspective id="perspective6117" inkscape:vp_z="744.09448 : 526.18109 : 1"
-                                        inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
-                                        inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
-                                    </inkscape:perspective>
-                                </defs>
-                                <g id="layer1" transform="translate(0.1250195,0.4949951)" inkscape:label="water" inkscape:groupmode="layer">
-                                </g>
-                                <g id="layer2" transform="translate(0.1250195,0.4949951)" inkscape:label="america" inkscape:groupmode="layer">
-                                    <g id="g2862" transform="matrix(0.7155925,0,0,-0.7155925,1448.0618,288.44848)">
-                                        <path id="path2864" fill="#DCDCDC" d="M0,0h0.24H0" />
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="975.537px"
+                                height="654.82px" viewBox="0 0 975.537 654.82"
+                                enable-background="new 0 0 975.537 654.82" xml:space="preserve">
+                                <g id="BASE_MAPA" inkscape:output_extension="org.inkscape.output.svg.inkscape"
+                                    xmlns:dc="http://purl.org/dc/elements/1.1/"
+                                    xmlns:cc="http://creativecommons.org/ns#"
+                                    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                                    xmlns:svg="http://www.w3.org/2000/svg"
+                                    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                                    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:version="0.32"
+                                    inkscape:version="0.46" sodipodi:docname="Blank map of Mexico.svg">
+
+                                    <sodipodi:namedview id="base" inkscape:cy="401.39839" inkscape:cx="724.31607"
+                                        pagecolor="#ffffff" bordercolor="#666666" inkscape:zoom="0.70710678"
+                                        borderopacity="1.0" objecttolerance="10.0" gridtolerance="10.0"
+                                        guidetolerance="10.0" borderlayer="true" showgrid="false"
+                                        inkscape:current-layer="layer4" inkscape:window-y="-4" inkscape:window-x="-4"
+                                        inkscape:showpageshadow="false" inkscape:window-width="1280"
+                                        inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="744">
+                                    </sodipodi:namedview>
+                                    <defs>
+
+                                        <inkscape:perspective id="perspective47" inkscape:vp_z="974.72998 : 326.815 : 1"
+                                            inkscape:vp_y="0 : 1000 : 0" inkscape:vp_x="0 : 326.815 : 1"
+                                            sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="487.36499 : 217.87667 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective26882"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective76809"
+                                            inkscape:vp_z="454.1705 : 224.86328 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 224.86328 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="227.08525 : 149.90885 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective76559"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective67867"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective2450"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective6125"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective6123"
+                                            inkscape:vp_z="454.1705 : 224.86328 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 224.86328 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="227.08525 : 149.90885 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective6121"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective6119"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+
+                                        <inkscape:perspective id="perspective6117"
+                                            inkscape:vp_z="744.09448 : 526.18109 : 1" inkscape:vp_y="0 : 1000 : 0"
+                                            inkscape:vp_x="0 : 526.18109 : 1" sodipodi:type="inkscape:persp3d"
+                                            inkscape:persp3d-origin="372.04724 : 350.78739 : 1">
+                                        </inkscape:perspective>
+                                    </defs>
+                                    <g id="layer1" transform="translate(0.1250195,0.4949951)" inkscape:label="water"
+                                        inkscape:groupmode="layer">
                                     </g>
-                                    <g id="g2870" transform="matrix(0.7155925,0,0,-0.7155925,1446.3444,288.62022)">
-                                        <path id="path2872" fill="#DCDCDC" d="M0,0h0.24H0" />
+                                    <g id="layer2" transform="translate(0.1250195,0.4949951)" inkscape:label="america"
+                                        inkscape:groupmode="layer">
+                                        <g id="g2862" transform="matrix(0.7155925,0,0,-0.7155925,1448.0618,288.44848)">
+                                            <path id="path2864" fill="#DCDCDC" d="M0,0h0.24H0" />
+                                        </g>
+                                        <g id="g2870" transform="matrix(0.7155925,0,0,-0.7155925,1446.3444,288.62022)">
+                                            <path id="path2872" fill="#DCDCDC" d="M0,0h0.24H0" />
+                                        </g>
+                                        <g id="g2942" transform="matrix(0.7155925,0,0,-0.7155925,1454.0728,294.6312)">
+                                            <path id="path2944" fill="#DCDCDC" d="M0,0v-0.24V0" />
+                                        </g>
+                                        <g id="g3006" transform="matrix(0.7155925,0,0,-0.7155925,1454.2445,294.45946)">
+                                            <path id="path3008" fill="#DCDCDC" d="M0,0h0.24H0" />
+                                        </g>
+                                        <g id="g3046" transform="matrix(0.7155925,0,0,-0.7155925,1454.0728,302.70308)">
+                                            <path id="path3048" fill="#DCDCDC" d="M0,0v-0.24V0" />
+                                        </g>
+                                        <g id="g3050" transform="matrix(0.7155925,0,0,-0.7155925,1454.2445,302.70308)">
+                                            <path id="path3052" fill="#DCDCDC" d="M0.001,0h-0.24H0.001" />
+                                        </g>
+                                        <g id="g3162" transform="matrix(0.7155925,0,0,-0.7155925,1466.9535,306.99664)">
+                                            <path id="path3164" fill="#DCDCDC" d="M0.001,0.001v-0.24V0.001" />
+                                        </g>
+                                        <g id="g3256" transform="matrix(0.7155925,0,0,-0.7155925,1469.7013,325.71654)">
+                                            <path id="path3258" fill="#DCDCDC" d="M0.001-0.001h-0.24H0.001" />
+                                        </g>
+                                        <g id="g3276" transform="matrix(0.7155925,0,0,-0.7155925,1468.6709,325.71654)">
+                                            <path id="path3278" fill="#DCDCDC" d="M0.002-0.001v0.24V-0.001" />
+                                        </g>
+                                        <g id="g3802" transform="matrix(0.7155925,0,0,-0.7155925,1485.3299,288.62022)">
+                                            <path id="path3804" fill="#DCDCDC" d="M0.001,0h-0.719H0.001" />
+                                        </g>
+                                        <g id="g3870" transform="matrix(0.7155925,0,0,-0.7155925,1439.8182,289.13545)">
+                                            <path id="path3872" fill="#DCDCDC" d="M0.001,0h-0.24H0.001" />
+                                        </g>
+                                        <g id="g3882" transform="matrix(0.7155925,0,0,-0.7155925,1441.3639,288.96371)">
+                                            <path id="path3884" fill="#DCDCDC" d="M0.001,0h-0.24H0.001" />
+                                        </g>
+                                        <g id="g3970" transform="matrix(0.7155925,0,0,-0.7155925,1426.2506,290.33764)">
+                                            <path id="path3972" fill="#DCDCDC" d="M0.001,0h0.24H0.001" />
+                                        </g>
+                                        <g id="g4510" transform="matrix(0.7155925,0,0,-0.7155925,1460.7707,337.73849)">
+                                            <path id="path4512" fill="#DCDCDC" d="M0.002-0.001v-0.24V-0.001" />
+                                        </g>
+                                        <g id="g6006" transform="matrix(0.7155925,0,0,-0.7155925,1486.1886,332.071)">
+                                            <path id="path6008" fill="#DCDCDC" d="M0.002,0h0.24H0.002" />
+                                        </g>
+                                        <g id="g6018" transform="matrix(0.7155925,0,0,-0.7155925,1479.6624,340.48637)">
+                                            <path id="path6020" fill="#DCDCDC" d="M0.002-0.001h-0.24H0.002" />
+                                        </g>
+                                        <g id="g6394" transform="matrix(0.7155925,0,0,-0.7155925,1489.9669,322.10995)">
+                                            <path id="path6396" fill="#DCDCDC" d="M0.003,0.001h-0.24H0.003" />
+                                        </g>
+                                        <g id="g6826" transform="matrix(0.7155925,0,0,-0.7155925,1405.8132,288.44848)">
+                                            <path id="path6828" fill="#DCDCDC" d="M0.002,0h0.24H0.002" />
+                                        </g>
+                                        <g id="g7010" transform="matrix(0.7155925,0,0,-0.7155925,1426.2506,290.33764)">
+                                            <path id="path7012" fill="#DCDCDC" d="M0.002,0v-0.24V0" />
+                                        </g>
+                                        <g id="g7218" transform="matrix(0.7155925,0,0,-0.7155925,1429.3419,302.53134)">
+                                            <path id="path7220" fill="#DCDCDC" d="M0.003,0h0.239H0.003" />
+                                        </g>
+                                        <g id="g7650" transform="matrix(0.7155925,0,0,-0.7155925,1455.6185,345.46689)">
+                                            <path id="path7652" fill="#DCDCDC" d="M0.003-0.001h0.24H0.003" />
+                                        </g>
+                                        <g id="g7898" transform="matrix(0.7155925,0,0,-0.7155925,1460.0838,346.15386)">
+                                            <path id="path7900" fill="#DCDCDC" d="M0.002,0.001v0.237V0.001" />
+                                        </g>
+                                        <g id="g7916" transform="matrix(0.7155925,0,0,-0.7155925,1459.0533,357.48884)">
+                                            <path id="path7918" fill="#DCDCDC" d="M0.003,0v0.48V0" />
+                                        </g>
+                                        <g id="g8188" transform="matrix(0.7155925,0,0,-0.7155925,1475.0253,345.46689)">
+                                            <path id="path8190" fill="#DCDCDC" d="M0.003-0.001h-0.24H0.003" />
+                                        </g>
+                                        <g id="g8584" transform="matrix(0.7155925,0,0,-0.7155925,1523.9719,328.12093)">
+                                            <path id="path8586" fill="#FFFFFF" d="M0.004-0.001h0.24H0.004" />
+                                        </g>
+                                        <g id="g8904" transform="matrix(0.7155925,0,0,-0.7155925,1405.985,288.44848)">
+                                            <path id="path8906" fill="#FFFFFF" d="M0.003,0h-0.24H0.003" />
+                                        </g>
+                                        <g id="g8908" transform="matrix(0.7155925,0,0,-0.7155925,1394.9935,293.08552)">
+                                            <path id="path8910" fill="#FFFFFF" d="M0.004,0h0.24H0.004" />
+                                        </g>
+                                        <g id="g8956" transform="matrix(0.7155925,0,0,-0.7155925,1402.5501,286.9028)">
+                                            <path id="path8958" fill="#FFFFFF" d="M0.004,0h-0.961H0.004" />
+                                        </g>
+                                        <g id="g9072" transform="matrix(0.7155925,0,0,-0.7155925,1402.5501,286.9028)">
+                                            <path id="path9074" fill="#FFFFFF" d="M0.004,0h-0.961H0.004" />
+                                        </g>
+                                        <g id="g9504" transform="matrix(0.7155925,0,0,-0.7155925,1406.1567,292.05507)">
+                                            <path id="path9506" fill="#DCDCDC" d="M0.004,0v-0.24V0" />
+                                        </g>
+                                        <g id="g9932" transform="matrix(0.7155925,0,0,-0.7155925,1388.9825,313.00761)">
+                                            <path id="path9934" fill="#DCDCDC" d="M0.005,0h0.239H0.005" />
+                                        </g>
+                                        <g id="g9992" transform="matrix(0.7155925,0,0,-0.7155925,1414.0569,316.95769)">
+                                            <path id="path9994" fill="#DCDCDC" d="M0.005-0.001h-0.24H0.005" />
+                                        </g>
+                                        <g id="g9996" transform="matrix(0.7155925,0,0,-0.7155925,1413.8851,316.78594)">
+                                            <path id="path9998" fill="#DCDCDC" d="M0.004,0h0.24H0.004" />
+                                        </g>
+                                        <g id="g10024" transform="matrix(0.7155925,0,0,-0.7155925,1432.7768,356.63013)">
+                                            <path id="path10026" fill="#DCDCDC" d="M0.004,0.001h-0.48H0.004" />
+                                        </g>
+                                        <g id="g10664" transform="matrix(0.7155925,0,0,-0.7155925,1483.6125,388.40244)">
+                                            <path id="path10666" fill="#DCDCDC" d="M0.005-0.001h-0.24H0.005" />
+                                        </g>
+                                        <g id="g10848" transform="matrix(0.7155925,0,0,-0.7155925,1512.8086,354.91271)">
+                                            <path id="path10850" fill="#FFFFFF" d="M0.004,0h-0.239H0.004" />
+                                        </g>
+                                        <g id="g10988" transform="matrix(0.7155925,0,0,-0.7155925,1529.2959,367.79338)">
+                                            <path id="path10990" fill="#FFFFFF" d="M0.006,0v0.24V0" />
+                                        </g>
+                                        <g id="g10992" transform="matrix(0.7155925,0,0,-0.7155925,1528.6089,368.3086)">
+                                            <path id="path10994" fill="#FFFFFF" d="M0.005-0.001v0.24V-0.001" />
+                                        </g>
+                                        <g id="g11028" transform="matrix(0.7155925,0,0,-0.7155925,1512.8086,354.91271)">
+                                            <path id="path11030" fill="#DCDCDC" d="M0.005,0h0.24H0.005" />
+                                        </g>
+                                        <g id="g11368" transform="matrix(0.7155925,0,0,-0.7155925,1543.894,304.07702)">
+                                            <path id="path11370" fill="#FFFFFF" d="M0.005,0v-0.24V0" />
+                                        </g>
+                                        <g id="g12232" transform="matrix(0.7155925,0,0,-0.7155925,1474.3384,390.11986)">
+                                            <path id="path12234" fill="#DCDCDC" d="M0.005,0v-0.48V0" />
+                                        </g>
+                                        <g id="g12248" transform="matrix(0.7155925,0,0,-0.7155925,1465.923,390.11986)">
+                                            <path id="path12250" fill="#DCDCDC" d="M0.006,0h0.24H0.006" />
+                                        </g>
+                                        <g id="g12748" transform="matrix(0.7155925,0,0,-0.7155925,1510.7477,384.45237)">
+                                            <path id="path12750" fill="#FFFFFF" d="M0.006,0.001v-0.24V0.001" />
+                                        </g>
+                                        <g id="g13024" transform="matrix(0.7155925,0,0,-0.7155925,1580.1316,317.64465)">
+                                            <path id="path13026" fill="#FFFFFF" d="M0.006,0h-0.24H0.006" />
+                                        </g>
+                                        <g id="g13572" transform="matrix(0.7155925,0,0,-0.7155925,1346.2187,286.9028)">
+                                        </g>
+                                        <g id="g13764" transform="matrix(0.7155925,0,0,-0.7155925,1535.4786,393.38296)">
+                                            <path id="path13766" fill="#FFFFFF" d="M0.007-0.001h0.239H0.007" />
+                                        </g>
                                     </g>
-                                    <g id="g2942" transform="matrix(0.7155925,0,0,-0.7155925,1454.0728,294.6312)">
-                                        <path id="path2944" fill="#DCDCDC" d="M0,0v-0.24V0" />
+                                    <g id="layer3" transform="translate(0.1250195,0.4949951)" inkscape:label="mexico"
+                                        inkscape:groupmode="layer">
                                     </g>
-                                    <g id="g3006" transform="matrix(0.7155925,0,0,-0.7155925,1454.2445,294.45946)">
-                                        <path id="path3008" fill="#DCDCDC" d="M0,0h0.24H0" />
-                                    </g>
-                                    <g id="g3046" transform="matrix(0.7155925,0,0,-0.7155925,1454.0728,302.70308)">
-                                        <path id="path3048" fill="#DCDCDC" d="M0,0v-0.24V0" />
-                                    </g>
-                                    <g id="g3050" transform="matrix(0.7155925,0,0,-0.7155925,1454.2445,302.70308)">
-                                        <path id="path3052" fill="#DCDCDC" d="M0.001,0h-0.24H0.001" />
-                                    </g>
-                                    <g id="g3162" transform="matrix(0.7155925,0,0,-0.7155925,1466.9535,306.99664)">
-                                        <path id="path3164" fill="#DCDCDC" d="M0.001,0.001v-0.24V0.001" />
-                                    </g>
-                                    <g id="g3256" transform="matrix(0.7155925,0,0,-0.7155925,1469.7013,325.71654)">
-                                        <path id="path3258" fill="#DCDCDC" d="M0.001-0.001h-0.24H0.001" />
-                                    </g>
-                                    <g id="g3276" transform="matrix(0.7155925,0,0,-0.7155925,1468.6709,325.71654)">
-                                        <path id="path3278" fill="#DCDCDC" d="M0.002-0.001v0.24V-0.001" />
-                                    </g>
-                                    <g id="g3802" transform="matrix(0.7155925,0,0,-0.7155925,1485.3299,288.62022)">
-                                        <path id="path3804" fill="#DCDCDC" d="M0.001,0h-0.719H0.001" />
-                                    </g>
-                                    <g id="g3870" transform="matrix(0.7155925,0,0,-0.7155925,1439.8182,289.13545)">
-                                        <path id="path3872" fill="#DCDCDC" d="M0.001,0h-0.24H0.001" />
-                                    </g>
-                                    <g id="g3882" transform="matrix(0.7155925,0,0,-0.7155925,1441.3639,288.96371)">
-                                        <path id="path3884" fill="#DCDCDC" d="M0.001,0h-0.24H0.001" />
-                                    </g>
-                                    <g id="g3970" transform="matrix(0.7155925,0,0,-0.7155925,1426.2506,290.33764)">
-                                        <path id="path3972" fill="#DCDCDC" d="M0.001,0h0.24H0.001" />
-                                    </g>
-                                    <g id="g4510" transform="matrix(0.7155925,0,0,-0.7155925,1460.7707,337.73849)">
-                                        <path id="path4512" fill="#DCDCDC" d="M0.002-0.001v-0.24V-0.001" />
-                                    </g>
-                                    <g id="g6006" transform="matrix(0.7155925,0,0,-0.7155925,1486.1886,332.071)">
-                                        <path id="path6008" fill="#DCDCDC" d="M0.002,0h0.24H0.002" />
-                                    </g>
-                                    <g id="g6018" transform="matrix(0.7155925,0,0,-0.7155925,1479.6624,340.48637)">
-                                        <path id="path6020" fill="#DCDCDC" d="M0.002-0.001h-0.24H0.002" />
-                                    </g>
-                                    <g id="g6394" transform="matrix(0.7155925,0,0,-0.7155925,1489.9669,322.10995)">
-                                        <path id="path6396" fill="#DCDCDC" d="M0.003,0.001h-0.24H0.003" />
-                                    </g>
-                                    <g id="g6826" transform="matrix(0.7155925,0,0,-0.7155925,1405.8132,288.44848)">
-                                        <path id="path6828" fill="#DCDCDC" d="M0.002,0h0.24H0.002" />
-                                    </g>
-                                    <g id="g7010" transform="matrix(0.7155925,0,0,-0.7155925,1426.2506,290.33764)">
-                                        <path id="path7012" fill="#DCDCDC" d="M0.002,0v-0.24V0" />
-                                    </g>
-                                    <g id="g7218" transform="matrix(0.7155925,0,0,-0.7155925,1429.3419,302.53134)">
-                                        <path id="path7220" fill="#DCDCDC" d="M0.003,0h0.239H0.003" />
-                                    </g>
-                                    <g id="g7650" transform="matrix(0.7155925,0,0,-0.7155925,1455.6185,345.46689)">
-                                        <path id="path7652" fill="#DCDCDC" d="M0.003-0.001h0.24H0.003" />
-                                    </g>
-                                    <g id="g7898" transform="matrix(0.7155925,0,0,-0.7155925,1460.0838,346.15386)">
-                                        <path id="path7900" fill="#DCDCDC" d="M0.002,0.001v0.237V0.001" />
-                                    </g>
-                                    <g id="g7916" transform="matrix(0.7155925,0,0,-0.7155925,1459.0533,357.48884)">
-                                        <path id="path7918" fill="#DCDCDC" d="M0.003,0v0.48V0" />
-                                    </g>
-                                    <g id="g8188" transform="matrix(0.7155925,0,0,-0.7155925,1475.0253,345.46689)">
-                                        <path id="path8190" fill="#DCDCDC" d="M0.003-0.001h-0.24H0.003" />
-                                    </g>
-                                    <g id="g8584" transform="matrix(0.7155925,0,0,-0.7155925,1523.9719,328.12093)">
-                                        <path id="path8586" fill="#FFFFFF" d="M0.004-0.001h0.24H0.004" />
-                                    </g>
-                                    <g id="g8904" transform="matrix(0.7155925,0,0,-0.7155925,1405.985,288.44848)">
-                                        <path id="path8906" fill="#FFFFFF" d="M0.003,0h-0.24H0.003" />
-                                    </g>
-                                    <g id="g8908" transform="matrix(0.7155925,0,0,-0.7155925,1394.9935,293.08552)">
-                                        <path id="path8910" fill="#FFFFFF" d="M0.004,0h0.24H0.004" />
-                                    </g>
-                                    <g id="g8956" transform="matrix(0.7155925,0,0,-0.7155925,1402.5501,286.9028)">
-                                        <path id="path8958" fill="#FFFFFF" d="M0.004,0h-0.961H0.004" />
-                                    </g>
-                                    <g id="g9072" transform="matrix(0.7155925,0,0,-0.7155925,1402.5501,286.9028)">
-                                        <path id="path9074" fill="#FFFFFF" d="M0.004,0h-0.961H0.004" />
-                                    </g>
-                                    <g id="g9504" transform="matrix(0.7155925,0,0,-0.7155925,1406.1567,292.05507)">
-                                        <path id="path9506" fill="#DCDCDC" d="M0.004,0v-0.24V0" />
-                                    </g>
-                                    <g id="g9932" transform="matrix(0.7155925,0,0,-0.7155925,1388.9825,313.00761)">
-                                        <path id="path9934" fill="#DCDCDC" d="M0.005,0h0.239H0.005" />
-                                    </g>
-                                    <g id="g9992" transform="matrix(0.7155925,0,0,-0.7155925,1414.0569,316.95769)">
-                                        <path id="path9994" fill="#DCDCDC" d="M0.005-0.001h-0.24H0.005" />
-                                    </g>
-                                    <g id="g9996" transform="matrix(0.7155925,0,0,-0.7155925,1413.8851,316.78594)">
-                                        <path id="path9998" fill="#DCDCDC" d="M0.004,0h0.24H0.004" />
-                                    </g>
-                                    <g id="g10024" transform="matrix(0.7155925,0,0,-0.7155925,1432.7768,356.63013)">
-                                        <path id="path10026" fill="#DCDCDC" d="M0.004,0.001h-0.48H0.004" />
-                                    </g>
-                                    <g id="g10664" transform="matrix(0.7155925,0,0,-0.7155925,1483.6125,388.40244)">
-                                        <path id="path10666" fill="#DCDCDC" d="M0.005-0.001h-0.24H0.005" />
-                                    </g>
-                                    <g id="g10848" transform="matrix(0.7155925,0,0,-0.7155925,1512.8086,354.91271)">
-                                        <path id="path10850" fill="#FFFFFF" d="M0.004,0h-0.239H0.004" />
-                                    </g>
-                                    <g id="g10988" transform="matrix(0.7155925,0,0,-0.7155925,1529.2959,367.79338)">
-                                        <path id="path10990" fill="#FFFFFF" d="M0.006,0v0.24V0" />
-                                    </g>
-                                    <g id="g10992" transform="matrix(0.7155925,0,0,-0.7155925,1528.6089,368.3086)">
-                                        <path id="path10994" fill="#FFFFFF" d="M0.005-0.001v0.24V-0.001" />
-                                    </g>
-                                    <g id="g11028" transform="matrix(0.7155925,0,0,-0.7155925,1512.8086,354.91271)">
-                                        <path id="path11030" fill="#DCDCDC" d="M0.005,0h0.24H0.005" />
-                                    </g>
-                                    <g id="g11368" transform="matrix(0.7155925,0,0,-0.7155925,1543.894,304.07702)">
-                                        <path id="path11370" fill="#FFFFFF" d="M0.005,0v-0.24V0" />
-                                    </g>
-                                    <g id="g12232" transform="matrix(0.7155925,0,0,-0.7155925,1474.3384,390.11986)">
-                                        <path id="path12234" fill="#DCDCDC" d="M0.005,0v-0.48V0" />
-                                    </g>
-                                    <g id="g12248" transform="matrix(0.7155925,0,0,-0.7155925,1465.923,390.11986)">
-                                        <path id="path12250" fill="#DCDCDC" d="M0.006,0h0.24H0.006" />
-                                    </g>
-                                    <g id="g12748" transform="matrix(0.7155925,0,0,-0.7155925,1510.7477,384.45237)">
-                                        <path id="path12750" fill="#FFFFFF" d="M0.006,0.001v-0.24V0.001" />
-                                    </g>
-                                    <g id="g13024" transform="matrix(0.7155925,0,0,-0.7155925,1580.1316,317.64465)">
-                                        <path id="path13026" fill="#FFFFFF" d="M0.006,0h-0.24H0.006" />
-                                    </g>
-                                    <g id="g13572" transform="matrix(0.7155925,0,0,-0.7155925,1346.2187,286.9028)">
-                                    </g>
-                                    <g id="g13764" transform="matrix(0.7155925,0,0,-0.7155925,1535.4786,393.38296)">
-                                        <path id="path13766" fill="#FFFFFF" d="M0.007-0.001h0.239H0.007" />
-                                    </g>
-                                </g>
-                                <g id="layer3" transform="translate(0.1250195,0.4949951)" inkscape:label="mexico" inkscape:groupmode="layer">
-                                </g>
-                        
-                                <rect id="FONDO_AZUL" x="0.13" y="0.957" fill="#D2EFF9" stroke="#717171" stroke-width="0.25"
-                                    stroke-opacity="0.7186" width="974.755" height="653.189" />
-                                <g id="ESTADOS">
-                                    <path id="campeche"
-                                        sodipodi:nodetypes="cssssssccsscccsssssscccccccsssssccscccccccccccccccccsssscssssssssssccsssssssscssssscsssssscccccsccsscccsssssscccssccc"
-                                        fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="
+
+                                    <rect id="FONDO_AZUL" x="0.13" y="0.957" fill="#D2EFF9" stroke="#717171"
+                                        stroke-width="0.25" stroke-opacity="0.7186" width="974.755" height="653.189" />
+                                    <g id="ESTADOS">
+                                        <path id="campeche" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="
                                     M822.007,501.451c-0.969,0.807-1.662,1.074-2.633,1.822c-1.136,0.873-1.218,1.139-2.634,1.215
                                     c-1.326,0.07-3.182,1.023-4.253,1.619c-0.572,0.316-0.821,1.043-1.013,1.619c-0.354,1.063,7.035-1.234,7.494-1.619
                                     c1.203-1.012,2.538-0.664,3.646-2.023C822.967,503.648,823.159,502.261,822.007,501.451z M803.982,457.128
@@ -714,7 +615,7 @@
                                     c0.829,0,3.562-0.012,4.058,0.609c0.906,1.131,2.259,1.215,3.854,1.215v-7.525l3.044,0.023c1.343,0.012,2.25,0.982,3.651,1.42
                                     c2.362,0.738,2.429-0.775,4.667,1.014c1.862,1.488,6.113-0.395,8.46,1.717l0.033,4.316
                                     C859.584,532.82,875.678,531.802,894.209,530.505z" />
-                                    <path id="chiapas" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M745.807,598.478
+                                        <path id="chiapas" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M745.807,598.478
                                     c-0.044-0.756-0.092-1.516-0.13-2.289c-0.066-1.352,0.646-1.238,0.646-2.26c0-1.734-0.427-1.494,1.292-1.613
                                     c0.644-0.045,0.323-1.906,0.323-2.584v-3.227c0-2.057-1.872-2.154-4.2-2.26l7.105-21.949c0.817-0.27,1.57-0.322,2.048-0.818
                                     c0.456-0.473-0.687-1.354,0.255-2.293c0.836-0.836,3.146,0.082,3.569-1.02c0.138-0.357,0.199-0.709,0.239-0.98
@@ -753,7 +654,7 @@
                                     c0,4.307-2.086,6.887-2.086,10.979c0,1.904-0.557,2.621-0.557,4.445c0,1.906-0.96,2.689-1.746,3.637
                                     c-4.202-3.408-7.544-6.424-8.163-7.322c-7.504-10.887-20.103-16.896-30.018-26.172c-4.598-4.301-12.755-6.58-17.729-10.871
                                     C750.317,599.54,748.1,598.986,745.807,598.478z" />
-                                    <path id="tabasco" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M740.928,527.285l1.256,2.348
+                                        <path id="tabasco" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M740.928,527.285l1.256,2.348
                                     c0,1.201,0.255,2.143,0.255,3.311c0,1.594,0.492,0.596,1.02,1.529c0.22,0.389-1.525,2.184-0.51,3.566
                                     c0.231,0.316,2.581-0.27,3.06,0c1.535,0.867-0.888,1.41,2.039,2.549c1.24,0.928,1.614,2.705,3.314,2.803
                                     c1.592,0.09,3.981,1.066,3.569,2.547c-0.478,1.719,2.007,1.563,2.295,2.293c0.025,0.064,0.51,4.434-0.255,4.84
@@ -792,7 +693,8 @@
                                     c-2.064-1.412,2.32-2.809,1.171-2.809c-0.817,0-2.248,0.328-2.342,0.234c-0.652-0.652-2.531-0.703-3.749-0.703
                                     c-2.173,0-5.93,0.02-7.027,1.17c-3.424,3.592-10.455,1.906-12.885,5.854c-0.09,0.145-2.098,0.617-2.344,0.701
                                     C742.025,526.599,741.446,526.929,740.928,527.285z" />
-                                    <path id="oaxaca" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M599.129,593.103
+                                        <path id="oaxaca" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M599.129,593.103
                                     c0.14-0.049,0.328-0.094,0.597-0.135c0.696-0.104,0.057-0.463,1.269-0.508c2.477-0.088,3.724,1.143,6.094,0.254
                                     c0-0.355-0.055-0.986,0-1.268c0.135-0.695,0.896-0.348,1.016-0.508c0.244-0.328,0.564-1.277,0.508-1.775
                                     c-0.101-0.875-1.016-1.758-1.016-2.537c0-1.369,0.659-1.016,2.031-1.016c0.561,0,0.614-0.055,0.761,0.508
@@ -842,7 +744,8 @@
                                     c-4.188,4.357-12.272,6.943-19.381,8.824c-1.74,0.461-2.737,2.809-5.996,3.686c-5.085,1.367-11.701,3.547-14.979,3.547
                                     c-8.806,0-14.644-4.863-22.815-6.496c-6.153-0.367-12.021-0.404-12.389,0.246c-1.705,3.016-5.854-4.32-9.444-5.395
                                     c-2.946-0.881-17.422-4.918-19.504-6.742C602.055,595.73,600.657,594.425,599.129,593.103z" />
-                                    <path id="guerrero" opacity="0.75" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M488.821,543.622
+                                        <path id="guerrero" opacity="0.75" fill="#e8e8b1" stroke="#717171"
+                                            stroke-width="0.25" d="M488.821,543.622
                                     c-0.069-0.104-0.15-0.199-0.262-0.281c-1.067-0.777-0.83-0.615-1.663-1.762c-0.797-1.1-0.339-3.287,0.099-4.604
                                     c0.51-1.533,2.016-1.076,3.423-1.076c0.641,0,2.256-2.182,3.326-2.449c0.557-0.139,4.304,0.377,4.304-0.881
                                     c0-0.516-0.831-1.195-1.174-1.469c-0.514-0.412-0.489-1.535-0.489-2.252c0-1.383-0.391-3.035-0.391-4.211
@@ -884,7 +787,7 @@
                                     c-2.519,0-3.063-1.008-4.784-2.082c-3.684-2.303-5.506-3.65-9.445-4.904c-8.129-2.588-15.675-7.842-26.862-8.213
                                     c-2.794-0.092-11.875-9.799-17.418-11.645c-7.992-2.66-9.677-13.699-15.895-15.338
                                     C491.736,542.331,490.11,542.955,488.821,543.622z" />
-                                    <path id="veracruz" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M640.152,426.654
+                                        <path id="veracruz" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M640.152,426.654
                                     c-0.122-0.006-0.093-0.199-0.152-0.307c-0.05-0.088-0.085-0.076-0.153-0.152c-0.151-0.166-0.062-0.406-0.153-0.611
                                     c-0.05-0.111-0.235-0.053-0.306-0.152c-0.07-0.102-0.121-0.188-0.153-0.307c-0.056-0.209,0.132-0.229,0.153-0.459
                                     c0.036-0.391,0-0.824,0-1.223c0-0.102-0.097-0.273,0-0.305c0.233-0.078,0.93-0.033,1.224,0c0.296,0.033,0.242,0.057,0.307,0.305
@@ -966,8 +869,8 @@
                                     c1.592,0.09,3.981,1.066,3.569,2.547c-0.478,1.719,2.007,1.563,2.295,2.293c0.025,0.064,0.51,4.434-0.255,4.84
                                     c-1.607,0.857,0.623,2.814-0.255,5.096c-0.424,1.102-2.733,0.184-3.569,1.02c-0.941,0.939,0.201,1.82-0.255,2.293
                                     C752.414,561.974,751.663,562.023,750.844,562.296z" />
-                                    <path id="puebla" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M585.582,527.896
+                                        <path id="puebla" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M585.582,527.896
                                     c0.301-0.055,0.594-0.094,0.933-0.137c0.405-0.053,0.39-0.605,0.594-0.893c0.049-0.068,0.326-0.574,0.371-0.668
                                     c0.202-0.426-0.133-0.428,0.371-0.447c0.225-0.008,0.446-0.043,0.669-0.074c0.176-0.527,2.301-0.295,2.301-1.189
                                     c0-1.344-0.071-1.506,1.263-1.709c0.532-0.08,1.379-0.375,1.188,0.148c-0.295,0.809,0.68,0.125,1.039,0.371
@@ -1037,8 +940,8 @@
                                     c-0.296,0-0.96,0.145-0.978-0.162c-0.049-0.795,0-1.646,0-2.443c-0.742-0.74-2.647,0.205-3.423-0.326
                                     c-0.082-0.055,0.394-2.008,0.163-2.441c-0.674-1.271-2.743-1.906-2.771-2.117c-0.065-0.508-2.281,0.326-1.466-0.977
                                     c0.928-1.484-2.024-0.018-1.467-1.467c0.166-0.432-0.058-1.291,0-1.791C585.471,528.21,585.509,528.054,585.582,527.896z" />
-                                    <path id="tlaxcala" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M597.02,490.529l2.194,0.074l3.19,2.35
+                                        <path id="tlaxcala" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M597.02,490.529l2.194,0.074l3.19,2.35
                                     l1.334,3.836l3.522,2.207l1.46,1.955c0.896,0,1.434-0.369,1.434,0.453c0,0.318,0.063,0.424,0.075,0.68
                                     c0.034,0.729,0.644-0.129,0.83,0.68c0.146,0.631-0.135,0.66,0.604,0.68c0.516,0.014,0.734-0.09,1.132-0.15
                                     c0.497-0.076,0.604-0.336,0.604-0.832l0.075-0.377c0.026-0.133,0.652-0.393,0.755-0.529l3.696-3.398
@@ -1052,7 +955,7 @@
                                     c-0.098-1.078-0.66,0.061-1.05,0.211c-0.355,0.137-0.618-0.059-0.841,0.209c-0.151,0.186-0.733,0.941-1.05,1.051
                                     c-0.758,0.262-2.482,0-3.386-0.023c-0.268,0.289-0.574,0.412-0.805,0.645c-0.148,0.146-0.149,0.457-0.478,0.477
                                     c-0.59,0.033-1.205-0.045-1.272,0.477c-0.077,0.6-0.238,0.967-0.159,1.748c0.04,0.387,1.183,0.703,1.432,0.795L597.02,490.529z" />
-                                    <path id="morelos" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M571.754,517.185
+                                        <path id="morelos" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M571.754,517.185
                                     c0.237,0.615,0.221,1.176,0.506,1.803c0.566,1.242,1.82,0.59,2.302,1.709c0.056,0.129,0.399,1.09,0.446,1.115
                                     c0.427,0.238-0.535,0.912-0.298,1.338c0.796,1.434,0.334,0.893,3.118,0.893c0,1.602,1.246,0.893,2.599,0.893
                                     c0.572,0,0.393,0.342,0.816,0.371c0.991,0.068,1.298,0.166,2.079,0.594c0.071,0.039,0.159,0.168,0.223,0.225
@@ -1067,14 +970,14 @@
                                     l-1.332-0.998l-4.401-0.266l-2.358-1.732l-0.119,5.225c0,0.529-0.04,0.549,0.318,0.953c0.105,0.119,0.504,0.768,0.318,0.955
                                     c-0.213,0.213-0.175-0.189-0.318,0.158c-0.147,0.355-0.636,0.57-0.636,0.953v0.16c0,0.127-0.19-0.16-0.318-0.16h-0.478
                                     l-0.954-0.477l-2.862,2.385L571.754,517.185z" />
-                                    <path id="cdmx" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M576.805,502.109l0.052-1.686
+                                        <path id="cdmx" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M576.805,502.109l0.052-1.686
                                     c-0.369-0.207-1.082-0.482-1.113-0.795c-0.038-0.371,0.256-0.863,0.159-1.111c-0.15-0.383-0.902,0.137-1.272-0.158
                                     c-0.283-0.227-0.318-0.418-0.318-0.795c0-0.35-0.172-1.557,0.159-1.59c0.119-0.012,0.89,0.064,0.954,0
                                     c0.088-0.088,0.039-0.832,0.159-0.953c0.015-0.016,0.436-0.004,0.478,0c0.995,0.068,0.078-0.027,0.636,0.158l3.127-3.266
                                     l-0.978-0.242l0.318-1.883l1.514,0.082l-0.131-1.547l0.75-2.762l1.431,1.271l-1.112,2.361l2.703,0.816l0.636,1.748l-0.158,1.59
                                     l3.657,2.066l-0.159,3.02l1.113,0.988l-1.113,0.441l0.206,3.795l-0.337,0.713l-0.4-0.334l-1.534,0.135l-1.333,0.932l-1.332-0.998
                                     l-4.401-0.266L576.805,502.109z" />
-                                    <path id="hidalgo" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M600.077,426.566l1.633,0.094l-0.959,4.396
+                                        <path id="hidalgo" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M600.077,426.566l1.633,0.094l-0.959,4.396
                                     c2.284,1.561,1.529,2.523,2.117,2.906c0.421,0.275,1.816,0.463,2.202,0.463c0.289,0,1.843,0.584,2.311,0
                                     c2.747-3.434,4.83,3.355,4.189,4.477c-0.482,0.846-1.093,2.479-2.038,3.453c-0.658,0.678-0.261,1.273-0.261,2.563
                                     c0,1.691-1.261,1.471-1.051,1.471c-0.128,0.299-0.34,1.957-0.42,2.098c-0.007,0.012-0.832,0.023-1.05,0
@@ -1113,7 +1016,8 @@
                                     c0.172-0.211,0.427-0.604,0.678-0.678c0.235-0.07,1.084-0.428,1.084-0.678c-0.061-0.787-0.213-0.947-0.948-0.947
                                     c-0.23,0-0.515-0.004-0.678-0.135c-0.282-0.229-0.384-0.131-0.813-0.271c-0.269-0.088-0.543-0.557-0.543-0.813
                                     c0-0.537-0.135-0.941-0.135-1.488L600.077,426.566z" />
-                                    <path id="_estadodemexico" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M598.324,486.031
+                                        <path id="_estadodemexico" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M598.324,486.031
                                     c-0.241,0.313-0.574,0.412-0.805,0.645c-0.148,0.146-0.149,0.457-0.478,0.477c-0.59,0.033-1.205-0.045-1.272,0.477
                                     c-0.077,0.6-0.238,0.967-0.159,1.748c0.04,0.387,1.183,0.703,1.432,0.795l-0.478,6.039h-0.636c-0.53,0-0.057,0.158-0.318,0.158
                                     h-0.159c-0.764,0,1.145,0.143,1.909,0.158c0.069,0.002,0.432-0.027,0.477,0c0.038,0.023,0.301,0.553,0.318,0.637
@@ -1153,7 +1057,8 @@
                                     c0.097,0.314,0.142,0.719,0.21,1.049c0.077,0.377,0.429,0.383,0.63,0.631c0.192,0.236-0.379,0.977-0.42,1.049
                                     c-0.322,0.57-1.066,0.545-1.471,1.049c-0.333,0.418-0.628,0.047-1.05,0.42c-0.126,0.111-0.368,0.363-0.21,0.42
                                     c0.896,0.322,2.159-0.195,2.94,0.211C598.523,484.472,598.324,485.29,598.324,486.031z" />
-                                    <path id="bajacaliforniasur" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M132.884,195.298L132.884,195.298
+                                        <path id="bajacaliforniasur" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M132.884,195.298L132.884,195.298
                                     c-0.265,0.025-0.531,0.059-0.803,0.106c-1.551,0.268-1.031,1.718-2.188,1.85c-0.683,0.078-2.76-1.326-3.703-1.514
                                     c0.637,0.811,2.303,3.679,3.198,4.037c0.151-0.264,0.272-0.416,0.337-0.673c0.635-0.158,0.795-1.009,1.514-1.009
                                     c2.934,0,0.337,3.563,0.337,5.045c0.88,0,0.757-0.084,1.515-0.336c0.15,0.601,0.509,1.362,0.673,2.018
@@ -1242,7 +1147,7 @@
                                     c-0.208-0.76-0.77-1.019-0.815-1.72c-0.04-0.611,0.23-0.849-0.543-0.634c-0.239,0.066-0.377,0.139-0.634,0.091
                                     c-0.363-0.069-0.376-0.312-1.086-0.453c-1.119-0.602-0.098-1.226,0.453-1.81c1.245-1.32,1.209-4.046,1.993-5.793
                                     C183.875,298.796,184.741,296.45,186.136,296.191L186.136,296.191z" />
-                                    <path id="bajacalifornia" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M171.23,171.972
+                                        <path id="bajacalifornia" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M171.23,171.972
                                     c-0.325,0.074-0.656,0.285-0.977,0.195c-0.125-0.035-0.127-0.085-0.196-0.195c-0.068-0.11,0.092-0.299,0-0.391
                                     c-0.092-0.092-0.28,0.068-0.391,0c-0.11-0.069-0.195-0.065-0.195-0.196v-0.195l-0.195-0.195h-0.195V170.8
                                     c0-0.248-0.336,0.093-0.391-0.391c-0.038-0.333-0.075-0.761,0.196-0.976c0.219-0.175,0.438-0.355,0.781,0
@@ -1320,8 +1225,8 @@
                                     c0.368-0.624,0.505-1.26,0.505-2.018l0.336-0.168v-0.504c-0.436-0.349-1.122-0.56-1.346-1.009l-0.168-0.168
                                     c-0.334,0-0.238,0.032-0.505-0.168v-3.7l0.337-0.336h0.505l0.168-0.336c0.328-0.109,0.008-0.059,0.336-0.168
                                     C64.306,37.783,64.345,37.603,64.381,37.412z" />
-                                    <path id="sonora" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M191.161,177.244
+                                        <path id="sonora" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M191.161,177.244
                                     c-0.043,0.839,0.273,1.592-0.781,1.367c-0.977-0.209-0.893-1.02-0.977-1.757c-0.027-0.233-0.885-1.108-1.172-1.367
                                     c-0.939-0.845-0.184-1.304-2.149-1.563c-0.258-0.034-0.521,0-0.782,0c-0.987,0-0.197-1.461-0.977-1.562
                                     c-0.825-0.107-0.833,0.376-0.977-0.586c-0.159-1.063-0.712-0.479,0.586-1.367c0.75-0.513,2.149-0.088,2.149-1.367
@@ -1352,8 +1257,8 @@
                                     c-1.721,1.72-3.7-2.545-4.118-3.018c-1.051-1.188-1.967-2.142-3.104-3.114c-0.211-2.04-0.034-4.912-0.304-5.802
                                     c-0.517-1.711,0.337-1.602,0.491-2.942c0.202-1.752-3.528-2.058-2.208-4.167c0.375-0.598,0.595-1.278,0.981-1.961
                                     c0.441-0.779,0.626-1.343,1.227-1.716c0.774-0.48,4.968-3.677,5.152-3.677C128.65,44.939,129.377,45.028,130.001,44.97z" />
-                                    <path id="chihuahua" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M295.076,96.531l0.7,22.575
+                                        <path id="chihuahua" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M295.076,96.531l0.7,22.575
                                     c1.876,0,3.874-0.655,4.461,1.049c0.276,0.798-0.114,2.265,0,3.147c0.082,0.632,0.788,0.44,0.788,1.312
                                     c0,2.649,0.524,5.357,0.524,8.13c0,0.954-2.58,14.686-0.524,14.686c0.305,0.965-0.897,8.386-1.837,8.917
                                     c-0.836,0.473-0.433,1.915-0.787,2.623c-0.293,0.585-1.789,0.989-1.837,1.835c-0.074,1.292,1.531,3.409-0.788,3.409
@@ -1382,7 +1287,7 @@
                                     c-0.273-0.336-0.264-0.278-0.42-0.63c-1.016-2.295,0.039-4.421-1.894-5.676c-1.044-0.679,0.085-1.201-2.104-1.892
                                     c-1.467-4.397-3.936-7.725-9.046-9.25c-7.3-2.18-7.088-7.837-13.253-10.301c-2.346-0.938-6.439-8.218-8.415-9.881
                                     c-2.493-2.098-4.09-4.717-6.101-6.727c-2.541-2.539-3.899-2.373-6.764-4.854l-47.653-1.78L312.6,97.508L295.076,96.531z" />
-                                    <path id="coahuila" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M441.084,252.422l9.92,4.48l1.598,5.245
+                                        <path id="coahuila" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M441.084,252.422l9.92,4.48l1.598,5.245
                                     l2.282,4.789l-2.967,3.192c0,1.279,0.406,4.08-0.685,4.789c-0.796,0.518-0.811-0.08-0.685,1.14c0.041,0.4,0.177,0.187,0.229,0.912
                                     c0.021,0.315,0.026,0.669,0.228,0.913c0.313,0.379,0.726,0.516,1.142,1.14c0.375,2.628,0.926,5.991-0.229,8.209
                                     c-0.314,0.604-0.854,1.668-1.369,2.28c-0.582,0.691-1.489,0.134-1.825,1.14c0,0.554,0.212,0.644,0.456,1.141
@@ -1426,7 +1331,8 @@
                                     c0,0.328,0.141,0.399-0.211,0.42c-0.42,0.025-0.842-0.014-1.262,0c-0.994,0.033-1.025,0.064-1.894,0.42
                                     c-0.621,0.254-1.14,0.659-1.684,1.051c-1.404,0-1.459,3.158-2.104,4.205c-0.891,1.446-5.361,0.961-6.942,0.21
                                     c-0.139-0.066-0.274-0.143-0.387-0.225l-16.688,33.393L441.084,252.422z" />
-                                    <path id="tamaulipas" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M557.082,221.694l-3.802,3.833
+                                        <path id="tamaulipas" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M557.082,221.694l-3.802,3.833
                                     c0.943,0.331,2.177,0.428,2.177,1.365c0,1.432,2.242,1.376,3.149,1.376c0.935,0,0.666,0.745,0.394,1.18
                                     c-0.584,0.935-0.246,2.258-0.394,3.541c-0.034,0.304-1.046,0.725-0.984,0.983c0.3,1.243,1.692,0.983,2.953,0.983
                                     c-0.104,0.545-0.685,2.504-0.394,3.147c0.152,0.337,0.585,0.476,0.787,0.787c0.435,0.666-0.057,1.291,0.983,1.376
@@ -1510,8 +1416,8 @@
                                     c0-0.489-0.76-1.177-1.307-1.177c-0.917,0-0.041,1.029-1.241,0.785c-1.234-0.251,0.101-1.254,0.131-1.897
                                     c0.053-1.125-0.55-0.329-0.85-1.439c-0.187-0.691,0.181-1.152-0.262-1.832c-0.521-0.8-0.782-1.601-0.849-2.682
                                     c-1.122-4.388-2.494-10.52-2.853-15.708C562.892,224.959,559.818,223.557,557.082,221.694z" />
-                                    <path id="nuevoleon" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M557.082,221.694
+                                        <path id="nuevoleon" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M557.082,221.694
                                     c-1.482-0.923-2.71-2.294-2.876-2.463l-2.791,3.692c-0.078-0.236-0.208-0.418-0.456-0.684c-0.823-0.88-0.702-0.957-1.369-1.825
                                     c-0.175-0.228-2-0.999-2.282-1.14c-0.364-0.182-0.569-0.456-0.685-0.456h-0.685v-0.229c0-0.628,0.045,0.09-0.229-0.456
                                     l-0.456-0.912l-5.934,3.877c0,2.808,0.386,6-0.457,8.666c-0.123,0.372-2.666,0.858-3.423,0.912
@@ -1564,7 +1470,7 @@
                                     c-1.04-0.085-0.549-0.71-0.983-1.376c-0.202-0.311-0.635-0.449-0.787-0.787c-0.291-0.643,0.289-2.603,0.394-3.147
                                     c-1.261,0-2.653,0.26-2.953-0.983c-0.062-0.259,0.95-0.68,0.984-0.983c0.147-1.283-0.19-2.606,0.394-3.541
                                     c0.272-0.436,0.541-1.18-0.394-1.18c-0.907,0-3.149,0.056-3.149-1.376c0-0.938-1.233-1.035-2.177-1.365L557.082,221.694z" />
-                                    <path id="sinaloa" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M327.138,332.71
+                                        <path id="sinaloa" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M327.138,332.71
                                     c-0.499,0.035-0.932-0.275-1.292-0.584c-0.091-0.412-0.536-0.723-0.48-1.16c0.05-0.375-0.17-0.744-0.479-0.945
                                     c-0.243-0.275-0.699-0.584-1.055-0.463c-0.219,0.285-0.376,0.809-0.042,1.072c0.297,0.238,0.49,0.713,0.953,0.52
                                     c0.397-0.078,0.798,0.035,1.195,0.074c0.569-0.049,0.304,0.723,0.663,0.957C326.87,332.257,326.97,332.515,327.138,332.71z
@@ -1610,8 +1516,8 @@
                                     c-0.174-0.174,0.172-1.115,0.172-1.725c0-0.942,0.07-1.858-0.689-2.069c-1.68-0.467,0.383,0.062-1.034-0.862
                                     c-0.349-0.228-0.773-0.397-1.206-0.518c-0.76-0.212-3.641-1.225-3.101-2.415c0.305-0.673,0.463-1.79,0.517-2.759l-8.189,0.037
                                     l-1.054,0.398l-4.977,11.696l-7.245,3.898v2.228l-7.245,2.785L276.258,258.704z" />
-                                    <path id="durango" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M389.147,371.999
+                                        <path id="durango" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M389.147,371.999
                                     c0.186,0.092,0.327,0.23,0.369,0.414c0.14,0.609,0.858,1.348,0.603,2.01c-0.291,0.756-0.468,0.205-0.201,1.006h10.056v2.611
                                     c0,0.631-0.153,0.664,0.201,0.805c0.947,0.377,0.094,0.361,0.402,1.205c0.233,0.641,3.555,1.791,2.011,3.016
                                     c-1.189,0.941-5.284-0.27-5.028,2.211c0.16,1.545,0.919,1.205,2.212,1.205c1.537,0,1.81,0.002,1.81,1.607
@@ -1661,8 +1567,8 @@
                                     c-2.068,0-2.241-0.191-2.241,1.939c0,0.332-0.042,0.721,0,1.047c0.069,0.531,0.553,0.063,0.896,0.297
                                     c0.197,0.135-0.224,1.596,0.15,1.793c0.318,0.166,1.494-0.334,1.494-0.598c0-0.889,0.152-0.746,1.046-0.746
                                     c1.093,0,1.827,0.596,2.839,0.596c0.423,0,0.425,0.051,0.448,0.449C388.596,371.068,388.776,371.255,389.147,371.999z" />
-                                    <path id="nayalit" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M362.174,430.665
+                                        <path id="nayalit" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M362.174,430.665
                                     c-0.117,0.42-0.311,0.977-0.82,1.023c-0.517-0.033-1.148-0.186-1.566,0.215c-0.144,0.545-0.902,0.191-0.523-0.254
                                     c0.269-0.408,0.119-1.229-0.518-0.93c-0.428,0.182-1.068,0.395-1.36-0.115c-0.173-0.152-0.345-0.621,0.076-0.488
                                     c0.456-0.143,1.259-0.416,1.144-1.004c-0.14-0.369,0.07-0.656,0.385-0.74c0.256-0.348,0.804-0.688,1.193-0.34
@@ -1709,7 +1615,7 @@
                                     c0.428,0.377,0.376,2.502,0,2.65c-1.515,0.596,0.152,1.191,0.221,1.105c0.605-0.77,1.013-1.176,1.769-1.547
                                     c1.055-0.518,0.523,0.494,0.663,0.883c0.073,0.203,0.655,0.65,0.663,0.664c0.818,1.307,1.433,0.887,2.874-0.221
                                     c0-2.154-3.349-1.387-5.084-3.314c-0.691-0.768-1.145-6.023-1.547-7.07C379.294,394.613,380.02,391.29,380.332,388.283z" />
-                                    <path id="sanluispotosi" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M507.37,414.076
+                                        <path id="sanluispotosi" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M507.37,414.076
                                     c3.739,0.996,8.654,0.428,12.863,0.941c3.478,0.426,10.135,6.063,12.36,8.717c2.172,2.588,9.916-5.516,12.06-6.229
                                     c1.659,0.383,3.171,0.428,3.387,2.301c0.309,2.678,4.251,3.389,6.233,4.197c0.895,0.365,1.646,0.406,2.846,0.406
                                     c1.271,0,1.706,0.406,2.845,0.406l2.168-3.656h2.168l4.607,5.281c0.561-1.201,1.586-0.908,2.438-1.76
@@ -1757,7 +1663,7 @@
                                     c0.688-0.178,0.824-0.402,1.615-0.402c2.979,0.248,1.835,1.047,2.018,4.033c0.071,1.168,0.807,2.076,0.807,4.033
                                     c0,1.77-2.018,1.611-2.018,4.033c0,3.395,1.569,5.371,0.808,8.875c-0.248,1.141-2.2,2.781-2.826,4.033
                                     C509.034,410.687,508.259,412.996,507.37,414.076z" />
-                                    <path id="queretaro" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M550.3,474.16
+                                        <path id="queretaro" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M550.3,474.16
                                     c-0.048-0.496-0.098-0.945-0.016-1.035c0.085-0.094,0.88-1.945,0.881-1.957c0.075-1.098-1.183-0.279-1.272-1.273
                                     c-0.031-0.35-1.276-0.377-1.467-0.49c-0.058-0.035-0.368-0.924-0.587-1.078c-0.535-0.373-1.521-0.445-2.054-0.979
                                     c-0.474-0.473-0.724-1.457-1.077-2.252c-0.325,0.045-0.602,0.232-0.802,0.525c-0.606-1.002-1.287-2.211-1.307-2.451
@@ -1785,7 +1691,8 @@
                                     c-0.12,0.275-0.419,1.66-0.532,1.773c-0.927,0.926,0.71,0.367,0.71,1.775c0,0.447,0.132,1.563-0.354,1.596
                                     c-1.271,0.088-0.655,0.121-1.421,0.711c-0.932,0.715-0.603-0.463-1.243,0.178c-0.261,0.26-0.421,0.156-0.711,0.531
                                     C551.305,474.076,552.121,474.152,550.3,474.16z" />
-                                    <path id="zacatecas" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M507.371,414.119l-7.759-7h-3.648
+                                        <path id="zacatecas" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M507.371,414.119l-7.759-7h-3.648
                                     l-0.654-0.463c-0.129-1.541,0.364-1.684-1.211-2.018c-0.417-0.088-0.756,1.922-1.614,0.404c-0.133-0.234,0.034-0.541,0-0.807
                                     c-0.094-0.719-0.82-0.195-1.211-1.211c-0.343-0.891,1.438-3.631,0.403-3.631h-0.403c-0.954,0-1.255-1.498-2.019-1.613
                                     c-2.355-0.352-1.786-0.979-3.229-2.42c-0.921-0.92-2.366-1.043-2.825-2.42c-1.393,0.465-3.633,0.336-3.633,1.613
@@ -1852,7 +1759,7 @@
                                     c0.094-0.096,0.608-0.352,0.807-0.404c0.688-0.178,0.824-0.402,1.615-0.402c2.979,0.248,1.835,1.047,2.018,4.033
                                     c0.071,1.168,0.807,2.076,0.807,4.033c0,1.77-2.018,1.611-2.018,4.033c0,3.395,1.569,5.371,0.808,8.875
                                     c-0.248,1.141-2.2,2.781-2.826,4.033C509.034,410.687,508.26,413.039,507.371,414.119z" />
-                                    <path id="aguascalientes" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M495.964,407.119
+                                        <path id="aguascalientes" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M495.964,407.119
                                     c-0.347,0.117-0.808,3.041-0.996,3.762c-0.538,2.066-0.965,2.158-2.636,3.137l-7.279,4.264c-2.622,1.535,0.304,3.334-4.77,2.383
                                     c-0.796,0-0.925-0.973-1.13-1.504c-0.099-0.256-2.114-1.131-2.636-1.256c-0.705-0.166-0.367-0.492-0.753-0.877
                                     c-0.635-0.635-2.524,0.563-3.013-0.752c-0.11-0.301,0.184-0.662-0.251-0.754c-0.071-0.014-0.872,0.318-1.255,0.377
@@ -1862,8 +1769,8 @@
                                     c1.443,1.441,0.874,2.068,3.229,2.42c0.764,0.115,1.064,1.613,2.019,1.613h0.403c1.035,0-0.746,2.74-0.403,3.631
                                     c0.391,1.016,1.117,0.492,1.211,1.211c0.034,0.266-0.133,0.572,0,0.807c0.858,1.518,1.197-0.492,1.614-0.404
                                     c1.575,0.334,1.082,0.477,1.211,2.018L495.964,407.119z" />
-                                    <path id="guanajuato" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M489.943,462.435
+                                        <path id="guanajuato" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M489.943,462.435
                                     c0-3.355,0.269-3.973,1.511-6.4c0.324-0.635,0.55-0.172,0.754-0.502c1.25-2.031,1.588-1.174,0.125-3.512
                                     c-0.177-0.283,0.3-1.17,0.126-1.256c-2.202-1.07-2.637,1.043-2.637-1.756c1.669,0,1.523-3.559,2.009-4.641
                                     c0.899-2.006,3.624-3.369,5.146-4.891c1.91-1.91,2.93-6.689,4.77-7.65c2.604-1.361,1.661-3.107,3.012-5.27
@@ -1892,7 +1799,7 @@
                                     c-0.398-0.104-0.782-1.25-0.782-1.762c0-1.527-0.128-0.627-0.686-1.371c-0.292-0.391-0.195-0.895-0.195-1.371
                                     c0-0.658,2.537-0.371,1.174-2.35c-0.457-0.666-1.448-3.146-1.761-3.232c-1.949-0.541-7.271,0.896-7.532,3.035
                                     c-0.148,1.225-3.578,0.881-4.891,0.881c-4.871,0-1.504-3.975-4.793-4.994C491.191,462.408,490.708,462.564,489.943,462.435z" />
-                                    <path id="jalisco" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M389.543,450.872
+                                        <path id="jalisco" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M389.543,450.872
                                     c0.334,0.695,0.18,1.73,0.18,2.871c0,1.617-0.303,2.754-1.547,3.314c-1.759,0.791-5.221-0.174-5.969,0.221
                                     c-1.379,0.725-1.995-0.621-3.538,0.883c-1.005,0.982-0.102,1.988-1.989,1.988c0.837,5.303,1.363,7.363,3.758,12.15
                                     c0.511,1.021,2.05,6.395,2.432,6.629c5.689,3.467,9.905,5.207,11.717,10.162c2.59,7.084,8.675,9.227,14.704,11.543
@@ -1975,8 +1882,8 @@
                                     c-0.193-1.682-1.176-1.609-2.815-1.609c-0.38,0-0.709-1.428-0.805-1.809c-1.773-0.787-6.534-1.67-7.039,0.805
                                     c-0.536,2.627-2.882,0.52-4.224,1.607c-1.067,0.867-2.137,0.811-2.815,2.01c-0.756,1.338-3.448,1.447-3.821,3.016
                                     C390.045,449.539,389.98,450.195,389.543,450.872z" />
-                                    <path id="michoacan" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
-                                        d="M446.922,508.593
+                                        <path id="michoacan" fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="M446.922,508.593
                                     c-0.001,0.229-0.022,0.441-0.124,0.605c-0.411,0.658-0.798,0.564-1.191,1.588c-0.292,0.758-1.309,0.211-1.788,0.594
                                     c-1.897,1.518-5.954,1.262-6.156,4.367c-0.093,1.422-0.389,0.232-0.993,1.191c-0.105,0.166-0.206,0.404-0.298,0.68
                                     c3.859,2.52,3.667,9.451,7.958,11.9c7.085,4.047,16.037,6.316,24.981,8.836c4.475,1.262,12.728,6.531,16.139,6.85
@@ -2023,7 +1930,7 @@
                                     c-0.59,0.404-3.281-0.238-3.641,0.252c-0.382,0.521-0.579,1.063-0.753,1.756c-0.146,1.066-0.265,1.965-1.255,2.383
                                     c-1.674,0.707-1.993,0.725-2.385,2.635c-0.316,1.541-2.259,2.621-2.259,0.375c0-0.889,0.012-2.541-1.381-2.006
                                     c-0.832,0.318-0.1,0.799-1.632-0.125c-0.942-0.57-1.359,0.77-2.009,1.254C449.803,508.914,448.021,508.744,446.922,508.593z" />
-                                    <path id="colima" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M214.959,490.695
+                                        <path id="colima" fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="M214.959,490.695
                                     c-0.704,0.324-1.36,0.729-2.125,0.85c-0.419,0.066-0.905,0.209-1.275,0c-0.458-0.258-0.127-0.594,0.425-1.273
                                     c0.073-0.09,0.348-1.148,0.425-1.275c0.124-0.199,1.075-1.174,1.275-1.273c0.253-0.127,0.569-0.037,0.85,0
                                     c0.705,0.092,0.425,0.137,0.425,0.85C214.959,489.677,215.128,490.527,214.959,490.695L214.959,490.695z M210.709,508.958
@@ -2046,10 +1953,10 @@
                                     c-1.897,1.518-5.954,1.262-6.156,4.367c-0.093,1.422-0.389,0.232-0.993,1.191c-0.105,0.166-0.206,0.404-0.3,0.676
                                     c-0.454-0.295-0.965-0.531-1.546-0.689c-4.323-1.186-1.849-3.516-4.201-5.303c-1.897-1.441-9.265-1.365-9.506-3.535
                                     C418.157,504.146,413.74,502.343,409.297,500.636z" />
-                        
-                                    <path id="quintanaroo"
-                                        sodipodi:nodetypes="cccssssscssssssccsssssssssssssssssssssscccccccccccccccccccccccccccccccssssssssssccccssssssssssccccsssssccsssccccsccsc"
-                                        fill="#e8e8b1" stroke="#e8e8b1" stroke-width="0.25" d="
+
+                                        <path id="quintanaroo"
+                                            sodipodi:nodetypes="cccssssscssssssccsssssssssssssssssssssscccccccccccccccccccccccccccccccssssssssssccccssssssssssccccsssssccsssccccsccsc"
+                                            fill="#e8e8b1" stroke="#e8e8b1" stroke-width="0.25" d="
                                     M894.209,530.507c0.349-0.025,4.434-0.273,4.781-0.299l-0.717-5.74c0.032,0,2.129-1.156,2.628-1.314
                                     c1.411-0.451,3.172-0.24,4.659-0.24c3.12,0,1.865-1.545,3.823-2.033c2.834-0.707,3.839-7.902,3.703-10.764
                                     c-0.071-1.508,2.002-1.088,2.748-2.512c1.88-3.594,3.04-2.822,5.961-2.756c0.546-1.537,3.934-2.838,3.934-3.42
@@ -2079,10 +1986,11 @@
                                     c0,0.324-0.011,0.479,0.22,0.662C959.258,400.574,959.337,400.689,959.567,400.689L959.567,400.689z M938.909,400.853l0.025-0.949
                                     c2.212-0.119,4.124-0.729,6.346-1.281c1.291-0.322,3.438-1.721,4.062-0.119l0,0c-2.104,0.402-2.732,1.465-4.54,1.789
                                     C942.87,400.64,940.934,400.792,938.909,400.853z" />
-                        
-                                    <path id="yucatan"
-                                        sodipodi:nodetypes="ccsssccccccccccccccccccccccccccccssccccccccccccccccscsccssssssscssssssssssccccccsssccscc"
-                                        fill="#e8e8b1" stroke="#717171" stroke-width="0.25" d="
+
+                                        <path id="yucatan"
+                                            sodipodi:nodetypes="ccsssccccccccccccccccccccccccccccssccccccccccccccccscsccssssssscssssssssssccccccsssccscc"
+                                            fill="#e8e8b1" stroke="#717171" stroke-width="0.25"
+                                            d="
                                     M938.905,400.851l0.026-0.955c-0.265,0.031-0.539,0.039-0.818,0.039c-0.723,0-2.513-0.252-3.106,0.119
                                     c-1.325,0.828,0.116,0.836,1.434,0.836C937.283,400.89,938.098,400.874,938.905,400.851z M889.754,473.251l18.25-19.705l-0.6-3.6
                                     h4.198v-3.299h6.297v-2.098l8.097-0.301l-0.6-2.699l3.599-3.299l1.799-0.299v2.098l5.098,0.602v-1.801h-1.799v-4.498l4.198-0.6
@@ -2101,491 +2009,622 @@
                                     C867.3,372.98,867.296,372.955,867.308,372.923z M868.749,373.73c0.351,0.07,0.672,0.131,0.817,0.207
                                     c0.676,0.355,1.654-0.549,1.979,0.283c0.513,1.313-0.708,1.164-0.849,1.412c-0.624,1.105,0.482,1.313-0.047,2.045l-0.801-1.762
                                     c-0.077-0.93-0.023-1.152-0.565-1.695C869.123,374.06,868.945,373.89,868.749,373.73L868.749,373.73z" />
-                                </g>
-                                <g id="g6134" transform="matrix(1.25,0,0,-1.25,1814.29,217.74306)">
-                                    <path id="path6136" fill="#DCDCDC" d="M0.104-0.396h0.24H0.104" />
-                                </g>
-                                <g id="g6138" transform="matrix(1.25,0,0,-1.25,1811.29,218.04306)">
-                                    <path id="path6140" fill="#DCDCDC" d="M0.104-0.396h0.24H0.104" />
-                                </g>
-                                <g id="g6142" transform="matrix(1.25,0,0,-1.25,1824.79,228.54306)">
-                                    <path id="path6144" fill="#DCDCDC" d="M0.104-0.396v-0.24V-0.396" />
-                                </g>
-                                <g id="g6146" transform="matrix(1.25,0,0,-1.25,1825.09,228.24306)">
-                                    <path id="path6148" fill="#DCDCDC" d="M0.104-0.396h0.24H0.104" />
-                                </g>
-                                <g id="g6150" transform="matrix(1.25,0,0,-1.25,1824.79,242.64306)">
-                                    <path id="path6152" fill="#DCDCDC" d="M0.104-0.396v-0.24V-0.396" />
-                                </g>
-                                <g id="g6154" transform="matrix(1.25,0,0,-1.25,1825.09,242.64306)">
-                                    <path id="path6156" fill="#DCDCDC" d="M0.104-0.396h-0.241H0.104" />
-                                </g>
-                                <g id="g6158" transform="matrix(1.25,0,0,-1.25,1847.29,250.14306)">
-                                    <path id="path6160" fill="#DCDCDC" d="M0.104-0.396v-0.24V-0.396" />
-                                </g>
-                                <g id="g6162" transform="matrix(1.25,0,0,-1.25,1852.09,282.84306)">
-                                    <path id="path6164" fill="#DCDCDC" d="M0.104-0.396h-0.241H0.104" />
-                                </g>
-                                <g id="g6166" transform="matrix(1.25,0,0,-1.25,1850.29,282.84306)">
-                                    <path id="path6168" fill="#DCDCDC" d="M0.104-0.396v0.24V-0.396" />
-                                </g>
-                                <g id="g6170" transform="matrix(1.25,0,0,-1.25,1879.39,218.04306)">
-                                    <path id="path6172" fill="#DCDCDC" d="M0.103-0.396h-0.72H0.103" />
-                                </g>
-                                <g id="g6174" transform="matrix(1.25,0,0,-1.25,1799.89,218.94306)">
-                                    <path id="path6176" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
-                                </g>
-                                <g id="g6178" transform="matrix(1.25,0,0,-1.25,1802.59,218.64306)">
-                                    <path id="path6180" fill="#DCDCDC" d="M0.104-0.396h-0.241H0.104" />
-                                </g>
-                                <g id="g6182" transform="matrix(1.25,0,0,-1.25,1776.19,221.04306)">
-                                    <path id="path6184" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
-                                </g>
-                                <g id="g6186" transform="matrix(1.25,0,0,-1.25,1836.49,303.84306)">
-                                    <path id="path6188" fill="#DCDCDC" d="M0.103-0.396v-0.24V-0.396" />
-                                </g>
-                                <g id="g6190" transform="matrix(1.25,0,0,-1.25,1880.89,293.94306)">
-                                    <path id="path6192" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
-                                </g>
-                                <g id="g6194" transform="matrix(1.25,0,0,-1.25,1869.49,308.64306)">
-                                    <path id="path6196" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
-                                </g>
-                                <g id="g6198" transform="matrix(1.25,0,0,-1.25,1887.49,276.54306)">
-                                    <path id="path6200" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
-                                </g>
-                                <g id="g6202" transform="matrix(1.25,0,0,-1.25,1740.49,217.74306)">
-                                    <path id="path6204" fill="#DCDCDC" d="M0.103-0.396h0.241H0.103" />
-                                </g>
-                                <g id="g6206" transform="matrix(1.25,0,0,-1.25,1776.19,221.04306)">
-                                    <path id="path6208" fill="#DCDCDC" d="M0.103-0.396v-0.24V-0.396" />
-                                </g>
-                                <g id="g6210" transform="matrix(1.25,0,0,-1.25,1781.59,242.34306)">
-                                    <path id="path6212" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
-                                </g>
-                                <g id="g6214" transform="matrix(1.25,0,0,-1.25,1827.49,317.34306)">
-                                    <path id="path6216" fill="#DCDCDC" d="M0.103-0.396h0.241H0.103" />
-                                </g>
-                                <g id="g6218" transform="matrix(1.25,0,0,-1.25,1835.29,318.54306)">
-                                    <path id="path6220" fill="#DCDCDC" d="M0.103-0.396v0.24V-0.396" />
-                                </g>
-                                <g id="g6222" transform="matrix(1.25,0,0,-1.25,1833.49,338.34306)">
-                                    <path id="path6224" fill="#DCDCDC" d="M0.103-0.395v0.48V-0.395" />
-                                </g>
-                                <g id="g6226" transform="matrix(1.25,0,0,-1.25,1861.39,317.34306)">
-                                    <path id="path6228" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
-                                </g>
-                                <g id="g6230" transform="matrix(1.25,0,0,-1.25,1946.89,287.04306)">
-                                    <path id="path6232" fill="#FFFFFF" d="M0.103-0.396h0.24H0.103" />
-                                </g>
-                                <g id="g6234" transform="matrix(1.25,0,0,-1.25,1740.79,217.74306)">
-                                    <path id="path6236" fill="#FFFFFF" d="M0.103-0.396h-0.241H0.103" />
-                                </g>
-                                <g id="g6238" transform="matrix(1.25,0,0,-1.25,1721.59,225.84306)">
-                                    <path id="path6240" fill="#FFFFFF" d="M0.103-0.396h0.24H0.103" />
-                                </g>
-                                <g id="g6242" transform="matrix(1.25,0,0,-1.25,1734.79,215.04306)">
-                                    <path id="path6244" fill="#FFFFFF" d="M0.103-0.396h-0.96H0.103" />
-                                </g>
-                                <g id="g6246" transform="matrix(1.25,0,0,-1.25,1734.79,215.04306)">
-                                    <path id="path6248" fill="#FFFFFF" d="M0.103-0.396h-0.96H0.103" />
-                                </g>
-                                <g id="g6250" transform="matrix(1.25,0,0,-1.25,1741.09,224.04306)">
-                                    <path id="path6252" fill="#DCDCDC" d="M0.103-0.396v-0.24V-0.396" />
-                                </g>
-                                <g id="g6254" transform="matrix(1.25,0,0,-1.25,1711.09,260.64306)">
-                                    <path id="path6256" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
-                                </g>
-                                <g id="g6258" transform="matrix(1.25,0,0,-1.25,1754.89,267.54306)">
-                                    <path id="path6260" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
-                                </g>
-                                <g id="g6262" transform="matrix(1.25,0,0,-1.25,1754.59,267.24306)">
-                                    <path id="path6264" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
-                                </g>
-                                <g id="g6266" transform="matrix(1.25,0,0,-1.25,1787.59,336.84306)">
-                                    <path id="path6268" fill="#DCDCDC" d="M0.103-0.395h-0.48H0.103" />
-                                </g>
-                                <g id="g6270" transform="matrix(1.25,0,0,-1.25,1876.39,392.34306)">
-                                    <path id="path6272" fill="#DCDCDC" d="M0.103-0.395h-0.24H0.103" />
-                                </g>
-                                <g id="g6274" transform="matrix(1.25,0,0,-1.25,1927.39,333.84306)">
-                                    <path id="path6276" fill="#FFFFFF" d="M0.103-0.395h-0.24H0.103" />
-                                </g>
-                                <g id="g6278" transform="matrix(1.25,0,0,-1.25,1956.19,356.34306)">
-                                    <path id="path6280" fill="#FFFFFF" d="M0.103-0.395v0.239V-0.395" />
-                                </g>
-                                <g id="g6282" transform="matrix(1.25,0,0,-1.25,1954.99,357.24306)">
-                                    <path id="path6284" fill="#FFFFFF" d="M0.102-0.396v0.239V-0.396" />
-                                </g>
-                                <g id="g6286" transform="matrix(1.25,0,0,-1.25,1927.39,333.84306)">
-                                    <path id="path6288" fill="#DCDCDC" d="M0.103-0.395h0.24H0.103" />
-                                </g>
-                                <g id="g6290" transform="matrix(1.25,0,0,-1.25,1981.69,245.04306)">
-                                    <path id="path6292" fill="#FFFFFF" d="M0.103-0.396v-0.24V-0.396" />
-                                </g>
-                                <g id="g6294" transform="matrix(1.25,0,0,-1.25,1860.19,395.34306)">
-                                    <path id="path6296" fill="#DCDCDC" d="M0.102-0.395v-0.481V-0.395" />
-                                </g>
-                                <g id="g6298" transform="matrix(1.25,0,0,-1.25,1845.49,395.34306)">
-                                    <path id="path6300" fill="#DCDCDC" d="M0.102-0.395h0.241H0.102" />
-                                </g>
-                                <g id="g6302" transform="matrix(1.25,0,0,-1.25,1923.79,385.44306)">
-                                    <path id="path6304" fill="#FFFFFF" d="M0.103-0.397v-0.239V-0.397" />
-                                </g>
-                                <g id="g6306" transform="matrix(1.25,0,0,-1.25,2044.99,268.74306)">
-                                    <path id="path6308" fill="#FFFFFF" d="M0.102-0.396h-0.24H0.102" />
-                                </g>
-                                <g id="g6310" transform="matrix(1.25,0,0,-1.25,1636.39,215.04306)">
-                                </g>
-                                <g id="g6312" transform="matrix(1.25,0,0,-1.25,1966.99,401.04306)">
-                                    <path id="path6314" fill="#FFFFFF" d="M0.102-0.396h0.241H0.102" />
-                                </g>
-                                <g id="LÍNEAS_GLOBO" transform="matrix(4.6292732,0,0,-4.6292732,-535.75071,-248.17154)">
-                                    <path id="path16298" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M0.028-0.107h216" />
-                                    <path id="path16302" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M7.468-56.027
+                                    </g>
+                                    <g id="g6134" transform="matrix(1.25,0,0,-1.25,1814.29,217.74306)">
+                                        <path id="path6136" fill="#DCDCDC" d="M0.104-0.396h0.24H0.104" />
+                                    </g>
+                                    <g id="g6138" transform="matrix(1.25,0,0,-1.25,1811.29,218.04306)">
+                                        <path id="path6140" fill="#DCDCDC" d="M0.104-0.396h0.24H0.104" />
+                                    </g>
+                                    <g id="g6142" transform="matrix(1.25,0,0,-1.25,1824.79,228.54306)">
+                                        <path id="path6144" fill="#DCDCDC" d="M0.104-0.396v-0.24V-0.396" />
+                                    </g>
+                                    <g id="g6146" transform="matrix(1.25,0,0,-1.25,1825.09,228.24306)">
+                                        <path id="path6148" fill="#DCDCDC" d="M0.104-0.396h0.24H0.104" />
+                                    </g>
+                                    <g id="g6150" transform="matrix(1.25,0,0,-1.25,1824.79,242.64306)">
+                                        <path id="path6152" fill="#DCDCDC" d="M0.104-0.396v-0.24V-0.396" />
+                                    </g>
+                                    <g id="g6154" transform="matrix(1.25,0,0,-1.25,1825.09,242.64306)">
+                                        <path id="path6156" fill="#DCDCDC" d="M0.104-0.396h-0.241H0.104" />
+                                    </g>
+                                    <g id="g6158" transform="matrix(1.25,0,0,-1.25,1847.29,250.14306)">
+                                        <path id="path6160" fill="#DCDCDC" d="M0.104-0.396v-0.24V-0.396" />
+                                    </g>
+                                    <g id="g6162" transform="matrix(1.25,0,0,-1.25,1852.09,282.84306)">
+                                        <path id="path6164" fill="#DCDCDC" d="M0.104-0.396h-0.241H0.104" />
+                                    </g>
+                                    <g id="g6166" transform="matrix(1.25,0,0,-1.25,1850.29,282.84306)">
+                                        <path id="path6168" fill="#DCDCDC" d="M0.104-0.396v0.24V-0.396" />
+                                    </g>
+                                    <g id="g6170" transform="matrix(1.25,0,0,-1.25,1879.39,218.04306)">
+                                        <path id="path6172" fill="#DCDCDC" d="M0.103-0.396h-0.72H0.103" />
+                                    </g>
+                                    <g id="g6174" transform="matrix(1.25,0,0,-1.25,1799.89,218.94306)">
+                                        <path id="path6176" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
+                                    </g>
+                                    <g id="g6178" transform="matrix(1.25,0,0,-1.25,1802.59,218.64306)">
+                                        <path id="path6180" fill="#DCDCDC" d="M0.104-0.396h-0.241H0.104" />
+                                    </g>
+                                    <g id="g6182" transform="matrix(1.25,0,0,-1.25,1776.19,221.04306)">
+                                        <path id="path6184" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
+                                    </g>
+                                    <g id="g6186" transform="matrix(1.25,0,0,-1.25,1836.49,303.84306)">
+                                        <path id="path6188" fill="#DCDCDC" d="M0.103-0.396v-0.24V-0.396" />
+                                    </g>
+                                    <g id="g6190" transform="matrix(1.25,0,0,-1.25,1880.89,293.94306)">
+                                        <path id="path6192" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
+                                    </g>
+                                    <g id="g6194" transform="matrix(1.25,0,0,-1.25,1869.49,308.64306)">
+                                        <path id="path6196" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
+                                    </g>
+                                    <g id="g6198" transform="matrix(1.25,0,0,-1.25,1887.49,276.54306)">
+                                        <path id="path6200" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
+                                    </g>
+                                    <g id="g6202" transform="matrix(1.25,0,0,-1.25,1740.49,217.74306)">
+                                        <path id="path6204" fill="#DCDCDC" d="M0.103-0.396h0.241H0.103" />
+                                    </g>
+                                    <g id="g6206" transform="matrix(1.25,0,0,-1.25,1776.19,221.04306)">
+                                        <path id="path6208" fill="#DCDCDC" d="M0.103-0.396v-0.24V-0.396" />
+                                    </g>
+                                    <g id="g6210" transform="matrix(1.25,0,0,-1.25,1781.59,242.34306)">
+                                        <path id="path6212" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
+                                    </g>
+                                    <g id="g6214" transform="matrix(1.25,0,0,-1.25,1827.49,317.34306)">
+                                        <path id="path6216" fill="#DCDCDC" d="M0.103-0.396h0.241H0.103" />
+                                    </g>
+                                    <g id="g6218" transform="matrix(1.25,0,0,-1.25,1835.29,318.54306)">
+                                        <path id="path6220" fill="#DCDCDC" d="M0.103-0.396v0.24V-0.396" />
+                                    </g>
+                                    <g id="g6222" transform="matrix(1.25,0,0,-1.25,1833.49,338.34306)">
+                                        <path id="path6224" fill="#DCDCDC" d="M0.103-0.395v0.48V-0.395" />
+                                    </g>
+                                    <g id="g6226" transform="matrix(1.25,0,0,-1.25,1861.39,317.34306)">
+                                        <path id="path6228" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
+                                    </g>
+                                    <g id="g6230" transform="matrix(1.25,0,0,-1.25,1946.89,287.04306)">
+                                        <path id="path6232" fill="#FFFFFF" d="M0.103-0.396h0.24H0.103" />
+                                    </g>
+                                    <g id="g6234" transform="matrix(1.25,0,0,-1.25,1740.79,217.74306)">
+                                        <path id="path6236" fill="#FFFFFF" d="M0.103-0.396h-0.241H0.103" />
+                                    </g>
+                                    <g id="g6238" transform="matrix(1.25,0,0,-1.25,1721.59,225.84306)">
+                                        <path id="path6240" fill="#FFFFFF" d="M0.103-0.396h0.24H0.103" />
+                                    </g>
+                                    <g id="g6242" transform="matrix(1.25,0,0,-1.25,1734.79,215.04306)">
+                                        <path id="path6244" fill="#FFFFFF" d="M0.103-0.396h-0.96H0.103" />
+                                    </g>
+                                    <g id="g6246" transform="matrix(1.25,0,0,-1.25,1734.79,215.04306)">
+                                        <path id="path6248" fill="#FFFFFF" d="M0.103-0.396h-0.96H0.103" />
+                                    </g>
+                                    <g id="g6250" transform="matrix(1.25,0,0,-1.25,1741.09,224.04306)">
+                                        <path id="path6252" fill="#DCDCDC" d="M0.103-0.396v-0.24V-0.396" />
+                                    </g>
+                                    <g id="g6254" transform="matrix(1.25,0,0,-1.25,1711.09,260.64306)">
+                                        <path id="path6256" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
+                                    </g>
+                                    <g id="g6258" transform="matrix(1.25,0,0,-1.25,1754.89,267.54306)">
+                                        <path id="path6260" fill="#DCDCDC" d="M0.103-0.396h-0.24H0.103" />
+                                    </g>
+                                    <g id="g6262" transform="matrix(1.25,0,0,-1.25,1754.59,267.24306)">
+                                        <path id="path6264" fill="#DCDCDC" d="M0.103-0.396h0.24H0.103" />
+                                    </g>
+                                    <g id="g6266" transform="matrix(1.25,0,0,-1.25,1787.59,336.84306)">
+                                        <path id="path6268" fill="#DCDCDC" d="M0.103-0.395h-0.48H0.103" />
+                                    </g>
+                                    <g id="g6270" transform="matrix(1.25,0,0,-1.25,1876.39,392.34306)">
+                                        <path id="path6272" fill="#DCDCDC" d="M0.103-0.395h-0.24H0.103" />
+                                    </g>
+                                    <g id="g6274" transform="matrix(1.25,0,0,-1.25,1927.39,333.84306)">
+                                        <path id="path6276" fill="#FFFFFF" d="M0.103-0.395h-0.24H0.103" />
+                                    </g>
+                                    <g id="g6278" transform="matrix(1.25,0,0,-1.25,1956.19,356.34306)">
+                                        <path id="path6280" fill="#FFFFFF" d="M0.103-0.395v0.239V-0.395" />
+                                    </g>
+                                    <g id="g6282" transform="matrix(1.25,0,0,-1.25,1954.99,357.24306)">
+                                        <path id="path6284" fill="#FFFFFF" d="M0.102-0.396v0.239V-0.396" />
+                                    </g>
+                                    <g id="g6286" transform="matrix(1.25,0,0,-1.25,1927.39,333.84306)">
+                                        <path id="path6288" fill="#DCDCDC" d="M0.103-0.395h0.24H0.103" />
+                                    </g>
+                                    <g id="g6290" transform="matrix(1.25,0,0,-1.25,1981.69,245.04306)">
+                                        <path id="path6292" fill="#FFFFFF" d="M0.103-0.396v-0.24V-0.396" />
+                                    </g>
+                                    <g id="g6294" transform="matrix(1.25,0,0,-1.25,1860.19,395.34306)">
+                                        <path id="path6296" fill="#DCDCDC" d="M0.102-0.395v-0.481V-0.395" />
+                                    </g>
+                                    <g id="g6298" transform="matrix(1.25,0,0,-1.25,1845.49,395.34306)">
+                                        <path id="path6300" fill="#DCDCDC" d="M0.102-0.395h0.241H0.102" />
+                                    </g>
+                                    <g id="g6302" transform="matrix(1.25,0,0,-1.25,1923.79,385.44306)">
+                                        <path id="path6304" fill="#FFFFFF" d="M0.103-0.397v-0.239V-0.397" />
+                                    </g>
+                                    <g id="g6306" transform="matrix(1.25,0,0,-1.25,2044.99,268.74306)">
+                                        <path id="path6308" fill="#FFFFFF" d="M0.102-0.396h-0.24H0.102" />
+                                    </g>
+                                    <g id="g6310" transform="matrix(1.25,0,0,-1.25,1636.39,215.04306)">
+                                    </g>
+                                    <g id="g6312" transform="matrix(1.25,0,0,-1.25,1966.99,401.04306)">
+                                        <path id="path6314" fill="#FFFFFF" d="M0.102-0.396h0.241H0.102" />
+                                    </g>
+                                    <g id="LÍNEAS_GLOBO"
+                                        transform="matrix(4.6292732,0,0,-4.6292732,-535.75071,-248.17154)">
+                                        <path id="path16298" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
+                                            d="M0.028-0.107h216" />
+                                        <path id="path16302" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M7.468-56.027
                                     c69.498,18.72,138.988,37.474,208.56,55.92" />
-                                    <path id="path16306" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M29.068-108.107
+                                        <path id="path16306" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M29.068-108.107
                                     c62.203,36.201,124.611,72.051,186.96,108" />
-                                    <path id="path16310" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M63.388-152.747
+                                        <path id="path16310" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M63.388-152.747
                                     c50.88,50.88,101.76,101.76,152.64,152.64" />
-                                    <path id="path16314" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M108.028-187.067
+                                        <path id="path16314" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M108.028-187.067
                                     c36.201,62.203,72.051,124.611,108,186.96" />
-                                    <path id="path16318" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M160.108-208.667
+                                        <path id="path16318" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M160.108-208.667
                                     c18.717,69.499,37.464,138.991,55.92,208.56" />
-                                    <path id="path16322" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
-                                        d="M216.028-216.107c0,72,0,144,0,216" />
-                                    <path id="path16326" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M271.948-208.667
+                                        <path id="path16322" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
+                                            d="M216.028-216.107c0,72,0,144,0,216" />
+                                        <path id="path16326" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M271.948-208.667
                                     c-18.717,69.499-37.464,138.991-55.92,208.56" />
-                                    <path id="path16330" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M324.028-187.067
+                                        <path id="path16330" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M324.028-187.067
                                     c-36.202,62.203-72.051,124.611-108,186.96" />
-                                    <path id="path16334" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M368.668-152.747
+                                        <path id="path16334" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M368.668-152.747
                                     c-50.88,50.88-101.76,101.76-152.64,152.64" />
-                                    <path id="path16338" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M402.988-108.107
+                                        <path id="path16338" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M402.988-108.107
                                     c-62.204,36.201-124.611,72.051-186.96,108" />
-                                    <path id="path16342" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M424.588-56.027
+                                        <path id="path16342" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M424.588-56.027
                                     c-69.499,18.72-138.988,37.474-208.56,55.92" />
-                                    <path id="path16346" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
-                                        d="M432.028-0.107c-72,0-144,0-216,0" />
-                                    <path id="path16350" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M0.028-0.107c-0.223-47.8,16.411-95.392,45.84-133.2
+                                        <path id="path16346" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
+                                            d="M432.028-0.107c-72,0-144,0-216,0" />
+                                        <path id="path16350" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M0.028-0.107c-0.223-47.8,16.411-95.392,45.84-133.2
                                     c28.756-36.547,69.534-63.827,114.96-75.6c60.248-16.212,125.546-4.698,176.88,30.24c42.271,28.841,74.166,73.262,87.12,123.36
                                     c4.791,17.93,7.193,36.522,7.2,55.2" />
-                                    <path id="path16354" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M37.708-0.107
+                                        <path id="path16354" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M37.708-0.107
                                     c-0.044-45.849,18.111-91.086,50.054-123.735c20.044-21.11,46.755-37.716,74.506-46.185
                                     c34.126-11.039,72.012-11.144,106.329-0.438c31.863,9.639,60.805,28.904,82.446,53.852c28.045,32.622,43.206,73.77,43.306,116.506
                                     " />
-                                    <path id="path16358" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M71.788-0.107c0.369-27.952,7.73-53.473,22.08-76.56
+                                        <path id="path16358" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M71.788-0.107c0.369-27.952,7.73-53.473,22.08-76.56
                                     c16.49-26.429,42.854-47.992,71.04-58.08c25.793-10.318,57.739-12.426,85.44-5.28c24.166,5.769,46.677,17.914,65.76,36.24
                                     c19.452,18.746,32.752,42.047,39.12,66.48c3.368,11.989,4.723,24.361,5.04,37.2" />
-                                    <path id="path16362" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
-                                        d="M103.468-0.107
+                                        <path id="path16362" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
+                                            d="M103.468-0.107
                                     c-0.575-44.487,27.912-87.357,69.36-103.92c39.466-17.13,88.717-8.323,120,21.6c22.543,20.754,36.046,51.549,35.76,82.32" />
-                                    <path id="path16366" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M132.988-0.107c0.097-21.321,8.413-41.946,23.28-57.6
+                                        <path id="path16366" fill="none" stroke="#FFFFFF" stroke-width="0.0275"
+                                            d="M132.988-0.107c0.097-21.321,8.413-41.946,23.28-57.6
                                     c18.913-19.511,47.037-29.132,74.16-24c28.14,4.41,53.679,25.564,63.36,52.8c3.423,9.03,5.056,18.718,5.28,28.8" />
-                                    <path id="path16370" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M161.308-0.107c0.095-21.099,12.555-40.597,31.2-49.2
+                                        <path id="path16370" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M161.308-0.107c0.095-21.099,12.555-40.597,31.2-49.2
                                     c16.24-8.498,38.99-6.614,54,3.84c15.132,10.243,24.035,27.277,24.24,45.36" />
-                                    <path id="path16374" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M188.908-0.107c0.386-10.625,5.178-17.952,12.48-22.8
+                                        <path id="path16374" fill="none" stroke="#FFFFFF" stroke-width="0.0275" d="M188.908-0.107c0.386-10.625,5.178-17.952,12.48-22.8
                                     c9.167-6.63,25.224-5.185,32.64,2.64c5.078,4.273,9.02,11.515,9.12,20.16" />
+                                    </g>
                                 </g>
-                            </g>
-                            <g id="CAPITALES">
-                                <g id="PUNTOS">
-                                    <circle fill="#C1272D" cx="519.915" cy="294.003" r="2.333" />
-                                    <circle fill="#C1272D" cx="376.678" cy="196.664" r="2.333" />
-                                    <circle fill="#C1272D" cx="234.271" cy="170.909" r="2.333" />
-                                    <circle fill="#C1272D" cx="242.1" cy="334.818" r="2.333" />
-                                    <circle fill="#C1272D" cx="107.66" cy="41.605" r="2.333" />
-                                    <circle fill="#C1272D" cx="580.837" cy="350.409" r="2.333" />
-                                    <circle fill="#C1272D" cx="473.938" cy="383.379" r="2.334" />
-                                    <circle fill="#C1272D" cx="482.145" cy="414.557" r="2.333" />
-                                    <circle fill="#C1272D" cx="523.248" cy="400.771" r="2.334" />
-                                    <circle fill="#C1272D" cx="513.48" cy="435.64" r="2.333" />
-                                    <circle fill="#C1272D" cx="401.937" cy="426.024" r="2.333" />
-                                    <circle fill="#C1272D" cx="456.299" cy="453.035" r="2.333" />
-                                    <circle fill="#C1272D" cx="336.146" cy="322.069" r="2.333" />
-                                    <circle fill="#C1272D" cx="412.418" cy="341.483" r="2.333" />
-                                    <circle fill="#C1272D" cx="582.837" cy="507.856" r="2.333" />
-                                    <circle fill="#C1272D" cx="436.369" cy="498.665" r="2.333" />
-                                    <circle fill="#C1272D" cx="566.159" cy="498.59" r="2.333" />
-                                    <circle fill="#C1272D" cx="592.436" cy="468.904" r="2.333" />
-                                    <circle fill="#C1272D" cx="544.374" cy="453.035" r="2.333" />
-                                    <circle fill="#C1272D" cx="522.248" cy="486.169" r="2.334" />
-                                    <circle fill="#C1272D" cx="650.937" cy="483.66" r="2.333" />
-                                    <circle fill="#C1272D" cx="878.258" cy="423.27" r="2.333" />
-                                    <circle fill="#C1272D" cx="849.27" cy="465.122" r="2.333" />
-                                    <circle fill="#C1272D" cx="923.414" cy="502.62" r="2.333" />
-                                    <circle fill="#C1272D" cx="784.269" cy="568.659" r="2.333" />
-                                    <circle fill="#C1272D" cx="779.548" cy="535.02" r="2.333" />
-                                    <circle fill="#C1272D" cx="666.105" cy="569.93" r="2.334" />
-                                    <circle fill="#C1272D" cx="609.23" cy="497.894" r="2.334" />
-                                    <circle fill="#C1272D" cx="570.752" cy="551.024" r="2.334" />
-                                    <circle fill="#C1272D" cx="610.23" cy="505.522" r="2.334" />
-                                    <circle fill="#C1272D" cx="541.609" cy="285.192" r="2.334" />
+                                <g id="CAPITALES">
+                                    <g id="PUNTOS">
+                                        <circle fill="#C1272D" cx="519.915" cy="294.003" r="2.333" />
+                                        <circle fill="#C1272D" cx="376.678" cy="196.664" r="2.333" />
+                                        <circle fill="#C1272D" cx="234.271" cy="170.909" r="2.333" />
+                                        <circle fill="#C1272D" cx="242.1" cy="334.818" r="2.333" />
+                                        <circle fill="#C1272D" cx="107.66" cy="41.605" r="2.333" />
+                                        <circle fill="#C1272D" cx="580.837" cy="350.409" r="2.333" />
+                                        <circle fill="#C1272D" cx="473.938" cy="383.379" r="2.334" />
+                                        <circle fill="#C1272D" cx="482.145" cy="414.557" r="2.333" />
+                                        <circle fill="#C1272D" cx="523.248" cy="400.771" r="2.334" />
+                                        <circle fill="#C1272D" cx="513.48" cy="435.64" r="2.333" />
+                                        <circle fill="#C1272D" cx="401.937" cy="426.024" r="2.333" />
+                                        <circle fill="#C1272D" cx="456.299" cy="453.035" r="2.333" />
+                                        <circle fill="#C1272D" cx="336.146" cy="322.069" r="2.333" />
+                                        <circle fill="#C1272D" cx="412.418" cy="341.483" r="2.333" />
+                                        <circle fill="#C1272D" cx="582.837" cy="507.856" r="2.333" />
+                                        <circle fill="#C1272D" cx="436.369" cy="498.665" r="2.333" />
+                                        <circle fill="#C1272D" cx="566.159" cy="498.59" r="2.333" />
+                                        <circle fill="#C1272D" cx="592.436" cy="468.904" r="2.333" />
+                                        <circle fill="#C1272D" cx="544.374" cy="453.035" r="2.333" />
+                                        <circle fill="#C1272D" cx="522.248" cy="486.169" r="2.334" />
+                                        <circle fill="#C1272D" cx="650.937" cy="483.66" r="2.333" />
+                                        <circle fill="#C1272D" cx="878.258" cy="423.27" r="2.333" />
+                                        <circle fill="#C1272D" cx="849.27" cy="465.122" r="2.333" />
+                                        <circle fill="#C1272D" cx="923.414" cy="502.62" r="2.333" />
+                                        <circle fill="#C1272D" cx="784.269" cy="568.659" r="2.333" />
+                                        <circle fill="#C1272D" cx="779.548" cy="535.02" r="2.333" />
+                                        <circle fill="#C1272D" cx="666.105" cy="569.93" r="2.334" />
+                                        <circle fill="#C1272D" cx="609.23" cy="497.894" r="2.334" />
+                                        <circle fill="#C1272D" cx="570.752" cy="551.024" r="2.334" />
+                                        <circle fill="#C1272D" cx="610.23" cy="505.522" r="2.334" />
+                                        <circle fill="#C1272D" cx="541.609" cy="285.192" r="2.334" />
+                                    </g>
                                 </g>
-                            </g>
-                            <g id="NOMBRES_ESTADOS">
-                                <text transform="matrix(1 0 0 1 460.594 409.8002)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="7">AGUASCALIENTES</text>
-                                <path fill="none" d="M93.321,59.89c0,0,8.118,60.969,21.257,77.484s32.639,34.332,34.139,48.674" />
-                                <text transform="matrix(0.1705 0.9854 -0.9854 0.1705 95.1409 71.8574)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">B</tspan>
-                                    <tspan x="7.824" y="-0.008" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-0.875">A</tspan>
-                                    <tspan x="15.267" y="-0.133" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-1.735">J</tspan>
-                                    <tspan x="21.438" y="-0.322" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-2.726">A</tspan>
-                                    <tspan x="28.862" y="-0.697" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-3.674"> </tspan>
-                                    <tspan x="32.626" y="-0.923" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-4.89">C</tspan>
-                                    <tspan x="40.736" y="-1.633" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-6.932">A</tspan>
-                                    <tspan x="48.333" y="-2.584" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-9.623">L</tspan>
-                                    <tspan x="55.031" y="-3.781" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-12.522">I</tspan>
-                                    <tspan x="58.914" y="-4.616" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-17.191">F</tspan>
-                                    <tspan x="66.19" y="-7.03" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-29.306">O</tspan>
-                                    <tspan x="73.613" y="-11.239" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-31.015">R</tspan>
-                                    <tspan x="80.328" y="-15.295" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-31.44">N</tspan>
-                                    <tspan x="87.339" y="-19.574" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-31.036">I</tspan>
-                                    <tspan x="90.398" y="-21.429" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-30.068">A</tspan>
-                                </text>
-                                <path fill="none" d="M149.771,207.568c0,0,44.25,49,52.25,82s21.75,45.5,33.5,53.25s12.056,16.346,19,20" />
-                                <text transform="matrix(0.649 0.7608 -0.7608 0.649 152.012 210.0854)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">B</tspan>
-                                    <tspan x="7.827" y="0.012" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="1.043">A</tspan>
-                                    <tspan x="15.265" y="0.16" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="1.926">J</tspan>
-                                    <tspan x="21.438" y="0.37" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="2.834">A</tspan>
-                                    <tspan x="28.881" y="0.757" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="3.624"> </tspan>
-                                    <tspan x="32.633" y="0.985" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="4.529">C</tspan>
-                                    <tspan x="40.769" y="1.642" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="5.841">A</tspan>
-                                    <tspan x="48.171" y="2.414" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="7.188">L</tspan>
-                                    <tspan x="54.632" y="3.252" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="8.292">I</tspan>
-                                    <tspan x="58.167" y="3.759" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="9.569">F</tspan>
-                                    <tspan x="64.72" y="4.857" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="11.811">O</tspan>
-                                    <tspan x="73.043" y="6.623" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="14.911">R</tspan>
-                                    <tspan x="80.502" y="8.618" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="19.021">N</tspan>
-                                    <tspan x="88.122" y="11.355" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="23.144">I</tspan>
-                                    <tspan x="91.323" y="12.757" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="26.331">A</tspan>
-                                    <tspan x="98.209" y="16.103" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="24.125"> </tspan>
-                                    <tspan x="101.831" y="17.744" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="21.597">S</tspan>
-                                    <tspan x="109.1" y="20.594" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="17.413">U</tspan>
-                                    <tspan x="117.367" y="23.123" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="12.152">R</tspan>
-                                </text>
-                                <text transform="matrix(1 0 0 1 214.3191 158.748)" font-family="'HelveticaNeue-Roman'" font-size="10"
-                                    letter-spacing="3">SONORA</text>
-                        
-                                <text transform="matrix(0.9227 -0.3855 0.3855 0.9227 830.3607 519.5893)" font-family="'HelveticaNeue-Roman'"
-                                    font-size="10" letter-spacing="1">CAMPECHE</text>
-                                <text transform="matrix(1 0 0 1 874.2708 434.559)" font-family="'HelveticaNeue-Roman'" font-size="10"
-                                    letter-spacing="1">YUCATÁN</text>
-                                <text transform="matrix(1 0 0 1 893.1351 476.1596)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">QUINTANA</tspan>
-                                    <tspan x="14.249" y="12" font-family="'HelveticaNeue-Roman'" font-size="10">ROO</tspan>
-                                </text>
-                                <text transform="matrix(1 0 0 1 775.511 581.9096)" font-family="'HelveticaNeue-Roman'" font-size="10"
-                                    letter-spacing="2">CHIAPAS</text>
-                                <text transform="matrix(1 0 0 1 639.2542 580.8344)" font-family="'HelveticaNeue-Roman'" font-size="10"
-                                    letter-spacing="3">OAXACA</text>
-                                <text transform="matrix(1 0 0 1 756.179 530.5073)" font-family="'HelveticaNeue-Roman'"
-                                    font-size="10">TABASCO</text>
-                                <path fill="none" d="M615.417,454.748c0,0,69.661,89.055,135.933,102.117" />
-                                <text transform="matrix(0.7263 0.6874 -0.6874 0.7263 653.5989 496.2602)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">V</tspan>
-                                    <tspan x="10.068" y="-0.046" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-1.403">E</tspan>
-                                    <tspan x="20.117" y="-0.339" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-2.983">R</tspan>
-                                    <tspan x="30.909" y="-0.964" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-4.762">A</tspan>
-                                    <tspan x="41.289" y="-1.887" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-6.788">C</tspan>
-                                    <tspan x="52.359" y="-3.283" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-9.135">R</tspan>
-                                    <tspan x="62.958" y="-5.072" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-11.839">U</tspan>
-                                    <tspan x="73.852" y="-7.47" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-14.903">Z</tspan>
-                                </text>
-                        
-                                <text transform="matrix(0.8773 0.4799 -0.4799 0.8773 517.6038 540.2661)" font-family="'HelveticaNeue-Roman'"
-                                    font-size="10" letter-spacing="2">GUERRERO</text>
-                                <path fill="none" d="M474.836,537.888c0,0,13.733-38.989,64.867-38.323" />
-                                <text transform="matrix(0.4871 -0.8734 0.8734 0.4871 475.3509 536.1557)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">M</tspan>
-                                    <tspan x="10.471" y="0.307" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="7.098">I</tspan>
-                                    <tspan x="14.832" y="0.824" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="13.211">C</tspan>
-                                    <tspan x="23.537" y="2.995" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="21.407">H</tspan>
-                                    <tspan x="31.844" y="6.375" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="29.774">O</tspan>
-                                    <tspan x="39.882" y="11.16" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="37.597">A</tspan>
-                                    <tspan x="46.371" y="16.279" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="44.825">C</tspan>
-                                    <tspan x="52.667" y="22.725" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="51.427">Á</tspan>
-                                    <tspan x="57.773" y="29.263" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="57.329">N</tspan>
-                                </text>
-                                <text transform="matrix(1 0 0 1 326.6438 207.5678)" font-family="'HelveticaNeue-Roman'" font-size="10"
-                                    letter-spacing="3">CHIHUAHUA</text>
-                        
-                                <text transform="matrix(0.6607 0.7507 -0.7507 0.6607 290.5042 268.9443)" font-family="'HelveticaNeue-Roman'"
-                                    font-size="10" letter-spacing="3">SINALOA</text>
-                                <text transform="matrix(1 0 0 1 364.2703 315.9843)" font-family="'HelveticaNeue-Roman'" font-size="10"
-                                    letter-spacing="4">DURANGO</text>
-                        
-                                <text transform="matrix(0.576 0.8175 -0.8175 0.576 392.763 395.0795)" font-family="'HelveticaNeue-Roman'"
-                                    font-size="10" letter-spacing="1">NAYARIT</text>
-                                <text transform="matrix(1 0 0 1 396.513 469.7289)" font-family="'HelveticaNeue-Roman'" font-size="10"
-                                    letter-spacing="3">JALISCO</text>
-                                <path fill="none" d="M468.114,381.41c0,0-13.646-29.334,37.331-54" />
-                                <text transform="matrix(-0.2441 -0.9698 0.9698 -0.2441 467.992 381.728)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">Z</tspan>
-                                    <tspan x="6.684" y="0.079" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="14.45">A</tspan>
-                                    <tspan x="13.519" y="1.884" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="28.199">C</tspan>
-                                    <tspan x="20.374" y="5.705" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="40.345">A</tspan>
-                                    <tspan x="25.799" y="10.453" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="49.619">T</tspan>
-                                    <tspan x="29.973" y="15.442" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="57.027">E</tspan>
-                                    <tspan x="33.717" y="21.269" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="63.661">C</tspan>
-                                    <tspan x="37.222" y="28.508" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="69.06">A</tspan>
-                                    <tspan x="39.813" y="35.391" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="73.227">S</tspan>
-                                </text>
-                                <text transform="matrix(1 0 0 1 601.0394 525.937)" font-family="'HelveticaNeue-Roman'"
-                                    font-size="10">PUEBLA</text>
-                                <text transform="matrix(1 0 0 1 598.3548 489.5034)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="8">TLAXCALA</text>
-                                <text transform="matrix(1 0 0 1 569.7523 523.2055)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="7">MORELOS</text>
-                                <text transform="matrix(1 0 0 1 576.9173 495.561)">
-                                    <tspan x="2.912" y="6.4" font-family="'HelveticaNeue-MediumCond'" font-size="7">CDMX</tspan>
-                                </text>
-                                <path fill="none" d="M550.605,501.5c0,0,22.221-22.534,31.108-16.062" />
-                                <text transform="matrix(0.7466 -0.6653 0.6653 0.7466 551.9915 500.0571)">
-                                            <tspan x="2.912" y="6.4" font-family="'HelveticaNeue-MediumCond'" font-size="7">Edo. Méx</tspan>
-                                </text>
-                                <path fill="none" d="M494.421,456.051c0,0,12.339,15.577,58.31-32.042" />
-                                <text transform="matrix(0.9911 -0.1332 0.1332 0.9911 501.3626 458.6723)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Condensed'" font-size="10.0943">G</tspan>
-                                    <tspan x="6.996" y="-0.277" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-13.295">U
-                                    </tspan>
-                                    <tspan x="13.112" y="-1.825" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-20.293">A
-                                    </tspan>
-                                    <tspan x="18.67" y="-3.923" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-25.031">N
-                                    </tspan>
-                                    <tspan x="24.423" y="-6.653" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-28.414">A
-                                    </tspan>
-                                    <tspan x="29.479" y="-9.418" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-30.756">J
-                                    </tspan>
-                                    <tspan x="33.727" y="-11.953" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-32.682">U
-                                    </tspan>
-                                    <tspan x="38.539" y="-15.052" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-34.353">A
-                                    </tspan>
-                                    <tspan x="43.07" y="-18.162" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-35.697">T
-                                    </tspan>
-                                    <tspan x="47.249" y="-21.166" font-family="'HelveticaNeue-Condensed'" font-size="10.0943" rotate="-36.925">O
-                                    </tspan>
-                                </text>
-                                <path fill="none" d="M523.576,345.949c0,0-27.033,72.044,65.831,65.336" />
-                                <text transform="matrix(-0.2194 0.9756 -0.9756 -0.2194 522.3421 349.6645)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">S</tspan>
-                                    <tspan x="8.001" y="-0.08" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-6.38">A</tspan>
-                                    <tspan x="16.05" y="-1.047" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-14.121">N</tspan>
-                                    <tspan x="24.503" y="-3.407" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-21.318"> </tspan>
-                                    <tspan x="28.596" y="-5.009" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-28.733">L</tspan>
-                                    <tspan x="35.199" y="-8.755" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-41.246">U</tspan>
-                                    <tspan x="41.748" y="-15.022" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-52.168">I</tspan>
-                                    <tspan x="44.459" y="-18.508" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-62.189">S</tspan>
-                                    <tspan x="48.028" y="-25.904" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-71.262"> </tspan>
-                                    <tspan x="49.443" y="-30.068" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-78.856">P</tspan>
-                                    <tspan x="50.91" y="-38.094" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-87.346">O</tspan>
-                                    <tspan x="51.185" y="-47.168" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-93.45">T</tspan>
-                                    <tspan x="50.725" y="-54.27" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-98.178">O</tspan>
-                                    <tspan x="49.384" y="-63.077" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-102.087">S</tspan>
-                                    <tspan x="47.713" y="-70.574" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-104.329">Í</tspan>
-                                </text>
-                                <path fill="none" d="M589.22,380.104c0,0,29.229-67.05,22.453-95.319" />
-                                <text transform="matrix(0.3758 -0.9267 0.9267 0.3758 590.6683 376.6987)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">T</tspan>
-                                    <tspan x="8.712" y="-0.028" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-1.173">A</tspan>
-                                    <tspan x="18.141" y="-0.242" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-2.507">M</tspan>
-                                    <tspan x="29.803" y="-0.802" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-3.988">A</tspan>
-                                    <tspan x="39.214" y="-1.49" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-5.605">U</tspan>
-                                    <tspan x="49.303" y="-2.536" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-7.486">L</tspan>
-                                    <tspan x="57.742" y="-3.71" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-9.244">I</tspan>
-                                    <tspan x="63.329" y="-4.637" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-11.639">P</tspan>
-                                    <tspan x="72.934" y="-6.717" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-15.994">A</tspan>
-                                    <tspan x="82.567" y="-9.654" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-23.413">S</tspan>
-                                </text>
-                                <text transform="matrix(0.6452 -0.764 0.764 0.6452 548.2689 465.4135)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="10">QUERÉTARO</text>
-                                <path fill="none" d="M547.951,345.949c0,0,27.68-72.618,0-108.662" />
-                                <text transform="matrix(0.2635 -0.9647 0.9647 0.2635 552.0921 333.2836)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">N</tspan>
-                                    <tspan x="9.152" y="-0.037" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-2.238">U</tspan>
-                                    <tspan x="18.297" y="-0.442" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-4.469">E</tspan>
-                                    <tspan x="26.332" y="-1.106" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-6.765">V</tspan>
-                                    <tspan x="34.475" y="-2.101" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-9.646">O</tspan>
-                                    <tspan x="44.157" y="-3.855" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-12.394"> </tspan>
-                                    <tspan x="49.026" y="-4.94" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-15.081">L</tspan>
-                                    <tspan x="56.605" y="-7.048" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-19.077">E</tspan>
-                                    <tspan x="64.674" y="-9.909" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-24.643">Ó</tspan>
-                                    <tspan x="73.89" y="-14.31" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-32.192">N</tspan>
-                                </text>
-                                <path fill="none" d="M471.604,286.02c0,0,24.666-32.777,30-108.777" />
-                                <text transform="matrix(0.3824 -0.924 0.924 0.3824 481.5779 267.5834)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">C</tspan>
-                                    <tspan x="10.121" y="-0.079" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-3.043">O</tspan>
-                                    <tspan x="20.627" y="-0.714" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-5.7">H</tspan>
-                                    <tspan x="30.721" y="-1.791" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-7.959">A</tspan>
-                                    <tspan x="40.062" y="-3.147" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-10.033">U</tspan>
-                                    <tspan x="50.067" y="-4.991" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-11.58">I</tspan>
-                                    <tspan x="55.515" y="-6.124" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-12.892">L</tspan>
-                                    <tspan x="63.801" y="-8.057" font-family="'HelveticaNeue-Roman'" font-size="10" rotate="-14.473">A</tspan>
-                                </text>
-                        
-                                <text transform="matrix(1 0.0081 -0.0081 1 563.4485 465.1674)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="10" letter-spacing="1">HIDALGO</text>
-                        
-                                <text transform="matrix(0.9995 0.0305 -0.0305 0.9995 417.0374 510.5395)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="10">COLIMA</text>
-                                <text transform="matrix(1 0 0 1 516.9818 481.6489)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="5">Morelia</text>
-                                <text transform="matrix(1 0 0 1 395.7708 433.4096)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="5">Tepic</text>
-                                <text transform="matrix(1 0 0 1 465.9573 421.2973)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="5">Aguascalientes</text>
-                                <text transform="matrix(1 0 0 1 464.1287 390.4096)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="5">Zacatecas</text>
-                                <text transform="matrix(1 0 0 1 573.8226 339.5463)">
-                                    <tspan x="0" y="0" font-family="'HelveticaNeue-Condensed'" font-size="5">Ciudad</tspan>
-                                    <tspan x="-0.708" y="6" font-family="'HelveticaNeue-Condensed'" font-size="5">Victoria</tspan>
-                                </text>
-                                <text transform="matrix(1 0 0 1 528.1312 281.1596)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="5">Monterrey</text>
-                                <text transform="matrix(1 0 0 1 507.9886 301.4096)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="5">Saltillo</text>
-                                <text transform="matrix(1 0 0 1 365.9558 190.9096)" font-family="'HelveticaNeue-Condensed'"
-                                    font-size="5">Chihuahua</text>
-                                <text transform="matrix(1 0 0 1 246.9651 336.228)" font-family="'HelveticaNeue-Condensed'" font-size="5">La
-                                    Paz</text>
-                            </g>
-                        </svg>
+                                <g id="NOMBRES_ESTADOS">
+                                    <text transform="matrix(1 0 0 1 460.594 409.8002)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="7">AGUASCALIENTES</text>
+                                    <path fill="none"
+                                        d="M93.321,59.89c0,0,8.118,60.969,21.257,77.484s32.639,34.332,34.139,48.674" />
+                                    <text transform="matrix(0.1705 0.9854 -0.9854 0.1705 95.1409 71.8574)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">B</tspan>
+                                        <tspan x="7.824" y="-0.008" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-0.875">A</tspan>
+                                        <tspan x="15.267" y="-0.133" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-1.735">J</tspan>
+                                        <tspan x="21.438" y="-0.322" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-2.726">A</tspan>
+                                        <tspan x="28.862" y="-0.697" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-3.674"> </tspan>
+                                        <tspan x="32.626" y="-0.923" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-4.89">C</tspan>
+                                        <tspan x="40.736" y="-1.633" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-6.932">A</tspan>
+                                        <tspan x="48.333" y="-2.584" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-9.623">L</tspan>
+                                        <tspan x="55.031" y="-3.781" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-12.522">I</tspan>
+                                        <tspan x="58.914" y="-4.616" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-17.191">F</tspan>
+                                        <tspan x="66.19" y="-7.03" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-29.306">O</tspan>
+                                        <tspan x="73.613" y="-11.239" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-31.015">R</tspan>
+                                        <tspan x="80.328" y="-15.295" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-31.44">N</tspan>
+                                        <tspan x="87.339" y="-19.574" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-31.036">I</tspan>
+                                        <tspan x="90.398" y="-21.429" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-30.068">A</tspan>
+                                    </text>
+                                    <path fill="none"
+                                        d="M149.771,207.568c0,0,44.25,49,52.25,82s21.75,45.5,33.5,53.25s12.056,16.346,19,20" />
+                                    <text transform="matrix(0.649 0.7608 -0.7608 0.649 152.012 210.0854)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">B</tspan>
+                                        <tspan x="7.827" y="0.012" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="1.043">A</tspan>
+                                        <tspan x="15.265" y="0.16" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="1.926">J</tspan>
+                                        <tspan x="21.438" y="0.37" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="2.834">A</tspan>
+                                        <tspan x="28.881" y="0.757" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="3.624"> </tspan>
+                                        <tspan x="32.633" y="0.985" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="4.529">C</tspan>
+                                        <tspan x="40.769" y="1.642" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="5.841">A</tspan>
+                                        <tspan x="48.171" y="2.414" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="7.188">L</tspan>
+                                        <tspan x="54.632" y="3.252" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="8.292">I</tspan>
+                                        <tspan x="58.167" y="3.759" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="9.569">F</tspan>
+                                        <tspan x="64.72" y="4.857" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="11.811">O</tspan>
+                                        <tspan x="73.043" y="6.623" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="14.911">R</tspan>
+                                        <tspan x="80.502" y="8.618" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="19.021">N</tspan>
+                                        <tspan x="88.122" y="11.355" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="23.144">I</tspan>
+                                        <tspan x="91.323" y="12.757" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="26.331">A</tspan>
+                                        <tspan x="98.209" y="16.103" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="24.125"> </tspan>
+                                        <tspan x="101.831" y="17.744" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="21.597">S</tspan>
+                                        <tspan x="109.1" y="20.594" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="17.413">U</tspan>
+                                        <tspan x="117.367" y="23.123" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="12.152">R</tspan>
+                                    </text>
+                                    <text transform="matrix(1 0 0 1 214.3191 158.748)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="3">SONORA</text>
+
+                                    <text transform="matrix(0.9227 -0.3855 0.3855 0.9227 830.3607 519.5893)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="1">CAMPECHE</text>
+                                    <text transform="matrix(1 0 0 1 874.2708 434.559)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="1">YUCATÁN</text>
+                                    <text transform="matrix(1 0 0 1 893.1351 476.1596)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">QUINTANA
+                                        </tspan>
+                                        <tspan x="14.249" y="12" font-family="'HelveticaNeue-Roman'" font-size="10">ROO
+                                        </tspan>
+                                    </text>
+                                    <text transform="matrix(1 0 0 1 775.511 581.9096)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="2">CHIAPAS</text>
+                                    <text transform="matrix(1 0 0 1 639.2542 580.8344)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="3">OAXACA</text>
+                                    <text transform="matrix(1 0 0 1 756.179 530.5073)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10">TABASCO</text>
+                                    <path fill="none" d="M615.417,454.748c0,0,69.661,89.055,135.933,102.117" />
+                                    <text transform="matrix(0.7263 0.6874 -0.6874 0.7263 653.5989 496.2602)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">V</tspan>
+                                        <tspan x="10.068" y="-0.046" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-1.403">E</tspan>
+                                        <tspan x="20.117" y="-0.339" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-2.983">R</tspan>
+                                        <tspan x="30.909" y="-0.964" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-4.762">A</tspan>
+                                        <tspan x="41.289" y="-1.887" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-6.788">C</tspan>
+                                        <tspan x="52.359" y="-3.283" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-9.135">R</tspan>
+                                        <tspan x="62.958" y="-5.072" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-11.839">U</tspan>
+                                        <tspan x="73.852" y="-7.47" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-14.903">Z</tspan>
+                                    </text>
+
+                                    <text transform="matrix(0.8773 0.4799 -0.4799 0.8773 517.6038 540.2661)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="2">GUERRERO</text>
+                                    <path fill="none" d="M474.836,537.888c0,0,13.733-38.989,64.867-38.323" />
+                                    <text transform="matrix(0.4871 -0.8734 0.8734 0.4871 475.3509 536.1557)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">M</tspan>
+                                        <tspan x="10.471" y="0.307" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="7.098">I</tspan>
+                                        <tspan x="14.832" y="0.824" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="13.211">C</tspan>
+                                        <tspan x="23.537" y="2.995" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="21.407">H</tspan>
+                                        <tspan x="31.844" y="6.375" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="29.774">O</tspan>
+                                        <tspan x="39.882" y="11.16" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="37.597">A</tspan>
+                                        <tspan x="46.371" y="16.279" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="44.825">C</tspan>
+                                        <tspan x="52.667" y="22.725" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="51.427">Á</tspan>
+                                        <tspan x="57.773" y="29.263" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="57.329">N</tspan>
+                                    </text>
+                                    <text transform="matrix(1 0 0 1 326.6438 207.5678)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="3">CHIHUAHUA</text>
+
+                                    <text transform="matrix(0.6607 0.7507 -0.7507 0.6607 290.5042 268.9443)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="3">SINALOA</text>
+                                    <text transform="matrix(1 0 0 1 364.2703 315.9843)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="4">DURANGO</text>
+
+                                    <text transform="matrix(0.576 0.8175 -0.8175 0.576 392.763 395.0795)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="1">NAYARIT</text>
+                                    <text transform="matrix(1 0 0 1 396.513 469.7289)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10"
+                                        letter-spacing="3">JALISCO</text>
+                                    <path fill="none" d="M468.114,381.41c0,0-13.646-29.334,37.331-54" />
+                                    <text transform="matrix(-0.2441 -0.9698 0.9698 -0.2441 467.992 381.728)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">Z</tspan>
+                                        <tspan x="6.684" y="0.079" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="14.45">A</tspan>
+                                        <tspan x="13.519" y="1.884" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="28.199">C</tspan>
+                                        <tspan x="20.374" y="5.705" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="40.345">A</tspan>
+                                        <tspan x="25.799" y="10.453" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="49.619">T</tspan>
+                                        <tspan x="29.973" y="15.442" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="57.027">E</tspan>
+                                        <tspan x="33.717" y="21.269" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="63.661">C</tspan>
+                                        <tspan x="37.222" y="28.508" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="69.06">A</tspan>
+                                        <tspan x="39.813" y="35.391" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="73.227">S</tspan>
+                                    </text>
+                                    <text transform="matrix(1 0 0 1 601.0394 525.937)"
+                                        font-family="'HelveticaNeue-Roman'" font-size="10">PUEBLA</text>
+                                    <text transform="matrix(1 0 0 1 598.3548 489.5034)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="8">TLAXCALA</text>
+                                    <text transform="matrix(1 0 0 1 569.7523 523.2055)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="7">MORELOS</text>
+                                    <text transform="matrix(1 0 0 1 576.9173 495.561)">
+                                        <tspan x="2.912" y="6.4" font-family="'HelveticaNeue-MediumCond'" font-size="7">
+                                            CDMX</tspan>
+                                    </text>
+                                    <path fill="none" d="M550.605,501.5c0,0,22.221-22.534,31.108-16.062" />
+                                    <text transform="matrix(0.7466 -0.6653 0.6653 0.7466 551.9915 500.0571)">
+                                        <tspan x="2.912" y="6.4" font-family="'HelveticaNeue-MediumCond'" font-size="7">
+                                            Edo. Méx</tspan>
+                                    </text>
+                                    <path fill="none" d="M494.421,456.051c0,0,12.339,15.577,58.31-32.042" />
+                                    <text transform="matrix(0.9911 -0.1332 0.1332 0.9911 501.3626 458.6723)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Condensed'" font-size="10.0943">G
+                                        </tspan>
+                                        <tspan x="6.996" y="-0.277" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-13.295">U
+                                        </tspan>
+                                        <tspan x="13.112" y="-1.825" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-20.293">A
+                                        </tspan>
+                                        <tspan x="18.67" y="-3.923" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-25.031">N
+                                        </tspan>
+                                        <tspan x="24.423" y="-6.653" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-28.414">A
+                                        </tspan>
+                                        <tspan x="29.479" y="-9.418" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-30.756">J
+                                        </tspan>
+                                        <tspan x="33.727" y="-11.953" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-32.682">U
+                                        </tspan>
+                                        <tspan x="38.539" y="-15.052" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-34.353">A
+                                        </tspan>
+                                        <tspan x="43.07" y="-18.162" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-35.697">T
+                                        </tspan>
+                                        <tspan x="47.249" y="-21.166" font-family="'HelveticaNeue-Condensed'"
+                                            font-size="10.0943" rotate="-36.925">O
+                                        </tspan>
+                                    </text>
+                                    <path fill="none" d="M523.576,345.949c0,0-27.033,72.044,65.831,65.336" />
+                                    <text transform="matrix(-0.2194 0.9756 -0.9756 -0.2194 522.3421 349.6645)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">S</tspan>
+                                        <tspan x="8.001" y="-0.08" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-6.38">A</tspan>
+                                        <tspan x="16.05" y="-1.047" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-14.121">N</tspan>
+                                        <tspan x="24.503" y="-3.407" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-21.318"> </tspan>
+                                        <tspan x="28.596" y="-5.009" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-28.733">L</tspan>
+                                        <tspan x="35.199" y="-8.755" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-41.246">U</tspan>
+                                        <tspan x="41.748" y="-15.022" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-52.168">I</tspan>
+                                        <tspan x="44.459" y="-18.508" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-62.189">S</tspan>
+                                        <tspan x="48.028" y="-25.904" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-71.262"> </tspan>
+                                        <tspan x="49.443" y="-30.068" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-78.856">P</tspan>
+                                        <tspan x="50.91" y="-38.094" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-87.346">O</tspan>
+                                        <tspan x="51.185" y="-47.168" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-93.45">T</tspan>
+                                        <tspan x="50.725" y="-54.27" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-98.178">O</tspan>
+                                        <tspan x="49.384" y="-63.077" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-102.087">S</tspan>
+                                        <tspan x="47.713" y="-70.574" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-104.329">Í</tspan>
+                                    </text>
+                                    <path fill="none" d="M589.22,380.104c0,0,29.229-67.05,22.453-95.319" />
+                                    <text transform="matrix(0.3758 -0.9267 0.9267 0.3758 590.6683 376.6987)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">T</tspan>
+                                        <tspan x="8.712" y="-0.028" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-1.173">A</tspan>
+                                        <tspan x="18.141" y="-0.242" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-2.507">M</tspan>
+                                        <tspan x="29.803" y="-0.802" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-3.988">A</tspan>
+                                        <tspan x="39.214" y="-1.49" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-5.605">U</tspan>
+                                        <tspan x="49.303" y="-2.536" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-7.486">L</tspan>
+                                        <tspan x="57.742" y="-3.71" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-9.244">I</tspan>
+                                        <tspan x="63.329" y="-4.637" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-11.639">P</tspan>
+                                        <tspan x="72.934" y="-6.717" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-15.994">A</tspan>
+                                        <tspan x="82.567" y="-9.654" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-23.413">S</tspan>
+                                    </text>
+                                    <text transform="matrix(0.6452 -0.764 0.764 0.6452 548.2689 465.4135)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="10">QUERÉTARO</text>
+                                    <path fill="none" d="M547.951,345.949c0,0,27.68-72.618,0-108.662" />
+                                    <text transform="matrix(0.2635 -0.9647 0.9647 0.2635 552.0921 333.2836)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">N</tspan>
+                                        <tspan x="9.152" y="-0.037" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-2.238">U</tspan>
+                                        <tspan x="18.297" y="-0.442" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-4.469">E</tspan>
+                                        <tspan x="26.332" y="-1.106" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-6.765">V</tspan>
+                                        <tspan x="34.475" y="-2.101" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-9.646">O</tspan>
+                                        <tspan x="44.157" y="-3.855" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-12.394"> </tspan>
+                                        <tspan x="49.026" y="-4.94" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-15.081">L</tspan>
+                                        <tspan x="56.605" y="-7.048" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-19.077">E</tspan>
+                                        <tspan x="64.674" y="-9.909" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-24.643">Ó</tspan>
+                                        <tspan x="73.89" y="-14.31" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-32.192">N</tspan>
+                                    </text>
+                                    <path fill="none" d="M471.604,286.02c0,0,24.666-32.777,30-108.777" />
+                                    <text transform="matrix(0.3824 -0.924 0.924 0.3824 481.5779 267.5834)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Roman'" font-size="10">C</tspan>
+                                        <tspan x="10.121" y="-0.079" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-3.043">O</tspan>
+                                        <tspan x="20.627" y="-0.714" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-5.7">H</tspan>
+                                        <tspan x="30.721" y="-1.791" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-7.959">A</tspan>
+                                        <tspan x="40.062" y="-3.147" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-10.033">U</tspan>
+                                        <tspan x="50.067" y="-4.991" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-11.58">I</tspan>
+                                        <tspan x="55.515" y="-6.124" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-12.892">L</tspan>
+                                        <tspan x="63.801" y="-8.057" font-family="'HelveticaNeue-Roman'" font-size="10"
+                                            rotate="-14.473">A</tspan>
+                                    </text>
+
+                                    <text transform="matrix(1 0.0081 -0.0081 1 563.4485 465.1674)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="10"
+                                        letter-spacing="1">HIDALGO</text>
+
+                                    <text transform="matrix(0.9995 0.0305 -0.0305 0.9995 417.0374 510.5395)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="10">COLIMA</text>
+                                    <text transform="matrix(1 0 0 1 516.9818 481.6489)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">Morelia</text>
+                                    <text transform="matrix(1 0 0 1 395.7708 433.4096)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">Tepic</text>
+                                    <text transform="matrix(1 0 0 1 465.9573 421.2973)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">Aguascalientes</text>
+                                    <text transform="matrix(1 0 0 1 464.1287 390.4096)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">Zacatecas</text>
+                                    <text transform="matrix(1 0 0 1 573.8226 339.5463)">
+                                        <tspan x="0" y="0" font-family="'HelveticaNeue-Condensed'" font-size="5">Ciudad
+                                        </tspan>
+                                        <tspan x="-0.708" y="6" font-family="'HelveticaNeue-Condensed'" font-size="5">
+                                            Victoria</tspan>
+                                    </text>
+                                    <text transform="matrix(1 0 0 1 528.1312 281.1596)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">Monterrey</text>
+                                    <text transform="matrix(1 0 0 1 507.9886 301.4096)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">Saltillo</text>
+                                    <text transform="matrix(1 0 0 1 365.9558 190.9096)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">Chihuahua</text>
+                                    <text transform="matrix(1 0 0 1 246.9651 336.228)"
+                                        font-family="'HelveticaNeue-Condensed'" font-size="5">La
+                                        Paz</text>
+                                </g>
+                            </svg>
                         </div>
-                        <div name="tarjetasEstacion" class="col-2">
-                            <div class="card row" style="width: 18rem">
-                                <div class="card-body row">
-                                    <p class="card-text col">Nuevo</p>
-                                    <h1 class="col" id="nuevo"></h1>
-                                </div>
-                            </div>
-                            <div class="card row" style="width: 18rem">
-                                <div class="card-body row">
-                                    <p class="card-text col">Marcacion</p>
-                                    <h1 class="col" id="marcacion"></h1>
-                                </div>
-                            </div>
-                            <div class="card row" style="width: 18rem">
-                                <div class="card-body row">
-                                    <p class="card-text col">Proceso</p>
-                                    <h1 class="col" id="proceso"></h1>
-                                </div>
-                            </div>
-                            <div class="card row" style="width: 18rem">
+                        <div name="tarjetasEstacion" class="col">
+                            <div class="card">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <p class="card-text col">Cancelado</p>
-                                        <h1 class="col" id="cancelado"></h1>
-                                    </div>
-                                    <div class="row">
-                                        <h4 class="text-center" id="canceladoTotal"></h4>
+                                    <div class="col">
+                                        <p class="card-text col">Nuevo</p>
+                                        <h1 class="col" id="nuevo">0</h1>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card row" style="width: 18rem">
-                                <div class="card-body row">
-                                    <p class="card-text col">Terminado</p>
-                                    <h1 class="col" id="terminado"></h1>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col">
+                                        <p class="card-text col">En Proceso</p>
+                                        <h1 class="col" id="proceso">0</h1>
+                                    </div>
+                                    <div class="col">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-telephone-forward" viewBox="0 0 16 16">
+                                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.762.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"/>
+                                          </svg>
+                                          <label for="">100%</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col">
+                                        <p class="card-text col">Cancelado</p>
+                                        <h1 class="col" id="cancelado">0</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col">
+                                        <p class="card-text col">Terminado</p>
+                                        <h1 class="col" id="terminado">0</h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2707,7 +2746,6 @@
             </div>
         </div>
     </div>
-    <script src="../js/pruebasrutas.js"></script>
 </body>
 
 </html>
