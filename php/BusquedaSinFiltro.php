@@ -58,4 +58,10 @@ switch ($accion) {
             ConsultasSelect($sql);
             break;
         }
+    case "imagenesUsuario": {
+            $idRegistro = $_POST["idRegistro"];
+            $sql = "SELECT nombreImagen,nombreOriginal,iframe FROM soleraatlas.imagenes where fkImagen=$idRegistro";
+            ConsultasSelectCualquiera($sql, "./Conexion.php", "Imagen");
+            break;
+        }
 }

@@ -39,159 +39,57 @@ function datosMapa() {
     }
   });
 }
-window.addEventListener("load", function () {
-  datosMapa();
-  mostrarMovimientos();
-  resultadosProcesos();
-  $.ajax({
-    method: "POST",
-    url: "../MostrarDatosMapas",
-    data: {
-      consulta: "resultadosEstacion",
-    },
-    success: function (result) {},
-  });
-});
-function buscarDatos() {
-  txtFechaCarga = document.getElementById("txtFechaCarga").value;
-  if (txtFechaCarga == "Selecciona...") {
-    txtFechaCarga = "";
-  }
-  txtEstacion = document.getElementById("txtEstacion").value;
-  if (txtEstacion == "Selecciona...") {
-    txtEstacion = "";
-  }
-  txtEstatus = document.getElementById("txtEstatus").value;
-  if (txtEstatus == "Selecciona...") {
-    txtEstatus = "";
-  }
-  txtSubEstatus = document.getElementById("txtSubEstatus").value;
-  if (txtSubEstatus == "Selecciona...") {
-    txtSubEstatus = "";
-  }
-  txtFechaSeguimiento = document.getElementById("txtFechaSeguimiento").value;
-  if (txtFechaSeguimiento == "Selecciona...") {
-    txtFechaSeguimiento = "";
-  }
-  txtRegion = document.getElementById("txtRegion").value;
-  if (txtRegion == "Todos-Ninguna") {
-    txtRegion = "";
-  }
-  txtEstado = document.getElementById("txtEstado").value;
-  if (txtEstado == "Selecciona...") {
-    txtEstado = "";
-  }
-  txtCobertura = document.getElementById("txtCobertura").value;
-  if (txtCobertura == "Selecciona...") {
-    txtCobertura = "";
-  }
-  $.ajax({
-    url: "../ControladorMostrarDatos",
-    data: {
-      fechaCarga: txtFechaCarga,
-      estacion: txtEstacion,
-      estatus: txtEstatus,
-      subEstatus: txtSubEstatus,
-      fechaSeguimiento: txtFechaSeguimiento,
-      region: txtRegion,
-      estado: txtEstado,
-      cobertura: txtCobertura,
-    },
-    success: function (result) {
-      $("#mostrarTablaDatos").html(result);
-    },
-  });
-}
-function resultadosProcesos() {
+//////grafica de folios por area
+function foliosArea() {
   $.ajax({
     method: "POST",
     url: rutaInicial + "InformacionMapas.php",
     dataType: "json",
     data: {
-      accion: "InfoCartas",
+      accion: "foliosArea",
     },
     success: function (result) {
-      console.log(result);
+      let conteoTotal = 0;
+      let porcentajeNuevo;
+      let porcentajeProceso;
+      let porcentajeCancelado;
+      let porcentajeTerminado;
       for (let i in result.Estacion) {
+        conteoTotal = conteoTotal + result.Estacion[i].conteo;
+      }
+      for (let i in result.Estacion) {
+        let porcentaje = (result.Estacion[i].conteo / conteoTotal) * 100;
+        decimal = +porcentaje.toString().replace(/^[^\.]+/, "0");
+        if (decimal > 0.5) {
+          porcentaje = Math.ceil(porcentaje);
+        } else {
+          porcentaje = Math.floor(porcentaje);
+        }
+        if (i == 0) {
+          porcentajeNuevo = porcentaje;
+        } else if (i == 1) {
+          porcentajeProceso = porcentaje;
+        } else if (i == 2) {
+          porcentajeCancelado = porcentaje;
+        } else if (i == 3) {
+          porcentajeTerminado = porcentaje;
+        }
         switch (result.Estacion[i].estacionProceso) {
           case "Nuevo":
             $("#nuevo").html(result.Estacion[i].conteo);
+            $("#nuevoPorcentaje").html(porcentaje + "%");
             break;
           case "En seguimiento":
-            console.log(result.Estacion[i].estacionProceso);
             $("#proceso").html(result.Estacion[i].conteo);
+            $("#procesoPorcentaje").html(porcentaje + "%");
             break;
           case "Cancelado":
             $("#cancelado").html(result.Estacion[i].conteo);
-           // $("#canceladoTotal").html("Casos: " + cantSiniestro);
+            $("#canceladoPorcentaje").html(porcentaje + "%");
             break;
           case "Terminado":
             $("#terminado").html(result.Estacion[i].conteo);
-            //$("#canceladoTotal").html("Casos: " + cantSiniestro);
-            break;
-        }
-      }
-    },
-  });
-}
-$(document).ready(function () {
-  $(".calendario").datepicker({
-    timepicker: false,
-    datepicker: true,
-    format: "yyyy-mm-dd",
-    value: "2022-09-14",
-    weeks: true,
-  });
-  //mostrar en tiempo real la grafica de folios//
-  $.ajax({
-    method: "POST",
-    url: "../DatosReporte",
-    data: {
-      accion: "InfoCartas",
-    },
-    success: function (result) {
-      let sinComas;
-      let nuevoP = 0;
-      let nuevoC = 0;
-      let marcacionP = 0;
-      let marcacionC = 0;
-      let procesoP = 0;
-      let procesoC = 0;
-      let terminadoP = 0;
-      let terminadoC = 0;
-      let canceladoP = 0;
-      let canceladoC = 0;
-      let porcentaje;
-      sinComas = result.split(",");
-
-      for (let i = 1; i < sinComas.length; i = i + 2) {
-        //se hace para hacer el calculo del procentaje de cada caso
-        porcentaje = (sinComas[i - 1] * 100) / sinComas[sinComas.length - 1];
-        switch (sinComas[i]) {
-          case "Nuevo":
-            nuevoC = sinComas[i - 1];
-            $("#nuevo").html("Casos: " + nuevoC);
-            nuevoP = porcentaje + "%";
-            break;
-          case "Marcacion":
-            marcacionC = sinComas[i - 1];
-            $("#marcacion").html("Casos: " + marcacionC);
-            marcacionP = porcentaje + "%";
-            break;
-          case "Proceso":
-            procesoC = sinComas[i - 1];
-            $("#proceso").html("Casos: " + procesoC);
-            procesoP = porcentaje + "%";
-            break;
-          case "Cancelado":
-            canceladoC = sinComas[i - 1];
-            $("#canceladoTotal").html("Casos: " + canceladoC);
-            canceladoP = porcentaje + "%";
-            break;
-          case "Terminado":
-            terminadoC = sinComas[i - 1];
-            $("#terminado").html("Casos: " + terminadoC);
-            terminadoP = porcentaje + "%";
+            $("#terminadoPorcentaje").html(porcentaje + "%");
             break;
         }
       }
@@ -202,15 +100,19 @@ $(document).ready(function () {
         series: [
           {
             name: "Folios",
-            data: [procesoC, nuevoC, marcacionC, terminadoC, canceladoC],
+            data: [
+              result.Estacion[0].conteo,
+              result.Estacion[1].conteo,
+              result.Estacion[2].conteo,
+              result.Estacion[3].conteo,
+            ],
           },
         ],
         labels: [
-          "Proceso: " + procesoP + "",
-          "Nuevo: " + nuevoP + "",
-          "Marcacion: " + marcacionP + "",
-          "Facturado: " + terminadoP + "",
-          "Cancelado: " + canceladoP + "",
+          "Nuevo: " + porcentajeNuevo + "%",
+          "En proceso: " + porcentajeProceso + "%",
+          "Cancelado: " + porcentajeCancelado + "%",
+          "Terminado" + porcentajeTerminado + "%",
         ],
         title: {
           text: "Distribucion de folios por area",
@@ -220,81 +122,28 @@ $(document).ready(function () {
           },
         },
       };
-
       let chart = new ApexCharts(
         document.querySelector("#foliosGrafica"),
         options
       );
-
       chart.render();
-    },
-  });
-
-  //grafica dona//
-  $.ajax({
-    method: "POST",
-    url: "../DatosReporte",
-    data: {
-      accion: "InfoCartas",
-    },
-    success: function (result) {
-      let sinComas;
-      let nuevoP = 0;
-      let nuevoC = 0;
-      let marcacionP = 0;
-      let marcacionC = 0;
-      let procesoP = 0;
-      let procesoC = 0;
-      let terminadoP = 0;
-      let terminadoC = 0;
-      let canceladoP = 0;
-      let canceladoC = 0;
-      let porcentaje;
-      sinComas = result.split(",");
-
-      for (let i = 1; i < sinComas.length; i = i + 2) {
-        //se hace para hacer el calculo del procentaje de cada caso
-        porcentaje = (sinComas[i - 1] * 100) / sinComas[sinComas.length - 1];
-        switch (sinComas[i]) {
-          case "Nuevo":
-            nuevoC = sinComas[i - 1];
-            $("#nuevo").html("Casos: " + nuevoC);
-            nuevoP = porcentaje;
-            break;
-          case "Marcacion":
-            marcacionC = sinComas[i - 1];
-            $("#marcacion").html("Casos: " + marcacionC);
-            marcacionP = porcentaje;
-            break;
-          case "Proceso":
-            procesoC = sinComas[i - 1];
-            $("#proceso").html("Casos: " + procesoC);
-            procesoP = porcentaje;
-            break;
-          case "Cancelado":
-            canceladoC = sinComas[i - 1];
-            $("#canceladoTotal").html("Casos: " + canceladoC);
-            canceladoP = porcentaje;
-            break;
-          case "Terminado":
-            terminadoC = sinComas[i - 1];
-            $("#terminado").html("Casos: " + terminadoC);
-            terminadoP = porcentaje;
-            break;
-        }
-      }
-      let options = {
-        series: [procesoP, nuevoP, marcacionP, terminadoP, canceladoP],
+      //dona
+      options = {
+        series: [
+          result.Estacion[0].conteo,
+          result.Estacion[1].conteo,
+          result.Estacion[2].conteo,
+          result.Estacion[3].conteo,
+        ],
         chart: {
           width: 600,
           type: "donut",
         },
         labels: [
-          "Proceso: " + procesoC + "",
-          "Nuevo: " + nuevoC + "",
-          "Marcacion: " + marcacionC + "",
-          "Facturado: " + terminadoC + "",
-          "Cancelado: " + canceladoC + "",
+          "Nuevo: " + porcentajeNuevo + "%",
+          "En proceso: " + porcentajeProceso + "%",
+          "Cancelado: " + porcentajeCancelado + "%",
+          "Terminado" + porcentajeTerminado + "%",
         ],
         responsive: [
           {
@@ -310,11 +159,31 @@ $(document).ready(function () {
           },
         ],
       };
-
-      let chart = new ApexCharts(document.querySelector("#folioDona"), options);
+      chart = new ApexCharts(document.querySelector("#folioDona"), options);
       chart.render();
     },
   });
+}
+function estatuseguimiento(result) {}
+$(document).ready(() => {
+  datosMapa();
+  foliosArea();
+  estatuseguimiento();
+  $(".calendario").datepicker({
+    timepicker: false,
+    datepicker: true,
+    format: "yyyy-mm-dd",
+    value: "2022-09-14",
+    weeks: true,
+  });
+});
+////////////////////////////////
+//funciones utilizadas
+////////////////////////////////
+$(document).ready(function () {
+  //mostrar en tiempo real la grafica de folios//
+
+  //grafica dona//
   //termina la grafica de folios
 
   //inicia grafica de seguimiento

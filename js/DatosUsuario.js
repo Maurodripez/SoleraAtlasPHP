@@ -1,79 +1,4 @@
-//inicio de la carga de imagenes por medio del usuario
-let botonPresionado;
-let btnAcordeon;
-$(document).ready(function (e) {
-  //obtenemos la clasepara saber que boton se esta presionando
-  $(".accordion-button").on("click", function () {
-    btnAcordeon = $(this).attr("value");
-    mortrarImagen(btnAcordeon);
-  });
-  //funcion para obtneer el boton que se preciona en ese momento
-  $(function () {
-    $("#traerDatos").click(function () {
-      //le agregamos el valor del boton que se apreto con la clase
-      traerDatos();
-    });
-  });
-  //file type validation
-});
-function userSubmit() {
-  let imagen;
-  //obtenemos el form data para guardar la imagen
-  switch (botonPresionado) {
-    case "imgIdentificacion":
-      imagen = new FormData(document.getElementById("cargaIdentificacion"));
-      break;
-    case "imgComprobante":
-      imagen = new FormData(document.getElementById("cargaComprobante"));
-      break;
-    case "imgInfo":
-      imagen = new FormData(document.getElementById("cargaInfo"));
-      break;
-    case "imgFactura":
-      imagen = new FormData(document.getElementById("cargaFactura"));
-      break;
-    case "imgTenencias":
-      imagen = new FormData(document.getElementById("cargaTenencias"));
-      break;
-    case "imgBaja":
-      imagen = new FormData(document.getElementById("cargaBaja"));
-      break;
-    case "imgEstado":
-      imagen = new FormData(document.getElementById("cargaEstado"));
-      break;
-    case "imgDenuncia":
-      imagen = new FormData(document.getElementById("cargaDenuncia"));
-      break;
-    case "imgAcreditacion":
-      imagen = new FormData(document.getElementById("cargaAcreditacion"));
-      break;
-  }
-  alert(imagen.FormData);
-  alert(imagen.textContent);
-  alert(imagen.value);
-  $.ajax({
-    url: "GuardarImagenesCliente",
-    method: "post",
-    data: imagen,
-    cache: false,
-    processData: false, // Estos tres deben ser falsos
-    contentType: false, //
-    success: function (data) {
-      alert(data);
-    },
-    error: function () {
-      alert("Servidor anormal, intente nuevamente más tarde ...");
-    },
-  });
-  return false;
-}
-window.addEventListener("load", function () {
-  $("#btnConfirmarDatos").on("click", function () {
-    validarDatos();
-  });
-  $("#modalConfirmarDocs").on("click", function () {
-    traerDatos();
-  });
+function ocultarIframes() {
   document.getElementById("iFrameFactura").style.display = "none";
   document.getElementById("iFrameSecuencia").style.display = "none";
   document.getElementById("iFrameCertificado").style.display = "none";
@@ -94,22 +19,47 @@ window.addEventListener("load", function () {
   document.getElementById("iFrameOtros").style.display = "none";
   document.getElementById("iFrameOficio").style.display = "none";
   document.getElementById("iFrameOficioCancelacion").style.display = "none";
-  //funciones para darle a todas las clases ocultas el id del usuario
-  const idsOcultos = document.querySelectorAll(".idsOcultos");
-  let obtenerInfo = document.getElementById("Valor").textContent;
-  let contador = 0;
-  idsOcultos.forEach((element) => {
-    element.value = obtenerInfo;
+}
+$(document).ready(function (e) {
+  subirImagen();
+  ocultarIframes();
+  mostrarImagenFrame();
+  acordeonCerrado();
+  let iFrame = document.getElementById("iFrameFactura");
+  if (document.querySelector("#btnIdentificacion.collapsed")) {
+    iFrame.style.display = "none";
+  } else {
+    console.log("Se ejecuta si no la tiene");
+    iFrame.style.display = "";
+  }
+  //obtenemos la clasepara saber que boton se esta presionando
+  $(".accordion-button").on("click", function () {
+    btnAcordeon = $(this).attr("value");
+    mortrarImagen(btnAcordeon);
   });
-  idsOcultos[0].value = idsOcultos[0].value + ",Identificacion oficial";
-  idsOcultos[1].value = idsOcultos[1].value + ",Comprobante de domicilio";
-  idsOcultos[2].value = idsOcultos[2].value + ",Informacion adicional";
-  idsOcultos[3].value = idsOcultos[3].value + ",Factura del vehiculo";
-  idsOcultos[4].value = idsOcultos[4].value + ",Tenencias";
-  idsOcultos[5].value = idsOcultos[5].value + ",Baja";
-  idsOcultos[6].value = idsOcultos[6].value + ",Estado de cuenta";
-  idsOcultos[7].value = idsOcultos[7].value + ",Denuncia";
-  idsOcultos[8].value = idsOcultos[8].value + ",Acreditacion";
+  //funcion para obtneer el boton que se preciona en ese momento
+  $(function () {
+    $("#traerDatos").click(function () {
+      //le agregamos el valor del boton que se apreto con la clase
+      traerDatos();
+    });
+  });
+  //file type validation
+});
+///////////////////////////
+//funciones utilizadas
+///////////////////////////
+
+//inicio de la carga de imagenes por medio del usuario
+let botonPresionado;
+let btnAcordeon;
+window.addEventListener("load", function () {
+  $("#btnConfirmarDatos").on("click", function () {
+    validarDatos();
+  });
+  $("#modalConfirmarDocs").on("click", function () {
+    traerDatos();
+  });
   //////////////////////////////////////////////
 });
 function GuardarComent() {
@@ -155,7 +105,168 @@ function TablaMensajes() {
     },
   });
 }
-
+function acordeonCerrado() {
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnFactura.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnSecuencia").on("click", function () {
+    let iFrame = document.getElementById("iFrameSecuencia");
+    if (document.querySelector("#btnSecuencia.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+  $("#btnFactura").on("click", function () {
+    let iFrame = document.getElementById("iFrameFactura");
+    if (document.querySelector("#btnIdentificacion.collapsed")) {
+      iFrame.style.display = "none";
+    } else {
+      iFrame.style.display = "";
+    }
+  });
+}
 let abrirCerrarIdent = true;
 let abrirCerrarComp = true;
 let abrirCerrarInfo = true;
@@ -165,6 +276,26 @@ let abrirCerrarBaja = true;
 let abrirCerrarEstado = true;
 let abrirCerrarDenun = true;
 let abrirCerrarAcred = true;
+function mostrarImagenFrame() {
+  let idRegistro = document.getElementById("sesionActual").textContent;
+  $.ajax({
+    method: "post",
+    url: "../php/BusquedaSinFiltro.php",
+    dataType: "json",
+    data: {
+      idRegistro,
+      accion: "imagenesUsuario",
+    },
+  }).done(function (result) {
+    console.log(result);
+    let iFrame;
+    for (let i in result.Imagen) {
+        iFrame = document.getElementById(result.Imagen[i].iframe);
+        iFrame.style.display = "none";
+        iFrame.src = `../Documentos/Ids/${idRegistro}/${result.Imagen[i].nombreImagen}`;
+    }
+  });
+}
 function mortrarImagen(valor) {
   let obtenerInfo = document.getElementById("Valor").textContent;
   $.ajax({
@@ -710,7 +841,7 @@ function validarDatos() {
   }
 }
 function traerDatos() {
-  let obtenerId =document.getElementById("Valor").textContent;
+  let obtenerId = document.getElementById("Valor").textContent;
   $.ajax({
     method: "POST",
     url: "ValidarDatos",
@@ -722,24 +853,146 @@ function traerDatos() {
     //console.log(result);
     let sinCodificado = result.split("-_/");
     //sinCodificado.forEach((element) => console.log(element));
-    document.getElementById("txtSiniestro").value=sinCodificado[0];
-    document.getElementById("txtPoliza").value=sinCodificado[1];
-    document.getElementById("txtNombre").value=sinCodificado[2];
-    document.getElementById("txtTelefono").value=sinCodificado[3];
-    document.getElementById("txtCorreo").value=sinCodificado[4];
-    document.getElementById("txtAuto").value=sinCodificado[5];
-    document.getElementById("txtFecha").value=sinCodificado[6];
-    document.getElementById("txtTipo").value=sinCodificado[7];
-    document.getElementById("txtSerie").value=sinCodificado[8];
-    document.getElementById("txtPlacas").value=sinCodificado[9];
+    document.getElementById("txtSiniestro").value = sinCodificado[0];
+    document.getElementById("txtPoliza").value = sinCodificado[1];
+    document.getElementById("txtNombre").value = sinCodificado[2];
+    document.getElementById("txtTelefono").value = sinCodificado[3];
+    document.getElementById("txtCorreo").value = sinCodificado[4];
+    document.getElementById("txtAuto").value = sinCodificado[5];
+    document.getElementById("txtFecha").value = sinCodificado[6];
+    document.getElementById("txtTipo").value = sinCodificado[7];
+    document.getElementById("txtSerie").value = sinCodificado[8];
+    document.getElementById("txtPlacas").value = sinCodificado[9];
   });
 }
-function progresoDocs(){
+function progresoDocs() {
   $.ajax({
-    method:"POST",
-    url:"ValidarDatos",
-    data:{
-      accion:"ObtenerAvance"
+    method: "POST",
+    url: "ValidarDatos",
+    data: {
+      accion: "ObtenerAvance",
+    },
+  });
+}
+function subirImagen() {
+  $(".botonGuardar").on("click", function () {
+    let id = this.id;
+    let documento;
+    let files;
+    if (id === "imgFactura") {
+      documento = "Factura";
+      files = $("#inputFactura")[0].files[0];
+      iFrame = "iFrameFactura";
     }
-  })
+    if (id === "imgSecuencia") {
+      documento = "Secuencia de facturas";
+      files = $("#inputSecuencia")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgCertificado") {
+      documento = "Certificado Propiedad";
+      files = $("#inputCertificado")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgCopiaCertificado") {
+      documento = "Copia certificado propiedad";
+      files = $("#inputCopiaCertificado")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgImportacion") {
+      documento = "Pedimento de Importacion";
+      files = $("#inputPedimento")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgPermiso") {
+      documento = "Baja de permiso de internacion";
+      files = $("#inputBajaPermiso")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgRFV") {
+      documento = "R.F.V.";
+      files = $("#inputRFV")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgVerificacion") {
+      documento = "Verificacion";
+      files = $("#inputVerificacion")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgTenencias") {
+      documento = "Tenencias";
+      files = $("#inputTenencias")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgBaja") {
+      documento = "Baja de placas";
+      files = $("#inputPlacas")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgFacturaMotor") {
+      documento = "Factura del motor";
+      files = $("#inputFacturaMotor")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgLlaves") {
+      documento = "Llaves";
+      files = $("#inputLlaves")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgConoce") {
+      documento = "Formato conoce a tu cliente";
+      files = $("#inputFormato")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgLFPDPPP") {
+      documento = "Consentimiento LFPDPPP";
+      files = $("#inputConsentimiento")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgAveriguacion") {
+      documento = "Averiguación previa";
+      files = $("#inputAveriguacion")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgAcreditacion") {
+      documento = "Acreditacion de propiedad";
+      files = $("#inputAcreditacion")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgAviso") {
+      documento = "Aviso a PFP";
+      files = $("#inputAviso")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgOtros") {
+      documento = "Otros";
+      files = $("#inputOtros")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgOficio") {
+      documento = "Oficio de liberacion";
+      files = $("#inputLiberacion")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgOficioCancelacion") {
+      documento = "Oficio de cancelacion del robo";
+      files = $("#inputCancelacion")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    let sesionActual = document.getElementById("sesionActual").textContent;
+    alert(sesionActual);
+    let formData = new FormData();
+    formData.append("file", files);
+    $.ajax({
+      url: `../php/upload.php?idRegistro=${sesionActual}&nombreArchivo=${documento}&iFrame=${iFrame}`,
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        console.log(response);
+      },
+    });
+    return false;
+  });
 }

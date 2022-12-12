@@ -443,6 +443,7 @@ function funcionAjaxParaFiltros(filtro, getId) {
       accion: filtro,
     },
   }).done(function (result) {
+    console.log(result);
     mostrarTabla(result);
   });
 }
@@ -913,13 +914,14 @@ function enviarImagenes() {
   $("#btnSubirDoc").on("click", function () {
     let idRegistro = document.getElementById("idOculto").value;
     let nombreArchivo = document.getElementById("tipoArchivoCargado").value;
+    let iFrame = document.getElementById("tipoArchivoCargado").name;
     let formData = new FormData();
     let files = $("#archivoCargado")[0].files[0];
     formData.append("file", files);
     $.ajax({
       url:
         rutaInicial +
-        `upload.php?idRegistro=${idRegistro}&nombreArchivo=${nombreArchivo}`,
+        `upload.php?idRegistro=${idRegistro}&nombreArchivo=${nombreArchivo}&iFrame=${iFrame}`,
       type: "post",
       data: formData,
       contentType: false,
