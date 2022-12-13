@@ -288,7 +288,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <iframe id="iFrameCertificado" src="" width="100%" height="500px"
+                                    <iframe id="iFrameCertificado" width="100%" height="500px"
                                         frameborder="0"></iframe>
                                     <img id="imgCertificadoVer" class="img-fluid" src="" alt="" />
                                 </div>

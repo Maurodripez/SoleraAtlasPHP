@@ -20,23 +20,32 @@ function ocultarIframes() {
   document.getElementById("iFrameOficio").style.display = "none";
   document.getElementById("iFrameOficioCancelacion").style.display = "none";
 }
+let iFrameFactura = false;
+let iFrameSecuencia = false;
+let iFrameCertificado = false;
+let iFrameCopiaCertificado = false;
+let iFrameImportacion = false;
+let iFramePermiso = false;
+let iFrameRFV = false;
+let iFrameVerificacion = false;
+let iFrameTenencia = false;
+let iFrameBaja = false;
+let iFrameFacturaMotor = false;
+let iFrameLlaves = false;
+let iFrameConoce = false;
+let iFrameLFPDPPP = false;
+let iFrameAveriguacion = false;
+let iFrameAcreditacion = false;
+let iFrameAviso = false;
+let iFrameOtros = false;
+let iFrameOficio = false;
+let iFrameOficioCancelacion = false;
 $(document).ready(function (e) {
   subirImagen();
   ocultarIframes();
   mostrarImagenFrame();
   acordeonCerrado();
-  let iFrame = document.getElementById("iFrameFactura");
-  if (document.querySelector("#btnIdentificacion.collapsed")) {
-    iFrame.style.display = "none";
-  } else {
-    console.log("Se ejecuta si no la tiene");
-    iFrame.style.display = "";
-  }
   //obtenemos la clasepara saber que boton se esta presionando
-  $(".accordion-button").on("click", function () {
-    btnAcordeon = $(this).attr("value");
-    mortrarImagen(btnAcordeon);
-  });
   //funcion para obtneer el boton que se preciona en ese momento
   $(function () {
     $("#traerDatos").click(function () {
@@ -106,176 +115,174 @@ function TablaMensajes() {
   });
 }
 function acordeonCerrado() {
+  let iFrame;
   $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
+    iFrame = document.getElementById("iFrameFactura");
     if (document.querySelector("#btnFactura.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+      console.log("entra");
+    } else if (iFrameFactura) {
+      console.log("entra2");
+      iFrame = document.getElementById("iFrameFactura");
       iFrame.style.display = "";
     }
   });
   $("#btnSecuencia").on("click", function () {
-    let iFrame = document.getElementById("iFrameSecuencia");
+    iFrame = document.getElementById("iFrameSecuencia");
     if (document.querySelector("#btnSecuencia.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameSecuencia) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnCertificado").on("click", function () {
+    if ((document.getElementById("iFrameCertificado").src = "")) {
+      alert("Error");
+    }
+    iFrame = document.getElementById("iFrameCertificado");
+    if (document.querySelector("#btnCertificado.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameCertificado) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnCopiaCertificado").on("click", function () {
+    iFrame = document.getElementById("iFrameCopiaCertificado");
+    if (document.querySelector("#btnCopiaCertificado.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameCopiaCertificado) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnImportacion").on("click", function () {
+    iFrame = document.getElementById("iFrameImportacion");
+    if (document.querySelector("#btnImportacion.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameImportacion) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnPermiso").on("click", function () {
+    iFrame = document.getElementById("iFramePermiso");
+    if (document.querySelector("#btnPermiso.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFramePermiso) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnRFV").on("click", function () {
+    iFrame = document.getElementById("iFrameRFV");
+    if (document.querySelector("#btnRFV.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameRFV) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnVerificacion").on("click", function () {
+    iFrame = document.getElementById("iFrameVerificacion");
+    if (document.querySelector("#btnVerificacion.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameVerificacion) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnTenencias").on("click", function () {
+    iFrame = document.getElementById("iFrameTenencia");
+    if (document.querySelector("#btnTenencias.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameTenencia) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnBaja").on("click", function () {
+    iFrame = document.getElementById("iFrameBaja");
+    if (document.querySelector("#btnBaja.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameBaja) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnLlaves").on("click", function () {
+    iFrame = document.getElementById("iFrameLlaves");
+    if (document.querySelector("#btnLlaves.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameLlaves) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnFacturaMotor").on("click", function () {
+    iFrame = document.getElementById("iFrameFacturaMotor");
+    if (document.querySelector("#btnFacturaMotor.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameFacturaMotor) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnConoce").on("click", function () {
+    iFrame = document.getElementById("iFrameConoce");
+    if (document.querySelector("#btnConoce.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameConoce) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnLFPDPPP").on("click", function () {
+    iFrame = document.getElementById("iFrameLFPDPPP");
+    if (document.querySelector("#btnLFPDPPP.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameLFPDPPP) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnAveriguacion").on("click", function () {
+    iFrame = document.getElementById("iFrameAveriguacion");
+    if (document.querySelector("#btnAveriguacion.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameAveriguacion) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnAcreditacion").on("click", function () {
+    iFrame = document.getElementById("iFrameAcreditacion");
+    if (document.querySelector("#btnAcreditacion.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameAcreditacion) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnAviso").on("click", function () {
+    iFrame = document.getElementById("iFrameAviso");
+    if (document.querySelector("#btnAviso.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameAviso) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnOtros").on("click", function () {
+    iFrame = document.getElementById("iFrameOtros");
+    if (document.querySelector("#btnOtros.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameOtros) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnOficio").on("click", function () {
+    iFrame = document.getElementById("iFrameOficio");
+    if (document.querySelector("#btnOficio.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameOficio) {
       iFrame.style.display = "";
     }
   });
-  $("#btnFactura").on("click", function () {
-    let iFrame = document.getElementById("iFrameFactura");
-    if (document.querySelector("#btnIdentificacion.collapsed")) {
+  $("#btnOficioCancelacion").on("click", function () {
+    iFrame = document.getElementById("iFrameOficioCancelacion");
+    if (document.querySelector("#btnOficioCancelacion.collapsed")) {
       iFrame.style.display = "none";
-    } else {
+    } else if (iFrameOficioCancelacion) {
       iFrame.style.display = "";
     }
   });
 }
-let abrirCerrarIdent = true;
-let abrirCerrarComp = true;
-let abrirCerrarInfo = true;
-let abrirCerrarFact = true;
-let abrirCerrarTenen = true;
-let abrirCerrarBaja = true;
-let abrirCerrarEstado = true;
-let abrirCerrarDenun = true;
-let abrirCerrarAcred = true;
 function mostrarImagenFrame() {
   let idRegistro = document.getElementById("sesionActual").textContent;
   $.ajax({
@@ -290,372 +297,71 @@ function mostrarImagenFrame() {
     console.log(result);
     let iFrame;
     for (let i in result.Imagen) {
-        iFrame = document.getElementById(result.Imagen[i].iframe);
-        iFrame.style.display = "none";
-        iFrame.src = `../Documentos/Ids/${idRegistro}/${result.Imagen[i].nombreImagen}`;
+      iFrame = document.getElementById(result.Imagen[i].iframe);
+      if (result.Imagen[i].iframe === "iFrameFactura") {
+        iFrameFactura = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameSecuencia") {
+        iFrameSecuencia = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameCertificado") {
+        iFrameCertificado = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameCopiaCertificado") {
+        iFrameCopiaCertificado = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameImportacion") {
+        iFrameImportacion = true;
+      }
+      if (result.Imagen[i].iframe === "iFramePermiso") {
+        iFramePermiso = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameRFV") {
+        iFrameRFV = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameVerificacion") {
+        iFrameVerificacion = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameTenencia") {
+        iFrameTenencia = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameBaja") {
+        iFrameBaja = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameFacturaMotor") {
+        iFrameFacturaMotor = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameLlaves") {
+        iFrameLlaves = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameConoce") {
+        iFrameConoce = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameLFPDPPP") {
+        iFrameLFPDPPP = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameAveriguacion") {
+        iFrameAveriguacion = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameAcreditacion") {
+        iFrameAcreditacion = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameAviso") {
+        iFrameAviso = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameOtros") {
+        iFrameOtros = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameOficio") {
+        iFrameOficio = true;
+      }
+      if (result.Imagen[i].iframe === "iFrameOficioCancelacion") {
+        iFrameOficioCancelacion = true;
+      }
+      iFrame.style.display = "none";
+      iFrame.src = `../Documentos/Ids/${idRegistro}/${result.Imagen[i].nombreImagen}`;
     }
   });
-}
-function mortrarImagen(valor) {
-  let obtenerInfo = document.getElementById("Valor").textContent;
-  $.ajax({
-    method: "post",
-    url: "ImagenesUsuario",
-    data: {
-      id: obtenerInfo,
-      nombreDoc: btnAcordeon,
-    },
-    success: function (result) {
-      let sinCodificado = result.split("=/=");
-      for (let i = 0; i < sinCodificado.length - 1; i = i + 3) {
-        console.log(sinCodificado[i]);
-        switch (sinCodificado[i]) {
-          case "Identificacion oficial":
-            alert("entra");
-            if (abrirCerrarIdent == false) {
-              let imagenSrc = document.getElementById("imgIdentificacionVer");
-              let iframe = document.getElementById("iFrameIdentificacion");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarIdent = true;
-            } else {
-              let imagenSrc = document.getElementById("imgIdentificacionVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameIdentificacion");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarIdent = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarIdent = false;
-              }
-            }
-            break;
-
-          case "Comprobante de domicilio":
-            if (abrirCerrarComp == false) {
-              let imagenSrc = document.getElementById("imgComprobanteVer");
-              let iframe = document.getElementById("iFrameComprobante");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarComp = true;
-            } else {
-              let imagenSrc = document.getElementById("imgComprobanteVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameComprobante");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarComp = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarComp = false;
-              }
-            }
-            break;
-
-          case "Informacion adicional":
-            if (abrirCerrarInfo == false) {
-              let imagenSrc = document.getElementById("imgInfoVer");
-              let iframe = document.getElementById("iFrameInfo");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarInfo = true;
-            } else {
-              let imagenSrc = document.getElementById("imgInfoVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameInfo");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarInfo = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarInfo = false;
-              }
-            }
-            break;
-
-          case "Factura del vehiculo":
-            if (abrirCerrarFact == false) {
-              let imagenSrc = document.getElementById("imgFacturaVer");
-              let iframe = document.getElementById("iFrameFactura");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarFact = true;
-            } else {
-              let imagenSrc = document.getElementById("imgFacturaVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameFactura");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarFact = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarFact = false;
-              }
-            }
-            break;
-
-          case "Tenencias":
-            console.log("aqui entra");
-            if (abrirCerrarTenen == false) {
-              let imagenSrc = document.getElementById("imgTenenciasVer");
-              let iframe = document.getElementById("iFrameTenencia");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarTenen = true;
-            } else {
-              let imagenSrc = document.getElementById("imgTenenciasVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameTenencia");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarTenen = false;
-              } else {
-                console.log(obtenerInfo);
-                console.log(sinCodificado[i + 2]);
-                console.log(
-                  "./documentos/" +
-                    obtenerInfo +
-                    "/" +
-                    sinCodificado[i + 2] +
-                    ""
-                );
-                imagenSrc.src = "./documentos/100/cutez-1.jpg";
-                //imagenSrc.src="./documentos/100/cute (1).jpg";
-                abrirCerrarTenen = false;
-              }
-            }
-            break;
-
-          case "Baja":
-            if (abrirCerrarBaja == false) {
-              let imagenSrc = document.getElementById("imgBajaVer");
-              let iframe = document.getElementById("iFrameBaja");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarBaja = true;
-            } else {
-              let imagenSrc = document.getElementById("imgBajaVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameBaja");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarBaja = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarBaja = false;
-              }
-            }
-            break;
-
-          case "Estado de cuenta":
-            if (abrirCerrarEstado == false) {
-              let imagenSrc = document.getElementById("imgEstadoVer");
-              let iframe = document.getElementById("iFrameEstado");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarEstado = true;
-            } else {
-              let imagenSrc = document.getElementById("imgEstadoVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameEstado");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarEstado = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarEstado = false;
-              }
-            }
-            break;
-
-          case "Denuncia":
-            if (abrirCerrarDenun == false) {
-              let imagenSrc = document.getElementById("imgDenunciaVer");
-              let iframe = document.getElementById("iFrameDenuncia");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarDenun = true;
-            } else {
-              let imagenSrc = document.getElementById("imgDenunciaVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameDenuncia");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarDenun = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarDenun = false;
-              }
-            }
-            break;
-
-          case "Acreditacion":
-            if (abrirCerrarAcred == false) {
-              let imagenSrc = document.getElementById("imgAcreditacionVer");
-              let iframe = document.getElementById("iFrameAcreditacion");
-              iframe.style.display = "none";
-              imagenSrc.src = "";
-              abrirCerrarAcred = true;
-            } else {
-              let imagenSrc = document.getElementById("imgAcreditacionVer");
-              let saberExt = sinCodificado[i + 2].slice(
-                ((sinCodificado[i + 2].lastIndexOf(".") - 1) >>> 0) + 2
-              );
-              if (saberExt === "pdf") {
-                let iframe = document.getElementById("iFrameAcreditacion");
-                iframe.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                iframe.style.display = "";
-                abrirCerrarAcred = false;
-              } else {
-                imagenSrc.src =
-                  "./documentos/" +
-                  obtenerInfo +
-                  "/" +
-                  sinCodificado[i + 2] +
-                  "";
-                abrirCerrarAcred = false;
-              }
-            }
-            break;
-        }
-      }
-    },
-  });
-}
-function exportTableToExcel(tableID, filename = "") {
-  var downloadLink;
-  var dataType = "application/vnd.ms-excel";
-  var tableSelect = document.getElementById(tableID);
-  var tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
-
-  // Specify file name
-  filename = filename ? filename + ".xls" : "excel_data.xls";
-
-  // Create download link element
-  downloadLink = document.createElement("a");
-
-  document.body.appendChild(downloadLink);
-
-  if (navigator.msSaveOrOpenBlob) {
-    var blob = new Blob(["ufeff", tableHTML], {
-      type: dataType,
-    });
-    navigator.msSaveOrOpenBlob(blob, filename);
-  } else {
-    // Create a link to the file
-    downloadLink.href = "data:" + dataType + ", " + tableHTML;
-
-    // Setting the file name
-    downloadLink.download = filename;
-
-    //triggering the function
-    downloadLink.click();
-  }
 }
 function validarDatos() {
   let auto = false;
