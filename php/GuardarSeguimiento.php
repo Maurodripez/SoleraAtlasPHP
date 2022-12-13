@@ -86,8 +86,8 @@ switch ($accion) {
                 . " '$tipoContacto','$fechaFactServ','$fechaTermino',now(),'$nombreReal','$idEditableActual','$tipoMensaje')";
             ActualizarSiniestro($sql);
             if ($tipoMensaje == "Usuario") {
-                $sql = "insert into mensajesseguimientos(mensajes,usuario,fechaMensaje,fkmensgSeguimientos)"
-                    . " values('$comentarios','$nombreReal',now(),'$idEditableActual')";
+                $sql = "insert into mensajesseguimientos(mensajes,usuario,fechaMensaje,fkmensgSeguimientos,internoExterno)"
+                    . " values('$comentarios','$nombreReal',now(),'$idEditableActual','Interno')";
                 ActualizarSiniestro($sql);
                 $sql = "update mensajesseguimientos set respondido='si' where fkmensgSeguimientos='$idEditableActual'";
                 ActualizarSiniestro($sql);

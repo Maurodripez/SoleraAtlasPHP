@@ -1,4 +1,74 @@
-.iconos{
-    width: 50%;
-    margin: 0 auto;
+.card-body {
+  flex-wrap: wrap;
 }
+.iconos {
+  padding: 20px 0 0 0;
+}
+#EnviarComentario {
+  padding: 1%;
+  background-color: #8381ca;
+}
+#DatosTabla_wrapper {
+  background-color: #8381ca;
+}
+#DatosTabla_filter.input {
+  background-color: #ffffff;
+}
+.paginate_button {
+  background-color: rgb(145, 179, 196) !important;
+  border: 1px solid black;
+}
+#letreroMensaje {
+  border-radius: 5%;
+  background-color: #8381ca;
+}
+#btnModalMensajes {
+  background-color: #8381ca;
+}
+#traerDatos {
+  background-color: #8381ca;
+  color: #ebe6e6;       
+}
+#btnCargaDocumentos {
+  background-color: #8381ca;
+  color: #ebe6e6;
+}
+.checkinformacion{
+    padding: 0%;
+    padding-left: 1%;
+}
+
+.file-select {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .file-select::before {
+    background-color: #5678EF;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    content: 'Seleccionar'; /* testo por defecto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .file-select input[type="file"] {
+    opacity: 0;
+    width: 200px;
+    height: 32px;
+    display: inline-block;
+  }
+  
+  #src-file1::before {
+    content: 'Seleccionar Archivo 1';
+  }
+  
+  .botonCargarDoc::before {
+    content: 'Seleccionar Archivo';
+  }

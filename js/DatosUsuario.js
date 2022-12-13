@@ -1,3 +1,4 @@
+let rutaInicial = "../php/Usuarios/";
 function ocultarIframes() {
   document.getElementById("iFrameFactura").style.display = "none";
   document.getElementById("iFrameSecuencia").style.display = "none";
@@ -20,109 +21,13 @@ function ocultarIframes() {
   document.getElementById("iFrameOficio").style.display = "none";
   document.getElementById("iFrameOficioCancelacion").style.display = "none";
 }
-let iFrameFactura = false;
-let iFrameSecuencia = false;
-let iFrameCertificado = false;
-let iFrameCopiaCertificado = false;
-let iFrameImportacion = false;
-let iFramePermiso = false;
-let iFrameRFV = false;
-let iFrameVerificacion = false;
-let iFrameTenencia = false;
-let iFrameBaja = false;
-let iFrameFacturaMotor = false;
-let iFrameLlaves = false;
-let iFrameConoce = false;
-let iFrameLFPDPPP = false;
-let iFrameAveriguacion = false;
-let iFrameAcreditacion = false;
-let iFrameAviso = false;
-let iFrameOtros = false;
-let iFrameOficio = false;
-let iFrameOficioCancelacion = false;
-$(document).ready(function (e) {
-  subirImagen();
-  ocultarIframes();
-  mostrarImagenFrame();
-  acordeonCerrado();
-  //obtenemos la clasepara saber que boton se esta presionando
-  //funcion para obtneer el boton que se preciona en ese momento
-  $(function () {
-    $("#traerDatos").click(function () {
-      //le agregamos el valor del boton que se apreto con la clase
-      traerDatos();
-    });
-  });
-  //file type validation
-});
-///////////////////////////
-//funciones utilizadas
-///////////////////////////
-
-//inicio de la carga de imagenes por medio del usuario
-let botonPresionado;
-let btnAcordeon;
-window.addEventListener("load", function () {
-  $("#btnConfirmarDatos").on("click", function () {
-    validarDatos();
-  });
-  $("#modalConfirmarDocs").on("click", function () {
-    traerDatos();
-  });
-  //////////////////////////////////////////////
-});
-function GuardarComent() {
-  //funcion para guardar los mensajes del cliente
-  let obtenerInfo = document.getElementById("Valor").textContent;
-  let infoTexto = document.getElementById("comentarios");
-  $.ajax({
-    method: "post",
-    url: "Comentarios",
-    data: {
-      accion: "GuardarComents",
-      comentario: infoTexto.value,
-      idRegistro: obtenerInfo,
-    },
-    success: function (result) {
-      alert(result);
-    },
-  });
-}
-function TablaMensajes() {
-  let obtenerInfo = document.getElementById("Valor").textContent;
-  $.ajax({
-    method: "post",
-    url: "Comentarios",
-    data: {
-      accion: "MostrarTabla",
-      idRegistro: obtenerInfo,
-    },
-    success: function (result) {
-      console.log(result);
-      let tablaMensajes = document.getElementById("Tablamensajes");
-      let sinDiagonal = result.split("/");
-      console.log(sinDiagonal.length);
-      for (let i = 0; i < sinDiagonal.length - 1; i++) {
-        let sinComas = sinDiagonal[i].split(",");
-        // Creando los 'td' que almacenará cada parte de la información del usuario actual
-        let usuario = `<td>${sinComas[0]}</td>`;
-        let fecha = `<td>${sinComas[1]}</td>`;
-        let comentario = `<td>${sinComas[2]}</td>`;
-
-        tablaMensajes.innerHTML += `<tr>${usuario + fecha + comentario}</tr>`;
-      }
-    },
-  });
-}
 function acordeonCerrado() {
   let iFrame;
   $("#btnFactura").on("click", function () {
     iFrame = document.getElementById("iFrameFactura");
     if (document.querySelector("#btnFactura.collapsed")) {
       iFrame.style.display = "none";
-      console.log("entra");
     } else if (iFrameFactura) {
-      console.log("entra2");
       iFrame = document.getElementById("iFrameFactura");
       iFrame.style.display = "";
     }
@@ -136,9 +41,6 @@ function acordeonCerrado() {
     }
   });
   $("#btnCertificado").on("click", function () {
-    if ((document.getElementById("iFrameCertificado").src = "")) {
-      alert("Error");
-    }
     iFrame = document.getElementById("iFrameCertificado");
     if (document.querySelector("#btnCertificado.collapsed")) {
       iFrame.style.display = "none";
@@ -363,6 +265,232 @@ function mostrarImagenFrame() {
     }
   });
 }
+function subirImagen() {
+  $(".botonGuardar").on("click", function () {
+    let id = this.id;
+    let documento;
+    let files;
+    if (id === "imgFactura") {
+      documento = "Factura";
+      files = $("#inputFactura")[0].files[0];
+      iFrame = "iFrameFactura";
+    }
+    if (id === "imgSecuencia") {
+      documento = "Secuencia de facturas";
+      files = $("#inputSecuencia")[0].files[0];
+      iFrame = "iFrameSecuencia";
+    }
+    if (id === "imgCertificado") {
+      documento = "Certificado Propiedad";
+      files = $("#inputCertificado")[0].files[0];
+      iFrame = "iFrameCertificado";
+    }
+    if (id === "imgCopiaCertificado") {
+      documento = "Copia certificado propiedad";
+      files = $("#inputCopiaCertificado")[0].files[0];
+      iFrame = "iFrameCopiaCertificado";
+    }
+    if (id === "imgImportacion") {
+      documento = "Pedimento de Importacion";
+      files = $("#inputPedimento")[0].files[0];
+      iFrame = "iFrameImportacion";
+    }
+    if (id === "imgPermiso") {
+      documento = "Baja de permiso de internacion";
+      files = $("#inputBajaPermiso")[0].files[0];
+      iFrame = "iFramePermiso";
+    }
+    if (id === "imgRFV") {
+      documento = "R.F.V.";
+      files = $("#inputRFV")[0].files[0];
+      iFrame = "iFrameRFV";
+    }
+    if (id === "imgVerificacion") {
+      documento = "Verificacion";
+      files = $("#inputVerificacion")[0].files[0];
+      iFrame = "iFrameVerificacion";
+    }
+    if (id === "imgTenencias") {
+      documento = "Tenencias";
+      files = $("#inputTenencias")[0].files[0];
+      iFrame = "iFrameTenencia";
+    }
+    if (id === "imgBaja") {
+      documento = "Baja de placas";
+      files = $("#inputPlacas")[0].files[0];
+      iFrame = "iFrameBaja";
+    }
+    if (id === "imgFacturaMotor") {
+      documento = "Factura del motor";
+      files = $("#inputFacturaMotor")[0].files[0];
+      iFrame = "iFrameFacturaMotor";
+    }
+    if (id === "imgLlaves") {
+      documento = "Llaves";
+      files = $("#inputLlaves")[0].files[0];
+      iFrame = "iFrameLlaves";
+    }
+    if (id === "imgConoce") {
+      documento = "Formato conoce a tu cliente";
+      files = $("#inputFormato")[0].files[0];
+      iFrame = "iFrameConoce";
+    }
+    if (id === "imgLFPDPPP") {
+      documento = "Consentimiento LFPDPPP";
+      files = $("#inputConsentimiento")[0].files[0];
+      iFrame = "iFrameLFPDPPP";
+    }
+    if (id === "imgAveriguacion") {
+      documento = "Averiguación previa";
+      files = $("#inputAveriguacion")[0].files[0];
+      iFrame = "iFrameAveriguacion";
+    }
+    if (id === "imgAcreditacion") {
+      documento = "Acreditacion de propiedad";
+      files = $("#inputAcreditacion")[0].files[0];
+      iFrame = "iFrameAcreditacion";
+    }
+    if (id === "imgAviso") {
+      documento = "Aviso a PFP";
+      files = $("#inputAviso")[0].files[0];
+      iFrame = "iFrameAviso";
+    }
+    if (id === "imgOtros") {
+      documento = "Otros";
+      files = $("#inputOtros")[0].files[0];
+      iFrame = "iFrameOtros";
+    }
+    if (id === "imgOficio") {
+      documento = "Oficio de liberacion";
+      files = $("#inputLiberacion")[0].files[0];
+      iFrame = "iFrameOficio";
+    }
+    if (id === "imgOficioCancelacion") {
+      documento = "Oficio de cancelacion del robo";
+      files = $("#inputCancelacion")[0].files[0];
+      iFrame = "iFrameOficioCancelacion";
+    }
+    let sesionActual = document.getElementById("sesionActual").textContent;
+    //alert(sesionActual);
+    alert(iFrame);
+    let formData = new FormData();
+    formData.append("file", files);
+    $.ajax({
+      url: `../php/upload.php?idRegistro=${sesionActual}&nombreArchivo=${documento}&iFrame=${iFrame}`,
+      type: "post",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        alert(response);
+        if (response === "Subido con éxito") {
+          let iFrameActivo = document.getElementById("iFrameTenencia");
+          mostrarImagenFrame();
+          document.getElementById("iFrameTenencia").style.display = "";
+        }
+      },
+    });
+    return false;
+  });
+}
+function TablaMensajes() {
+  let sesionActual = document.getElementById("sesionActual").textContent;
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "PeticionesUsuario.php",
+    dataType: "json",
+    data: {
+      accion: "MostrarMensajes",
+      sesionActual,
+    },
+    success: function (result) {
+      console.log(result);
+      $(".tablaMensajes").remove();
+      let tablaMensajes = document.getElementById("Tablamensajes");
+      for (let i in result.Mensajes) {
+        let usuario;
+        let fecha;
+        let comentario;
+        // Creando los 'td' que almacenará cada parte de la información del usuario actual
+        if (result.Mensajes[i].internoExterno === "Interno") {
+          usuario = `<td style='font-size: 11px' class='table-success tablaMensajes'>${result.Mensajes[i].usuario}</td>`;
+          fecha = `<td style='font-size: 11px' class='table-success tablaMensajes'>${result.Mensajes[i].fechaMensaje}</td>`;
+          comentario = `<td style='font-size: 11px' class='table-success tablaMensajes'>${result.Mensajes[i].mensajes}</td>`;
+        } else {
+          fecha = `<td style='font-size: 11px' class='table-info tablaMensajes'>${result.Mensajes[i].fechaMensaje}</td>`;
+          comentario = `<td style='font-size: 11px' class='table-info tablaMensajes'>${result.Mensajes[i].mensajes}</td>`;
+          usuario = `<td style='font-size: 11px' class='table-info tablaMensajes'>${result.Mensajes[i].usuario}</td>`;
+        }
+
+        tablaMensajes.innerHTML += `<tr>${usuario + fecha + comentario}</tr>`;
+      }
+      $("#DatosTabla").DataTable({
+        language: {
+          decimal: "",
+          emptyTable: "No hay información",
+          info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+          infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
+          infoFiltered: "(Filtrado de _MAX_ total entradas)",
+          infoPostFix: "",
+          thousands: ",",
+          lengthMenu: "Mostrar _MENU_ Entradas",
+          loadingRecords: "Cargando...",
+          processing: "Procesando...",
+          search: "Buscar:",
+          zeroRecords: "Sin resultados encontrados",
+          paginate: {
+            first: "Primero",
+            last: "Ultimo",
+            next: "Siguiente",
+            previous: "Anterior",
+          },
+        },
+        retrieve: true,
+        searching: false,
+        lengthChange: false,
+        ordering: false,
+        info: false,
+      });
+    },
+  });
+}
+let iFrameFactura = false;
+let iFrameSecuencia = false;
+let iFrameCertificado = false;
+let iFrameCopiaCertificado = false;
+let iFrameImportacion = false;
+let iFramePermiso = false;
+let iFrameRFV = false;
+let iFrameVerificacion = false;
+let iFrameTenencia = false;
+let iFrameBaja = false;
+let iFrameFacturaMotor = false;
+let iFrameLlaves = false;
+let iFrameConoce = false;
+let iFrameLFPDPPP = false;
+let iFrameAveriguacion = false;
+let iFrameAcreditacion = false;
+let iFrameAviso = false;
+let iFrameOtros = false;
+let iFrameOficio = false;
+let iFrameOficioCancelacion = false;
+$(document).ready(function (e) {
+  progresoExpediente();
+  subirImagen();
+  ocultarIframes();
+  mostrarImagenFrame();
+  $("#btnModalMensajes").on("click", function () {
+    TablaMensajes();
+  });
+  acordeonCerrado();
+  $("#btnConfirmarDatos").on("click", function () {
+    validarDatos();
+  });
+  $("#traerDatos").on("click", function () {
+    traerInfo();
+  });
+  //file type validation
+});
 function validarDatos() {
   let auto = false;
   let fechaSin = false;
@@ -493,11 +621,11 @@ function validarDatos() {
                       ) {
                         poliza = false;
                       }
-                      let obtenerId =
-                        document.getElementById("Valor").textContent;
+                      let sesionActual =
+                        document.getElementById("sesionActual").textContent;
                       $.ajax({
                         method: "POST",
-                        url: "ValidarDatos",
+                        url: rutaInicial + "PeticionesUsuario.php",
                         data: {
                           accion: "ValidarDatos",
                           siniestro,
@@ -510,7 +638,7 @@ function validarDatos() {
                           tipoAuto,
                           serie,
                           placas,
-                          obtenerId,
+                          sesionActual,
                         },
                       }).done(function (result) {
                         alert(result);
@@ -546,159 +674,66 @@ function validarDatos() {
     alert("Por favor, valida todos tus datos");
   }
 }
-function traerDatos() {
-  let obtenerId = document.getElementById("Valor").textContent;
+function GuardarComent() {
+  //funcion para guardar los mensajes del cliente
+  let sesionActual = document.getElementById("sesionActual").textContent;
+  let comentario = document.getElementById("comentarios").value;
+  $.ajax({
+    method: "post",
+    url: rutaInicial + "PeticionesUsuario.php",
+    data: {
+      accion: "GuardarComentario",
+      comentario,
+      sesionActual,
+    },
+    success: function (result) {
+      alert(result);
+      TablaMensajes();
+    },
+  });
+}
+///////////////////////////
+//funciones utilizadas
+///////////////////////////
+function traerInfo() {
+  let sesionActual = document.getElementById("sesionActual").textContent;
   $.ajax({
     method: "POST",
-    url: "ValidarDatos",
+    url: rutaInicial + "PeticionesUsuario.php",
+    dataType: "json",
     data: {
-      accion: "TraerDatos",
-      obtenerId,
+      accion: "TraerInformacion",
+      sesionActual,
     },
   }).done(function (result) {
-    //console.log(result);
-    let sinCodificado = result.split("-_/");
-    //sinCodificado.forEach((element) => console.log(element));
-    document.getElementById("txtSiniestro").value = sinCodificado[0];
-    document.getElementById("txtPoliza").value = sinCodificado[1];
-    document.getElementById("txtNombre").value = sinCodificado[2];
-    document.getElementById("txtTelefono").value = sinCodificado[3];
-    document.getElementById("txtCorreo").value = sinCodificado[4];
-    document.getElementById("txtAuto").value = sinCodificado[5];
-    document.getElementById("txtFecha").value = sinCodificado[6];
-    document.getElementById("txtTipo").value = sinCodificado[7];
-    document.getElementById("txtSerie").value = sinCodificado[8];
-    document.getElementById("txtPlacas").value = sinCodificado[9];
+    console.log(result);
+    document.getElementById("txtSiniestro").value =
+      result.Datos[0].numSiniestro;
+    document.getElementById("txtPoliza").value = result.Datos[0].poliza;
+    document.getElementById("txtNombre").value = result.Datos[0].asegurado;
+    document.getElementById("txtTelefono").value =
+      result.Datos[0].telefonoprincipal;
+    document.getElementById("txtCorreo").value = result.Datos[0].correo;
+    document.getElementById("txtAuto").value = result.Datos[0].marca;
+    document.getElementById("txtFecha").value = result.Datos[0].fechaSiniestro;
+    document.getElementById("txtTipo").value = result.Datos[0].modelo;
+    document.getElementById("txtSerie").value = result.Datos[0].numserie;
+    document.getElementById("txtPlacas").value = result.Datos[0].placas;
   });
 }
-function progresoDocs() {
+function progresoExpediente() {
+  let sesionActual = document.getElementById("sesionActual").textContent;
   $.ajax({
     method: "POST",
-    url: "ValidarDatos",
+    url: rutaInicial + "PeticionesUsuario.php",
     data: {
-      accion: "ObtenerAvance",
+      accion: "ProgresoExpediente",
+      sesionActual,
     },
-  });
-}
-function subirImagen() {
-  $(".botonGuardar").on("click", function () {
-    let id = this.id;
-    let documento;
-    let files;
-    if (id === "imgFactura") {
-      documento = "Factura";
-      files = $("#inputFactura")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgSecuencia") {
-      documento = "Secuencia de facturas";
-      files = $("#inputSecuencia")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgCertificado") {
-      documento = "Certificado Propiedad";
-      files = $("#inputCertificado")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgCopiaCertificado") {
-      documento = "Copia certificado propiedad";
-      files = $("#inputCopiaCertificado")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgImportacion") {
-      documento = "Pedimento de Importacion";
-      files = $("#inputPedimento")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgPermiso") {
-      documento = "Baja de permiso de internacion";
-      files = $("#inputBajaPermiso")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgRFV") {
-      documento = "R.F.V.";
-      files = $("#inputRFV")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgVerificacion") {
-      documento = "Verificacion";
-      files = $("#inputVerificacion")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgTenencias") {
-      documento = "Tenencias";
-      files = $("#inputTenencias")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgBaja") {
-      documento = "Baja de placas";
-      files = $("#inputPlacas")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgFacturaMotor") {
-      documento = "Factura del motor";
-      files = $("#inputFacturaMotor")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgLlaves") {
-      documento = "Llaves";
-      files = $("#inputLlaves")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgConoce") {
-      documento = "Formato conoce a tu cliente";
-      files = $("#inputFormato")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgLFPDPPP") {
-      documento = "Consentimiento LFPDPPP";
-      files = $("#inputConsentimiento")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgAveriguacion") {
-      documento = "Averiguación previa";
-      files = $("#inputAveriguacion")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgAcreditacion") {
-      documento = "Acreditacion de propiedad";
-      files = $("#inputAcreditacion")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgAviso") {
-      documento = "Aviso a PFP";
-      files = $("#inputAviso")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgOtros") {
-      documento = "Otros";
-      files = $("#inputOtros")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgOficio") {
-      documento = "Oficio de liberacion";
-      files = $("#inputLiberacion")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    if (id === "imgOficioCancelacion") {
-      documento = "Oficio de cancelacion del robo";
-      files = $("#inputCancelacion")[0].files[0];
-      iFrame = "iFrameFactura";
-    }
-    let sesionActual = document.getElementById("sesionActual").textContent;
-    alert(sesionActual);
-    let formData = new FormData();
-    formData.append("file", files);
-    $.ajax({
-      url: `../php/upload.php?idRegistro=${sesionActual}&nombreArchivo=${documento}&iFrame=${iFrame}`,
-      type: "post",
-      data: formData,
-      contentType: false,
-      processData: false,
-      success: function (response) {
-        console.log(response);
-      },
-    });
-    return false;
+  }).done(function (result) {
+    let porcentajeBarra = document.getElementById("progresoDocs");
+    porcentajeBarra.style.width = result + "%";
+    porcentajeBarra.innerHTML = result + "%";
+    console.log(result);
   });
 }

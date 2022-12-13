@@ -1,5 +1,6 @@
 <?php
-function ConsultasSelect($sql){
+function ConsultasSelect($sql)
+{
     require "./Conexion.php";
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
@@ -12,7 +13,8 @@ function ConsultasSelect($sql){
     }
     echo json_encode($datos);
 }
-function ConsultasNoSiniestros($sql, $tabla){
+function ConsultasNoSiniestros($sql, $tabla)
+{
     require "../Conexion.php";
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
@@ -25,24 +27,28 @@ function ConsultasNoSiniestros($sql, $tabla){
     }
     echo json_encode($datos);
 }
-function EliminarSiniestro($sql){
+function EliminarSiniestro($sql)
+{
     require "./Conexion.php";
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
 }
-function ActualizarSiniestro($sql){
+function ActualizarSiniestro($sql)
+{
     require "./Conexion.php";
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
 }
-function ObtenerValorSql($sql){
+function ObtenerValorSql($sql)
+{
     require "./Conexion.php";
     $stmt = $DBcon->query($sql);
     while ($row = $stmt->fetch()) {
         return $row[0];
-      }
+    }
 }
-function ConsultasSelects($sql){
+function ConsultasSelects($sql)
+{
     require "./Conexion.php";
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
@@ -55,7 +61,8 @@ function ConsultasSelects($sql){
     }
     echo json_encode($datos);
 }
-function ConsultasSelectCualquiera($sql,$rutaConexion,$nombreJson){
+function ConsultasSelectCualquiera($sql, $rutaConexion, $nombreJson)
+{
     require $rutaConexion;
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
@@ -67,4 +74,18 @@ function ConsultasSelectCualquiera($sql,$rutaConexion,$nombreJson){
         $datos[$nombreJson][] = $row;
     }
     echo json_encode($datos);
+}
+function ObtenerValorCualquiera($sql, $rutaConexion)
+{
+    require $rutaConexion;
+    $stmt = $DBcon->query($sql);
+    while ($row = $stmt->fetch()) {
+        return $row[0];
+    }
+}
+function ActualizarCualquierSiniestro($sql, $rutaConexion)
+{
+    require $rutaConexion;
+    $stmt = $DBcon->prepare($sql);
+    $stmt->execute();
 }
