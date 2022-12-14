@@ -387,6 +387,7 @@ function subirImagen() {
           let iFrameActivo = document.getElementById("iFrameTenencia");
           mostrarImagenFrame();
           document.getElementById("iFrameTenencia").style.display = "";
+          validarSiExiste();
         }
       },
     });
@@ -479,6 +480,9 @@ $(document).ready(function (e) {
   subirImagen();
   ocultarIframes();
   mostrarImagenFrame();
+  $("#btnCargaDocumentos").on("click", function () {
+    validarSiExiste();
+  });
   $("#btnModalMensajes").on("click", function () {
     TablaMensajes();
   });
@@ -692,9 +696,6 @@ function GuardarComent() {
     },
   });
 }
-///////////////////////////
-//funciones utilizadas
-///////////////////////////
 function traerInfo() {
   let sesionActual = document.getElementById("sesionActual").textContent;
   $.ajax({
@@ -735,5 +736,212 @@ function progresoExpediente() {
     porcentajeBarra.style.width = result + "%";
     porcentajeBarra.innerHTML = result + "%";
     console.log(result);
+  });
+}
+function eliminarImagen(getId) {
+  if (confirm("Eliminar imagen?") == true) {
+    let imagenEliminar;
+    let iFrame;
+    if (getId === "dltFactura") {
+      imagenEliminar = "Factura";
+      iFrame = "iFrameFactura";
+    } else if (getId === "dltSecuencia") {
+      imagenEliminar = "Secuencia de facturas";
+      iFrame = "iFrameSecuencia";
+    } else if (getId === "dltCertificado") {
+      imagenEliminar = "Certificado Propiedad";
+      iFrame = "iFrameCertificado";
+    } else if (getId === "dltCopiaCertificado") {
+      iFrame = "iFrameCopiaCertificado";
+      imagenEliminar = "Copia certificado propiedad";
+    } else if (getId === "dltImportacion") {
+      iFrame = "iFrameImportacion";
+      imagenEliminar = "Pedimento de Importacion";
+    } else if (getId === "dltPermiso") {
+      iFrame = "iFramePermiso";
+      imagenEliminar = "Baja de permiso de internacion";
+    } else if (getId === "dltRFV") {
+      iFrame = "iFrameRFV";
+      imagenEliminar = "R.F.V.";
+    } else if (getId === "dltVerificacion") {
+      iFrame = "iFrameVerificacion";
+      imagenEliminar = "Verificacion";
+    } else if (getId === "dltTenencias") {
+      iFrame = "iFrameTenencia";
+      imagenEliminar = "Tenencias";
+    } else if (getId === "dltBaja") {
+      iFrame = "iFrameBaja";
+      imagenEliminar = "Baja de placas";
+    } else if (getId === "dltMotor") {
+      iFrame = "iFrameFacturaMotor";
+      imagenEliminar = "Factura del motor";
+    } else if (getId === "dltLlaves") {
+      iFrame = "iFrameLlavesv";
+      imagenEliminar = "Llaves";
+    } else if (getId === "dltConoce") {
+      iFrame = "iFrameConoce";
+      imagenEliminar = "Formato conoce a tu cliente";
+    } else if (getId === "dltLFPDPPP") {
+      iFrame = "iFrameLFPDPPP";
+      imagenEliminar = "Consentimiento LFPDPPP";
+    } else if (getId === "dltAveriguacion") {
+      iFrame = "iFrameAveriguacion";
+      imagenEliminar = "Averiguación previa";
+    } else if (getId === "dltAcreditacion") {
+      iFrame = "iFrameAcreditacion";
+      imagenEliminar = "Acreditacion de propiedad";
+    } else if (getId === "dltAviso") {
+      iFrame = "iFrameAviso";
+      imagenEliminar = "Aviso a PFP";
+    } else if (getId === "dltOtros") {
+      iFrame = "iFrameOtros";
+      imagenEliminar = "Otros";
+    } else if (getId === "dltOficio") {
+      iFrame = "iFrameOficio";
+      imagenEliminar = "Oficio de liberacion";
+    } else if (getId === "dltOficioCancelacion") {
+      iFrame = "iFrameOficioCancelacion";
+      imagenEliminar = "Oficio de cancelacion del robo";
+    }
+    let sesionActual = document.getElementById("sesionActual").textContent;
+    $.ajax({
+      method: "POST",
+      url: rutaInicial + "PeticionesUsuario.php",
+      data: {
+        accion: "EliminarImagen",
+        imagenEliminar,
+        sesionActual,
+      },
+    }).done(function (result) {
+      if (result === "Imagen eliminada con éxito") {
+        document.getElementById(iFrame).style.display = "none";
+        alert(result);
+        validarSiExiste();
+      }
+    });
+  }
+}
+
+///////////////////////////
+//funciones utilizadas
+///////////////////////////
+function validarSiExiste() {
+  let sesionActual = document.getElementById("sesionActual").textContent;
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "PeticionesUsuario.php",
+    dataType: "json",
+    data: {
+      accion: "ValidarSiExiste",
+      sesionActual,
+    },
+  }).done(function (result) {
+    console.log(result);
+    for (let i in result.Imagenes) {
+      if (result.Imagenes[i].nombreOriginal === "Factura") {
+        document.getElementById("imgFactura").disabled = true;
+      } else {
+        document.getElementById("imgFactura").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Secuencia de facturas") {
+        document.getElementById("imgSecuencia").disabled = true;
+      } else {
+        document.getElementById("imgSecuencia").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Certificado Propiedad") {
+        document.getElementById("imgCertificado").disabled = true;
+      } else {
+        document.getElementById("imgCertificado").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Copia certificado propiedad") {
+        document.getElementById("imgCopiaCertificado").disabled = true;
+      } else {
+        document.getElementById("imgCopiaCertificado").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Pedimento de Importacion") {
+        document.getElementById("imgImportacion").disabled = true;
+      } else {
+        document.getElementById("imgImportacion").disabled = false;
+      }
+      if (
+        result.Imagenes[i].nombreOriginal === "Baja de permiso de internacion"
+      ) {
+        document.getElementById("imgPermiso").disabled = true;
+      } else {
+        document.getElementById("imgPermiso").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "R.F.V.") {
+        document.getElementById("imgRFV").disabled = true;
+      } else {
+        document.getElementById("imgRFV").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Verificacion") {
+        document.getElementById("imgVerificacion").disabled = true;
+      } else {
+        document.getElementById("imgVerificacion").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Tenencias") {
+        document.getElementById("imgTenencias").disabled = true;
+      } else {
+        document.getElementById("imgTenencias").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Baja de placas") {
+        document.getElementById("imgBaja").disabled = true;
+      } else {
+        document.getElementById("imgBaja").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Factura del motor") {
+        document.getElementById("imgFacturaMotor").disabled = true;
+      } else {
+        document.getElementById("imgFacturaMotor").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Llaves") {
+        document.getElementById("imgLlaves").disabled = true;
+      } else {
+        document.getElementById("imgLlaves").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Formato conoce a tu cliente") {
+        document.getElementById("imgConoce").disabled = true;
+      } else {
+        document.getElementById("imgConoce").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Consentimiento LFPDPPP") {
+        document.getElementById("imgLFPDPPP").disabled = true;
+      } else {
+        document.getElementById("imgLFPDPPP").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Averiguación previa") {
+        document.getElementById("imgAveriguacion").disabled = true;
+      } else {
+        document.getElementById("imgAveriguacion").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Acreditacion de propiedad") {
+        document.getElementById("imgAcreditacion").disabled = true;
+      } else {
+        document.getElementById("imgAcreditacion").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Aviso a PFP") {
+        document.getElementById("imgAviso").disabled = true;
+      } else {
+        document.getElementById("imgAviso").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Otros") {
+        document.getElementById("imgOtros").disabled = true;
+      } else {
+        document.getElementById("imgOtros").disabled = false;
+      }
+      if (result.Imagenes[i].nombreOriginal === "Oficio de liberacion") {
+        document.getElementById("imgOficio").disabled = true;
+      } else {
+        document.getElementById("imgOficio").disabled = false;
+      }
+      if (
+        result.Imagenes[i].nombreOriginal === "Oficio de cancelacion del robo"
+      ) {
+        document.getElementById("imgOficioCancelacion").disabled = true;
+      } else {
+        document.getElementById("imgOficioCancelacion").disabled = false;
+      }
+    }
   });
 }

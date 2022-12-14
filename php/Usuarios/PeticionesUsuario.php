@@ -3,12 +3,12 @@ include "../FuncionesSQL.php";
 $accion = $_POST['accion'];
 $usuario = $_POST['sesionActual'];
 switch ($accion) {
-    case "MostrarMensajes": {
+    case "MostrarMensajes":{
             $sql = "SELECT fechaMensaje,usuario,mensajes,internoExterno FROM mensajesseguimientos where fkmensgSeguimientos=$usuario order by fechaMensaje desc";
             ConsultasSelectCualquiera($sql, "../Conexion.php", "Mensajes");
             break;
         }
-    case "GuardarComentario": {
+    case "GuardarComentario":{
             $comentario = $_POST["comentario"];
             $sql = "select asegurado from infocliente where fkIdRegistro=$usuario";
             $nombreUsuario = ObtenerValorCualquiera($sql, "../Conexion.php");
@@ -18,7 +18,7 @@ switch ($accion) {
             echo "Mensaje enviado";
             break;
         }
-    case "ValidarDatos": {
+    case "ValidarDatos":{
             $siniestro = $_POST["siniestro"];
             $poliza = $_POST["poliza"];
             $nombre = $_POST["nombre"];
@@ -45,5 +45,21 @@ switch ($accion) {
         $sql = "SELECT porcentajeTotal from docsaprobadosatlas where fkDocsAtlas=$usuario";
         $resultado = ObtenerValorCualquiera($sql, "../Conexion.php");
         echo $resultado;
+        break;
+    case "EliminarImagen":
+        $imagenEliminar = $_POST["imagenEliminar"];
+        $sql = "SELECT nombreImagen FROM imagenes where fkImagen=$usuario and nombreOriginal='$imagenEliminar'";
+        $nombreArchivo = ObtenerValorCualquiera($sql, "../Conexion.php");
+        if (unlink("../../Documentos/Ids/$usuario/$nombreArchivo")) {
+            $sql = "DELETE FROM imagenes WHERE fkImagen =$usuario and nombreOriginal='$imagenEliminar'";
+            ActualizarCualquierSiniestro($sql, "../Conexion.php");
+            echo "Imagen eliminada con éxito";
+        } else {
+            echo "Eror al eliminar archivo";
+        }
+        break;
+    case "ValidarSiExiste":
+        $sql = "SELECT nombreOriginal FROM imagenes where fkImagen=$usuario";
+        ConsultasSelectCualquiera($sql, "../Conexion.php", "Imagenes");
         break;
 }
