@@ -1,5 +1,25 @@
 <?php
 include './FuncionesSQL.php';
+$conteo = count($_FILES["archivos"]["name"]);
+for ($i = 0; $i < $conteo; $i++) {
+    $idRegistro = $_GET["idRegistro"];
+    $nombreArchivoFinal = $_GET["nombreArchivo"];
+    $iFrame = $_GET["iFrame"];
+    $ubicacionTemporal = $_FILES["archivos"]["tmp_name"][$i];
+    $nombreArchivo = $_FILES["archivos"]["name"][$i];
+    $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+    // Renombrar archivo
+    $nuevoNombre = sprintf("%s_%d.%s", uniqid(), $i, $extension);
+    // Mover del temporal al directorio actual
+    $resultado = move_uploaded_file($ubicacionTemporal, "../Documentos/Ids/$idRegistro/$nuevoNombre");
+    if ($resultado) {
+        $sql = "INSERT INTO imagenes (nombreImagen, rutaImagen, fkImagen, fechaCarga,nombreOriginal,iframe) "
+            . " VALUES ('$nuevoNombre','../Documentos/Ids/$idRegistro/$nuevoNombre', $idRegistro, now(), '$nombreArchivoFinal','$iFrame')";
+        ActualizarSiniestro($sql);
+    }
+}
+echo json_encode(true);
+/*
 $archivo = $_FILES["file"];
 $idRegistro = $_GET["idRegistro"];
 $nombreArchivo = $_GET["nombreArchivo"];
@@ -23,3 +43,5 @@ if ($resultado) {
 } else {
     echo "Error al subir archivo";
 }
+
+*/

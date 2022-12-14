@@ -122,6 +122,8 @@
             </div>
         </div>
     </div>
+
+
     <!-- Modal -->
     <div class="modal fade modal-lg" id="modalDocumentos" tabindex="-1" aria-labelledby="modalDocumentosLabel"
         aria-hidden="true">
@@ -149,10 +151,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputFactura" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputFactura" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gFactura" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gFactura" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgFactura">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -163,15 +165,30 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button onclick="eliminarImagen(this.id)" type="button" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltFactura">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                                    </svg>
-                                                </button>
+                                                <a class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse" href="#collapseFactura" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                                      </svg>
+                                                </a>
                                             </div>
+                                              <div class="collapse" id="collapseFactura">
+                                                <div class="card card-body">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item">
+                                                          <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                                                          <label class="form-check-label" for="firstRadio">First radio</label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                          <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
+                                                          <label class="form-check-label" for="secondRadio">Second radio</label>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                          <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="thirdRadio">
+                                                          <label class="form-check-label" for="thirdRadio">Third radio</label>
+                                                        </li>
+                                                      </ul>                                                </div>
+                                              </div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,12 +209,12 @@
                                     aria-labelledby="headingTwo">
                                     <div id="imagenSecuencia" class="accordion-body">
                                         <div class="row">
-                                                <div class="file-select botonCargarDoc col-8">
-                                                    <input class="form-control form-control-sm" type="file"
-                                                        id="inputSecuencia" accept="image/*" capture="camera" />
-                                                   </div>
-                                                <div class="btn-group col-4" role="group">
-                                                <button name="gSecuencia" type="submit"
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file"
+                                                    id="inputSecuencia" multiple=""/>
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gSecuencia" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgSecuencia">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -208,8 +225,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltSecuencia">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltSecuencia">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -238,12 +255,12 @@
                                     aria-labelledby="headingThree">
                                     <div id="imagenCertificado" class="accordion-body">
                                         <div class="row">
-                                                <div class="file-select botonCargarDoc col-8">
-                                                    <input class="form-control form-control-sm" type="file"
-                                                        id="inputCertificado" accept="image/*" capture="camera" />
-                                                   </div>
-                                                <div class="btn-group col-4" role="group">
-                                                <button name="gCertificado" type="submit"
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file"
+                                                    id="inputCertificado" multiple=""/>
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gCertificado" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgCertificado">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -255,8 +272,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltCertificado">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltCertificado">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -287,10 +304,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputCopiaCertificado" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputCopiaCertificado" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gCopiaCertificado" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gCopiaCertificado" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgCopiaCertificado">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -302,8 +319,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltCopiaCertificado">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltCopiaCertificado">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -334,10 +351,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputPedimento" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputPedimento" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gFactura" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gFactura" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgImportacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -349,8 +366,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltImportacion">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltImportacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -379,10 +396,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputBajaPermiso" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputBajaPermiso" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gPermiso" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gPermiso" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgPermiso">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -393,8 +410,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltPermiso">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltPermiso">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -421,11 +438,11 @@
                                     <div id="imagenRFV" class="accordion-body">
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
-                                                <input class="form-control form-control-sm" type="file"
-                                                    id="inputRFV" accept="image/*" capture="camera" />
-                                               </div>
+                                                <input class="form-control form-control-sm" type="file" id="inputRFV"
+                                                multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gRFV" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gRFV" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgRFV">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -436,7 +453,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm" id="dltRFV">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltRFV">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -465,10 +483,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputVerificacion" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputVerificacion" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gVerificacion" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gVerificacion" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgVerificacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -480,8 +498,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltVerificacion">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltVerificacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -510,10 +528,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputTenencias" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputTenencias" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gTenencias" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gTenencias" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgTenencias">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -524,8 +542,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltTenencias">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltTenencias">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -552,11 +570,11 @@
                                     <div id="imagenBaja" class="accordion-body">
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
-                                                <input class="form-control form-control-sm" type="file"
-                                                    id="inputPlacas" accept="image/*" capture="camera" />
-                                               </div>
+                                                <input class="form-control form-control-sm" type="file" id="inputPlacas"
+                                                multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gBaja" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gBaja" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgBaja">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -567,7 +585,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm" id="dltBaja">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltBaja">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -596,10 +615,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputFacturaMotor" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputFacturaMotor" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gFacturaMotor" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gFacturaMotor" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgFacturaMotor">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -611,7 +630,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm" id="dltMotor">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltMotor">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -639,11 +659,11 @@
                                     <div id="imagenLlaves" class="accordion-body">
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
-                                                <input class="form-control form-control-sm" type="file"
-                                                    id="inputLlaves" accept="image/*" capture="camera" />
-                                               </div>
+                                                <input class="form-control form-control-sm" type="file" id="inputLlaves"
+                                                multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gFacturaMotor" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gFacturaMotor" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgLlaves">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -654,8 +674,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltLlaves">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltLlaves">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -683,10 +703,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputFormato" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputFormato" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gConoce" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gConoce" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgConoce">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -697,8 +717,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltConoce">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltConoce">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -726,10 +746,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputConsentimiento" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputConsentimiento" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gLFPDPPP" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gLFPDPPP" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgLFPDPPP">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -740,8 +760,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltLFPDPPP">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltLFPDPPP">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -770,10 +790,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputAveriguacion" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputAveriguacion" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gAveriguacion" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gAveriguacion" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgAveriguacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -785,8 +805,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltAveriguacion">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltAveriguacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -816,10 +836,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputAcreditacion" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputAcreditacion" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gAcreditacion" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gAcreditacion" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgAcreditacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -831,8 +851,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltAcreditacion">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltAcreditacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -861,10 +881,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file" id="inputAviso"
-                                                    accept="image/*" capture="camera" />
-                                               </div>
+                                                multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gAviso" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gAviso" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgAviso">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -875,7 +895,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm" id="dltAviso">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltAviso">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -903,10 +924,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file" id="inputOtros"
-                                                    accept="image/*" capture="camera" />
-                                               </div>
+                                                multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gOtros" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gOtros" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgOtros">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -917,7 +938,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm" id="dltOtros">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltOtros">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -945,10 +967,10 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputLiberacion" accept="image/*" capture="camera" />
-                                               </div>
+                                                    id="inputLiberacion" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gOficio" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gOficio" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm" id="imgOficio">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -959,8 +981,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltOficio">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltOficio">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
@@ -988,12 +1010,12 @@
                                     aria-labelledby="headingThree">
                                     <div id="imagenOficioCancelacion" class="accordion-body">
                                         <div class="row">
-                                                <div class="file-select botonCargarDoc col-8">
-                                                    <input class="form-control form-control-sm" type="file"
-                                                   id="inputCancelacion" accept="image/*" capture="camera" />
-                                                   </div>
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file"
+                                                    id="inputCancelacion" multiple=""/>
+                                            </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button name="gOficioCancelacion" type="submit"
+                                                <button onclick="subirImagen(this.id)" name="gOficioCancelacion" type="submit"
                                                     class="botonGuardar btn btn-success col-2 btn-sm pr-1"
                                                     id="imgOficioCancelacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -1005,8 +1027,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)" class="btn btn-danger col-2 btn-sm"
-                                                    id="dltOficioCancelacion">
+                                                <button type="button" onclick="eliminarImagen(this.id)"
+                                                    class="btn btn-danger col-2 btn-sm" id="dltOficioCancelacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
