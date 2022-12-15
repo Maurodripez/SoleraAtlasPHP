@@ -60,7 +60,8 @@ switch ($accion) {
         }
     case "imagenesUsuario": {
             $idRegistro = $_POST["idRegistro"];
-            $sql = "SELECT nombreImagen,nombreOriginal,iframe FROM imagenes where fkImagen=$idRegistro";
+            $nombreImagen = $_POST["nombreImagen"];
+            $sql = "SELECT nombreImagen,nombreOriginal,iframe FROM imagenes where fkImagen=$idRegistro and nombreOriginal='$nombreImagen'";
             ConsultasSelectCualquiera($sql, "./Conexion.php", "Imagen");
             break;
         }

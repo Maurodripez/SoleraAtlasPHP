@@ -123,7 +123,6 @@
         </div>
     </div>
 
-
     <!-- Modal -->
     <div class="modal fade modal-lg" id="modalDocumentos" tabindex="-1" aria-labelledby="modalDocumentosLabel"
         aria-hidden="true">
@@ -140,8 +139,8 @@
                         <div class="col">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" value="factura" id="btnFactura" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#factura" aria-expanded="true"
+                                    <button class="accordion-button collapsed" value="factura" id="btnFactura" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#factura" aria-expanded="false"
                                         aria-controls="collapseOne">
                                         Factura
                                     </button>
@@ -151,7 +150,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputFactura" multiple=""/>
+                                                    id="inputFactura" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gFactura" type="submit"
@@ -165,43 +164,37 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse" href="#collapseFactura" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                                                      </svg>
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulFactura','Factura')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseFactura" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
                                                 </a>
                                             </div>
-                                              <div class="collapse" id="collapseFactura">
+                                            <div class="collapse" id="collapseFactura">
                                                 <div class="card card-body">
-                                                    <ul class="list-group">
-                                                        <li class="list-group-item">
-                                                          <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
-                                                          <label class="form-check-label" for="firstRadio">First radio</label>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                          <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="secondRadio">
-                                                          <label class="form-check-label" for="secondRadio">Second radio</label>
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                          <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="thirdRadio">
-                                                          <label class="form-check-label" for="thirdRadio">Third radio</label>
-                                                        </li>
-                                                      </ul>                                                </div>
-                                              </div>
+                                                    <ul id="ulFactura" class="list-group">  
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameFactura" class="p-2" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                    <img id="iFrameFactura" src="" alt="">
+
                             </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
-                                    <button value="secuencia Facturas" id="btnSecuencia" class="accordion-button"
+                                    <button value="secuencia Facturas" id="btnSecuencia" class="accordion-button collapsed"
                                         type="button" data-bs-toggle="collapse" data-bs-target="#secuenciaFacturas"
-                                        aria-expanded="true">
+                                        aria-expanded="false">
                                         Secuencia de facturas
                                     </button>
                                 </h2>
@@ -211,7 +204,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputSecuencia" multiple=""/>
+                                                    id="inputSecuencia" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gSecuencia" type="submit"
@@ -225,20 +218,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltSecuencia">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulSecuencia','Secuencia de facturas')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseSecuencia" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseSecuencia">
+                                                <div class="card card-body">
+                                                    <ul id="ulSecuencia" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameSecuencia" class="p-2" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                    <img id="iFrameSecuencia" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -257,7 +258,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputCertificado" multiple=""/>
+                                                    id="inputCertificado" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gCertificado" type="submit"
@@ -272,20 +273,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltCertificado">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulCertificado','Certificado Propiedad')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseCertificado" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseCertificado">
+                                                <div class="card card-body">
+                                                    <ul id="ulCertificado" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameCertificado" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameCertificado" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -304,11 +313,11 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputCopiaCertificado" multiple=""/>
+                                                    id="inputCopiaCertificado" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button onclick="subirImagen(this.id)" name="gCopiaCertificado" type="submit"
-                                                    class="botonGuardar btn btn-success col-2 btn-sm"
+                                                <button onclick="subirImagen(this.id)" name="gCopiaCertificado"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgCopiaCertificado">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -319,20 +328,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltCopiaCertificado">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulCopiaCertificado','Copia certificado propiedad')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseCopiaCertificado" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseCopiaCertificado">
+                                                <div class="card card-body">
+                                                    <ul id="ulCopiaCertificado" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameCopiaCertificado" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameCopiaCertificado" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -351,7 +368,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputPedimento" multiple=""/>
+                                                    id="inputPedimento" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gFactura" type="submit"
@@ -366,20 +383,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltImportacion">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulPedimento','Pedimento de Importacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapsePedimento" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapsePedimento">
+                                                <div class="card card-body">
+                                                    <ul id="ulPedimento" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameImportacion" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameImportacion" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -396,7 +421,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputBajaPermiso" multiple=""/>
+                                                    id="inputBajaPermiso" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gPermiso" type="submit"
@@ -410,20 +435,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltPermiso">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulBajaPermiso','Baja de permiso de internacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseBajaPermiso" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseBajaPermiso">
+                                                <div class="card card-body">
+                                                    <ul id="ulBajaPermiso" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFramePermiso" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFramePermiso" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -439,7 +472,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file" id="inputRFV"
-                                                multiple=""/>
+                                                    multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gRFV" type="submit"
@@ -453,20 +486,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltRFV">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulRFV','R.F.V.')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseRFV" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseRFV">
+                                                <div class="card card-body">
+                                                    <ul id="ulRFV" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameRFV" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameRFV" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -483,11 +524,11 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputVerificacion" multiple=""/>
+                                                    id="inputVerificacion" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button onclick="subirImagen(this.id)" name="gVerificacion" type="submit"
-                                                    class="botonGuardar btn btn-success col-2 btn-sm"
+                                                <button onclick="subirImagen(this.id)" name="gVerificacion"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgVerificacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -498,20 +539,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltVerificacion">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulVerificacion','Verificacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseVerificacion" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseVerificacion">
+                                                <div class="card card-body">
+                                                    <ul id="ulVerificacion" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameVerificacion" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameVerificacion" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -528,7 +577,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputTenencias" multiple=""/>
+                                                    id="inputTenencias" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gTenencias" type="submit"
@@ -542,20 +591,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltTenencias">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulTenencias','Tenencias')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseTenencias" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseTenencias">
+                                                <div class="card card-body">
+                                                    <ul id="ulFactura" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameTenencia" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameTenencia" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -571,7 +628,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file" id="inputPlacas"
-                                                multiple=""/>
+                                                    multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gBaja" type="submit"
@@ -585,20 +642,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltBaja">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulPlacas','Baja de placas')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapsePlacas" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapsePlacas">
+                                                <div class="card card-body">
+                                                    <ul id="ulPlacas" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameBaja" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameBaja" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -615,11 +680,11 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputFacturaMotor" multiple=""/>
+                                                    id="inputFacturaMotor" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button onclick="subirImagen(this.id)" name="gFacturaMotor" type="submit"
-                                                    class="botonGuardar btn btn-success col-2 btn-sm"
+                                                <button onclick="subirImagen(this.id)" name="gFacturaMotor"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgFacturaMotor">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -630,20 +695,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltMotor">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulMotor','Factura del motor')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseMotor" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseMotor">
+                                                <div class="card card-body">
+                                                    <ul id="ulMotor" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameFacturaMotor" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameFacturaMotor" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -660,11 +733,12 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file" id="inputLlaves"
-                                                multiple=""/>
+                                                    multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button onclick="subirImagen(this.id)" name="gFacturaMotor" type="submit"
-                                                    class="botonGuardar btn btn-success col-2 btn-sm" id="imgLlaves">
+                                                <button onclick="subirImagen(this.id)" name="gFacturaMotor"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm"
+                                                    id="imgLlaves">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
                                                         viewBox="0 0 16 16">
@@ -674,20 +748,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltLlaves">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulLlaves','Llaves')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseLlaves" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseLlaves">
+                                                <div class="card card-body">
+                                                    <ul id="ulLlaves" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameLlaves" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameLlaves" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -703,7 +785,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputFormato" multiple=""/>
+                                                    id="inputFormato" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gConoce" type="submit"
@@ -717,20 +799,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltConoce">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulConoce','Formato conoce a tu cliente')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseConoce" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseConoce">
+                                                <div class="card card-body">
+                                                    <ul id="ulConoce" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameConoce" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameConoce" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -746,7 +836,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputConsentimiento" multiple=""/>
+                                                    id="inputConsentimiento" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gLFPDPPP" type="submit"
@@ -760,20 +850,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltLFPDPPP">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulLFPDPPP','Consentimiento LFPDPPP')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseLFPDPPP" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseLFPDPPP">
+                                                <div class="card card-body">
+                                                    <ul id="ulLFPDPPP" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameLFPDPPP" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameLFPDPPP" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -790,11 +888,11 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputAveriguacion" multiple=""/>
+                                                    id="inputAveriguacion" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button onclick="subirImagen(this.id)" name="gAveriguacion" type="submit"
-                                                    class="botonGuardar btn btn-success col-2 btn-sm"
+                                                <button onclick="subirImagen(this.id)" name="gAveriguacion"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgAveriguacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -805,20 +903,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltAveriguacion">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulAveriguación','Averiguación previa')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseAveriguación" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseAveriguación">
+                                                <div class="card card-body">
+                                                    <ul id="ulAveriguación" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameAveriguacion" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameAveriguacion" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -836,11 +942,11 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputAcreditacion" multiple=""/>
+                                                    id="inputAcreditacion" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button onclick="subirImagen(this.id)" name="gAcreditacion" type="submit"
-                                                    class="botonGuardar btn btn-success col-2 btn-sm"
+                                                <button onclick="subirImagen(this.id)" name="gAcreditacion"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm"
                                                     id="imgAcreditacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -851,20 +957,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltAcreditacion">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulAcreditacion','Acreditacion de propiedad')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseAcreditacion" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseAcreditacion">
+                                                <div class="card card-body">
+                                                    <ul id="ulAcreditacion" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameAcreditacion" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameAcreditacion" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -881,7 +995,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file" id="inputAviso"
-                                                multiple=""/>
+                                                    multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gAviso" type="submit"
@@ -895,20 +1009,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltAviso">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulPFP','Aviso a PFP')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapsePFP" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapsePFP">
+                                                <div class="card card-body">
+                                                    <ul id="ulPFP" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameAviso" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameAviso" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -924,7 +1046,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file" id="inputOtros"
-                                                multiple=""/>
+                                                    multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gOtros" type="submit"
@@ -938,20 +1060,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltOtros">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulOtros','Otros')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseOtros" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseOtros">
+                                                <div class="card card-body">
+                                                    <ul id="ulOtros" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameOtros" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameOtros" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -967,7 +1097,7 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputLiberacion" multiple=""/>
+                                                    id="inputLiberacion" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gOficio" type="submit"
@@ -981,20 +1111,28 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltOficio">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulLiberacion','Oficio de liberacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseLiberacion" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseLiberacion">
+                                                <div class="card card-body">
+                                                    <ul id="ulLiberacion" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameOficio" src="" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
+                                <img id="iFrameOficio" src="" alt="">                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -1012,11 +1150,11 @@
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
                                                 <input class="form-control form-control-sm" type="file"
-                                                    id="inputCancelacion" multiple=""/>
+                                                    id="inputCancelacion" multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
-                                                <button onclick="subirImagen(this.id)" name="gOficioCancelacion" type="submit"
-                                                    class="botonGuardar btn btn-success col-2 btn-sm pr-1"
+                                                <button onclick="subirImagen(this.id)" name="gOficioCancelacion"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm pr-1"
                                                     id="imgOficioCancelacion">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cloud-arrow-up"
@@ -1026,21 +1164,30 @@
                                                         <path
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
+
                                                 </button>
-                                                <button type="button" onclick="eliminarImagen(this.id)"
-                                                    class="btn btn-danger col-2 btn-sm" id="dltOficioCancelacion">
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulCancelacion','Oficio de cancelacion del robo')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseCancelacion" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                                         <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                                     </svg>
-                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseCancelacion">
+                                                <div class="card card-body">
+                                                    <ul id="ulCancelacion" class="list-group">  
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameOficioCancelacion" src="" width="100%" height="500px"
-                                    frameborder="0"></iframe>
+                                <img id="iFrameOficioCancelacion" src="" alt="">
                             </div>
                         </div>
                     </div>

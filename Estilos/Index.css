@@ -1,7 +1,7 @@
 .loginCard {
   border: 0px;
   display: grid;
-  padding-top: 150px;
+  padding-top: 100px;
   place-content: center;
 }
 .form-group {
@@ -9,5 +9,12 @@
 }
 .btnLogin {
   background-color: #542b6d;
-  
+}
+.btnLogin:hover {
+  background-color: #542b6d;
+}
+.loginCardUsuario {
+  border: 0px;
+  display: grid;
+  place-content: center;
 }

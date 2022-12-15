@@ -72,3 +72,13 @@
   .botonCargarDoc::before {
     content: 'Seleccionar Archivo';
   }
+  .contenedor{
+    width:100%;
+    height:250px;
+  }
+  /*Aplicamos la propiedad object-fit cover, ajustar su tamaño y no perder la proporcion de nuestra imagen*/
+  img{
+    object-fit: cover;
+    width:100%;
+    height:250px;
+  }

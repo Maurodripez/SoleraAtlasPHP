@@ -5,6 +5,10 @@ for ($i = 0; $i < $conteo; $i++) {
     $idRegistro = $_GET["idRegistro"];
     $nombreArchivoFinal = $_GET["nombreArchivo"];
     $iFrame = $_GET["iFrame"];
+    $micarpeta = "../Documentos/Ids/$idRegistro/";
+    if (!file_exists($micarpeta)) {
+        mkdir($micarpeta, 0777, true);
+    }
     $ubicacionTemporal = $_FILES["archivos"]["tmp_name"][$i];
     $nombreArchivo = $_FILES["archivos"]["name"][$i];
     $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);

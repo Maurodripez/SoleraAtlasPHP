@@ -921,7 +921,7 @@ function enviarImagenes() {
     $.ajax({
       url:
         rutaInicial +
-        `upload.php?idRegistro=${idRegistro}&nombreArchivo=${nombreArchivo}&iFrame=${iFrame}`,
+        `SubirImagen.php?idRegistro=${idRegistro}&nombreArchivo=${nombreArchivo}&iFrame=${iFrame}`,
       type: "post",
       data: formData,
       contentType: false,
