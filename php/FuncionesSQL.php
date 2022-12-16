@@ -89,3 +89,16 @@ function ActualizarCualquierSiniestro($sql, $rutaConexion)
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
 }
+function SelectSinNombreJson($sql,$rutaConexion){
+    require $rutaConexion;
+    $stmt = $DBcon->prepare($sql);
+    $stmt->execute();
+
+    $datos = array();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        $datos[] = $row;
+    }
+    echo json_encode($datos);
+}
