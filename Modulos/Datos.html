@@ -703,8 +703,8 @@
                         </button>
                         <a href="../Excels/Siniestros.xlsx" download="Siniestros.xlsx" class="btn btn-primary"
                             role="button">Exportar</a>
-                        <button id="btnMovimientos" onclick="mostrarMovsPorDefecto()" type="button" class="btn btn-primary"
-                            data-bs-toggle="modal" data-bs-target="#movimientosUsuarios">
+                        <button id="btnMovimientos" onclick="mostrarMovsPorDefecto()" type="button"
+                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#movimientosUsuarios">
                             Movimientos
                         </button>
                     </div>
@@ -2311,8 +2311,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="calendario date col px-md-3">
-                                                        <label class="input-group-text fw-bold"
-                                                            for="inputGroupSelect01">
+                                                        <label class="input-group-text fw-bold" for="txtFechaTermino">
                                                             Fecha Termino
                                                         </label>
                                                         <div class="input-group-sm input-group mb-3">
@@ -2328,6 +2327,132 @@
                                                                 id="txtFechaTermino"
                                                                 pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
                                                                 name="txtFechaTermino" type="text" placeholder="Fecha">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mb-3 mt-3">
+                                                        <button id="btnOffCanvasCita" class="btn" type="button"
+                                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasCita"
+                                                            aria-controls="offcanvasCita">Generar Cita</button>
+
+                                                        <div class="offcanvas offcanvas-end" tabindex="-1"
+                                                            id="offcanvasCita" aria-labelledby="offcanvasCitaLabel">
+                                                            <div class="offcanvas-header">
+                                                                <h5 class="offcanvas-title" id="offcanvasCitaLabel">
+                                                                    Generar Cita</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="offcanvas"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="offcanvas-body">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="mb-2 calendario date">
+                                                                            <label for="txtFechaDatos"
+                                                                                class="form-label">Fecha</label>
+                                                                            <input placeholder="Fecha" type="text"
+                                                                                class="form-control input-group-append"
+                                                                                id="txtFechaDatos">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="mb-2">
+                                                                            <label for="txtTitulo"
+                                                                                class="form-label">Titulo</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="txtTitulo">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="mb-2">
+                                                                            <label for="txtHoraInicio"
+                                                                                class="form-label">Hora de
+                                                                                inicio</label>
+                                                                            <select id="txtHoraInicio"
+                                                                                class="selectpicker"
+                                                                                data-live-search="true">
+                                                                                <option value="09:00">09:00</option>
+                                                                                <option value="10:00">10:00</option>
+                                                                                <option value="11:00">11:00</option>
+                                                                                <option value="12:00">12:00</option>
+                                                                                <option value="13:00">13:00</option>
+                                                                                <option value="14:00">14:00</option>
+                                                                                <option value="15:00">15:00</option>
+                                                                                <option value="16:00">16:00</option>
+                                                                            </select>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="mb-2">
+                                                                            <label for="txtHoraFinal"
+                                                                                class="form-label">Hora final</label>
+                                                                            <select id="txtHoraFinal"
+                                                                                class="selectpicker"
+                                                                                data-live-search="true">
+                                                                                <option value="10:00">10:00</option>
+                                                                                <option value="11:00">11:00</option>
+                                                                                <option value="12:00">12:00</option>
+                                                                                <option value="13:00">13:00</option>
+                                                                                <option value="14:00">14:00</option>
+                                                                                <option value="15:00">15:00</option>
+                                                                                <option value="16:00">16:00</option>
+                                                                                <option value="17:00">17:00</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-2 row">
+                                                                    <label for="txtInfoAdicional"
+                                                                        class="form-label">Informacion adicional</label>
+                                                                    <textarea class="form-control" id="txtInfoAdicional"
+                                                                        rows="3" value="Ninguna"></textarea>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col mb-2">
+                                                                        <label for="txtAsesor"
+                                                                            class="form-label">Asesor</label>
+                                                                        <select id="txtAsesor"
+                                                                            class="form-select mb-3 form-select-sm"
+                                                                            aria-label=".form-select-lg example">
+                                                                            <option selected>Asesor</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col mb-2">
+                                                                        <label for="txtColor"
+                                                                            class="form-label">Color</label>
+                                                                            <div>
+                                                                                <select id="txtColor" name="opciones">
+                                                                                    <option value="#ff0000" class="rojo">Rojo</option>
+                                                                                    <option value="#0066ff" class="azul">azul</option>
+                                                                                    <option value="#009900" class="verde">Verde</option>
+                                                                                    </select>
+                                                                            </div>
+                                                                    </div>
+                                                                    <div class="col mb-2">
+                                                                        <label for="txtSiniestro"
+                                                                            class="form-label">Siniestro</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="txtSiniestro" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row p-2">
+                                                                    <div class="card-body">
+                                                                        <h5 id="citaActiva" class="card-title">Cita activa</h5>
+                                                                      </div>
+                                                                    <div class="card">
+                                                                        <ul id="ulCitaActiva" class="list-group list-group-flush">
+                                                                        </ul>
+                                                                      </div>
+                                                                </div>
+                                                                <button id="btnGuardarCita" class="btn btn-info">
+                                                                    Guardar Cita
+                                                                </button>
+                                                                <button id="btnGuardarCita" class="btn btn-danger">
+                                                                    Eliminar Cita
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2368,7 +2493,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Close
+                            Cerrar
                         </button>
                     </div>
                 </div>
@@ -2589,44 +2714,58 @@
                                             <select id="tipoArchivoCargado" name="tipoArchivo"
                                                 class="form-select form-select-sm" aria-label="Default select example">
                                                 <option selected>Selecciona...</option>
-                                                <option id="selectFactura" value="Factura" name="iFrameFactura">Factura</option>
-                                                <option id="selectfacturaAtlas"
-                                                    value="Factura a favor de Seguros Atlas" name="iFrameFavorAtlas">Factura a favor de Seguros
+                                                <option id="selectFactura" value="Factura" name="iFrameFactura">Factura
+                                                </option>
+                                                <option id="selectfacturaAtlas" value="Factura a favor de Seguros Atlas"
+                                                    name="iFrameFavorAtlas">Factura a favor de Seguros
                                                     Atlas</option>
-                                                <option id="selectSecuencia" value="Secuencia de facturas" name="iFrameSecuencia">Secuencia de
+                                                <option id="selectSecuencia" value="Secuencia de facturas"
+                                                    name="iFrameSecuencia">Secuencia de
                                                     facturas
                                                 </option>
-                                                <option id="selectBajaPlacas" value="Baja de placas" name="iFrameBaja">Baja de placas
+                                                <option id="selectBajaPlacas" value="Baja de placas" name="iFrameBaja">
+                                                    Baja de placas
                                                 </option>
-                                                <option id="selectCertificado" value="Certificado Propiedad" name="iFrameCertificado">
+                                                <option id="selectCertificado" value="Certificado Propiedad"
+                                                    name="iFrameCertificado">
                                                     Certificado Propiedad</option>
-                                                <option id="selectCertificadoCopia" value="Copia certificado propiedad" name="iFrameCopiaCertificado">
+                                                <option id="selectCertificadoCopia" value="Copia certificado propiedad"
+                                                    name="iFrameCopiaCertificado">
                                                     Copia certificado propiedad</option>
-                                                <option id="selectPedimento" value="Pedimento de Importacion" name="iFrameImportacion">Pedimento de Importacion</option>
+                                                <option id="selectPedimento" value="Pedimento de Importacion"
+                                                    name="iFrameImportacion">Pedimento de Importacion</option>
                                                 <option id="selectR.F.V." value=" R.F.V." name="iFrameRFV">R.F.V.
                                                 </option>
-                                                <option id="selectBajaPermiso" value="Baja de permiso de internacion" name="iFramePermiso">
+                                                <option id="selectBajaPermiso" value="Baja de permiso de internacion"
+                                                    name="iFramePermiso">
                                                     Baja de permiso de internacion
                                                 </option>
-                                                <option id="selectVerificacion" value="Verificacion" name="iFrameVerificacion">
+                                                <option id="selectVerificacion" value="Verificacion"
+                                                    name="iFrameVerificacion">
                                                     Verificacion
                                                 </option>
-                                                <option id="selectTenencias" value="Tenencias" name="iFrameTenencia">Tenencias</option>
-                                                <option id="selectMotor" value="Factura del motor" name="iFrameFacturaMotor">
+                                                <option id="selectTenencias" value="Tenencias" name="iFrameTenencia">
+                                                    Tenencias</option>
+                                                <option id="selectMotor" value="Factura del motor"
+                                                    name="iFrameFacturaMotor">
                                                     Factura del motor</option>
                                                 <option id="selectLlaves" value="Llaves" name="iFrameLlaves">
                                                     Llaves
                                                 </option>
-                                                <option id="selectConoce" value="Formato conoce a tu cliente" name="iFrameConoce">
+                                                <option id="selectConoce" value="Formato conoce a tu cliente"
+                                                    name="iFrameConoce">
                                                     Formato conoce a tu cliente
                                                 </option>
-                                                <option id="selectLFPDPPP" value="Consentimiento LFPDPPP" name="iFrameLFPDPPP">
+                                                <option id="selectLFPDPPP" value="Consentimiento LFPDPPP"
+                                                    name="iFrameLFPDPPP">
                                                     Consentimiento LFPDPPP
                                                 </option>
-                                                <option id="selectAveriguacion" value="Averiguación previa" name="iFrameAveriguacion">
+                                                <option id="selectAveriguacion" value="Averiguación previa"
+                                                    name="iFrameAveriguacion">
                                                     Averiguación previa
                                                 </option>
-                                                <option id="selectAcreditacion" value="Acreditacion de propiedad" name="iFrameAcreditacion">
+                                                <option id="selectAcreditacion" value="Acreditacion de propiedad"
+                                                    name="iFrameAcreditacion">
                                                     Acreditacion de propiedad
                                                 </option>
                                                 <option id="selectPFP" value="Aviso a PFP" name="iFrameAviso">
@@ -2635,11 +2774,13 @@
                                                 <option id="selectOtros" value="Otros" name="iFrameOtros">
                                                     Otros
                                                 </option>
-                                                <option id="selectOficioLiberacion" value="Oficio de liberacion" name="iFrameOficio">
+                                                <option id="selectOficioLiberacion" value="Oficio de liberacion"
+                                                    name="iFrameOficio">
                                                     Oficio de liberacion
                                                 </option>
                                                 <option id="selectOficioCancelacion"
-                                                    value="Oficio de cancelacion del robo" name="iFrameOficioCancelacion">
+                                                    value="Oficio de cancelacion del robo"
+                                                    name="iFrameOficioCancelacion">
                                                     Oficio de cancelacion del robo
                                                 </option>
                                             </select>

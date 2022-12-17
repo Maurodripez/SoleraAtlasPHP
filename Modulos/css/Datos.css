@@ -153,3 +153,7 @@
 .btnSeleccionar{
   border-color: #ced4da;
 }
+#btnOffCanvasCita{
+  background-color: #00b360;
+  color: #ffffff;
+}

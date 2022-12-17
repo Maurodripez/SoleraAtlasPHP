@@ -14,9 +14,10 @@
 </head>
 
 <body>
-    <h2>Citas</h2>
+    <div class="encabezado">
+        <h1>Citas</h1>
+    </div>
     <p id="idCitaActual" style="display: none;">El id</p>
-    <div class="response"></div>
     <div id='calendar'></div>
     <!-- Modal -->
     <div class="modal fade" id="ModalEventos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -84,20 +85,21 @@
                             <select id="txtAsesor" class="form-select mb-3 form-select-sm"
                                 aria-label=".form-select-lg example">
                                 <option selected>Asesor</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
                             </select>
                         </div>
                         <div class="col mb-2">
                             <label for="txtColor" class="form-label">Color</label>
-                            <div class="col">
-                                <input type="color" class="form-control" id="txtColor">
+                            <div>
+                                <select id="txtColor" name="opciones">
+                                    <option value="#ff0000" class="rojo">Rojo</option>
+                                    <option value="#0066ff" class="azul">azul</option>
+                                    <option value="#009900" class="verde">Verde</option>
+                                    </select>
                             </div>
                         </div>
                         <div class="col mb-2">
                             <label for="txtSiniestro" class="form-label">Siniestro</label>
-                            <input type="text" class="form-control" id="txtSiniestro">
+                            <input type="text" class="form-control" id="txtSiniestro" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -108,75 +110,64 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="ModalMostrarInfoEvento" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="ModalMostrarInfoEvento" tabindex="-1" aria-labelledby="ModalMostrarInfoEventoLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="ModalMostrarInfoEventoLabel">Informacion</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col">
                             <div class="mb-2">
-                                <label for="txtFecha" class="form-label">Fecha</label>
-                                <input type="text" class="form-control" id="txtFecha">
+                                <label for="txtInfoFecha" class="form-label">Fecha</label>
+                                <input type="text" class="form-control" id="txtInfoFecha" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <label for="txtTitulo" class="form-label">Titulo</label>
-                                <input type="text" class="form-control" id="txtTitulo">
+                                <label for="txtInfoTitulo" class="form-label">Titulo</label>
+                                <input type="text" class="form-control" id="txtInfoTitulo" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="mb-2">
-                                <label for="txtHoraInicio" class="form-label">Hora de inicio</label>
-                                <input type="text" class="form-control" id="txtHoraInicio">
+                                <label for="txtInfoHoraInicio" class="form-label">Hora de inicio</label>
+                                <input type="text" class="form-control" id="txtInfoHoraInicio" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <label for="txtHoraFinal" class="form-label">Hora final</label>
-                                <input type="text" class="form-control" id="txtHoraFinal">
+                                <label for="txtInfoHoraFinal" class="form-label">Hora final</label>
+                                <input type="text" class="form-control" id="txtInfoHoraFinal" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="mb-2 row">
-                        <label for="txtInfoAdicional" class="form-label">Informacion adicional</label>
-                        <textarea class="form-control" id="txtInfoAdicional" rows="3" value="Ninguna"></textarea>
+                        <label for="txtInfoInfoAdicional" class="form-label">Informacion adicional</label>
+                        <textarea class="form-control" id="txtInfoInfoAdicional" rows="3" value="Ninguna" readonly></textarea>
                     </div>
                     <div class="row">
                         <div class="col mb-2">
-                            <label for="txtAsesor" class="form-label">Asesor</label>
-                            <select id="txtAsesor" class="form-select mb-3 form-select-sm"
-                                aria-label=".form-select-lg example">
-                                <option selected>Asesor</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <label for="txtInfoAsesor" class="form-label">Asesor</label>
+                                <input type="text" class="form-control" id="txtInfoAsesor" readonly>
                         </div>
                         <div class="col pt-4">
                             <p>
-                                <a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseExample"
-                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <a id="desplegarInfoAdicional" class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#listaInfoAdicional"
+                                    role="button" aria-expanded="false" aria-controls="listaInfoAdicional">
                                     Informacion adicional
                                 </a>
                             </p>
                         </div>
                     </div>
-                    <div class="collapse" id="collapseExample">
+                    <div class="collapse" id="listaInfoAdicional">
                         <div class="card card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
-                                <li class="list-group-item">A fourth item</li>
-                                <li class="list-group-item">And a fifth one</li>
+                            <ul id="ulListaInfo" class="list-group list-group-flush">
                             </ul>
                         </div>
                     </div>

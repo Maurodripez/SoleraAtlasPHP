@@ -28,6 +28,10 @@ function controlIframe(txtIframe) {
       iframecontrolador.src = "./Modulos/CrearUsuario.html";
       closeNav();
       break;
+    case "Agenda":
+      iframecontrolador.src = "./Modulos/Citas.html";
+      closeNav();
+      break;
   }
 }
 function openNav() {
@@ -49,11 +53,14 @@ function obtenerSesion() {
       accion: "Privilegios",
     },
   }).done(function (result) {
-    if (result.Siniestros[0].privilegios!="root" && result.Siniestros[0].privilegios!="supervisor") {
-      document.getElementById("Asignacion").style.display="none";
-      document.getElementById("Reporte").style.display="none";
-      document.getElementById("Encuesta").style.display="none";
-      document.getElementById("CrearUsuario").style.display="none";
+    if (
+      result.Siniestros[0].privilegios != "root" &&
+      result.Siniestros[0].privilegios != "supervisor"
+    ) {
+      document.getElementById("Asignacion").style.display = "none";
+      document.getElementById("Reporte").style.display = "none";
+      document.getElementById("Encuesta").style.display = "none";
+      document.getElementById("CrearUsuario").style.display = "none";
     }
   });
 }

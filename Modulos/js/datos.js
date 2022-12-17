@@ -26,6 +26,14 @@ $(document).ready(function () {
   consultaUsuarios();
   descargarEnZip();
   mostrarDivsModal();
+  $("#btnOffCanvasCita").click(function () {
+    obtenerCitaActiva();
+    operadoresAtlas();
+    $("#txtSiniestro").val($("#numSiniestro").val());
+  });
+  $("#btnGuardarCita").click(function () {
+    guardarCita();
+  });
   //funcion para limpiar el regitro
   $("#limpiarRegistro").click(function () {
     $(".filtrosBusqueda").val($(".filtrosBusqueda option:first").val());
@@ -1451,7 +1459,107 @@ function exportarMovimientos() {
       btnDescargar.click();
     });
 }
-
+function operadoresAtlas() {
+  $.ajax({
+    url: "../../php/Citas/ConsultasCitas.php",
+    type: "POST",
+    dataType: "JSON",
+    data: {
+      accion: "MostrarOperadores",
+    },
+  }).done(function (result) {
+    console.log(result);
+    $(".operadores").remove();
+    let selectIntegradores = document.getElementById("txtAsesor");
+    for (let i in result.Operadores) {
+      let option = document.createElement("option");
+      option.setAttribute("class", "operadores");
+      option.text = result.Operadores[i].nombreReal;
+      selectIntegradores.add(option);
+    }
+  });
+}
+function guardarCita() {
+  let siniestro = document.getElementById("txtSiniestro").value;
+  $.ajax({
+    url: "../../php/Citas/ConsultasCitas.php",
+    type: "POST",
+    data: {
+      siniestro,
+      accion: "ValidarCita",
+    },
+  }).done(function (result) {
+    if (document.getElementById("txtAsesor").value == "Asesor") {
+      alert("Por favor, selecciona un asesor");
+      return;
+    }
+    //se valida si ya se tiene una cita
+    if (result === "Verdadero") {
+      alert("Ya existe una cita, validar por favor");
+      return;
+    } else {
+      let fecha = document.getElementById("txtFechaDatos").value;
+      let horaInicio = document.getElementById("txtHoraInicio").value;
+      let horaFin = document.getElementById("txtHoraFinal").value;
+      let infoAdicional = document.getElementById("txtInfoAdicional").value;
+      let asesor = document.getElementById("txtAsesor").value;
+      let color = document.getElementById("txtColor").value;
+      let start = `${fecha} ${horaInicio}:00`;
+      let end = `${fecha} ${horaFin}:00`;
+      $.ajax({
+        url: "../../php/citas/AgregarEvento.php",
+        data: {
+          title: document.getElementById("txtTitulo").value,
+          start,
+          end,
+          infoAdicional,
+          asesor,
+          color,
+          siniestro,
+        },
+        type: "POST",
+        success: function (data) {
+          displayMessage("Agregado con exito");
+          location.reload();
+        },
+      });
+    }
+  });
+}
 /////////////////////////////
 //funciones todavia no utilizadas
 ////////////////////////////
+
+function obtenerCitaActiva() {
+  let id = document.getElementById("idOculto").value;
+  $.ajax({
+    url: "../../php/Citas/ConsultasCitas.php",
+    type: "POST",
+    dataType: "JSON",
+    data: {
+      accion: "ObtenerCitaActiva",
+      id,
+    },
+  }).done(function (response) {
+    let horaFinal = response.Citas[0].end.split(" ");
+    let horaInicio = response.Citas[0].start.split(" ");
+    let asesor = `<li style='font-size: 13px' class="list-group-item">Asegurado: ${response.Citas[0].asesor}</li>`;
+    let end = `<li style='font-size: 13px' class="list-group-item">Telefono: ${horaFinal[1]}</li>`;
+    let infoAdicional = `<li style='font-size: 13px' class="list-group-item">Marca: ${response.Citas[0].infoAdicional}</li>`;
+    let operador = `<li style='font-size: 13px' class="list-group-item">Tipo: ${response.Citas[0].operador}</li>`;
+    let siniestro = `<li style='font-size: 13px' class="list-group-item">Modelo: ${response.Citas[0].siniestro}</li>`;
+    let start = `<li style='font-size: 13px' class="list-group-item">Serie: ${horaInicio[1]}</li>`;
+    let title = `<li style='font-size: 13px' class="list-group-item">Contacto: ${response.Citas[0].title}</li>`;
+    let fecha = `<li style='font-size: 13px' class="list-group-item">Telefono: ${horaFinal[0]}</li>`;
+    let ul = document.getElementById("ulCitaActiva");
+    ul.innerHTML =
+      asesor +
+      end +
+      infoAdicional +
+      operador +
+      siniestro +
+      start +
+      title +
+      fecha;
+  });
+}

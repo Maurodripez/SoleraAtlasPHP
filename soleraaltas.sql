@@ -24,21 +24,23 @@ USE `soleraatlas`;
 DROP TABLE IF EXISTS `citas`;
 CREATE TABLE IF NOT EXISTS `citas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) DEFAULT NULL,
+  `title` varchar(450) DEFAULT NULL,
   `start` varchar(45) DEFAULT NULL,
   `end` varchar(45) DEFAULT NULL,
   `infoAdicional` varchar(45) DEFAULT NULL,
   `asesor` varchar(45) DEFAULT NULL,
   `color` varchar(45) DEFAULT NULL,
   `fkCitas` int(11) DEFAULT NULL,
+  `siniestro` varchar(450) DEFAULT NULL,
+  `operador` varchar(450) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla soleraatlas.citas: ~2 rows (aproximadamente)
 DELETE FROM `citas`;
-INSERT INTO `citas` (`id`, `title`, `start`, `end`, `infoAdicional`, `asesor`, `color`, `fkCitas`) VALUES
-	(2, 'marina', '2022-12-08 10:30:00', '2022-12-08 11:30:00', 'marniana', '1', '#000000', 839),
-	(3, 'mar', '2022-12-09 09:00:00', '2022-12-09 10:00:00', 'por ahora nada', '2', '#000000', 839);
+INSERT INTO `citas` (`id`, `title`, `start`, `end`, `infoAdicional`, `asesor`, `color`, `fkCitas`, `siniestro`, `operador`) VALUES
+	(7, 'marina', '2022-12-18 09:00:00', '2022-12-18 10:00:00', 'wer', 'prueba', '#000000', 839, '42129149', 'Mauricio Rodriguez'),
+	(8, 'marina', '2022-12-18 09:00:00', '2022-12-18 10:00:00', 'wer', 'prueba2', '#000000', 837, '42172278', 'Mauricio Rodriguez');
 
 -- Volcando estructura para tabla soleraatlas.datosvalidados
 DROP TABLE IF EXISTS `datosvalidados`;
@@ -3483,9 +3485,9 @@ CREATE TABLE IF NOT EXISTS `seguimientoprincipal` (
   PRIMARY KEY (`idseguimientoPrincipal`),
   KEY `fkIdRegistroSegPrincipal` (`fkIdRegistroSegPrincipal`),
   CONSTRAINT `fkIdRegistroSegPrincipal` FOREIGN KEY (`fkIdRegistroSegPrincipal`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=3725 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3728 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.seguimientoprincipal: ~2,913 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.seguimientoprincipal: ~2,914 rows (aproximadamente)
 DELETE FROM `seguimientoprincipal`;
 INSERT INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fechaseguimiento`, `estatusSeguimiento`, `comentarios`, `idseguimientoPrincipal`, `estacionPrincipal`, `subEstatus`, `respuestaSolera`, `personaContactada`, `tipodePersona`, `contacto`, `integraciondeexpediente`, `facturaciondeservicio`, `termino`, `fechaasigncion`, `usuarioAsignado`, `numSiniestro`, `msgInterno`) VALUES
 	(837, 'Ivet Gonz lez', '2022-10-28 00:00:00', 'DATOS INCORRECTOS', 'SE CIERRA SINIESTRO YA QUE EN GEAS NO HAY DATO ADICIONAL Y EN GOOGLE NO APARECE EMPRESA', 84, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, '42172278', NULL),
@@ -6402,8 +6404,6 @@ INSERT INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fech
 	(901, 'Alicia Hernandez', '2022-11-25 17:50:37', 'CON CONTACTO SIN DOCUMENTOS', 'SE REALIZA LLAMADA NO HAY CONTACTO ', 3686, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
 	(1333, 'Teresa Medina ', '2022-11-25 17:50:45', 'DE 4 A 6 DOCUMENTOS', 'SE LE VUELVE A MARCAR POR DUDAS QUE TIENE RESPECTO A SUS DOCUMENTOS, COMENTA QUE SI REALIZO BAJA EN MORELOS PERO NO CUENTA CON EL DOCUMENTO,  SE LE INFORMA CON DETALLE SUS FALTANTES ', 3687, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
 	(935, 'Teresa Medina ', '2022-11-25 17:52:38', 'DE 7 A 10 DOCUMENTOS', 'SOLICITA POR WHATS ESTATUSDE SU SINIESTRO, SE LE INFORMA QUE ESTAMOS EN ESPERA DE RESPUESTA', 3688, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', '', '', '', NULL, NULL, NULL, NULL),
-	(839, '12', '0000-00-00 00:00:00', '3', '1', 3690, '2', '4', '5', '6', '7', '8', 'Sin cambios', '9', '10', NULL, NULL, NULL, NULL),
-	(839, '12', '0000-00-00 00:00:00', '3', '1', 3691, '2', '4', '5', '6', '7', '8', 'Sin cambios', '9', '10', NULL, NULL, NULL, NULL),
 	(839, '12', '2022-12-06 11:44:33', '3', '1', 3692, '2', '4', '5', '6', '7', '8', 'Sin cambios', '9', '10', NULL, NULL, NULL, NULL),
 	(839, '12', '2022-12-06 11:45:35', '3', '1', 3693, '2', '4', '5', '6', '7', '8', 'Sin cambios', '9', '10', NULL, NULL, NULL, NULL),
 	(839, 'Mauricio Rodriguez', '2022-12-06 11:48:23', 'CASO REABIERTO', 'wqeqe', 3694, 'Terminado', 'Terminado', 'Atendido', 'qweqwe', 'Asegurado', 'Si', 'Sin cambios', '2022-12-13', '2022-12-13', NULL, NULL, NULL, NULL),
@@ -6436,7 +6436,10 @@ INSERT INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fech
 	(839, 'Mauricio Rodriguez', '2022-12-10 13:24:16', 'DE 4 A 6 DOCUMENTOS', 'efdfd', 3721, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
 	(839, '', '2022-12-13 11:00:55', 'DE 4 A 6 DOCUMENTOS', 'nuevo seguimiento', 3722, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
 	(839, 'Mauricio Rodriguez', '2022-12-13 11:03:52', 'DE 4 A 6 DOCUMENTOS', 'para ver', 3723, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Interno'),
-	(839, 'Mauricio Rodriguez', '2022-12-13 11:05:52', 'DE 4 A 6 DOCUMENTOS', 'para ver', 3724, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Usuario');
+	(839, 'Mauricio Rodriguez', '2022-12-13 11:05:52', 'DE 4 A 6 DOCUMENTOS', 'para ver', 3724, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Usuario'),
+	(NULL, 'Mauricio Rodriguez', '2022-12-17 11:19:43', 'Cita creada', 'ningana', 3725, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-17 11:22:45', 'Cita creada', 'wer', 3726, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(837, 'Mauricio Rodriguez', '2022-12-17 12:01:17', 'Cita creada', 'wer', 3727, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno');
 
 -- Volcando estructura para tabla soleraatlas.usuarios
 DROP TABLE IF EXISTS `usuarios`;
@@ -6447,9 +6450,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `privilegios` varchar(45) DEFAULT NULL,
   `nombreReal` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idUsuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.usuarios: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.usuarios: ~8 rows (aproximadamente)
 DELETE FROM `usuarios`;
 INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `contrasena`, `privilegios`, `nombreReal`) VALUES
 	(1, 'admin', '1234', 'root', 'Mauricio Rodriguez'),
@@ -6457,7 +6460,9 @@ INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `contrasena`, `privilegios`, `n
 	(5, 'mzarza', 'Mzarza2022?', 'operador', 'Marisol Zarza'),
 	(6, 'igonzalez', 'gonzalez', 'supervisor', 'Ivet Gonzalez'),
 	(7, 'ahernandez', 'ahernandez', 'operador', 'Alicia Hernandez'),
-	(8, 'aCastillo', 'aCastillo', 'supervisor', 'Alexis castillo');
+	(8, 'aCastillo', 'aCastillo', 'supervisor', 'Alexis castillo'),
+	(9, 'pPrueba', 'pPrueba', 'operadorAtlas', 'prueba'),
+	(10, 'pPrueba2', 'pPrueba2', 'operadorAtlas', 'prueba2');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
