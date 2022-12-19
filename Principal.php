@@ -1,3 +1,9 @@
+<?php
+session_start();    
+if (!isset($_SESSION['usuario'])) {
+header('Location: ./index.html');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,7 +118,7 @@
     <!-- Add all your websites page content here  -->
     <div class="embed-container ">
       <iframe id="controladorIframe" style="border: none" name="iframeControl" scrolling="auto"
-        class="responsive-iframe" allowfullscreen src="ModuloPrincipal.html"></iframe>
+        class="responsive-iframe" allowfullscreen src="ModuloPrincipal.php"></iframe>
     </div>
   </div>
 </body>

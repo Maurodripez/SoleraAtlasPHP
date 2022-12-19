@@ -1,3 +1,9 @@
+<?php
+session_start();    
+if (!isset($_SESSION['usuario'])) {
+header('Location: ../index.html');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1178,7 +1184,7 @@
                 <div class="modal-body">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <button type="button" id="btnSeguimiento" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            <svg xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" width="25" height="25" fill="none"
                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path
                                     d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -1218,9 +1224,16 @@
                                 <path
                                     d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
                             </svg></label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off" />
-                        <label class="btn btn-outline-primary" for="btnradio6">Radio 3</label>
+                        <button id="btnLink" style="background-color:#FF1F00;" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round" stroke="#ffffff" class="bi bi-link"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z" />
+                                <path
+                                    d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z" />
+                            </svg>
+                        </button>
                     </div>
                     <!--div para mostrar el seguimiento-->
                     <div id="divSeguimiento" style="display:''">
@@ -2422,13 +2435,16 @@
                                                                     <div class="col mb-2">
                                                                         <label for="txtColor"
                                                                             class="form-label">Color</label>
-                                                                            <div>
-                                                                                <select id="txtColor" name="opciones">
-                                                                                    <option value="#ff0000" class="rojo">Rojo</option>
-                                                                                    <option value="#0066ff" class="azul">azul</option>
-                                                                                    <option value="#009900" class="verde">Verde</option>
-                                                                                    </select>
-                                                                            </div>
+                                                                        <div>
+                                                                            <select id="txtColor" name="opciones">
+                                                                                <option value="#ff0000" class="rojo">
+                                                                                    Rojo</option>
+                                                                                <option value="#0066ff" class="azul">
+                                                                                    azul</option>
+                                                                                <option value="#009900" class="verde">
+                                                                                    Verde</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="col mb-2">
                                                                         <label for="txtSiniestro"
@@ -2438,18 +2454,21 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row p-2">
-                                                                    <div class="card-body">
-                                                                        <h5 id="citaActiva" class="card-title">Cita activa</h5>
-                                                                      </div>
+                                                                    <div id="ulCitas" class="card-body">
+                                                                        <h5 id="citaActiva" class="card-title">Cita
+                                                                            activa</h5>
+                                                                    </div>
                                                                     <div class="card">
-                                                                        <ul id="ulCitaActiva" class="list-group list-group-flush">
+                                                                        <ul id="ulCitaActiva"
+                                                                            class="list-group list-group-flush">
                                                                         </ul>
-                                                                      </div>
+                                                                    </div>
                                                                 </div>
                                                                 <button id="btnGuardarCita" class="btn btn-info">
                                                                     Guardar Cita
                                                                 </button>
-                                                                <button id="btnGuardarCita" class="btn btn-danger">
+                                                                <button id="btnEliminarCita" class="btn btn-danger"
+                                                                    disabled>
                                                                     Eliminar Cita
                                                                 </button>
                                                             </div>
@@ -2857,7 +2876,62 @@
                         </div>
                     </div>
                 </div>
-                <!--Botnoes de edtiar-->
+                <div id="divLink">
+                    <div class="pt-2">
+                        <label for="basic-url" class="form-label">Link del cliente</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"
+                                id="linkCliente">bestcontact.mx/Solera/Atlas/VistaUsuario.html</span>
+                            <button id="btnCopiaLink" class="btn-primary btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-clipboard" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                    <path
+                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 pt-2">
+                            <label for="basic-url" class="form-label">Usuario</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="txtUsuario"></span>
+                                <button id="btnCopiaUsuario" class="btn-primary btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-clipboard" viewBox="0 0 16 16">
+                                        <path
+                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                        <path
+                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-8 pt-2">
+                            <label for="basic-url" class="form-label">Password</label>
+                            <label id="diasParaExpirar" for="basic-url" class="form-label">Dias para expirar la contraseña: </label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="passwordGenerada">Sin generar</span>
+                                <button id="btnCopiaPassword" class="btn-primary btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-clipboard" viewBox="0 0 16 16">
+                                        <path
+                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                        <path
+                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-success" id="generarPassword">
+                                        Generar password
+                                    </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

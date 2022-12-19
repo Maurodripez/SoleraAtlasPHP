@@ -9,27 +9,27 @@ function controlIframe(txtIframe) {
   let iframecontrolador = document.getElementById("controladorIframe");
   switch (txtIframe) {
     case "Home":
-      iframecontrolador.src = "ModuloPrincipal.html";
+      iframecontrolador.src = "ModuloPrincipal.php";
       closeNav();
       break;
     case "datos":
-      iframecontrolador.src = "./Modulos/Datos.html";
+      iframecontrolador.src = "./Modulos/Datos.php";
       closeNav();
       break;
     case "Reporte":
-      iframecontrolador.src = "./Modulos/Reporte.html";
+      iframecontrolador.src = "./Modulos/Reporte.php";
       closeNav();
       break;
     case "Asignacion":
-      iframecontrolador.src = "./Modulos/Asignacion.html";
+      iframecontrolador.src = "./Modulos/Asignacion.php";
       closeNav();
       break;
     case "CrearUsuario":
-      iframecontrolador.src = "./Modulos/CrearUsuario.html";
+      iframecontrolador.src = "./Modulos/CrearUsuario.php";
       closeNav();
       break;
     case "Agenda":
-      iframecontrolador.src = "./Modulos/Citas.html";
+      iframecontrolador.src = "./Modulos/Citas.php";
       closeNav();
       break;
   }

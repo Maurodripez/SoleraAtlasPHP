@@ -1,7 +1,12 @@
+<?php
+session_start();    
+if (!isset($_SESSION['usuarioExterno'])) {
+header('Location: ../LoginUsuarios.html');
+}
+?>
 <!DOCTYPE html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Usuario</title>
@@ -139,9 +144,9 @@
                         <div class="col">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button collapsed" value="factura" id="btnFactura" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#factura" aria-expanded="false"
-                                        aria-controls="collapseOne">
+                                    <button class="accordion-button collapsed" value="factura" id="btnFactura"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#factura"
+                                        aria-expanded="false" aria-controls="collapseOne">
                                         Factura
                                     </button>
                                 </h2>
@@ -164,7 +169,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulFactura','Factura')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulFactura','Factura')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseFactura" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -178,23 +185,23 @@
                                             </div>
                                             <div class="collapse" id="collapseFactura">
                                                 <div class="card card-body">
-                                                    <ul id="ulFactura" class="list-group">  
+                                                    <ul id="ulFactura" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                    <img id="iFrameFactura" src="" alt="">
+                                <img id="iFrameFactura" src="" alt="">
 
                             </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
-                                    <button value="secuencia Facturas" id="btnSecuencia" class="accordion-button collapsed"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#secuenciaFacturas"
-                                        aria-expanded="false">
+                                    <button value="secuencia Facturas" id="btnSecuencia"
+                                        class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#secuenciaFacturas" aria-expanded="false">
                                         Secuencia de facturas
                                     </button>
                                 </h2>
@@ -218,7 +225,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulSecuencia','Secuencia de facturas')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulSecuencia','Secuencia de facturas')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseSecuencia" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -232,14 +241,14 @@
                                             </div>
                                             <div class="collapse" id="collapseSecuencia">
                                                 <div class="card card-body">
-                                                    <ul id="ulSecuencia" class="list-group">  
+                                                    <ul id="ulSecuencia" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                    <img id="iFrameSecuencia" src="" alt="">
+                                <img id="iFrameSecuencia" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -273,7 +282,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulCertificado','Certificado Propiedad')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulCertificado','Certificado Propiedad')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseCertificado" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -287,7 +298,7 @@
                                             </div>
                                             <div class="collapse" id="collapseCertificado">
                                                 <div class="card card-body">
-                                                    <ul id="ulCertificado" class="list-group">  
+                                                    <ul id="ulCertificado" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -328,7 +339,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulCopiaCertificado','Copia certificado propiedad')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulCopiaCertificado','Copia certificado propiedad')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseCopiaCertificado" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -342,7 +355,7 @@
                                             </div>
                                             <div class="collapse" id="collapseCopiaCertificado">
                                                 <div class="card card-body">
-                                                    <ul id="ulCopiaCertificado" class="list-group">  
+                                                    <ul id="ulCopiaCertificado" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -383,7 +396,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulPedimento','Pedimento de Importacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulPedimento','Pedimento de Importacion')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapsePedimento" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -397,7 +412,7 @@
                                             </div>
                                             <div class="collapse" id="collapsePedimento">
                                                 <div class="card card-body">
-                                                    <ul id="ulPedimento" class="list-group">  
+                                                    <ul id="ulPedimento" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -435,7 +450,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulBajaPermiso','Baja de permiso de internacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulBajaPermiso','Baja de permiso de internacion')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseBajaPermiso" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -449,14 +466,15 @@
                                             </div>
                                             <div class="collapse" id="collapseBajaPermiso">
                                                 <div class="card card-body">
-                                                    <ul id="ulBajaPermiso" class="list-group">  
+                                                    <ul id="ulBajaPermiso" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFramePermiso" src="" alt="">                            </div>
+                                <img id="iFramePermiso" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -486,7 +504,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulRFV','R.F.V.')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulRFV','R.F.V.')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseRFV" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -500,14 +519,15 @@
                                             </div>
                                             <div class="collapse" id="collapseRFV">
                                                 <div class="card card-body">
-                                                    <ul id="ulRFV" class="list-group">  
+                                                    <ul id="ulRFV" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameRFV" src="" alt="">                            </div>
+                                <img id="iFrameRFV" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -539,7 +559,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulVerificacion','Verificacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulVerificacion','Verificacion')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseVerificacion" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -553,7 +575,7 @@
                                             </div>
                                             <div class="collapse" id="collapseVerificacion">
                                                 <div class="card card-body">
-                                                    <ul id="ulVerificacion" class="list-group">  
+                                                    <ul id="ulVerificacion" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -591,7 +613,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulTenencias','Tenencias')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulTenencias','Tenencias')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseTenencias" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -605,14 +629,15 @@
                                             </div>
                                             <div class="collapse" id="collapseTenencias">
                                                 <div class="card card-body">
-                                                    <ul id="ulFactura" class="list-group">  
+                                                    <ul id="ulFactura" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameTenencia" src="" alt="">                            </div>
+                                <img id="iFrameTenencia" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -642,7 +667,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulPlacas','Baja de placas')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulPlacas','Baja de placas')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapsePlacas" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -656,14 +683,15 @@
                                             </div>
                                             <div class="collapse" id="collapsePlacas">
                                                 <div class="card card-body">
-                                                    <ul id="ulPlacas" class="list-group">  
+                                                    <ul id="ulPlacas" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameBaja" src="" alt="">                            </div>
+                                <img id="iFrameBaja" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -695,7 +723,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulMotor','Factura del motor')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulMotor','Factura del motor')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseMotor" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -709,7 +739,7 @@
                                             </div>
                                             <div class="collapse" id="collapseMotor">
                                                 <div class="card card-body">
-                                                    <ul id="ulMotor" class="list-group">  
+                                                    <ul id="ulMotor" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -748,7 +778,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulLlaves','Llaves')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulLlaves','Llaves')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseLlaves" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -762,14 +794,15 @@
                                             </div>
                                             <div class="collapse" id="collapseLlaves">
                                                 <div class="card card-body">
-                                                    <ul id="ulLlaves" class="list-group">  
+                                                    <ul id="ulLlaves" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameLlaves" src="" alt="">                            </div>
+                                <img id="iFrameLlaves" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -799,7 +832,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulConoce','Formato conoce a tu cliente')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulConoce','Formato conoce a tu cliente')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseConoce" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -813,14 +848,15 @@
                                             </div>
                                             <div class="collapse" id="collapseConoce">
                                                 <div class="card card-body">
-                                                    <ul id="ulConoce" class="list-group">  
+                                                    <ul id="ulConoce" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameConoce" src="" alt="">                            </div>
+                                <img id="iFrameConoce" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -850,7 +886,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulLFPDPPP','Consentimiento LFPDPPP')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulLFPDPPP','Consentimiento LFPDPPP')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseLFPDPPP" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -864,14 +902,15 @@
                                             </div>
                                             <div class="collapse" id="collapseLFPDPPP">
                                                 <div class="card card-body">
-                                                    <ul id="ulLFPDPPP" class="list-group">  
+                                                    <ul id="ulLFPDPPP" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameLFPDPPP" src="" alt="">                            </div>
+                                <img id="iFrameLFPDPPP" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -903,7 +942,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulAveriguación','Averiguación previa')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulAveriguación','Averiguación previa')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseAveriguación" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -917,7 +958,7 @@
                                             </div>
                                             <div class="collapse" id="collapseAveriguación">
                                                 <div class="card card-body">
-                                                    <ul id="ulAveriguación" class="list-group">  
+                                                    <ul id="ulAveriguación" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -957,7 +998,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulAcreditacion','Acreditacion de propiedad')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulAcreditacion','Acreditacion de propiedad')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseAcreditacion" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -971,7 +1014,7 @@
                                             </div>
                                             <div class="collapse" id="collapseAcreditacion">
                                                 <div class="card card-body">
-                                                    <ul id="ulAcreditacion" class="list-group">  
+                                                    <ul id="ulAcreditacion" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1009,7 +1052,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulPFP','Aviso a PFP')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulPFP','Aviso a PFP')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapsePFP" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -1023,14 +1068,15 @@
                                             </div>
                                             <div class="collapse" id="collapsePFP">
                                                 <div class="card card-body">
-                                                    <ul id="ulPFP" class="list-group">  
+                                                    <ul id="ulPFP" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameAviso" src="" alt="">                            </div>
+                                <img id="iFrameAviso" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -1060,7 +1106,8 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulOtros','Otros')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulOtros','Otros')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseOtros" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -1074,14 +1121,15 @@
                                             </div>
                                             <div class="collapse" id="collapseOtros">
                                                 <div class="card card-body">
-                                                    <ul id="ulOtros" class="list-group">  
+                                                    <ul id="ulOtros" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameOtros" src="" alt="">                            </div>
+                                <img id="iFrameOtros" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -1111,7 +1159,9 @@
                                                             d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
                                                     </svg>
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulLiberacion','Oficio de liberacion')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulLiberacion','Oficio de liberacion')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseLiberacion" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -1125,14 +1175,15 @@
                                             </div>
                                             <div class="collapse" id="collapseLiberacion">
                                                 <div class="card card-body">
-                                                    <ul id="ulLiberacion" class="list-group">  
+                                                    <ul id="ulLiberacion" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameOficio" src="" alt="">                            </div>
+                                <img id="iFrameOficio" src="" alt="">
+                            </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
@@ -1166,7 +1217,9 @@
                                                     </svg>
 
                                                 </button>
-                                                <a id="btnListaFactura" onclick="mostrarImagenFrame('ulCancelacion','Oficio de cancelacion del robo')" class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                <a id="btnListaFactura"
+                                                    onclick="mostrarImagenFrame('ulCancelacion','Oficio de cancelacion del robo')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
                                                     href="#collapseCancelacion" role="button" aria-expanded="false"
                                                     aria-controls="collapseExample">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -1180,7 +1233,7 @@
                                             </div>
                                             <div class="collapse" id="collapseCancelacion">
                                                 <div class="card card-body">
-                                                    <ul id="ulCancelacion" class="list-group">  
+                                                    <ul id="ulCancelacion" class="list-group">
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1635,7 +1688,7 @@
     </div>
     <div class="pt-4 text-center">
         <h2 class="pb-2">Progreso de expediente</h2>
-        <div class="col progress offset-md-3" style="height: 20px;">
+        <div class="col progress" style="height: 20px;">
             <div id="progresoDocs" class="progress-bar bg-success" role="progressbar" style="width: 25%"
                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
         </div>

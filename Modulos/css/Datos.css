@@ -157,3 +157,9 @@
   background-color: #00b360;
   color: #ffffff;
 }
+#ulCitas{
+  border-radius: 100px 100px 0px 0px; 
+}
+#btnSeguimiento{
+  background-color: #605ca8;
+}

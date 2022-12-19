@@ -12,10 +12,10 @@ $sql->bindPAram(":p", $password);
 $sql->execute();
 $usuario = $sql->fetch(PDO::FETCH_ASSOC);
 if ($sql->rowCount() == 1) {
-    $_SESSION['usuario'] = $username;
+    $_SESSION['usuarioExterno'] = $username;
     $sql = "select idRegistro from infosiniestro where numSiniestro ='$username'";
     $id = ObtenerValorSql($sql);
-    header("Location: ../VistaUsuario.php?id=839");
+    header("Location: ../VistaUsuario.php?id=$id");
 } else {
     header('Location: ../LoginUsuarios.html');
 }

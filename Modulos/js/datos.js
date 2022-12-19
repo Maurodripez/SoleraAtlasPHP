@@ -26,6 +26,21 @@ $(document).ready(function () {
   consultaUsuarios();
   descargarEnZip();
   mostrarDivsModal();
+  $("#generarPassword").click(function () {
+    generarPassword();
+  });
+  $("#btnCopiaLink").click(function () {
+    let codigoACopiar = document.getElementById("linkCliente");
+    navigator.clipboard.writeText(codigoACopiar.innerHTML);
+  });
+  $("#btnCopiaUsuario").click(function () {
+    let codigoACopiar = document.getElementById("txtUsuario");
+    navigator.clipboard.writeText(codigoACopiar.innerHTML);
+  });
+  $("#btnCopiaPassword").click(function () {
+    let codigoACopiar = document.getElementById("passwordGenerada");
+    navigator.clipboard.writeText(codigoACopiar.innerHTML);
+  });
   $("#btnOffCanvasCita").click(function () {
     obtenerCitaActiva();
     operadoresAtlas();
@@ -37,6 +52,9 @@ $(document).ready(function () {
   //funcion para limpiar el regitro
   $("#limpiarRegistro").click(function () {
     $(".filtrosBusqueda").val($(".filtrosBusqueda option:first").val());
+  });
+  $("#btnEliminarCita").click(function () {
+    eliminarCita();
   });
 });
 //funcion para sesiones
@@ -906,17 +924,28 @@ function tablaSeguimiento() {
 function mostrarDivsModal() {
   document
     .getElementById("btnDocsMostrar")
-    .addEventListener("click", function (event) {
+    .addEventListener("click", function () {
       document.getElementById("divSeguimiento").style.display = "none";
       document.getElementById("divGuardarImagenes").style.display = "";
+      document.getElementById("divLink").style.display = "none";
       mostrarDocsAprobados();
     });
   document
     .getElementById("btnSeguimiento")
-    .addEventListener("click", function (event) {
+    .addEventListener("click", function () {
       document.getElementById("divSeguimiento").style.display = "";
       document.getElementById("divGuardarImagenes").style.display = "none";
+      document.getElementById("divLink").style.display = "none";
     });
+  document.getElementById("btnLink").addEventListener("click", function () {
+    document.getElementById("txtUsuario").textContent = `SIN-${
+      document.getElementById("numSiniestro").value
+    }`;
+    obtenerPassword();
+    document.getElementById("divSeguimiento").style.display = "none";
+    document.getElementById("divGuardarImagenes").style.display = "none";
+    document.getElementById("divLink").style.display = "";
+  });
 }
 function enviarImagenes() {
   $("#btnSubirDoc").on("click", function () {
@@ -1333,8 +1362,29 @@ function mostrarMovimientos() {
           "sabado",
         ];
         //obtengo los dias con su nombre
-        const numeroDia = new Date().getDay() - i;
+        let numeroDia = new Date().getDay() - i;
+        switch (numeroDia) {
+          case -1:
+            numeroDia = 6;
+            break;
+          case -2:
+            numeroDia = 5;
+            break;
+          case -3:
+            numeroDia = 4;
+            break;
+          case -4:
+            numeroDia = 3;
+            break;
+          case -5:
+            numeroDia = 2;
+            break;
+          case -6:
+            numeroDia = 1;
+            break;
+        }
         let nombreDia = dias[numeroDia];
+        console.log(nombreDia);
         $.ajax({
           type: "POST",
           url: rutaInicial + "MostrarMovimientos.php",
@@ -1413,8 +1463,29 @@ function mostrarMovsPorDefecto() {
             "viernes",
             "sábado",
           ];
+
           //obtengo los dias con su nombre
-          const numeroDia = new Date().getDay() - menosDias;
+          let numeroDia = new Date().getDay() - menosDias;
+          switch (numeroDia) {
+            case -1:
+              numeroDia = 6;
+              break;
+            case -2:
+              numeroDia = 5;
+              break;
+            case -3:
+              numeroDia = 4;
+              break;
+            case -4:
+              numeroDia = 3;
+              break;
+            case -5:
+              numeroDia = 2;
+              break;
+            case -6:
+              numeroDia = 1;
+              break;
+          }
           const nombreDia = dias[numeroDia];
           soloDias = `<th>${nombreDia}</th>` + soloDias;
           cadenaMovs =
@@ -1519,47 +1590,111 @@ function guardarCita() {
         },
         type: "POST",
         success: function (data) {
-          displayMessage("Agregado con exito");
-          location.reload();
+          alert("Cita creada");
+          obtenerCitaActiva();
         },
       });
     }
   });
 }
-/////////////////////////////
-//funciones todavia no utilizadas
-////////////////////////////
-
 function obtenerCitaActiva() {
   let id = document.getElementById("idOculto").value;
   $.ajax({
     url: "../../php/Citas/ConsultasCitas.php",
     type: "POST",
-    dataType: "JSON",
+    dataType: "json",
     data: {
       accion: "ObtenerCitaActiva",
       id,
     },
   }).done(function (response) {
-    let horaFinal = response.Citas[0].end.split(" ");
-    let horaInicio = response.Citas[0].start.split(" ");
-    let asesor = `<li style='font-size: 13px' class="list-group-item">Asegurado: ${response.Citas[0].asesor}</li>`;
-    let end = `<li style='font-size: 13px' class="list-group-item">Telefono: ${horaFinal[1]}</li>`;
-    let infoAdicional = `<li style='font-size: 13px' class="list-group-item">Marca: ${response.Citas[0].infoAdicional}</li>`;
-    let operador = `<li style='font-size: 13px' class="list-group-item">Tipo: ${response.Citas[0].operador}</li>`;
-    let siniestro = `<li style='font-size: 13px' class="list-group-item">Modelo: ${response.Citas[0].siniestro}</li>`;
-    let start = `<li style='font-size: 13px' class="list-group-item">Serie: ${horaInicio[1]}</li>`;
-    let title = `<li style='font-size: 13px' class="list-group-item">Contacto: ${response.Citas[0].title}</li>`;
-    let fecha = `<li style='font-size: 13px' class="list-group-item">Telefono: ${horaFinal[0]}</li>`;
-    let ul = document.getElementById("ulCitaActiva");
-    ul.innerHTML =
-      asesor +
-      end +
-      infoAdicional +
-      operador +
-      siniestro +
-      start +
-      title +
-      fecha;
+    console.log(response);
+    try {
+      let horaFinal = response.Cita[0].end.split(" ");
+      let horaInicio = response.Cita[0].start.split(" ");
+      let title = `<li style='font-size: 13px' class="cita list-group-item">Cita: ${response.Cita[0].title}</li>`;
+      let siniestro = `<li style='font-size: 13px' class="cita list-group-item">Siniestro: ${response.Cita[0].siniestro}</li>`;
+      let asesor = `<li style='font-size: 13px' class="cita list-group-item">Asesor: ${response.Cita[0].asesor}</li>`;
+      let end = `<li style='font-size: 13px' class="cita list-group-item">Hora final: ${horaFinal[1]}</li>`;
+      let infoAdicional = `<li style='font-size: 13px' class="cita list-group-item">Informacion adicional: ${response.Cita[0].infoAdicional}</li>`;
+      let operador = `<li style='font-size: 13px' class="cita list-group-item">Operador: ${response.Cita[0].operador}</li>`;
+      let start = `<li style='font-size: 13px' class="cita list-group-item">Hora inicial: ${horaInicio[1]}</li>`;
+      let fecha = `<li style='font-size: 13px' class="cita list-group-item">Fecha: ${horaFinal[0]}</li>`;
+      let ul = document.getElementById("ulCitaActiva");
+      ul.innerHTML =
+        title +
+        siniestro +
+        fecha +
+        start +
+        end +
+        infoAdicional +
+        asesor +
+        operador;
+      console.log("final");
+      $("#btnEliminarCita").attr("disabled", false);
+      document.getElementById("ulCitas").style.backgroundColor = "#00b360";
+    } catch (error) {
+      $(".cita").remove();
+      document.getElementById("ulCitas").style.backgroundColor = "#B1B1B2";
+    }
+  });
+}
+function eliminarCita() {
+  let opcion = confirm("Eliminar siniestro?");
+  let id = document.getElementById("idOculto").value;
+  if (opcion == true) {
+    $.ajax({
+      method: "POST",
+      url: "../../php/Citas/ConsultasCitas.php",
+      data: {
+        accion: "EliminarCita",
+        id,
+      },
+    }).done(function (result) {
+      alert("Eliminado con exito");
+      obtenerCitaActiva();
+    });
+    mensaje = "Has clickado OK";
+  }
+}
+/////////////////////////////
+//funciones todavia no utilizadas
+////////////////////////////
+function generarPassword() {
+  let opcion = confirm("Generar nueva password?");
+  if (opcion) {
+    $.ajax({
+      method: "POST",
+      url: "../../php/Usuarios/GeneradorPassword.php",
+      data: {
+        accion: "GenerarPassword",
+        usuario: document.getElementById("txtUsuario").textContent,
+      },
+    }).done(function (result) {
+      let sinDiagonal = result.split("//");
+      console.log(result);
+      document.getElementById("passwordGenerada").textContent = sinDiagonal[0];
+      document.getElementById("diasParaExpirar").textContent =
+        14 - parseInt(sinDiagonal[1]);
+    });
+  }
+}
+function obtenerPassword() {
+  let siniestro = document.getElementById("txtUsuario").textContent;
+  $.ajax({
+    method: "POST",
+    url: "../../php/Usuarios/GeneradorPassword.php",
+    data: {
+      accion: "ObtenerPassword",
+      siniestro,
+    },
+  }).done(function (result) {
+    let resultado = result.split("//");
+    if (resultado[0] == 1) {
+      document.getElementById("passwordGenerada").textContent = resultado[1];
+    } else {
+      document.getElementById("passwordGenerada").textContent = "Sin Password";
+    }
+    console.log(result);
   });
 }
