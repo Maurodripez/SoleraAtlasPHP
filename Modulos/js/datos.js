@@ -41,6 +41,10 @@ $(document).ready(function () {
     let codigoACopiar = document.getElementById("passwordGenerada");
     navigator.clipboard.writeText(codigoACopiar.innerHTML);
   });
+  $("#btnCopiaCorreo").click(function () {
+    let codigoACopiar = document.getElementById("correoCliente").value;
+    navigator.clipboard.writeText(codigoACopiar);
+  });
   $("#btnOffCanvasCita").click(function () {
     obtenerCitaActiva();
     operadoresAtlas();
@@ -938,10 +942,11 @@ function mostrarDivsModal() {
       document.getElementById("divLink").style.display = "none";
     });
   document.getElementById("btnLink").addEventListener("click", function () {
-    document.getElementById("txtUsuario").textContent = `SIN-${
+    document.getElementById("txtUsuario").textContent = `SIN${
       document.getElementById("numSiniestro").value
     }`;
     obtenerPassword();
+    document.getElementById("correoCliente").value = document.getElementById("correo").value;
     document.getElementById("divSeguimiento").style.display = "none";
     document.getElementById("divGuardarImagenes").style.display = "none";
     document.getElementById("divLink").style.display = "";
@@ -1657,9 +1662,6 @@ function eliminarCita() {
     mensaje = "Has clickado OK";
   }
 }
-/////////////////////////////
-//funciones todavia no utilizadas
-////////////////////////////
 function generarPassword() {
   let opcion = confirm("Generar nueva password?");
   if (opcion) {
@@ -1674,8 +1676,10 @@ function generarPassword() {
       let sinDiagonal = result.split("//");
       console.log(result);
       document.getElementById("passwordGenerada").textContent = sinDiagonal[0];
-      document.getElementById("diasParaExpirar").textContent =
-        14 - parseInt(sinDiagonal[1]);
+      let diasActiva = 14 - parseInt(sinDiagonal[1]);
+      document.getElementById(
+        "diasParaExpirar"
+      ).textContent = `Dias para expirar la contraseña: ${diasActiva}`;
     });
   }
 }
@@ -1689,12 +1693,21 @@ function obtenerPassword() {
       siniestro,
     },
   }).done(function (result) {
+    console.log(result);
     let resultado = result.split("//");
     if (resultado[0] == 1) {
       document.getElementById("passwordGenerada").textContent = resultado[1];
+      let diasActiva = 14 - parseInt(resultado[2]);
+      document.getElementById(
+        "diasParaExpirar"
+      ).textContent = `Dias para expirar la contraseña: ${diasActiva}`;
     } else {
       document.getElementById("passwordGenerada").textContent = "Sin Password";
     }
     console.log(result);
   });
 }
+/////////////////////////////
+//funciones todavia no utilizadas
+////////////////////////////
+

@@ -163,3 +163,8 @@
 #btnSeguimiento{
   background-color: #605ca8;
 }
+/*boton para agregar siniestros*/
+#divAgregarSiniestro{
+background-color: #8584ac;
+border-radius: 5px 5px 5px 5px;
+}

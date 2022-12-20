@@ -978,14 +978,14 @@ header('Location: ../index.html');
                         <thead id="seccionBotones">
                             <div class="row">
                                 <td>
-                                    <div class="col-2" name="SearchButtonGeneral">
+                                    <div id="divAgregarSiniestro" class="col-6" name="SearchButtonGeneral">
                                         <button data-bs-toggle="modal" data-bs-target="#AgregarSiniestro" type="button"
-                                            class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                            class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                                 <path
                                                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                                             </svg></button>
-                                    </div>
+                                        </divi>
                                 </td>
                                 <td>
                                     <div class="col" name="SearchButtonGeneral">
@@ -2876,21 +2876,38 @@ header('Location: ../index.html');
                         </div>
                     </div>
                 </div>
-                <div id="divLink">
-                    <div class="pt-2">
-                        <label for="basic-url" class="form-label">Link del cliente</label>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text"
-                                id="linkCliente">bestcontact.mx/Solera/Atlas/VistaUsuario.html</span>
-                            <button id="btnCopiaLink" class="btn-primary btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-clipboard" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                    <path
-                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                </svg>
-                            </button>
+                <div id="divLink" style="display: none">
+                    <div class="row">
+                        <div class="col-8 pt-2">
+                            <label for="basic-url" class="form-label">Link del cliente</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"
+                                    id="linkCliente">bestcontact.mx/Solera/Atlas/LoginUsuarios.html</span>
+                                <button id="btnCopiaLink" class="btn-primary btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-clipboard" viewBox="0 0 16 16">
+                                        <path
+                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                        <path
+                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col pt-2">
+                            <label for="basic-url" class="form-label">Correo</label>
+                            <div class="input-group mb-3">
+                                <input class="input-group-text" id="correoCliente"></input>
+                                <button id="btnCopiaCorreo" class="btn-primary btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-clipboard" viewBox="0 0 16 16">
+                                        <path
+                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                        <path
+                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -2910,8 +2927,7 @@ header('Location: ../index.html');
                             </div>
                         </div>
                         <div class="col-8 pt-2">
-                            <label for="basic-url" class="form-label">Password</label>
-                            <label id="diasParaExpirar" for="basic-url" class="form-label">Dias para expirar la contraseña: </label>
+                            <label id="diasParaExpirar" for="basic-url" class="form-label"></label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="passwordGenerada">Sin generar</span>
                                 <button id="btnCopiaPassword" class="btn-primary btn">
@@ -2924,8 +2940,8 @@ header('Location: ../index.html');
                                     </svg>
                                 </button>
                                 <button class="btn btn-success" id="generarPassword">
-                                        Generar password
-                                    </button>
+                                    Generar password
+                                </button>
                             </div>
                         </div>
 
