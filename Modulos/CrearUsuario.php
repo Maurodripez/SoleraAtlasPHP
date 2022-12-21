@@ -1,8 +1,13 @@
+<?php
+session_start();    
+if (!isset($_SESSION['usuario'])) {
+header('Location: ../index.html');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <%@ page contentType="text/html; charset=UTF-8" %>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,32 +29,31 @@
         </div>
     </nav>
     <div class="row justify-content-center">
-        <div class="card col-6">
+        <div class="card col-4">
             <div class="card-header">Nuevo usuario</div>
             <div class="card-body">
                 <input type="hidden" name="sinId" id="idOculto" />
-                <input type="hidden" name="" id="crearUsuario" />
                 <div class="mb-3 row justify-content-center">
-                    <label for="nombre" class="col-sm-2 col-form-label">Nombre real</label>
-                    <div class="col-sm-6">
+                    <label for="nombre" class="col col-form-label">Nombre real</label>
+                    <div class="col">
                         <input type="text" class="form-control" required id="nombre" />
                     </div>
                 </div>
                 <div class="mb-3 row justify-content-center">
-                    <label for="usuario" class="col-sm-2 col-form-label">Usuario</label>
-                    <div class="col-sm-6">
+                    <label for="usuario" class="col col-form-label">Usuario</label>
+                    <div class="col">
                         <input type="text" class="form-control" required id="usuario" />
                     </div>
                 </div>
                 <div class="mb-3 row justify-content-center">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-6">
+                    <label for="password" class="col col-form-label">Password</label>
+                    <div class="col">
                         <input type="password" class="form-control" required id="password" />
                     </div>
                 </div>
                 <div class="mb-3 row justify-content-center">
-                    <label for="privilegios" class="col-sm-2 col-form-label">Privilegios</label>
-                    <div class="col-sm-6">
+                    <label for="privilegios" class="col col-form-label">Privilegios</label>
+                    <div class="col">
                         <select id="privilegio" required class="form-select">
                             <option selected>Privilegios...</option>
                             <option value="root">Root</option>
@@ -62,12 +66,12 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <div class="d-grid col-sm-6 mx-auto">
+                    <div class="d-grid col-sm-4 mx-auto">
                         <button onclick="crearUsuario()" class="btn btn-primary">
                             Crear usuario
                         </button>
                     </div>
-                    <div class="d-grid col-sm-6 mx-auto">
+                    <div class="d-grid col-sm-4 mx-auto">
                         <button onclick="EditarUsuario()" class="btn btn-primary">
                             Editar usuario
                         </button>
@@ -75,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-5">
+        <div class="card col-8">
             <div class="card-header">Editar Usuario</div>
             <div class="card-body">
                 <div class="table-responsive">

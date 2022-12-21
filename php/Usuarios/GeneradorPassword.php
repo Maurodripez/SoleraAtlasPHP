@@ -21,9 +21,9 @@ switch ($accion) {
             . " VALUES ('$usuario', '$password', now())";
         ActualizarCualquierSiniestro($sql, "../Conexion.php");
         //se crea un nuevo evento con la duracion de 2 semanas
-        $sql = "CREATE EVENT $usuario"
+        $sql = "CREATE EVENT $password"
             . " ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 20160 MINUTE"
-            . " DO DELETE FROM usuariostemporales WHERE usuario ='$usuario'";
+            . " DO DELETE FROM usuariostemporales WHERE contrasena ='$password'";
         ActualizarCualquierSiniestro($sql, "../Conexion.php");
         $diasActiva = diasActiva($usuario);
         echo $password . "//" . $diasActiva;

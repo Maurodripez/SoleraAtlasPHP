@@ -20,6 +20,12 @@ DROP DATABASE IF EXISTS `soleraatlas`;
 CREATE DATABASE IF NOT EXISTS `soleraatlas` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `soleraatlas`;
 
+-- Volcando estructura para evento soleraatlas.0sst54uk10
+DROP EVENT IF EXISTS `0sst54uk10`;
+DELIMITER //
+CREATE EVENT `0sst54uk10` ON SCHEDULE AT '2023-01-04 09:01:47' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM usuariostemporales WHERE contrasena ='0sst54uk10'//
+DELIMITER ;
+
 -- Volcando estructura para tabla soleraatlas.citas
 DROP TABLE IF EXISTS `citas`;
 CREATE TABLE IF NOT EXISTS `citas` (
@@ -34,13 +40,12 @@ CREATE TABLE IF NOT EXISTS `citas` (
   `siniestro` varchar(450) DEFAULT NULL,
   `operador` varchar(450) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.citas: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.citas: ~0 rows (aproximadamente)
 DELETE FROM `citas`;
 INSERT INTO `citas` (`id`, `title`, `start`, `end`, `infoAdicional`, `asesor`, `color`, `fkCitas`, `siniestro`, `operador`) VALUES
-	(7, 'marina', '2022-12-18 09:00:00', '2022-12-18 10:00:00', 'wer', 'prueba', '#000000', 839, '42129149', 'Mauricio Rodriguez'),
-	(8, 'marina', '2022-12-18 09:00:00', '2022-12-18 10:00:00', 'wer', 'prueba2', '#000000', 837, '42172278', 'Mauricio Rodriguez');
+	(12, 'marina', '2022-12-14 09:00:00', '2022-12-14 10:00:00', 'qw', 'prueba', '#ff0000', 839, '42129149', 'Mauricio Rodriguez');
 
 -- Volcando estructura para tabla soleraatlas.datosvalidados
 DROP TABLE IF EXISTS `datosvalidados`;
@@ -60,9 +65,9 @@ CREATE TABLE IF NOT EXISTS `datosvalidados` (
   PRIMARY KEY (`iddatosValidados`),
   KEY `fkIdRegistroValidados` (`fkIdRegistroValidados`),
   CONSTRAINT `fkIdRegistroValidados` FOREIGN KEY (`fkIdRegistroValidados`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.datosvalidados: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.datosvalidados: ~9 rows (aproximadamente)
 DELETE FROM `datosvalidados`;
 INSERT INTO `datosvalidados` (`iddatosValidados`, `siniestro`, `poliza`, `nombre`, `telefono`, `correo`, `auto`, `fechaSin`, `tipoAuto`, `serie`, `placas`, `fkIdRegistroValidados`) VALUES
 	(2, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 1336),
@@ -70,7 +75,10 @@ INSERT INTO `datosvalidados` (`iddatosValidados`, `siniestro`, `poliza`, `nombre
 	(4, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 1348),
 	(5, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 1349),
 	(6, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 1350),
-	(7, 'false', 'false', 'false', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 839);
+	(7, 'false', 'false', 'false', 'false', 'false', 'true', 'true', 'true', 'true', 'true', 839),
+	(8, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 1351),
+	(9, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 1351),
+	(10, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 1357);
 
 -- Volcando estructura para tabla soleraatlas.docsaprobadosatlas
 DROP TABLE IF EXISTS `docsaprobadosatlas`;
@@ -101,9 +109,9 @@ CREATE TABLE IF NOT EXISTS `docsaprobadosatlas` (
   `tenencias` varchar(45) DEFAULT 'false',
   PRIMARY KEY (`iddocumentosaprobados`),
   KEY `fkIdRegistroDocsAprobados` (`fkDocsAtlas`)
-) ENGINE=InnoDB AUTO_INCREMENT=870 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=874 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.docsaprobadosatlas: ~184 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.docsaprobadosatlas: ~188 rows (aproximadamente)
 DELETE FROM `docsaprobadosatlas`;
 INSERT INTO `docsaprobadosatlas` (`iddocumentosaprobados`, `factura`, `secuencia`, `certificadopropiedad`, `copiacertificado`, `pedimento`, `rfv`, `verificacion`, `baja`, `conoceatucliente`, `consentimiento`, `averiguacionprevia`, `avisopfp`, `otros`, `oficioliberacion`, `oficiocancelacion`, `porcentajeDocs`, `porcentajeTotal`, `facturamotor`, `llaves`, `fkDocsAtlas`, `facturaatlas`, `acreditacion`, `tenencias`) VALUES
 	(2, 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'false', 'true', 'true', 'false', 'false', 'false', 75, 50, 'true', 'true', 839, 'true', 'false', 'true'),
@@ -290,7 +298,11 @@ INSERT INTO `docsaprobadosatlas` (`iddocumentosaprobados`, `factura`, `secuencia
 	(866, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1336, 'false', 'false', 'false'),
 	(867, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1348, 'false', 'false', 'false'),
 	(868, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1349, 'false', 'false', 'false'),
-	(869, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1350, 'false', 'false', 'false');
+	(869, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1350, 'false', 'false', 'false'),
+	(870, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1351, 'false', 'false', 'false'),
+	(871, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1351, 'false', 'false', 'false'),
+	(872, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1356, 'false', 'false', 'false'),
+	(873, 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 0, 0, 'false', 'false', 1357, 'false', 'false', 'false');
 
 -- Volcando estructura para tabla soleraatlas.encuestaplataforma
 DROP TABLE IF EXISTS `encuestaplataforma`;
@@ -315,9 +327,9 @@ CREATE TABLE IF NOT EXISTS `estadoproceso` (
   PRIMARY KEY (`idProceso`),
   KEY `fkIdRegistro` (`fkIdRegistroEstadoProceso`),
   CONSTRAINT `fkIdRegistro` FOREIGN KEY (`fkIdRegistroEstadoProceso`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.estadoproceso: ~182 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.estadoproceso: ~185 rows (aproximadamente)
 DELETE FROM `estadoproceso`;
 INSERT INTO `estadoproceso` (`idProceso`, `estacionProceso`, `estatusOperativo`, `subEstatusProceso`, `usuarioSeguimiento`, `fkIdRegistroEstadoProceso`) VALUES
 	(1, 'En seguimiento', 'DE 4 A 6 DOCUMENTOS', 'En seguimiento', 'Mauricio Rodriguez', 839),
@@ -504,7 +516,10 @@ INSERT INTO `estadoproceso` (`idProceso`, `estacionProceso`, `estatusOperativo`,
 	(190, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1336),
 	(191, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1348),
 	(192, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1349),
-	(193, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1350);
+	(193, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1350),
+	(194, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1351),
+	(196, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1356),
+	(197, 'Nuevo', 'Nuevo', 'Nuevo, activacion por proceso normal', NULL, 1357);
 
 -- Volcando estructura para tabla soleraatlas.fechasseguimiento
 DROP TABLE IF EXISTS `fechasseguimiento`;
@@ -533,9 +548,9 @@ CREATE TABLE IF NOT EXISTS `fechasseguimiento` (
   PRIMARY KEY (`idFechasseguimiento`),
   KEY `fkIdRegistroFechaseguimiento` (`fkidRegistro`),
   CONSTRAINT `fkIdRegistroFechaseguimiento` FOREIGN KEY (`fkidRegistro`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.fechasseguimiento: ~179 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.fechasseguimiento: ~182 rows (aproximadamente)
 DELETE FROM `fechasseguimiento`;
 INSERT INTO `fechasseguimiento` (`idFechasseguimiento`, `fechaSeguimiento`, `fechaContactoCliente`, `fechaPrimerEnvioDoc`, `fechaIntegracionexpedienteCompleto`, `fechaTermino`, `contactoFinal`, `siClienteOtro`, `numDatosincorrectos`, `fecharecepcionDocOriginales`, `fechaPago`, `docCompletosCorrectos`, `noindicaFaltantes`, `importePagado`, `comentarios`, `detalles`, `linea`, `guia`, `refactura`, `aviso`, `fkidRegistro`) VALUES
 	(3, '2022-10-28 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 837),
@@ -720,7 +735,10 @@ INSERT INTO `fechasseguimiento` (`idFechasseguimiento`, `fechaSeguimiento`, `fec
 	(187, '2022-12-09 12:54:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1336),
 	(188, '2022-12-09 12:55:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1348),
 	(189, '2022-12-09 13:01:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1349),
-	(190, '2022-12-09 13:03:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1350);
+	(190, '2022-12-09 13:03:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1350),
+	(191, '2022-12-21 11:51:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1351),
+	(193, '2022-12-21 12:20:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1356),
+	(194, '2022-12-21 12:22:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1357);
 
 -- Volcando estructura para tabla soleraatlas.imagenes
 DROP TABLE IF EXISTS `imagenes`;
@@ -735,9 +753,9 @@ CREATE TABLE IF NOT EXISTS `imagenes` (
   PRIMARY KEY (`idimagenes`),
   KEY `fkIdRegistroImagenes` (`fkImagen`),
   CONSTRAINT `fkIdRegistroImagenes` FOREIGN KEY (`fkImagen`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.imagenes: ~170 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.imagenes: ~171 rows (aproximadamente)
 DELETE FROM `imagenes`;
 INSERT INTO `imagenes` (`idimagenes`, `nombreImagen`, `rutaImagen`, `fkImagen`, `fechaCarga`, `nombreOriginal`, `iframe`) VALUES
 	(27, 'Factura original', '/home/admin/Documentos/SoleraWeb/web/documentos/963/Factura-original-1-FACTURA.pdf', 963, '2022-11-10 00:00:00', 'Factura-original-1-FACTURA.pdf', NULL),
@@ -911,7 +929,8 @@ INSERT INTO `imagenes` (`idimagenes`, `nombreImagen`, `rutaImagen`, `fkImagen`, 
 	(306, '639b7033c155a_0.jpg', '../Documentos/Ids/839/639b7033c155a_0.jpg', 839, '2022-12-15 13:06:27', 'Factura', 'iFrameFactura'),
 	(307, '639b71b98b464_0.jpg', '../Documentos/Ids/839/639b71b98b464_0.jpg', 839, '2022-12-15 13:12:57', 'Factura', 'iFrameFactura'),
 	(308, '639b71dddb95c_0.png', '../Documentos/Ids/839/639b71dddb95c_0.png', 839, '2022-12-15 13:13:33', 'Factura', 'iFrameFactura'),
-	(309, '639b721545768_0.png', '../Documentos/Ids/839/639b721545768_0.png', 839, '2022-12-15 13:14:29', 'Factura', 'iFrameFactura');
+	(309, '639b721545768_0.png', '../Documentos/Ids/839/639b721545768_0.png', 839, '2022-12-15 13:14:29', 'Factura', 'iFrameFactura'),
+	(310, '63a32e89ea060_0.pdf', '../Documentos/Ids/839/63a32e89ea060_0.pdf', 839, '2022-12-21 10:04:25', 'Factura', 'iFrameFactura');
 
 -- Volcando estructura para tabla soleraatlas.infoauto
 DROP TABLE IF EXISTS `infoauto`;
@@ -928,9 +947,9 @@ CREATE TABLE IF NOT EXISTS `infoauto` (
   PRIMARY KEY (`idAuto`),
   KEY `fkIdRegistro3` (`fkIdRegistro`),
   CONSTRAINT `fkIdRegistro3` FOREIGN KEY (`fkIdRegistro`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.infoauto: ~184 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.infoauto: ~187 rows (aproximadamente)
 DELETE FROM `infoauto`;
 INSERT INTO `infoauto` (`idAuto`, `marca`, `tipo`, `modelo`, `numSerie`, `valorIndemnizacion`, `fkIdRegistro`, `valorComercial`, `placas`) VALUES
 	(2, 'CHEVROLET', '2018', 'AVEO', 'LSGHD52H3JD100308', '2', 837, '1', NULL),
@@ -1117,7 +1136,10 @@ INSERT INTO `infoauto` (`idAuto`, `marca`, `tipo`, `modelo`, `numSerie`, `valorI
 	(192, 'eq', 'qdas', 'qwe', 'asd', NULL, 1336, NULL, NULL),
 	(193, 'eq', 'qdas', 'qwe', 'asd', NULL, 1348, NULL, NULL),
 	(194, 'eq', 'qdas', 'qwe', 'asd', 'ad', 1349, 'sda', NULL),
-	(195, 'adad', 'adasd', 'ad', 'ada', 'adas', 1350, 'ada', NULL);
+	(195, 'adad', 'adasd', 'ad', 'ada', 'adas', 1350, 'ada', NULL),
+	(196, 'RENAULT', 'MEGANE', '2003', 'VF1H019CX3E513297', '', 1351, '', NULL),
+	(198, 'RENAULT', 'MEGANE', '2003', 'VF1H019CX3E513297', 'ND', 1356, '3', NULL),
+	(199, 'RENAULT', 'MEGANE', '2003', 'VF1H019CX3E513297', 'ND', 1357, '3', NULL);
 
 -- Volcando estructura para tabla soleraatlas.infocliente
 DROP TABLE IF EXISTS `infocliente`;
@@ -1134,9 +1156,9 @@ CREATE TABLE IF NOT EXISTS `infocliente` (
   PRIMARY KEY (`idCliente`),
   KEY `fkIdRegistroinfoCliente` (`fkIdRegistro`),
   CONSTRAINT `fkIdRegistroinfoCliente` FOREIGN KEY (`fkIdRegistro`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.infocliente: ~184 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.infocliente: ~187 rows (aproximadamente)
 DELETE FROM `infocliente`;
 INSERT INTO `infocliente` (`idCliente`, `telefonoPrincipal`, `telefonosecundario`, `contacto`, `correo`, `fkIdRegistro`, `asegurado`, `correoContacto`, `telContacto`) VALUES
 	(2, '5546026059', 'SD', '1212', '022', 839, 'RAFAEL SANCHEZ2', 'err', '456'),
@@ -1330,7 +1352,10 @@ INSERT INTO `infocliente` (`idCliente`, `telefonoPrincipal`, `telefonosecundario
 	(193, 'w', 'ewe', NULL, 'w', 1336, 'q', NULL, NULL),
 	(194, 'w', 'ewe', NULL, 'w', 1348, 'q', NULL, NULL),
 	(195, 'w', 'ewe', NULL, 'w', 1349, 'q', NULL, NULL),
-	(196, 'asdasd', 'adad', NULL, 'ada', 1350, 'asdad', NULL, NULL);
+	(196, 'asdasd', 'adad', NULL, 'ada', 1350, 'asdad', NULL, NULL),
+	(197, '3336672029', '3311447084T', NULL, 'NO@CORREO', 1351, 'MARIO ALBERTO GONZALEZ', NULL, NULL),
+	(199, '3336672029', '3311447084T', NULL, 'NO@CORREO', 1356, 'Ejemplo', NULL, NULL),
+	(200, '3336672029', '3311447084T', NULL, 'NO@CORREO', 1357, 'Ejemplo', NULL, NULL);
 
 -- Volcando estructura para tabla soleraatlas.infosiniestro
 DROP TABLE IF EXISTS `infosiniestro`;
@@ -1352,7 +1377,7 @@ CREATE TABLE IF NOT EXISTS `infosiniestro` (
   `comentariosCliente` varchar(500) CHARACTER SET utf8 DEFAULT 'ninguno',
   `datosAudatex` varchar(45) DEFAULT 'Sin Datos',
   `passwordExterno` varchar(45) DEFAULT 'Sin Password',
-  `fechaCarga` date DEFAULT NULL,
+  `fechaCarga` datetime DEFAULT NULL,
   `fechaDecreto` date DEFAULT NULL,
   `usuarioCarga` varchar(100) DEFAULT 'NULSDL',
   `estatusSeguimientoSin` varchar(450) DEFAULT 'SIN CONTACTO',
@@ -1360,207 +1385,210 @@ CREATE TABLE IF NOT EXISTS `infosiniestro` (
   `fechaAsignacion` datetime DEFAULT NULL,
   `agente` varchar(250) DEFAULT 'SD',
   PRIMARY KEY (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=1351 DEFAULT CHARSET=utf8mb4 COMMENT='tabla para la informacion del siniestro';
+) ENGINE=InnoDB AUTO_INCREMENT=1358 DEFAULT CHARSET=utf8mb4 COMMENT='tabla para la informacion del siniestro';
 
--- Volcando datos para la tabla soleraatlas.infosiniestro: ~184 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.infosiniestro: ~200 rows (aproximadamente)
 DELETE FROM `infosiniestro`;
 INSERT INTO `infosiniestro` (`idRegistro`, `numSiniestro`, `poliza`, `afectado`, `tipoDeCaso`, `cobertura`, `fechaSiniestro`, `estado`, `ciudad`, `region`, `ubicacionTaller`, `financiado`, `regimenFiscal`, `estatusCliente`, `comentariosCliente`, `datosAudatex`, `passwordExterno`, `fechaCarga`, `fechaDecreto`, `usuarioCarga`, `estatusSeguimientoSin`, `usuarioAsignadoSin`, `fechaAsignacion`, `agente`) VALUES
-	(837, '42172278', '0', 'A', 'Colision', 'DM', '2022-10-22', 'Aguascalientes', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'Auto online', 'Si', 'Persona fisica', 'Documento incorrecto', 'ninguno2', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(839, '42129149', '00000000', 'A', 'Incendio', 'DM', '2022-10-22', 'Zacatecas', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'Auto online', 'No', 'Persona moral', 'Pendiente', 'ninguno34', 'Sin Datos', 'Sin Password2', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(840, '42152626', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(841, '042129318-003', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(842, '42164643', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Expediente aprobado', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(843, '042186005-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'NINGUNA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(844, '042183705-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(845, '042167891-001', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(846, '42187629', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(847, '042161648-003', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(848, '042169442-001', '00000000', 'A', NULL, 'SD', '2022-10-22', 'ND', NULL, 'nd', 'TLALPAN', NULL, NULL, NULL, 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(849, '421A6385', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(850, '42290076', '00000000', 'A', NULL, 'SD', '2022-10-22', 'ND', NULL, 'nd', 'TLALPAN', NULL, NULL, NULL, 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(851, '042158144-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(852, '042190608-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(853, '42290090', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(854, '042140737-003', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(855, '042190644-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(856, '42219888', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(857, '042215337-003', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', 'Selecciona...', '2022-11-12 11:14:16', 'SD'),
-	(858, '42137312', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(859, '042290072-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(860, '042204225-001', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica con actividad empresarial', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(861, '42229972', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(862, '42201833-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 1 A 3 DOCUMENTOS', NULL, NULL, 'SD'),
-	(863, '42220909', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona fisica', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(864, '042217923-001', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(865, '042233057-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(866, '042215337-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(867, '042235179-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(868, '042218226-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(869, '0421-64534', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(870, '0421A5380', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(871, '42238835', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 1 A 3 DOCUMENTOS', NULL, NULL, 'SD'),
-	(872, '42226153', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(873, '42247976', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(874, '042247431-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(875, '42233189', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(876, '042241064-003', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(877, '042230231-001', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica con actividad empresarial', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(878, '042248650-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(879, '042249861-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(880, '042222574-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(881, '42253434', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(882, '42261869', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(883, '42150159', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(884, '042261857-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(885, '042242644-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(886, '042254620-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA MORAL', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(887, '042235736-001', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona fisica con actividad empresarial', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(888, '042263935-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(889, '042263716T', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(890, '042266554A', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(891, '042259012-003', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(892, '42260060', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(893, '42255429', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(894, '42223774', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(895, '42258294', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(896, '42256179', 'ND', 'T', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(897, '42214102', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(898, '42183825', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(899, '42236408', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(900, '42203432', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(901, '42186608', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(902, '42184962', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(903, '42066068', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(904, '42162602', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(905, '42170663', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(906, '42200516', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(907, '42209886', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(908, '42235325', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(909, '42249655', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(910, '42251445', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(911, '42252022', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(912, '42252106', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(913, '42271411', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(914, '42271720', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Revision', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(915, '42270613', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(916, '42275840', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(917, '042224252-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(918, '042217035-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(919, '042262482-001', '03566268', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA MORAL', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(920, '042257308-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(921, '042277295-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(922, '042268103-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(923, '042276315-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(924, '42245157', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona fisica', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(925, '42235739', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(926, '42280136', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(927, '42258694', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(928, '42266528', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(929, '042252652-001', '0', 'A', 'Otro', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Documento incorrecto', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(930, '42287214', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(931, '42277852', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(932, '42231500', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'TLALPAN', 'ND', 'ND', 'ND', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(933, '042238253-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(934, '42255056', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(935, '042261722-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(936, '042106490-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(937, '42275385', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(938, '42215868', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(939, '42271609', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(940, '42263231', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona fisica', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(941, '42253152', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(942, '42227040', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', 'Nina Rivera', NULL, 'SD'),
-	(943, '042268551-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(944, '042272285-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(945, '42271388', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(946, '04218866-003', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(947, '42110944', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'ND', 'Persona moral', 'ND', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(948, '42160898', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(949, '42271079', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(950, '42232419', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(951, '42208866', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(952, '42147035', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(953, '42219498', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(954, '42164534', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(955, '42232770', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'MORELIA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(956, '42264110', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'HERMOSILLO', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(957, '42240433', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'HERMOSILLO', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(958, '42245531', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(959, '42238508', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'ZACATECAS', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(960, '421A3093', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG E: Leon, San Luis Potosi-Aguascalientes-Morelia-Tamaulipas-Zacatecas', 'TLALPAN', 'ND', 'ND', 'ND', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(961, '42159905', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(962, '42235380', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'ZACATECAS', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(963, '42263757', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(964, '42120328', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona moral', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(965, '42151241', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(966, '042168875-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(967, '42164126', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Expediente aprobado', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(968, '42188233', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(969, '42227174', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(970, '42234951', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(971, '42174375', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(972, '421A2102', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(973, '421A5004', 'ND', 'T', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'Si', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(974, '42288344', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(975, '42271794', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(976, '42260510', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(977, '42278304', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(978, '42269552', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(979, '42230078', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(980, '42242925', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(981, '42162836', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(982, '42287925', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona fisica', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(983, '422A1855', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(984, '42265435', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(985, '42271014', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(986, '42269653', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(987, '42263916', '00000000', 'ND', NULL, 'COLISION', '1905-07-15', 'ND', 'MONTERREY', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-09-14', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
-	(988, '422A2432', '00000000', 'A', NULL, 'COLISION', '1905-07-16', 'ND', 'GUADALAJARA', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-09-15', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(989, '42231148', '00000000', 'A', NULL, 'COLISION', '1905-07-17', 'ND', 'GUADALAJARA', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-09-16', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(990, '42280252', '00000000', 'ND', NULL, 'ND', '1905-07-18', 'ND', 'ND', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-09-17', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(992, '42276023', '00000000', 'ND', NULL, 'ND', '1905-07-20', 'ND', 'ND', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-09-19', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
-	(993, '42270478', '00000000', 'T', NULL, 'COLISION', '1905-07-21', 'ND', 'GUADALAJARA', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31', '2022-09-20', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(1310, '42275746', '03604040', 'nd', NULL, 'nd', '2022-08-29', 'ND', 'GUADALAJARA', 'N/D', 'nd', NULL, 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-08-29', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(1311, '42268513', '03644256', 'nd', NULL, 'nd', '2022-08-07', 'ND', 'GUADALAJARA', 'N/D', 'nd', NULL, 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-11-02', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
-	(1312, '42268513', '03644256', 'A', 'Colision', 'DM', '2022-08-07', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'nd', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-11-02', 'admin', 'DE 1 A 3 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1313, '42275746', '03604040', 'nd', NULL, 'nd', '2022-08-29', 'ND', 'GUADALAJARA', 'N/D', 'nd', NULL, 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-08-29', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1314, '0422A7136', '4059773', 'ND', 'ND', 'ND', '2022-10-28', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-10-28', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1315, '042278324-001', '3763832', 'A', 'Colision', 'DM', '2022-09-05', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica con actividad empresarial', 'Revision', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-09-05', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1316, '42287748001', '3595113', 'A', 'Colision', 'DM', '2022-10-02', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-10-02', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1317, '42270841', '3635010', 'A', 'Colision', 'DM', '2022-08-15', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica con actividad empresarial', 'Expediente aprobado', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-08-15', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1318, '042282678-001', '3743932', 'A', NULL, 'DM', '2022-09-17', 'ND', 'JALISCO', 'N/D', 'SD', NULL, 'PF', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-09-17', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1319, '042283935-001', '3819266', 'A', 'Colision', 'DM', '2022-09-16', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Expediente aprobado', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-09-16', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1320, '42270555-001', '3833229', 'A', 'Colision', 'DM', '2022-08-13', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-08-13', 'Ivet Gonzalez', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
-	(1321, '42233646', '3389744', 'A', NULL, 'DM', '2022-04-25', 'ND', 'JALISCO', 'N/D', 'SD', NULL, 'PF', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-04-25', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(1322, '42269538', '3789837', 'ND', 'ND', 'ND', '2022-08-10', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-08-10', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(1323, '421A0545', '3486986', 'A', 'Colision', 'DM', '2021-12-11', 'ND', 'Todos-Ninguna', 'ND', 'ND', 'ND', 'Persona fisica', 'Selecciona...', 'ND', 'ND', 'Sin Password', '2022-11-10', '2021-12-11', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1324, '42285111A', '4044579', 'ND', 'ND', 'ND', '2022-09-24', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-09-24', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1325, '422A0379A', '3921972', 'ND', 'ND', 'ND', '2022-10-09', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-10-09', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(1326, '42278090A', '3788781', 'A', 'Colision', 'DM', '2022-09-04', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10', '2022-09-04', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1327, '422A0379T', 'TERCERO', 'ND', 'ND', 'ND', '2022-10-09', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10', '2022-10-09', 'Ivet Gonzalez', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1328, '422A0363', '3644590', 'A', 'Colision', 'DM', '2022-10-09', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-10-28', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1329, '42289467', '200162497', 'A', NULL, 'DM', '2022-10-06', 'ND', 'JALISCO', 'N/D', 'SD', NULL, 'PF', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-10-06', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1330, '42287734', '3787874', 'A', 'Colision', 'DM', '2022-10-01', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-10-01', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1331, '42283357', '3912582', 'A', 'Colision', 'DM', '2022-09-19', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'Si', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-09-19', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
-	(1332, '422A7357', 'TERCERO', 'T', 'Colision', 'DM', '2022-10-29', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-10-29', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1333, '42256497', '3549664', 'A', 'Colision', 'DM', '2022-07-01', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-07-01', 'Ivet Gonzalez', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
-	(1334, '422A3406', '3870599', 'A', 'Colision', 'DM', '2022-10-18', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-10-18', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(1335, '42250137', '3922504', 'A', 'Colision', 'DM', '2022-06-11', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24', '2022-06-11', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
-	(1336, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1337, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1338, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1339, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1340, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1341, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1342, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1343, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1344, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1345, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1346, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1347, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1348, 'qww', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
-	(1349, 'qwwwwwww', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'ew'),
-	(1350, 'sefdfsdf', 'sdfsdf', 'asdad', 'SD', 'sdfsf', '2022-10-11', 'N/D', 'ada', 'N/D', 'ada', 'SD', 'adas', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'asda');
+	(837, '42172278', '0', 'A', 'Colision', 'DM', '2022-10-22', 'Aguascalientes', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'Auto online', 'Si', 'Persona fisica', 'Documento incorrecto', 'ninguno2', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(839, '42129149', '00000000', 'A', 'Incendio', 'DM', '2022-10-22', 'Zacatecas', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'Auto online', 'No', 'Persona moral', 'Pendiente', 'ninguno34', 'Sin Datos', 'Sin Password2', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(840, '42152626', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(841, '042129318-003', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(842, '42164643', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Expediente aprobado', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(843, '042186005-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'NINGUNA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(844, '042183705-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(845, '042167891-001', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(846, '42187629', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(847, '042161648-003', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(848, '042169442-001', '00000000', 'A', NULL, 'SD', '2022-10-22', 'ND', NULL, 'nd', 'TLALPAN', NULL, NULL, NULL, 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(849, '421A6385', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(850, '42290076', '00000000', 'A', NULL, 'SD', '2022-10-22', 'ND', NULL, 'nd', 'TLALPAN', NULL, NULL, NULL, 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(851, '042158144-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(852, '042190608-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(853, '42290090', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(854, '042140737-003', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(855, '042190644-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(856, '42219888', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(857, '042215337-003', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', 'Selecciona...', '2022-11-12 11:14:16', 'SD'),
+	(858, '42137312', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(859, '042290072-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(860, '042204225-001', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica con actividad empresarial', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(861, '42229972', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(862, '42201833-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 1 A 3 DOCUMENTOS', NULL, NULL, 'SD'),
+	(863, '42220909', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona fisica', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(864, '042217923-001', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(865, '042233057-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(866, '042215337-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(867, '042235179-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(868, '042218226-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(869, '0421-64534', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(870, '0421A5380', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(871, '42238835', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 1 A 3 DOCUMENTOS', NULL, NULL, 'SD'),
+	(872, '42226153', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(873, '42247976', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(874, '042247431-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(875, '42233189', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(876, '042241064-003', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(877, '042230231-001', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica con actividad empresarial', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(878, '042248650-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(879, '042249861-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(880, '042222574-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(881, '42253434', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(882, '42261869', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(883, '42150159', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(884, '042261857-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(885, '042242644-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(886, '042254620-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA MORAL', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(887, '042235736-001', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona fisica con actividad empresarial', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(888, '042263935-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(889, '042263716T', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(890, '042266554A', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(891, '042259012-003', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(892, '42260060', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(893, '42255429', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(894, '42223774', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(895, '42258294', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(896, '42256179', 'ND', 'T', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(897, '42214102', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(898, '42183825', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(899, '42236408', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(900, '42203432', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(901, '42186608', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(902, '42184962', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(903, '42066068', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(904, '42162602', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(905, '42170663', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(906, '42200516', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona moral', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(907, '42209886', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(908, '42235325', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(909, '42249655', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(910, '42251445', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(911, '42252022', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(912, '42252106', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(913, '42271411', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(914, '42271720', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Revision', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(915, '42270613', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(916, '42275840', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(917, '042224252-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(918, '042217035-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(919, '042262482-001', '03566268', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA MORAL', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(920, '042257308-001', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(921, '042277295-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(922, '042268103-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(923, '042276315-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(924, '42245157', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona fisica', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(925, '42235739', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(926, '42280136', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(927, '42258694', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(928, '42266528', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(929, '042252652-001', '0', 'A', 'Otro', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Documento incorrecto', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(930, '42287214', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(931, '42277852', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(932, '42231500', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'TLALPAN', 'ND', 'ND', 'ND', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(933, '042238253-001', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(934, '42255056', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(935, '042261722-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(936, '042106490-001', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(937, '42275385', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(938, '42215868', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(939, '42271609', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(940, '42263231', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona fisica', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(941, '42253152', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(942, '42227040', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', 'Nina Rivera', NULL, 'SD'),
+	(943, '042268551-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(944, '042272285-001', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(945, '42271388', '0', 'A', NULL, 'SD', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(946, '04218866-003', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(947, '42110944', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'ND', 'Persona moral', 'ND', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(948, '42160898', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(949, '42271079', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(950, '42232419', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(951, '42208866', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(952, '42147035', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(953, '42219498', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(954, '42164534', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(955, '42232770', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'MORELIA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(956, '42264110', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'HERMOSILLO', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(957, '42240433', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'HERMOSILLO', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(958, '42245531', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(959, '42238508', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'ZACATECAS', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(960, '421A3093', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG E: Leon, San Luis Potosi-Aguascalientes-Morelia-Tamaulipas-Zacatecas', 'TLALPAN', 'ND', 'ND', 'ND', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(961, '42159905', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(962, '42235380', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'ZACATECAS', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(963, '42263757', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(964, '42120328', '0', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'Si', 'Persona moral', 'Revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(965, '42151241', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(966, '042168875-001', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(967, '42164126', '00000000', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'TLALPAN', 'No', 'Persona fisica', 'Expediente aprobado', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(968, '42188233', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(969, '42227174', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(970, '42234951', '00000000', 'A', NULL, 'COLISION', '2022-10-22', 'ND', 'GUADALAJARA', 'N/D', 'TLALPAN', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(971, '42174375', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(972, '421A2102', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(973, '421A5004', 'ND', 'T', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'Si', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(974, '42288344', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(975, '42271794', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(976, '42260510', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(977, '42278304', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(978, '42269552', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(979, '42230078', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(980, '42242925', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(981, '42162836', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(982, '42287925', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona fisica', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(983, '422A1855', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(984, '42265435', '0', 'A', NULL, 'NUEVO', '2022-10-22', 'ND', 'SD', 'N/D', 'TLALPAN', NULL, 'SD', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(985, '42271014', 'ND', 'A', 'Colision', 'DM', '2022-10-22', 'ND', 'Todos-Ninguna', 'Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur', 'ND', 'ND', 'Persona moral', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(986, '42269653', 'ND', 'ND', 'ND', 'ND', '2022-10-22', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-10-31 00:00:00', '2022-10-22', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(987, '42263916', '00000000', 'ND', NULL, 'COLISION', '1905-07-15', 'ND', 'MONTERREY', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-09-14', 'admin', 'TERMINADO POR PROCESO COMPLETO', NULL, NULL, 'SD'),
+	(988, '422A2432', '00000000', 'A', NULL, 'COLISION', '1905-07-16', 'ND', 'GUADALAJARA', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-09-15', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(989, '42231148', '00000000', 'A', NULL, 'COLISION', '1905-07-17', 'ND', 'GUADALAJARA', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-09-16', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(990, '42280252', '00000000', 'ND', NULL, 'ND', '1905-07-18', 'ND', 'ND', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-09-17', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(992, '42276023', '00000000', 'ND', NULL, 'ND', '1905-07-20', 'ND', 'ND', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-09-19', 'admin', 'DATOS INCORRECTOS', NULL, NULL, 'SD'),
+	(993, '42270478', '00000000', 'T', NULL, 'COLISION', '1905-07-21', 'ND', 'GUADALAJARA', 'N/D', 'DESCONOCIDO', NULL, 'PERSONA FISICA', 'revision', 'ninguno', 'Sin Datos', 'Sin Password', '2022-10-31 00:00:00', '2022-09-20', 'admin', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(1310, '42275746', '03604040', 'nd', NULL, 'nd', '2022-08-29', 'ND', 'GUADALAJARA', 'N/D', 'nd', NULL, 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-08-29', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(1311, '42268513', '03644256', 'nd', NULL, 'nd', '2022-08-07', 'ND', 'GUADALAJARA', 'N/D', 'nd', NULL, 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-11-02', 'admin', 'SIN CONTACTO', NULL, NULL, 'SD'),
+	(1312, '42268513', '03644256', 'A', 'Colision', 'DM', '2022-08-07', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'nd', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-11-02', 'admin', 'DE 1 A 3 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1313, '42275746', '03604040', 'nd', NULL, 'nd', '2022-08-29', 'ND', 'GUADALAJARA', 'N/D', 'nd', NULL, 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-08-29', 'admin', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1314, '0422A7136', '4059773', 'ND', 'ND', 'ND', '2022-10-28', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-10-28', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1315, '042278324-001', '3763832', 'A', 'Colision', 'DM', '2022-09-05', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica con actividad empresarial', 'Revision', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-09-05', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1316, '42287748001', '3595113', 'A', 'Colision', 'DM', '2022-10-02', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-10-02', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1317, '42270841', '3635010', 'A', 'Colision', 'DM', '2022-08-15', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica con actividad empresarial', 'Expediente aprobado', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-08-15', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1318, '042282678-001', '3743932', 'A', NULL, 'DM', '2022-09-17', 'ND', 'JALISCO', 'N/D', 'SD', NULL, 'PF', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-09-17', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1319, '042283935-001', '3819266', 'A', 'Colision', 'DM', '2022-09-16', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Expediente aprobado', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-09-16', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1320, '42270555-001', '3833229', 'A', 'Colision', 'DM', '2022-08-13', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'ND', 'No', 'Persona fisica', 'Pendiente', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-08-13', 'Ivet Gonzalez', 'CON CONTACTO SIN COOPERACION DEL CLIENTE', NULL, NULL, 'SD'),
+	(1321, '42233646', '3389744', 'A', NULL, 'DM', '2022-04-25', 'ND', 'JALISCO', 'N/D', 'SD', NULL, 'PF', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-04-25', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(1322, '42269538', '3789837', 'ND', 'ND', 'ND', '2022-08-10', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-08-10', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(1323, '421A0545', '3486986', 'A', 'Colision', 'DM', '2021-12-11', 'ND', 'Todos-Ninguna', 'ND', 'ND', 'ND', 'Persona fisica', 'Selecciona...', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2021-12-11', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1324, '42285111A', '4044579', 'ND', 'ND', 'ND', '2022-09-24', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-09-24', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1325, '422A0379A', '3921972', 'ND', 'ND', 'ND', '2022-10-09', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-10-09', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(1326, '42278090A', '3788781', 'A', 'Colision', 'DM', '2022-09-04', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-10 00:00:00', '2022-09-04', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1327, '422A0379T', 'TERCERO', 'ND', 'ND', 'ND', '2022-10-09', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'ND', 'Sin Password', '2022-11-10 00:00:00', '2022-10-09', 'Ivet Gonzalez', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1328, '422A0363', '3644590', 'A', 'Colision', 'DM', '2022-10-09', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-10-28', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1329, '42289467', '200162497', 'A', NULL, 'DM', '2022-10-06', 'ND', 'JALISCO', 'N/D', 'SD', NULL, 'PF', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-10-06', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1330, '42287734', '3787874', 'A', 'Colision', 'DM', '2022-10-01', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-10-01', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1331, '42283357', '3912582', 'A', 'Colision', 'DM', '2022-09-19', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'Si', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-09-19', 'Ivet Gonzalez', 'CON CONTACTO SIN DOCUMENTOS', NULL, NULL, 'SD'),
+	(1332, '422A7357', 'TERCERO', 'T', 'Colision', 'DM', '2022-10-29', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-10-29', 'Ivet Gonzalez', 'DE 7 A 10 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1333, '42256497', '3549664', 'A', 'Colision', 'DM', '2022-07-01', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-07-01', 'Ivet Gonzalez', 'DE 4 A 6 DOCUMENTOS', NULL, NULL, 'SD'),
+	(1334, '422A3406', '3870599', 'A', 'Colision', 'DM', '2022-10-18', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona fisica', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-10-18', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(1335, '42250137', '3922504', 'A', 'Colision', 'DM', '2022-06-11', 'ND', 'Todos-Ninguna', 'Layout ZG A: Guadalajara-Colima-Nayarit', 'SD', 'No', 'Persona moral', 'Pendiente', 'ninguno', 'Sin Datos', 'Sin Password', '2022-11-24 00:00:00', '2022-06-11', 'Ivet Gonzalez', 'CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER)', NULL, NULL, 'SD'),
+	(1336, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1337, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1338, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1339, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1340, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1341, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1342, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1343, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1344, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1345, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1346, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1347, 'q', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1348, 'qww', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'SD'),
+	(1349, 'qwwwwwww', 'q', 'q', 'SD', 'q', '0000-00-00', 'N/D', 'asd', 'N/D', 'dasd', 'SD', 'w', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'ew'),
+	(1350, 'sefdfsdf', 'sdfsdf', 'asdad', 'SD', 'sdfsf', '2022-10-11', 'N/D', 'ada', 'N/D', 'ada', 'SD', 'adas', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-09 00:00:00', '0000-00-00', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'asda'),
+	(1351, '042154482-007', '00000000', 'A', 'SD', 'COLISION', '1905-07-13', 'N/D', 'GUADALAJARA', 'N/D', 'TLALPAN', 'SD', 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-21 00:00:00', '1905-07-13', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'Pedro'),
+	(1356, '042154482-007', '00000000', 'A', 'SD', 'COLISION', '1905-07-13', 'N/D', 'GUADALAJARA', 'N/D', 'TLALPAN', 'SD', 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-21 12:20:54', '1905-07-13', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'Pedro'),
+	(1357, '042154482-007', '00000000', 'A', 'SD', 'COLISION', '1905-07-13', 'N/D', 'GUADALAJARA', 'N/D', 'TLALPAN', 'SD', 'PERSONA FISICA', 'Sin Estatus', 'ninguno', 'Sin Datos', 'Sin Password', '2022-12-21 12:22:36', '1905-07-13', 'Mauricio Rodriguez', 'SIN CONTACTO', 'SD', NULL, 'Pedro');
 
 -- Volcando estructura para tabla soleraatlas.insertarregistros
 DROP TABLE IF EXISTS `insertarregistros`;
@@ -1574,9 +1602,9 @@ CREATE TABLE IF NOT EXISTS `insertarregistros` (
   PRIMARY KEY (`idInsertarRegistros`),
   KEY `fkIdRegistroInsertar` (`fkIdRegistroInsertar`),
   CONSTRAINT `fkIdRegistroInsertar` FOREIGN KEY (`fkIdRegistroInsertar`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.insertarregistros: ~182 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.insertarregistros: ~185 rows (aproximadamente)
 DELETE FROM `insertarregistros`;
 INSERT INTO `insertarregistros` (`idInsertarRegistros`, `respuestaSolera`, `personaContactada`, `tipoPersona`, `contactoSeguimiento`, `fkIdRegistroInsertar`) VALUES
 	(1, NULL, NULL, NULL, NULL, 839),
@@ -1765,7 +1793,10 @@ INSERT INTO `insertarregistros` (`idInsertarRegistros`, `respuestaSolera`, `pers
 	(188, NULL, NULL, NULL, NULL, 1336),
 	(189, NULL, NULL, NULL, NULL, 1348),
 	(190, NULL, NULL, NULL, NULL, 1349),
-	(191, NULL, NULL, NULL, NULL, 1350);
+	(191, NULL, NULL, NULL, NULL, 1350),
+	(192, NULL, NULL, NULL, NULL, 1351),
+	(194, NULL, NULL, NULL, NULL, 1356),
+	(195, NULL, NULL, NULL, NULL, 1357);
 
 -- Volcando estructura para tabla soleraatlas.mensajesseguimientos
 DROP TABLE IF EXISTS `mensajesseguimientos`;
@@ -3255,211 +3286,6 @@ INSERT INTO `mensajesseguimientos` (`idmensajesSeguimientos`, `fkmensgSeguimient
 	(1505, 839, 'quiero informacion ', 'RAFAEL SANCHEZ2', '2022-12-13 11:29:32', 'no', 'Externo'),
 	(1506, 839, 'mira la info', 'RAFAEL SANCHEZ2', '2022-12-13 11:30:37', 'no', 'Externo');
 
--- Volcando estructura para tabla soleraatlas.seguimiento
-DROP TABLE IF EXISTS `seguimiento`;
-CREATE TABLE IF NOT EXISTS `seguimiento` (
-  `idSeguimiento` int(11) NOT NULL AUTO_INCREMENT,
-  `fkIdUsuario` int(11) DEFAULT NULL,
-  `fechaModificacion` date DEFAULT NULL,
-  `tipoModificacion` varchar(45) DEFAULT NULL,
-  `comentariosSeguimiento` varchar(100) DEFAULT NULL,
-  `fkIdRegistroSeguimiento` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idSeguimiento`),
-  KEY `fkIdRegistroSeguimiento` (`fkIdRegistroSeguimiento`),
-  CONSTRAINT `fkIdRegistroSeguimiento` FOREIGN KEY (`fkIdRegistroSeguimiento`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8mb4;
-
--- Volcando datos para la tabla soleraatlas.seguimiento: ~182 rows (aproximadamente)
-DELETE FROM `seguimiento`;
-INSERT INTO `seguimiento` (`idSeguimiento`, `fkIdUsuario`, `fechaModificacion`, `tipoModificacion`, `comentariosSeguimiento`, `fkIdRegistroSeguimiento`) VALUES
-	(1, NULL, NULL, NULL, NULL, 839),
-	(5, NULL, NULL, NULL, NULL, 837),
-	(6, NULL, NULL, NULL, NULL, 841),
-	(7, NULL, NULL, NULL, NULL, 840),
-	(8, NULL, NULL, NULL, NULL, 842),
-	(9, NULL, NULL, NULL, NULL, 843),
-	(10, NULL, NULL, NULL, NULL, 844),
-	(11, NULL, NULL, NULL, NULL, 845),
-	(12, NULL, NULL, NULL, NULL, 846),
-	(13, NULL, NULL, NULL, NULL, 847),
-	(14, NULL, NULL, NULL, NULL, 848),
-	(15, NULL, NULL, NULL, NULL, 849),
-	(16, NULL, NULL, NULL, NULL, 850),
-	(17, NULL, NULL, NULL, NULL, 853),
-	(18, NULL, NULL, NULL, NULL, 851),
-	(19, NULL, NULL, NULL, NULL, 852),
-	(20, NULL, NULL, NULL, NULL, 854),
-	(21, NULL, NULL, NULL, NULL, 855),
-	(22, NULL, NULL, NULL, NULL, 856),
-	(23, NULL, NULL, NULL, NULL, 857),
-	(24, NULL, NULL, NULL, NULL, 858),
-	(25, NULL, NULL, NULL, NULL, 859),
-	(26, NULL, NULL, NULL, NULL, 860),
-	(27, NULL, NULL, NULL, NULL, 862),
-	(28, NULL, NULL, NULL, NULL, 863),
-	(29, NULL, NULL, NULL, NULL, 861),
-	(30, NULL, NULL, NULL, NULL, 864),
-	(31, NULL, NULL, NULL, NULL, 865),
-	(32, NULL, NULL, NULL, NULL, 867),
-	(33, NULL, NULL, NULL, NULL, 866),
-	(34, NULL, NULL, NULL, NULL, 868),
-	(35, NULL, NULL, NULL, NULL, 869),
-	(36, NULL, NULL, NULL, NULL, 870),
-	(37, NULL, NULL, NULL, NULL, 872),
-	(38, NULL, NULL, NULL, NULL, 873),
-	(39, NULL, NULL, NULL, NULL, 871),
-	(40, NULL, NULL, NULL, NULL, 874),
-	(41, NULL, NULL, NULL, NULL, 875),
-	(42, NULL, NULL, NULL, NULL, 878),
-	(43, NULL, NULL, NULL, NULL, 877),
-	(44, NULL, NULL, NULL, NULL, 876),
-	(45, NULL, NULL, NULL, NULL, 879),
-	(46, NULL, NULL, NULL, NULL, 880),
-	(47, NULL, NULL, NULL, NULL, 881),
-	(48, NULL, NULL, NULL, NULL, 883),
-	(49, NULL, NULL, NULL, NULL, 882),
-	(50, NULL, NULL, NULL, NULL, 884),
-	(51, NULL, NULL, NULL, NULL, 885),
-	(52, NULL, NULL, NULL, NULL, 886),
-	(53, NULL, NULL, NULL, NULL, 887),
-	(54, NULL, NULL, NULL, NULL, 888),
-	(55, NULL, NULL, NULL, NULL, 889),
-	(56, NULL, NULL, NULL, NULL, 890),
-	(57, NULL, NULL, NULL, NULL, 891),
-	(58, NULL, NULL, NULL, NULL, 892),
-	(59, NULL, NULL, NULL, NULL, 893),
-	(60, NULL, NULL, NULL, NULL, 894),
-	(61, NULL, NULL, NULL, NULL, 895),
-	(62, NULL, NULL, NULL, NULL, 896),
-	(63, NULL, NULL, NULL, NULL, 897),
-	(64, NULL, NULL, NULL, NULL, 898),
-	(65, NULL, NULL, NULL, NULL, 899),
-	(66, NULL, NULL, NULL, NULL, 900),
-	(67, NULL, NULL, NULL, NULL, 901),
-	(68, NULL, NULL, NULL, NULL, 903),
-	(69, NULL, NULL, NULL, NULL, 902),
-	(70, NULL, NULL, NULL, NULL, 904),
-	(71, NULL, NULL, NULL, NULL, 905),
-	(72, NULL, NULL, NULL, NULL, 906),
-	(73, NULL, NULL, NULL, NULL, 908),
-	(74, NULL, NULL, NULL, NULL, 907),
-	(75, NULL, NULL, NULL, NULL, 909),
-	(76, NULL, NULL, NULL, NULL, 910),
-	(77, NULL, NULL, NULL, NULL, 911),
-	(78, NULL, NULL, NULL, NULL, 913),
-	(79, NULL, NULL, NULL, NULL, 912),
-	(80, NULL, NULL, NULL, NULL, 914),
-	(81, NULL, NULL, NULL, NULL, 916),
-	(82, NULL, NULL, NULL, NULL, 915),
-	(83, NULL, NULL, NULL, NULL, 917),
-	(84, NULL, NULL, NULL, NULL, 918),
-	(85, NULL, NULL, NULL, NULL, 919),
-	(86, NULL, NULL, NULL, NULL, 920),
-	(87, NULL, NULL, NULL, NULL, 921),
-	(88, NULL, NULL, NULL, NULL, 922),
-	(89, NULL, NULL, NULL, NULL, 923),
-	(90, NULL, NULL, NULL, NULL, 924),
-	(91, NULL, NULL, NULL, NULL, 925),
-	(92, NULL, NULL, NULL, NULL, 926),
-	(93, NULL, NULL, NULL, NULL, 927),
-	(94, NULL, NULL, NULL, NULL, 928),
-	(95, NULL, NULL, NULL, NULL, 929),
-	(96, NULL, NULL, NULL, NULL, 931),
-	(97, NULL, NULL, NULL, NULL, 930),
-	(98, NULL, NULL, NULL, NULL, 932),
-	(99, NULL, NULL, NULL, NULL, 933),
-	(100, NULL, NULL, NULL, NULL, 934),
-	(101, NULL, NULL, NULL, NULL, 935),
-	(102, NULL, NULL, NULL, NULL, 936),
-	(103, NULL, NULL, NULL, NULL, 938),
-	(104, NULL, NULL, NULL, NULL, 939),
-	(105, NULL, NULL, NULL, NULL, 940),
-	(106, NULL, NULL, NULL, NULL, 937),
-	(107, NULL, NULL, NULL, NULL, 941),
-	(108, NULL, NULL, NULL, NULL, 945),
-	(109, NULL, NULL, NULL, NULL, 942),
-	(110, NULL, NULL, NULL, NULL, 943),
-	(111, NULL, NULL, NULL, NULL, 944),
-	(112, NULL, NULL, NULL, NULL, 946),
-	(113, NULL, NULL, NULL, NULL, 947),
-	(114, NULL, NULL, NULL, NULL, 948),
-	(115, NULL, NULL, NULL, NULL, 949),
-	(116, NULL, NULL, NULL, NULL, 950),
-	(117, NULL, NULL, NULL, NULL, 951),
-	(118, NULL, NULL, NULL, NULL, 952),
-	(119, NULL, NULL, NULL, NULL, 953),
-	(120, NULL, NULL, NULL, NULL, 954),
-	(121, NULL, NULL, NULL, NULL, 955),
-	(122, NULL, NULL, NULL, NULL, 956),
-	(123, NULL, NULL, NULL, NULL, 957),
-	(124, NULL, NULL, NULL, NULL, 958),
-	(125, NULL, NULL, NULL, NULL, 959),
-	(126, NULL, NULL, NULL, NULL, 960),
-	(127, NULL, NULL, NULL, NULL, 961),
-	(128, NULL, NULL, NULL, NULL, 962),
-	(129, NULL, NULL, NULL, NULL, 963),
-	(130, NULL, NULL, NULL, NULL, 964),
-	(131, NULL, NULL, NULL, NULL, 965),
-	(132, NULL, NULL, NULL, NULL, 966),
-	(133, NULL, NULL, NULL, NULL, 967),
-	(134, NULL, NULL, NULL, NULL, 968),
-	(135, NULL, NULL, NULL, NULL, 969),
-	(136, NULL, NULL, NULL, NULL, 970),
-	(137, NULL, NULL, NULL, NULL, 971),
-	(138, NULL, NULL, NULL, NULL, 972),
-	(139, NULL, NULL, NULL, NULL, 973),
-	(140, NULL, NULL, NULL, NULL, 974),
-	(141, NULL, NULL, NULL, NULL, 975),
-	(142, NULL, NULL, NULL, NULL, 977),
-	(143, NULL, NULL, NULL, NULL, 976),
-	(144, NULL, NULL, NULL, NULL, 979),
-	(145, NULL, NULL, NULL, NULL, 978),
-	(146, NULL, NULL, NULL, NULL, 980),
-	(147, NULL, NULL, NULL, NULL, 983),
-	(148, NULL, NULL, NULL, NULL, 982),
-	(149, NULL, NULL, NULL, NULL, 981),
-	(150, NULL, NULL, NULL, NULL, 984),
-	(151, NULL, NULL, NULL, NULL, 985),
-	(152, NULL, NULL, NULL, NULL, 986),
-	(153, NULL, NULL, NULL, NULL, 988),
-	(154, NULL, NULL, NULL, NULL, 987),
-	(155, NULL, NULL, NULL, NULL, 989),
-	(156, NULL, NULL, NULL, NULL, 990),
-	(158, NULL, NULL, NULL, NULL, 993),
-	(159, NULL, NULL, NULL, NULL, 992),
-	(160, NULL, NULL, NULL, NULL, 1313),
-	(161, NULL, NULL, NULL, NULL, 1312),
-	(162, NULL, NULL, NULL, NULL, 1316),
-	(163, NULL, NULL, NULL, NULL, 1315),
-	(164, NULL, NULL, NULL, NULL, 1317),
-	(165, NULL, NULL, NULL, NULL, 1318),
-	(166, NULL, NULL, NULL, NULL, 1314),
-	(167, NULL, NULL, NULL, NULL, 1319),
-	(168, NULL, NULL, NULL, NULL, 1321),
-	(169, NULL, NULL, NULL, NULL, 1323),
-	(170, NULL, NULL, NULL, NULL, 1322),
-	(171, NULL, NULL, NULL, NULL, 1320),
-	(172, NULL, NULL, NULL, NULL, 1324),
-	(173, NULL, NULL, NULL, NULL, 1326),
-	(174, NULL, NULL, NULL, NULL, 1327),
-	(175, NULL, NULL, NULL, NULL, 1325),
-	(176, NULL, NULL, NULL, NULL, 1328),
-	(177, NULL, NULL, NULL, NULL, 1332),
-	(178, NULL, NULL, NULL, NULL, 1329),
-	(179, NULL, NULL, NULL, NULL, 1331),
-	(180, NULL, NULL, NULL, NULL, 1330),
-	(181, NULL, NULL, NULL, NULL, 1333),
-	(182, NULL, NULL, NULL, NULL, 1334),
-	(183, NULL, NULL, NULL, NULL, 1335),
-	(184, NULL, NULL, NULL, NULL, 1336),
-	(185, NULL, NULL, NULL, NULL, 1336),
-	(186, NULL, NULL, NULL, NULL, 1336),
-	(187, NULL, NULL, NULL, NULL, 1336),
-	(188, NULL, NULL, NULL, NULL, 1336),
-	(189, NULL, NULL, NULL, NULL, 1348),
-	(190, NULL, NULL, NULL, NULL, 1349),
-	(191, NULL, NULL, NULL, NULL, 1350);
-
 -- Volcando estructura para tabla soleraatlas.seguimientoprincipal
 DROP TABLE IF EXISTS `seguimientoprincipal`;
 CREATE TABLE IF NOT EXISTS `seguimientoprincipal` (
@@ -3485,9 +3311,9 @@ CREATE TABLE IF NOT EXISTS `seguimientoprincipal` (
   PRIMARY KEY (`idseguimientoPrincipal`),
   KEY `fkIdRegistroSegPrincipal` (`fkIdRegistroSegPrincipal`),
   CONSTRAINT `fkIdRegistroSegPrincipal` FOREIGN KEY (`fkIdRegistroSegPrincipal`) REFERENCES `infosiniestro` (`idRegistro`)
-) ENGINE=InnoDB AUTO_INCREMENT=3728 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3736 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.seguimientoprincipal: ~2,914 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.seguimientoprincipal: ~2,913 rows (aproximadamente)
 DELETE FROM `seguimientoprincipal`;
 INSERT INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fechaseguimiento`, `estatusSeguimiento`, `comentarios`, `idseguimientoPrincipal`, `estacionPrincipal`, `subEstatus`, `respuestaSolera`, `personaContactada`, `tipodePersona`, `contacto`, `integraciondeexpediente`, `facturaciondeservicio`, `termino`, `fechaasigncion`, `usuarioAsignado`, `numSiniestro`, `msgInterno`) VALUES
 	(837, 'Ivet Gonz lez', '2022-10-28 00:00:00', 'DATOS INCORRECTOS', 'SE CIERRA SINIESTRO YA QUE EN GEAS NO HAY DATO ADICIONAL Y EN GOOGLE NO APARECE EMPRESA', 84, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, '42172278', NULL),
@@ -6439,7 +6265,21 @@ INSERT INTO `seguimientoprincipal` (`fkIdRegistroSegPrincipal`, `usuario`, `fech
 	(839, 'Mauricio Rodriguez', '2022-12-13 11:05:52', 'DE 4 A 6 DOCUMENTOS', 'para ver', 3724, 'En seguimiento', 'En seguimiento', 'Selecciona...', '', 'Selecciona...', 'Selecciona...', 'Sin cambios', '', '', NULL, NULL, NULL, 'Usuario'),
 	(NULL, 'Mauricio Rodriguez', '2022-12-17 11:19:43', 'Cita creada', 'ningana', 3725, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
 	(839, 'Mauricio Rodriguez', '2022-12-17 11:22:45', 'Cita creada', 'wer', 3726, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
-	(837, 'Mauricio Rodriguez', '2022-12-17 12:01:17', 'Cita creada', 'wer', 3727, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno');
+	(837, 'Mauricio Rodriguez', '2022-12-17 12:01:17', 'Cita creada', 'wer', 3727, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(837, 'Mauricio Rodriguez', '2022-12-19 08:48:12', 'CITA CANCELADA', 'SE CANCELA LA CITA', 3728, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-19 08:50:08', 'Cita creada', 'ninguna', 3729, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-19 08:50:13', 'CITA CANCELADA', 'SE CANCELA LA CITA', 3730, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-19 09:32:27', 'Cita creada', 'we', 3731, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-19 09:33:12', 'CITA CANCELADA', 'SE CANCELA LA CITA', 3732, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-19 09:39:41', 'Cita creada', 'we', 3733, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-19 09:39:45', 'CITA CANCELADA', 'SE CANCELA LA CITA', 3734, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno'),
+	(839, 'Mauricio Rodriguez', '2022-12-19 09:41:47', 'Cita creada', 'qw', 3735, NULL, NULL, 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', 'Sin cambios', NULL, NULL, NULL, 'Interno');
+
+-- Volcando estructura para evento soleraatlas.SIN42129149
+DROP EVENT IF EXISTS `SIN42129149`;
+DELIMITER //
+CREATE EVENT `SIN42129149` ON SCHEDULE AT '2023-01-03 08:24:55' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM usuariostemporales WHERE usuario ='SIN42129149'//
+DELIMITER ;
 
 -- Volcando estructura para tabla soleraatlas.usuarios
 DROP TABLE IF EXISTS `usuarios`;
@@ -6450,19 +6290,33 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `privilegios` varchar(45) DEFAULT NULL,
   `nombreReal` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idUsuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla soleraatlas.usuarios: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla soleraatlas.usuarios: ~5 rows (aproximadamente)
 DELETE FROM `usuarios`;
 INSERT INTO `usuarios` (`idUsuarios`, `usuario`, `contrasena`, `privilegios`, `nombreReal`) VALUES
 	(1, 'admin', '1234', 'root', 'Mauricio Rodriguez'),
-	(4, 'tmedina', 'M3d1n453452018?', 'operador', 'Teresa Medina'),
+	(4, 'tmedina', 'M3d1n453452018?', 'operador', 'tmedina2'),
 	(5, 'mzarza', 'Mzarza2022?', 'operador', 'Marisol Zarza'),
 	(6, 'igonzalez', 'gonzalez', 'supervisor', 'Ivet Gonzalez'),
-	(7, 'ahernandez', 'ahernandez', 'operador', 'Alicia Hernandez'),
-	(8, 'aCastillo', 'aCastillo', 'supervisor', 'Alexis castillo'),
-	(9, 'pPrueba', 'pPrueba', 'operadorAtlas', 'prueba'),
-	(10, 'pPrueba2', 'pPrueba2', 'operadorAtlas', 'prueba2');
+	(8, 'aCastillo', 'aCastillo', 'supervisor', 'Alexis castillo');
+
+-- Volcando estructura para tabla soleraatlas.usuariostemporales
+DROP TABLE IF EXISTS `usuariostemporales`;
+CREATE TABLE IF NOT EXISTS `usuariostemporales` (
+  `idusuariosTemporales` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) DEFAULT NULL,
+  `contrasena` varchar(45) DEFAULT NULL,
+  `fechaDeCreacion` datetime DEFAULT NULL,
+  PRIMARY KEY (`idusuariosTemporales`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla soleraatlas.usuariostemporales: ~3 rows (aproximadamente)
+DELETE FROM `usuariostemporales`;
+INSERT INTO `usuariostemporales` (`idusuariosTemporales`, `usuario`, `contrasena`, `fechaDeCreacion`) VALUES
+	(17, 'hola', 'td3ttaf01u', '2022-12-20 08:08:31'),
+	(30, 'SIN42129149', 'bhpsfdfn03', '2022-12-20 08:24:55'),
+	(34, 'SIN042129318-003', '0sst54uk10', '2022-12-21 09:01:47');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

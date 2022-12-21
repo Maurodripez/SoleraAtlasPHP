@@ -2878,7 +2878,7 @@ header('Location: ../index.html');
                 </div>
                 <div id="divLink" style="display: none">
                     <div class="row">
-                        <div class="col-8 pt-2">
+                        <div class="col-7 pt-2">
                             <label for="basic-url" class="form-label">Link del cliente</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"
@@ -2894,7 +2894,7 @@ header('Location: ../index.html');
                                 </button>
                             </div>
                         </div>
-                        <div class="col pt-2">
+                        <div class="col-5 pt-2">
                             <label for="basic-url" class="form-label">Correo</label>
                             <div class="input-group mb-3">
                                 <input class="input-group-text" id="correoCliente"></input>
@@ -2907,6 +2907,7 @@ header('Location: ../index.html');
                                             d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
                                     </svg>
                                 </button>
+                                <button id="btnEnviarCorreo" type="button" class="btn">Enviar correo</button>
                             </div>
                         </div>
                     </div>
@@ -2939,7 +2940,7 @@ header('Location: ../index.html');
                                             d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
                                     </svg>
                                 </button>
-                                <button class="btn btn-success" id="generarPassword">
+                                <button class="btn" id="generarPassword">
                                     Generar password
                                 </button>
                             </div>

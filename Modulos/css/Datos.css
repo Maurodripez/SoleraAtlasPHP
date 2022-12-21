@@ -1,117 +1,117 @@
 #card0a2D {
-    background-color: #d2d6de;
-  }
-  #card3a5D {
-    background-color: #dff0d8;
-  }
-  #card6a14D {
-    background-color: #fcf8e3;
-  }
-  #cardMas15D {
-    background-color: #f2dede;
-  }
-  #card0a2M {
-    background-color: #d2d6de;
-  }
-  #card3a5M {
-    background-color: #dff0d8;
-  }
-  #card6a14M {
-    background-color: #fcf8e3;
-  }
-  #cardMas15M {
-    background-color: #f2dede;
-  }
-  body {
-    background-color: #f5f5f5;
-  }
-  #txtBuscar0a2 {
-    background-color: #a1a4ab;
-    border: none;
-  }
-  #txtBuscar0a2:hover {
-    background-color: #7988ad;
-  }
-  #txtBuscar3a5 {
-    background-color: #afbdaa;
-    border: none;
-  }
-  #txtBuscar3a5:hover {
-    background-color: #95c285;
-  }
-  #txtBuscar6a14 {
-    background-color: #c9c5b5;
-    border: none;
-  }
-  #txtBuscar6a14:hover {
-    background-color: #ccbe87;
-  }
-  #txtBuscarMas15 {
-    background-color: #bfafaf;
-    border: none;
-  }
-  #txtBuscarMas15:hover {
-    background-color: #bb8282;
-  }
-  #btnMsg0a2 {
-    background-color: #a1a4ab;
-    border: none;
-  }
-  #btnMsg0a2:hover {
-    background-color: #7988ad;
-  }
-  #btnMsg3a5 {
-    background-color: #afbdaa;
-    border: none;
-  }
-  #btnMsg3a5:hover {
-    background-color: #95c285;
-  }
-  #btnMsg6a14 {
-    background-color: #c9c5b5;
-    border: none;
-  }
-  #btnMsg6a14:hover {
-    background-color: #ccbe87;
-  }
-  #btnMsgMas15 {
-    background-color: #bfafaf;
-    border: none;
-  }
-  #btnMsgMas15:hover {
-    background-color: #bb8282;
-  }
-  .acordeonPrincipal {
-    background-color: #d2d6de;
-  }
-  .tablasPrincipales {
-    background-color: #9896c7;
-  }
-  #TablaPGeneral {
-    background-color: #ffffff;
-  }
-  .letreroCedula {
-    background-color: #605ca8;
-    color: #ffffff;
-  }
-  #btnDocsMostrar{
-    background-color:#008d4c;
-  }
-  #encabezadoTabla{
-    background-color: #605ca8;
-    color: #ffffff;
-  }
-  #seccionBotones{
-    background-color: #605ca8;
-    color: #ffffff;
-  }
-#encabezadoDatos{
+  background-color: #d2d6de;
+}
+#card3a5D {
+  background-color: #dff0d8;
+}
+#card6a14D {
+  background-color: #fcf8e3;
+}
+#cardMas15D {
+  background-color: #f2dede;
+}
+#card0a2M {
+  background-color: #d2d6de;
+}
+#card3a5M {
+  background-color: #dff0d8;
+}
+#card6a14M {
+  background-color: #fcf8e3;
+}
+#cardMas15M {
+  background-color: #f2dede;
+}
+body {
+  background-color: #f5f5f5;
+}
+#txtBuscar0a2 {
+  background-color: #a1a4ab;
+  border: none;
+}
+#txtBuscar0a2:hover {
+  background-color: #7988ad;
+}
+#txtBuscar3a5 {
+  background-color: #afbdaa;
+  border: none;
+}
+#txtBuscar3a5:hover {
+  background-color: #95c285;
+}
+#txtBuscar6a14 {
+  background-color: #c9c5b5;
+  border: none;
+}
+#txtBuscar6a14:hover {
+  background-color: #ccbe87;
+}
+#txtBuscarMas15 {
+  background-color: #bfafaf;
+  border: none;
+}
+#txtBuscarMas15:hover {
+  background-color: #bb8282;
+}
+#btnMsg0a2 {
+  background-color: #a1a4ab;
+  border: none;
+}
+#btnMsg0a2:hover {
+  background-color: #7988ad;
+}
+#btnMsg3a5 {
+  background-color: #afbdaa;
+  border: none;
+}
+#btnMsg3a5:hover {
+  background-color: #95c285;
+}
+#btnMsg6a14 {
+  background-color: #c9c5b5;
+  border: none;
+}
+#btnMsg6a14:hover {
+  background-color: #ccbe87;
+}
+#btnMsgMas15 {
+  background-color: #bfafaf;
+  border: none;
+}
+#btnMsgMas15:hover {
+  background-color: #bb8282;
+}
+.acordeonPrincipal {
+  background-color: #d2d6de;
+}
+.tablasPrincipales {
+  background-color: #9896c7;
+}
+#TablaPGeneral {
+  background-color: #ffffff;
+}
+.letreroCedula {
+  background-color: #605ca8;
+  color: #ffffff;
+}
+#btnDocsMostrar {
+  background-color: #008d4c;
+}
+#encabezadoTabla {
+  background-color: #605ca8;
+  color: #ffffff;
+}
+#seccionBotones {
+  background-color: #605ca8;
+  color: #ffffff;
+}
+#encabezadoDatos {
   font-size: 30px;
 }
 .fechaInput {
   border: none;
 }
-.fSeguimientoClass{
+.fSeguimientoClass {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -120,51 +120,59 @@
   justify-content: center;
   align-items: center;
 }
-.SiniestrosDesglozados{
+.SiniestrosDesglozados {
   border: none;
   padding: 0%;
 }
-#svgCardCheck{
+#svgCardCheck {
   padding: 0%;
-  margin:0%;
+  margin: 0%;
   border: none;
 }
-.letrerosDias{
+.letrerosDias {
   padding: 0%;
   border: none;
 }
-.fondodesglozados{
+.fondodesglozados {
   background-color: transparent;
   border: none;
 }
-.accordion-button{
+.accordion-button {
   background-color: #d2d6de;
 }
-#SeleccionaCalendario{
+#SeleccionaCalendario {
   padding: 0%;
-  border:none;
+  border: none;
   fill: none;
 }
-#FechaCargaBtn{
+#FechaCargaBtn {
   padding: 0%;
-  border:none;
+  border: none;
   fill: none;
 }
-.btnSeleccionar{
+.btnSeleccionar {
   border-color: #ced4da;
 }
-#btnOffCanvasCita{
+#btnOffCanvasCita {
   background-color: #00b360;
   color: #ffffff;
 }
-#ulCitas{
-  border-radius: 100px 100px 0px 0px; 
+#ulCitas {
+  border-radius: 100px 100px 0px 0px;
 }
-#btnSeguimiento{
+#btnSeguimiento {
   background-color: #605ca8;
 }
 /*boton para agregar siniestros*/
-#divAgregarSiniestro{
-background-color: #8584ac;
-border-radius: 5px 5px 5px 5px;
+#divAgregarSiniestro {
+  background-color: #8584ac;
+  border-radius: 5px 5px 5px 5px;
+}
+#btnEnviarCorreo {
+  color: #ffffff;
+  background-color: #26a5bf;
+}
+#generarPassword {
+  background-color: #26a5bf;
+  color: #ffffff;
 }

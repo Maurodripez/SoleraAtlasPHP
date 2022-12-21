@@ -19,10 +19,15 @@ header('Location: ../index.html');
 
 <body class="p-2">
   <div class="card" style="width: 40rem;">
-    <div class="card-body">
-      <h5 class="card-title">Asignacion de Siniestros</h5>
+    <div class="row card-body">
+    <h5 class="card-title">Asignacion de Siniestros</h5>
       <p class="card-text">Por favor, carga el Archivo Excel</p>
+      <div class="col">
       <input type="file" class="form-control" id="LeerExcel">
+      </div>
+      <div class="col">
+      <button id="btnCargarExcel" type="button" class="btn btn-success">Cargar</button>
+      </div>
     </div>
   </div>
   <div class="card" style="width: 40rem;">

@@ -28,7 +28,7 @@ $sql = "insert into infosiniestro"
     . "(usuarioCarga,numSiniestro,fechaSiniestro,poliza,cobertura,afectado,regimenFiscal,ciudad,ubicacionTaller,fechaDecreto,fechaCarga,agente)"
     . " values('$nombreReal','$numSiniestro','$fechaSiniestro','$poliza','$cobertura','$afectado','$regimenFiscal','$ciudad','$ubicacionTaller','$fechaDecreto',now(),'$agente')";
 ActualizarSiniestro($sql);
-$sql = "select idRegistro from infosiniestro where numSiniestro ='$numSiniestro'";
+$sql = "SELECT MAX(idRegistro) as ultimoId FROM infosiniestro";
 $idRegistro = ObtenerValorSql($sql);
 $sql = "insert into infocliente(asegurado,telefonoPrincipal,telefonosecundario,correo,fkIdRegistro)"
     . " values('$asegurado','$telefono','$telefonoAlt','$correo','$idRegistro')";
@@ -43,8 +43,6 @@ ActualizarSiniestro($sql);
 $sql = "insert into fechasseguimiento(fkidRegistro,fechaSeguimiento)values($idRegistro,now())";
 ActualizarSiniestro($sql);
 $sql = "insert into insertarregistros(fkIdRegistroInsertar)values($idRegistro)";
-ActualizarSiniestro($sql);
-$sql = "insert into seguimiento(fkIdRegistroSeguimiento)values($idRegistro)";
 ActualizarSiniestro($sql);
 $sql = "INSERT INTO datosvalidados (fkIdRegistroValidados) VALUES ($idRegistro)";
 ActualizarSiniestro($sql);

@@ -60,6 +60,10 @@ $(document).ready(function () {
   $("#btnEliminarCita").click(function () {
     eliminarCita();
   });
+  //generar el correo y enviarlo
+  $("#btnEnviarCorreo").click(function () {
+    enviarCorreo();
+  });
 });
 //funcion para sesiones
 function obtenerSesion() {
@@ -946,7 +950,8 @@ function mostrarDivsModal() {
       document.getElementById("numSiniestro").value
     }`;
     obtenerPassword();
-    document.getElementById("correoCliente").value = document.getElementById("correo").value;
+    document.getElementById("correoCliente").value =
+      document.getElementById("correo").value;
     document.getElementById("divSeguimiento").style.display = "none";
     document.getElementById("divGuardarImagenes").style.display = "none";
     document.getElementById("divLink").style.display = "";
@@ -1711,3 +1716,23 @@ function obtenerPassword() {
 //funciones todavia no utilizadas
 ////////////////////////////
 
+function enviarCorreo() {
+  if (
+    document.getElementById("passwordGenerada").textContent === "Sin Password"
+  ) {
+    alert("Favor de generar un password");
+    return;
+  }
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "/Correos/phpMailer.php",
+    data: {
+      usuario: document.getElementById("txtUsuario").textContent,
+      password: document.getElementById("passwordGenerada").textContent,
+      email: document.getElementById("correoCliente").value,
+      asegurado: document.getElementById("asegurado").value,
+    },
+  }).done(function (result) {
+    alert(result);
+  });
+}
