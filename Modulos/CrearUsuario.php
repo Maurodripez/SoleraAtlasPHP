@@ -15,7 +15,9 @@ header('Location: ../index.html');
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="../js/jquery-3.6.1.js"></script>
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body class="p-4">
@@ -92,9 +94,14 @@ header('Location: ../index.html');
                             <th>Contraseña</th>
                             <th>Privilegios</th>
                         </thead>
-                        <tbody id="TablaUsuarios"></tbody>
                     </table>
                 </div>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item"><a id="btnAnterior" class="page-link" href="#">Anterior</a></li>
+                        <li class="page-item"><a id="btnSiguiente" class="page-link" href="#">Siguiente</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

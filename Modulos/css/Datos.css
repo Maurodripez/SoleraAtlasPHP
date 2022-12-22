@@ -176,3 +176,21 @@ body {
   background-color: #26a5bf;
   color: #ffffff;
 }
+.divDatosValidados {
+  position: relative;
+}
+
+.btnDatosValidados {
+  width: 80px;
+  height: 80px;
+  /* centrar vertical y horizontalmente */
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin: -25px 0 0 -25px; /* aplicar a top y al margen izquierdo un valor negativo para completar el centrado del elemento hijo */
+}
+img {
+  object-fit: cover;
+  width: 100%;
+  height: 500px;
+}

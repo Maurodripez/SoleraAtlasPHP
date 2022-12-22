@@ -1,7 +1,7 @@
 <?php
 session_start();    
 if (!isset($_SESSION['usuarioExterno'])) {
-header('Location: ../LoginUsuarios.html');
+header('Location: ./LoginUsuarios.html');
 }
 ?>
 <!DOCTYPE html>
@@ -192,8 +192,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameFactura" src="" alt="">
-
+                                <img id="iFrameFactura" src="" alt="" style="display: none;">
+                                <iframe id="iFrameIFrameIdentificacion" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
                             </div>
                         </div>
                         <div class="col">
@@ -248,7 +249,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameSecuencia" src="" alt="">
+                                <iframe id="iFrameIFrameSecuencia" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameSecuencia" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -305,7 +308,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameCertificado" src="" alt="">
+                                <iframe id="iFrameIFrameCertificado" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameCertificado" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -362,7 +367,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameCopiaCertificado" src="" alt="">
+                                <iframe id="iFrameIFrameCopiaCertificado" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameCopiaCertificado" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -419,7 +426,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameImportacion" src="" alt="">
+                                <iframe id="iFrameIFrameImportacion" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameImportacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -473,7 +482,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFramePermiso" src="" alt="">
+                                <iframe id="iFrameIFramePermiso" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFramePermiso" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -526,7 +537,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameRFV" src="" alt="">
+                                <iframe id="iFrameIFrameRFV" style="display: none;"src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameRFV" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -582,7 +595,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameVerificacion" src="" alt="">
+                                <iframe id="iFrameIFrameVerificacion" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameVerificacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -636,7 +651,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameTenencia" src="" alt="">
+                                <iframe id="iFrameIFrameTenencia" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameTenencia" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -690,7 +707,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameBaja" src="" alt="">
+                                <iframe id="iFrameIFrameBaja" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameBaja" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -746,7 +765,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameFacturaMotor" src="" alt="">
+                                <iframe id="iFrameIFrameFacturaMotor" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameFacturaMotor" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -801,7 +822,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameLlaves" src="" alt="">
+                                <iframe id="iFrameIFrameLlaves" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameLlaves" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -855,7 +878,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameConoce" src="" alt="">
+                                <iframe id="iFrameIFrameConoce" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameConoce" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -909,7 +934,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameLFPDPPP" src="" alt="">
+                                <iframe id="iFrameIFrameLFPDPPP" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameLFPDPPP" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -965,7 +992,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameAveriguacion" src="" alt="">
+                                <iframe id="iFrameIFrameAveriguacion" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameAveriguacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -1021,7 +1050,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameAcreditacion" src="" alt="">
+                                <iframe id="iFrameIFrameAcreditacion" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameAcreditacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -1075,7 +1106,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameAviso" src="" alt="">
+                                <iframe id="iFrameIFrameAviso" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameAviso" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -1128,7 +1161,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameOtros" src="" alt="">
+                                <iframe id="iFrameIFrameOtros" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameOtros" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -1182,7 +1217,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameOficio" src="" alt="">
+                                <iframe id="iFrameIFrameOficio" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameOficio" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
@@ -1240,7 +1277,9 @@ header('Location: ../LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <img id="iFrameOficioCancelacion" src="" alt="">
+                                <iframe id="iFrameIframeOficioCancelacion" style="display: none;" src="" width="100%" height="500vh"
+                                        frameborder="0"></iframe>
+                                <img id="iFrameOficioCancelacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
                     </div>

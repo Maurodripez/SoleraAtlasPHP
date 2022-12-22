@@ -1770,6 +1770,37 @@ header('Location: ../index.html');
                                                         name="txtComentariosCliente" id="exampleFormControlInput1">
                                                 </div>
                                             </div>
+                                            <div class="divDatosValidados col px-md-3">
+                                                <div class="btnDatosValidados">
+                                                    <p>
+                                                        <a class="btn btn-primary" id="btnDatosValidados" data-bs-toggle="collapse"
+                                                            href="#datosValidados" role="button" aria-expanded="false"
+                                                            aria-controls="datosValidados">
+                                                            Datos validados
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="collapse" id="datosValidados">
+                                                <div class="card card-body">    
+                                                    <ul id="filaUnoUl" class="list-group list-group-horizontal">
+                                                        <li id="liNombre" class="list-group-item"></li>
+                                                        <li id="liSiniestro" class="list-group-item"></li>
+                                                        <li id="liPoliza" class="list-group-item"></li>
+                                                        <li id="liTelefono" class="list-group-item"></li>
+                                                        <li id="liCorreo" class="list-group-item"></li>
+                                                    </ul>
+                                                    <ul id="filaDosUl" class="list-group list-group-horizontal-sm">
+                                                        <li id="liAuto" class="list-group-item"></li>
+                                                        <li id="liFechaSin" class="list-group-item"></li>
+                                                        <li id="liSerie" class="list-group-item"></li>
+                                                        <li id="liPlacas" class="list-group-item"></li>
+                                                        <li id="liTipoAuto" class="list-group-item"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

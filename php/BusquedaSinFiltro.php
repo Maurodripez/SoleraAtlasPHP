@@ -65,4 +65,9 @@ switch ($accion) {
             ConsultasSelectCualquiera($sql, "./Conexion.php", "Imagen");
             break;
         }
+    case "DatosValidados":
+        $id = $_POST["id"];
+        $sql = "SELECT * FROM datosvalidados where fkIdRegistroValidados=$id";
+        ConsultasSelectCualquiera($sql, "./Conexion.php", "Validados");
+        break;
 }

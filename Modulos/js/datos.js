@@ -64,6 +64,10 @@ $(document).ready(function () {
   $("#btnEnviarCorreo").click(function () {
     enviarCorreo();
   });
+  //////////////////////
+  $("#btnDatosValidados").click(function () {
+    datosValidados();
+  });
 });
 //funcion para sesiones
 function obtenerSesion() {
@@ -983,11 +987,21 @@ function enviarImagenes() {
   });
 }
 function mostrarImagenSelect(getId) {
-  let sinComas = getId.split(",");
   let iframe = document.getElementById("iFrameIdentificacion");
-  let direccionId = document.getElementById("idOculto").value;
-  iframe.src = "../../Documentos/Ids/" + direccionId + "/" + sinComas[2] + "";
-  iframe.style.display = "";
+  let img = document.getElementById("docSeleccionado");
+  let sinComas = getId.split(",");
+  console.log(sinComas[2].split(".")[1]);
+  if (sinComas[2].split(".")[1] === "pdf") {
+    let direccionId = document.getElementById("idOculto").value;
+    iframe.src = "../../Documentos/Ids/" + direccionId + "/" + sinComas[2] + "";
+    img.style.display = "none";
+    iframe.style.display = "";
+  } else {
+    let direccionId = document.getElementById("idOculto").value;
+    img.src = "../../Documentos/Ids/" + direccionId + "/" + sinComas[2] + "";
+    img.style.display = "";
+    iframe.style.display = "none";
+  }
 }
 function eliminarImagen(getId) {
   if (window.confirm("Eliminar imagen?")) {
@@ -1712,10 +1726,6 @@ function obtenerPassword() {
     console.log(result);
   });
 }
-/////////////////////////////
-//funciones todavia no utilizadas
-////////////////////////////
-
 function enviarCorreo() {
   if (
     document.getElementById("passwordGenerada").textContent === "Sin Password"
@@ -1734,5 +1744,80 @@ function enviarCorreo() {
     },
   }).done(function (result) {
     alert(result);
+  });
+}
+
+/////////////////////////////
+//funciones todavia no utilizadas
+////////////////////////////
+
+function datosValidados() {
+  let id = document.getElementById("idOculto").value;
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "BusquedaSinFiltro.php",
+    dataType: "json",
+    data: {
+      id,
+      accion: "DatosValidados",
+    },
+  }).done(function (result) {
+    console.log(result.length);
+    if (result.length > 0) {
+      document.getElementById("liNombre").textContent =
+        result.Validados[0].nombre === "true"
+          ? "Nombre: Correcto"
+          : "Nombre: Incorrecto";
+      document.getElementById("liSiniestro").textContent =
+        result.Validados[0].siniestro === "true"
+          ? "Siniestro: Correcto"
+          : "Siniestro: Incorrecto";
+      document.getElementById("liPoliza").textContent =
+        result.Validados[0].poliza === "true"
+          ? "Poliza: Correcto"
+          : "Poliza: Incorrecto";
+      document.getElementById("liTelefono").textContent =
+        result.Validados[0].telefono === "true"
+          ? "Telefono: Correcto"
+          : "Telefono: Incorrecto";
+      document.getElementById("liCorreo").textContent =
+        result.Validados[0].correo === "true"
+          ? "Correo: Correcto"
+          : "Correo: Incorrecto";
+      document.getElementById("liAuto").textContent =
+        result.Validados[0].auto === "true"
+          ? "Auto: Correcto"
+          : "Auto: Incorrecto";
+      document.getElementById("liFechaSin").textContent =
+        result.Validados[0].fechaSin === "true"
+          ? "Fecha siniestro: Correcto"
+          : "Fecha siniestro: Incorrecto";
+      document.getElementById("liSerie").textContent =
+        result.Validados[0].serie === "true"
+          ? "Serie: Correcto"
+          : "Serie: Incorrecto";
+      document.getElementById("liPlacas").textContent =
+        result.Validados[0].placas === "true"
+          ? "Placas: Correcto"
+          : "Placas: Incorrecto";
+      document.getElementById("liTipoAuto").textContent =
+        result.Validados[0].tipoAuto === "true"
+          ? "Tipo: Correcto"
+          : "Tipo: Incorrecto";
+    } else {
+      document.getElementById("liNombre").textContent = "Nombre: Sin validar";
+      document.getElementById("liSiniestro").textContent =
+        "Siniestro: Sin validar";
+      document.getElementById("liPoliza").textContent = "Poliza: Sin validar";
+      document.getElementById("liTelefono").textContent =
+        "Telefono: Sin validar";
+      document.getElementById("liCorreo").textContent = "Correo: Sin validar";
+      document.getElementById("liAuto").textContent = "Auto: Sin validar";
+      document.getElementById("liFechaSin").textContent =
+        "Fecha siniestro: Sin validar";
+      document.getElementById("liSerie").textContent = "Serie: Sin validar";
+      document.getElementById("liPlacas").textContent = "Placas: Sin validar";
+      document.getElementById("liTipoAuto").textContent = "Tipo: Sin validar";
+    }
   });
 }

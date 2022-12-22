@@ -22,170 +22,166 @@ function ocultarIframes() {
   document.getElementById("iFrameOficioCancelacion").style.display = "none";
 }
 function acordeonCerrado() {
+  let img;
   let iFrame;
   $("#btnFactura").on("click", function () {
-    iFrame = document.getElementById("iFrameFactura");
+    img = document.getElementById("iFrameFactura");
+    iFrame = document.getElementById("iFrameIFrameIdentificacion");
     if (document.querySelector("#btnFactura.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgFactura").disabled == true) {
-      iFrame = document.getElementById("iFrameFactura");
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnSecuencia").on("click", function () {
-    iFrame = document.getElementById("iFrameSecuencia");
+    img = document.getElementById("iFrameSecuencia");
+    iFrame = document.getElementById("iFrameIFrameSecuencia");
     if (document.querySelector("#btnSecuencia.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgSecuencia").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnCertificado").on("click", function () {
-    iFrame = document.getElementById("iFrameCertificado");
+    img = document.getElementById("iFrameCertificado");
+    iFrame = document.getElementById("iFrameIFrameCertificado");
     if (document.querySelector("#btnCertificado.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgCertificado").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnCopiaCertificado").on("click", function () {
-    iFrame = document.getElementById("iFrameCopiaCertificado");
+    img = document.getElementById("iFrameCopiaCertificado");
+    iFrame = document.getElementById("iFrameIFrameCopiaCertificado");
     if (document.querySelector("#btnCopiaCertificado.collapsed")) {
       iFrame.style.display = "none";
-    } else if (
-      document.getElementById("imgCopiaCertificado").disabled == true
-    ) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnImportacion").on("click", function () {
-    iFrame = document.getElementById("iFrameImportacion");
+    img = document.getElementById("iFrameImportacion");
+    iFrame = document.getElementById("iFrameIFrameImportacion");
     if (document.querySelector("#btnImportacion.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgImportacion").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnPermiso").on("click", function () {
-    iFrame = document.getElementById("iFramePermiso");
+    img = document.getElementById("iFramePermiso");
+    iFrame = document.getElementById("iFrameIFramePermiso");
     if (document.querySelector("#btnPermiso.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgPermiso").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnRFV").on("click", function () {
-    iFrame = document.getElementById("iFrameRFV");
+    img = document.getElementById("iFrameRFV");
+    iFrame = document.getElementById("iFrameIFrameRFV");
     if (document.querySelector("#btnRFV.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgRFV").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnVerificacion").on("click", function () {
-    iFrame = document.getElementById("iFrameVerificacion");
+    img = document.getElementById("iFrameVerificacion");
+    iFrame = document.getElementById("iFrameIFrameVerificacion");
     if (document.querySelector("#btnVerificacion.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgVerificacion").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnTenencias").on("click", function () {
-    iFrame = document.getElementById("iFrameTenencia");
+    img = document.getElementById("iFrameTenencia");
+    iFrame = document.getElementById("iFrameIFrameTenencia");
     if (document.querySelector("#btnTenencias.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgTenencias").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnBaja").on("click", function () {
-    iFrame = document.getElementById("iFrameBaja");
+    img = document.getElementById("iFrameBaja");
+    iFrame = document.getElementById("iFrameIFrameBaja");
     if (document.querySelector("#btnBaja.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgBaja").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnLlaves").on("click", function () {
-    iFrame = document.getElementById("iFrameLlaves");
+    img = document.getElementById("iFrameLlaves");
+    iFrame = document.getElementById("iFrameIFrameLlaves");
     if (document.querySelector("#btnLlaves.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgLlaves").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnFacturaMotor").on("click", function () {
-    iFrame = document.getElementById("iFrameFacturaMotor");
+    img = document.getElementById("iFrameFacturaMotor");
+    iFrame = document.getElementById("iFrameIFrameFacturaMotor");
     if (document.querySelector("#btnFacturaMotor.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgFacturaMotor").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnConoce").on("click", function () {
-    iFrame = document.getElementById("iFrameConoce");
+    img = document.getElementById("iFrameConoce");
+    iFrame = document.getElementById("iFrameIFrameConoce");
     if (document.querySelector("#btnConoce.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgConoce").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnLFPDPPP").on("click", function () {
-    iFrame = document.getElementById("iFrameLFPDPPP");
+    img = document.getElementById("iFrameLFPDPPP");
+    iFrame = document.getElementById("iFrameIFrameLFPDPPP");
     if (document.querySelector("#btnLFPDPPP.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgLFPDPPP").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnAveriguacion").on("click", function () {
-    iFrame = document.getElementById("iFrameAveriguacion");
+    img = document.getElementById("iFrameAveriguacion");
+    iFrame = document.getElementById("iFrameIFrameAveriguacion");
     if (document.querySelector("#btnAveriguacion.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgAveriguacion").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnAcreditacion").on("click", function () {
-    iFrame = document.getElementById("iFrameAcreditacion");
+    img = document.getElementById("iFrameAcreditacion");
+    iFrame = document.getElementById("iFrameIFrameAcreditacion");
     if (document.querySelector("#btnAcreditacion.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgAcreditacion").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnAviso").on("click", function () {
-    iFrame = document.getElementById("iFrameAviso");
+    img = document.getElementById("iFrameAviso");
+    iFrame = document.getElementById("iFrameIFrameAviso");
     if (document.querySelector("#btnAviso.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgAviso").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnOtros").on("click", function () {
-    iFrame = document.getElementById("iFrameOtros");
+    img = document.getElementById("iFrameOficioCancelacion");
+    iFrame = document.getElementById("iFrameIframeOficioCancelacion");
     if (document.querySelector("#btnOtros.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgOtros").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnOficio").on("click", function () {
-    iFrame = document.getElementById("iFrameOficio");
+    img = document.getElementById("iFrameFactura");
+    iFrame = document.getElementById("iFrameIFrameIdentificacion");
     if (document.querySelector("#btnOficio.collapsed")) {
       iFrame.style.display = "none";
-    } else if (document.getElementById("imgOficio").disabled == true) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
   $("#btnOficioCancelacion").on("click", function () {
-    iFrame = document.getElementById("iFrameOficioCancelacion");
+    img = document.getElementById("iFrameFactura");
+    iFrame = document.getElementById("iFrameIFrameIdentificacion");
     if (document.querySelector("#btnOficioCancelacion.collapsed")) {
       iFrame.style.display = "none";
-    } else if (
-      document.getElementById("imgOficioCancelacion").disabled == true
-    ) {
-      iFrame.style.display = "";
+      img.style.display = "none";
     }
   });
 }
@@ -214,83 +210,112 @@ function mostrarImagenFrame(getIdUl, nombreImagen) {
     }
   });
 }
-function cargarImagenIframe(getId, getIframe, getContenedor) {
+function cargarImagenIframe(getId, getImg, getIframe) {
   let activo = document.getElementById(getId);
-  let contenedor = document.getElementById(getContenedor);
+  let iFrame = document.getElementById(getIframe);
+  let idRegistro = document.getElementById("sesionActual").textContent;
+  let img = document.getElementById(getImg);
   if (activo != null) {
     if (activo.checked == true) {
-      let idRegistro = document.getElementById("sesionActual").textContent;
-      console.log(activo.id);
-      iFrame = document.getElementById(getIframe);
-      iFrame.style.display = "";
-      //let extension = getId.split(".");
-      //if (extension[1] === "pdf") {
-      //iFrame.src="https://docs.google.com/gview?url=bestcontact.mx/Solera/Atlas/Documentos/Ids/839/20221214112503.pdf&embedded=true" style="width:100%; height:700px;" frameborder="0";
-      //}
-      iFrame.src = `../Documentos/Ids/${idRegistro}/${getId}`;
+      let extension = getId.split(".");
+      if (extension[1] === "pdf") {
+        console.log(extension[1]);
+        iFrame.src = `http://bestcontact.mx/Solera/Atlas/Documentos/Ids/${idRegistro}/${getId}`;
+        iFrame.style.display = "";
+        img.style.display = "none";
+      } else {
+        console.log(activo.id);
+        img.src = `http://bestcontact.mx/Solera/Atlas/Documentos/Ids/${idRegistro}/${getId}`;
+        iFrame.style.display = "none";
+        img.style.display = "";
+      }
     }
   }
 }
 function imagenSeleccionada() {
   $(document).on("click", ".ulFactura", function () {
-    cargarImagenIframe(this.id, "iFrameFactura", "contenedorFactura");
+    cargarImagenIframe(this.id, "iFrameFactura", "iFrameIFrameIdentificacion");
   });
   $(document).on("click", ".ulSecuencia", function () {
-    cargarImagenIframe(this.id, "iFrameSecuencia");
+    cargarImagenIframe(this.id, "iFrameSecuencia", "iFrameIFrameSecuencia");
   });
   $(document).on("click", ".ulCertificado", function () {
-    cargarImagenIframe(this.id, "iFrameCertificado");
+    cargarImagenIframe(this.id, "iFrameCertificado", "iFrameIFrameCertificado");
   });
   $(document).on("click", ".ulCopiaCertificado", function () {
-    cargarImagenIframe(this.id, "iFrameCopiaCertificado");
+    cargarImagenIframe(
+      this.id,
+      "iFrameCopiaCertificado",
+      "iFrameIFrameCopiaCertificado"
+    );
   });
   $(document).on("click", ".ulPedimento", function () {
-    cargarImagenIframe(this.id, "iFrameImportacion");
+    cargarImagenIframe(this.id, "iFrameImportacion", "iFrameIFrameImportacion");
   });
   $(document).on("click", ".ulBajaPermiso", function () {
-    cargarImagenIframe(this.id, "iFramePermiso");
+    cargarImagenIframe(this.id, "iFramePermiso", "iFrameIFramePermiso");
   });
   $(document).on("click", ".ulRFV", function () {
-    cargarImagenIframe(this.id, "iFrameRFV");
+    cargarImagenIframe(this.id, "iFrameRFV", "iFrameIFrameRFV");
   });
   $(document).on("click", ".ulVerificacion", function () {
-    cargarImagenIframe(this.id, "iFrameVerificacion");
+    cargarImagenIframe(
+      this.id,
+      "iFrameVerificacion",
+      "iFrameIFrameVerificacion"
+    );
   });
   $(document).on("click", ".ulTenencias", function () {
-    cargarImagenIframe(this.id, "iFrameTenencia");
+    cargarImagenIframe(this.id, "iFrameTenencia", "iFrameIFrameTenencia");
   });
   $(document).on("click", ".ulPlacas", function () {
-    cargarImagenIframe(this.id, "iFrameBaja");
+    cargarImagenIframe(this.id, "iFrameBaja", "iFrameIFrameBaja");
   });
   $(document).on("click", ".ulMotor", function () {
-    cargarImagenIframe(this.id, "iFrameFacturaMotor");
+    cargarImagenIframe(
+      this.id,
+      "iFrameFacturaMotor",
+      "iFrameIFrameFacturaMotor"
+    );
   });
   $(document).on("click", ".ulLlaves", function () {
-    cargarImagenIframe(this.id, "iFrameLlaves");
+    cargarImagenIframe(this.id, "iFrameLlaves", "iFrameIFrameLlaves");
   });
   $(document).on("click", ".ulConoce", function () {
-    cargarImagenIframe(this.id, "iFrameConoce");
+    cargarImagenIframe(this.id, "iFrameConoce", "iFrameIFrameConoce");
   });
   $(document).on("click", ".ulLFPDPPP", function () {
-    cargarImagenIframe(this.id, "iFrameLFPDPPP");
+    cargarImagenIframe(this.id, "iFrameLFPDPPP", "iFrameIFrameLFPDPPP");
   });
   $(document).on("click", ".ulAveriguación", function () {
-    cargarImagenIframe(this.id, "iFrameAveriguacion");
+    cargarImagenIframe(
+      this.id,
+      "iFrameAveriguacion",
+      "iFrameIFrameAveriguacion"
+    );
   });
   $(document).on("click", ".ulAcreditacion", function () {
-    cargarImagenIframe(this.id, "iFrameAcreditacion");
+    cargarImagenIframe(
+      this.id,
+      "iFrameAcreditacion",
+      "iFrameIFrameAcreditacion"
+    );
   });
   $(document).on("click", ".ulPFP", function () {
-    cargarImagenIframe(this.id, "iFrameAviso");
+    cargarImagenIframe(this.id, "iFrameAviso", "iFrameIFrameAviso");
   });
   $(document).on("click", ".ulOtros", function () {
-    cargarImagenIframe(this.id, "iFrameOtros");
+    cargarImagenIframe(this.id, "iFrameOtros", "iFrameIFrameOtros");
   });
   $(document).on("click", ".ulLiberacion", function () {
-    cargarImagenIframe(this.id, "iFrameOficio");
+    cargarImagenIframe(this.id, "iFrameOficio", "iFrameIFrameOficio");
   });
   $(document).on("click", ".ulCancelacion", function () {
-    cargarImagenIframe(this.id, "iFrameOficioCancelacion");
+    cargarImagenIframe(
+      this.id,
+      "iFrameOficioCancelacion",
+      "iFrameIframeOficioCancelacion"
+    );
   });
 }
 async function subirImagen(getId) {
@@ -493,7 +518,7 @@ function TablaMensajes() {
 $(document).ready(function (e) {
   imagenSeleccionada();
   progresoExpediente();
-  ocultarIframes();
+  //  ocultarIframes();
   mostrarImagenFrame();
   $("#btnModalMensajes").on("click", function () {
     TablaMensajes();

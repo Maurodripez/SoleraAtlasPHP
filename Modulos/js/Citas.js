@@ -1,4 +1,4 @@
-let rutaInicial = "../../php/Citas/";
+let rutaInicial = "../php/Citas/";
 $(document).ready(function () {
   operadoresAtlas();
   deshabilitarAgregar();
