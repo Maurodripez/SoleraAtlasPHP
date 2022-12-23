@@ -171,134 +171,70 @@ function foliosArea() {
     },
   });
 }
-async function estatusSeguimiento() {
-  // en el objeto “datos” tenemos los datos que vamos a enviar al servidor
-  // en este ejemplo tenemos dos datos; un título y un array de números
-  var datos = { accion: "estatusSeguimiento" };
-  // en el objeto init tenemos los parámetros de la petición AJAX
-  var init = {
-    // el método de envío de la información será POST
-    method: "POST",
-    headers: {
-      // cabeceras HTTP
-      // vamos a enviar los datos en formato JSON
-      "Content-Type": "application/json",
-    },
-    // el cuerpo de la petición es una cadena de texto
-    // con los datos en formato JSON
-    body: JSON.stringify(datos), // convertimos el objeto a texto
-  };
-  // realizamos la petición AJAX usando fetch
-  // el primer parámetro es el recurso del servidor al que queremos acceder
-  // en este ejemplo, es un fichero php llamado media.php que se encuentra
-  // dentro de la carpeta ./php y con el código PHP que hay arriba.
-  // el segundo parámetro es el objeto init con la información sobre los
-  // datos que queremos enviar, el método de envio, etc.
-  var response = await fetch(rutaInicial + "InformacionMapas.php", init);
-  if (response.ok) {
-    // si la petición se ha resuelto correctamente,
-    // intentamos resolver otra promesa que convierta
-    // lo que nos ha respondido el servidor en un objeto de JavaScript.
-    // si el servidor no ha enviado correctamente la información
-    // en formato JSON, no se podrán convertir correctamente
-    // los datos a un objeto, por lo que la promesa fallará
-    // y esto provocará un error.
-    var respuesta = await response.json();
-    // en este ejemplo, el servidor nos devuelve un objeto con dos datos,
-    // la media de los números enviados, y un fragmento de HTML
-    // con un el título y una lista con los números
-    alert(respuesta.media);
-  } else {
-    throw new Error(response.statusText);
-  }
-}
-$(document).ready(() => {
-  datosMapa();
-  foliosArea();
-  estatusSeguimiento();
-  $(".calendario").datepicker({
-    timepicker: false,
-    datepicker: true,
-    format: "yyyy-mm-dd",
-    value: "2022-09-14",
-    weeks: true,
-  });
-});
-////////////////////////////////
-//funciones utilizadas
-////////////////////////////////
-$(document).ready(function () {
-  //mostrar en tiempo real la grafica de folios//
 
-  //grafica dona//
-  //termina la grafica de folios
-
+function estatusSeguimiento() {
   //inicia grafica de seguimiento
   $.ajax({
     method: "POST",
-    url: "../DatosReporte",
+    url: rutaInicial + "InformacionMapas.php",
+    dataType: "json",
     data: {
-      accion: "seguimiento",
+      accion: "estatusSeguimiento",
     },
     success: function (result) {
       let csDocumentosC = 0;
-      let csDocumentosP;
       let dIncorrectosC = 0;
-      let dIncorrectosP;
       let d1a3DocsC = 0;
-      let d1a3DocsP;
       let d4a6DocsC = 0;
-      let d4a6DocsP;
       let d7a10DocsC = 0;
-      let d7a10DocsP;
       let nuevoC = 0;
-      let nuevoP;
       let sContactoC = 0;
-      let sContactoP;
       let sc30DiasC = 0;
-      let sc30DiasP;
-      let tDocsC = 0;
-      let tDocsP;
-      let sinComas = result.split(",");
-      for (let i = 1; i < sinComas.length; i = i + 2) {
-        //se hace para hacer el calculo del procentaje de cada caso
-        porcentaje = (sinComas[i - 1] * 100) / sinComas[sinComas.length - 1];
-        switch (sinComas[i]) {
-          case "Con contacto sin documentos":
-            csDocumentosC = sinComas[i - 1];
-            csDocumentosP = porcentaje + "%";
+      let tProcesoC = 0;
+      let cOtrasViasC = 0;
+      let conteoTotal = 0;
+      let decimal = 0;
+      for (let i in result.Estatus) {
+        conteoTotal += result.Estatus[i].conteo;
+      }
+      for (let i in result.Estatus) {
+        let porcentaje = (result.Estatus[i].conteo / conteoTotal) * 100;
+        decimal = +porcentaje.toString().replace(/^[^\.]+/, "0");
+        if (decimal > 0.5) {
+          porcentaje = Math.ceil(porcentaje);
+        } else {
+          porcentaje = Math.floor(porcentaje);
+        }
+        switch (result.Estatus[i].estatusSeguimientoSin) {
+          case "CON CONTACTO SIN DOCUMENTOS":
+            csDocumentosC = result.Estatus[i].conteo;
             break;
-          case "Datos incorrectos":
-            dIncorrectosC = sinComas[i - 1];
-            dIncorrectosP = porcentaje + "%";
+          case "DATOS INCORRECTOS":
+            dIncorrectosC = result.Estatus[i].conteo;
             break;
-          case "De 1 a 3 documentos":
-            d1a3DocsC = sinComas[i - 1];
-            d1a3DocsP = porcentaje + "%";
+          case "DE 1 A 3 DOCUMENTOS":
+            d1a3DocsC = result.Estatus[i].conteo;
             break;
-          case "De 4 a 6 documentos":
-            d4a6DocsC = sinComas[i - 1];
-            d4a6DocsP = porcentaje + "%";
+          case "DE 4 A 6 DOCUMENTOS":
+            d4a6DocsC = result.Estatus[i].conteo;
             break;
-          case "De 7 a 10 documentos":
-            d7a10DocsC = sinComas[i - 1];
-            d7a10DocsP = porcentaje + "%";
+          case "DE 7 A 10 DOCUMENTOS":
+            d7a10DocsC = result.Estatus[i].conteo;
             break;
-          case "Nuevo":
-            nuevoC = sinComas[i - 1];
-            nuevoP = porcentaje + "%";
+          case "NUEVO":
+            nuevoC = result.Estatus[i].conteo;
             break;
-          case "Sin Contacto":
-            sContactoC = sinComas[i - 1];
-            sContactoP = porcentaje + "%";
+          case "SIN CONTACTO":
+            sContactoC = result.Estatus[i].conteo;
             break;
-          case "Sin contacto en 30 dias":
-            sc30DiasC = sinComas[i - 1];
-            sc30DiasP = porcentaje + "%";
+          case "SIN CONTACTO EN 30 DIAS":
+            sc30DiasC = result.Estatus[i].conteo;
             break;
-          case "Total de documentos":
-            tDocsC = sinComas[i - 1];
-            tDocsP = porcentaje + "%";
+          case "TERMINADO POR PROCESO COMPLETO":
+            tProcesoC = result.Estatus[i].conteo;
+            break;
+          case "CONCLUIDO POR OTRAS VIAS (BARRA, OFICINA, BROKER) ":
+            cOtrasViasC = result.Estatus[i].conteo;
             break;
         }
       }
@@ -315,6 +251,7 @@ $(document).ready(function () {
           "#07F589",
           "#9407F5",
           "#0707F5",
+          "#bb91f4",
         ],
         series: [
           Number(csDocumentosC),
@@ -325,7 +262,8 @@ $(document).ready(function () {
           Number(nuevoC),
           Number(sContactoC),
           Number(sc30DiasC),
-          Number(tDocsC),
+          Number(tProcesoC),
+          Number(cOtrasViasC),
         ],
         chart: {
           width: 650,
@@ -340,7 +278,8 @@ $(document).ready(function () {
           "Nuevo",
           "Sin Contacto",
           "Sin contacto en 30 dias",
-          "Total de documentos",
+          "Terminado por proceso completo",
+          "Concluido por otras vias(Barra,Oficina,Broker)",
         ],
         responsive: [
           {
@@ -371,80 +310,144 @@ $(document).ready(function () {
       chart.render();
     },
   });
-
+}
+$(document).ready(() => {
+  datosMapa();
+  foliosArea();
+  estatusSeguimiento();
+  asignadosEntregados();
+  $(".calendario").datepicker({
+    timepicker: false,
+    datepicker: true,
+    format: "yyyy-mm-dd",
+    value: "2022-09-14",
+    weeks: true,
+  });
+});
+////////////////////////////////
+//funciones utilizadas
+////////////////////////////////
+function asignadosEntregados() {
   $.ajax({
     method: "POST",
-    url: "../DatosReporte",
+    url: rutaInicial + "InformacionMapas.php",
     data: {
-      accion: "AsignadosEntregados",
+      accion: "Asignados",
     },
     success: function (result) {
-      let sinUltima = result.substring(0, result.length - 1);
-      let sinComas = sinUltima.split(",");
-      // obtener fecha
-      let hoy = new Date();
-      const meses = [
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre",
-      ];
-      let options = {
-        series: [
-          {
-            name: "series1",
-            data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-          },
-          {
-            name: "series2",
-            data: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
-          },
-        ],
-        chart: {
-          height: 350,
-          type: "area",
+      console.log(result);
+      let sinDiagonal = result.split("//");
+      let mes1 = JSON.parse(sinDiagonal[0]);
+      let mes2 = JSON.parse(sinDiagonal[1]);
+      let mes3 = JSON.parse(sinDiagonal[2]);
+      let mes4 = JSON.parse(sinDiagonal[3]);
+      let mes5 = JSON.parse(sinDiagonal[4]);
+      let mes6 = JSON.parse(sinDiagonal[5]);
+      let mes7 = JSON.parse(sinDiagonal[6]);
+      let mes8 = JSON.parse(sinDiagonal[7]);
+      let mes9 = JSON.parse(sinDiagonal[8]);
+      let mes10 = JSON.parse(sinDiagonal[9]);
+      let mes11 = JSON.parse(sinDiagonal[10]);
+      let mes12 = JSON.parse(sinDiagonal[11]);
+      $.ajax({
+        method: "POST",
+        url: rutaInicial + "InformacionMapas.php",
+        data: {
+          accion: "Entregados",
         },
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          curve: "smooth",
-        },
-        xaxis: {
-          type: "text",
-          categories: [
-            meses[hoy.getMonth() - 10],
-            meses[hoy.getMonth() - 9],
-            meses[hoy.getMonth() - 8],
-            meses[hoy.getMonth() - 7],
-            meses[hoy.getMonth() - 6],
-            meses[hoy.getMonth() - 5],
-            meses[hoy.getMonth() - 4],
-            meses[hoy.getMonth() - 3],
-            meses[hoy.getMonth() - 2],
-            meses[hoy.getMonth() - 1],
-            meses[hoy.getMonth()],
-            meses[hoy.getMonth() + 1],
-          ],
-        },
-      };
+        success: function (data) {
+          console.log(data);
+          let sinDiagonal2 = data.split("//");
+          console.log(sinDiagonal2[0]);
+          let mes012 = JSON.parse(sinDiagonal2[0]);
+          let mes22 = JSON.parse(sinDiagonal2[1]);
+          let mes32 = JSON.parse(sinDiagonal2[2]);
+          let mes42 = JSON.parse(sinDiagonal2[3]);
+          let mes52 = JSON.parse(sinDiagonal2[4]);
+          let mes62 = JSON.parse(sinDiagonal2[5]);
+          let mes72 = JSON.parse(sinDiagonal2[6]);
+          let mes82 = JSON.parse(sinDiagonal2[7]);
+          let mes92 = JSON.parse(sinDiagonal2[8]);
+          let mes102 = JSON.parse(sinDiagonal2[9]);
+          let mes112 = JSON.parse(sinDiagonal2[10]);
+          let mes122 = JSON.parse(sinDiagonal2[11]);
+          let options = {
+            series: [
+              {
+                name: "Asignados",
+                data: [
+                  mes12.Asignados[0].conteo,
+                  mes11.Asignados[0].conteo,
+                  mes10.Asignados[0].conteo,
+                  mes9.Asignados[0].conteo,
+                  mes8.Asignados[0].conteo,
+                  mes7.Asignados[0].conteo,
+                  mes6.Asignados[0].conteo,
+                  mes5.Asignados[0].conteo,
+                  mes4.Asignados[0].conteo,
+                  mes3.Asignados[0].conteo,
+                  mes2.Asignados[0].conteo,
+                  mes1.Asignados[0].conteo,
+                ],
+              },
+              {
+                name: "Entregados",
+                data: [
+                  mes12.Siniestros[0].conteo,
+                  mes11.Siniestros[0].conteo,
+                  mes10.Siniestros[0].conteo,
+                  mes9.Siniestros[0].conteo,
+                  mes8.Siniestros[0].conteo,
+                  mes7.Siniestros[0].conteo,
+                  mes6.Siniestros[0].conteo,
+                  mes5.Siniestros[0].conteo,
+                  mes4.Siniestros[0].conteo,
+                  mes3.Siniestros[0].conteo,
+                  mes2.Siniestros[0].conteo,
+                  mes1.Siniestros[0].conteo,
+                ],
+              },
+            ],
+            chart: {
+              height: 350,
+              type: "area",
+            },
+            dataLabels: {
+              enabled: false,
+            },
+            stroke: {
+              curve: "smooth",
+            },
+            xaxis: {
+              type: "text",
+              categories: [
+                mes12.Siniestros[0].mes,
+                mes11.Siniestros[0].mes,
+                mes10.Siniestros[0].mes,
+                mes9.Siniestros[0].mes,
+                mes8.Siniestros[0].mes,
+                mes7.Siniestros[0].mes,
+                mes6.Siniestros[0].mes,
+                mes5.Siniestros[0].mes,
+                mes4.Siniestros[0].mes,
+                mes3.Siniestros[0].mes,
+                mes2.Siniestros[0].mes,
+                mes1.Siniestros[0].mes,
+              ],
+            },
+          };
 
-      let chart = new ApexCharts(
-        document.querySelector("#foliosEntregados"),
-        options
-      );
-      chart.render();
+          let chart = new ApexCharts(
+            document.querySelector("#foliosEntregados"),
+            options
+          );
+          chart.render();
+        },
+      });
     },
   });
-
+}
+$(document).ready(function () {
   //grafica folios por fecha//
   $.ajax({
     method: "POST",

@@ -79,12 +79,24 @@ function obtenerSesion() {
       accion: "Privilegios",
     },
   }).done(function (result) {
+    console.log(result);
     if (
       result.Siniestros[0].privilegios === "root" ||
       result.Siniestros[0].privilegios === "supervisor"
     ) {
       $(".btnEliminar").show(); //muestro mediante clase
-    }
+    }else if(result.Siniestros[0].privilegios === "operadorAtlas" || result.Siniestros[0].privilegios === "consulta"){
+      console.log("entra");
+      document.getElementById("divAgregarSiniestro").style.display = "none";
+      document.getElementById("gDatosBtn").style.display = "none";
+      document.getElementById("btnOffCanvasCita").style.display = "none";
+      document.getElementById("insertarSeguimiento").style.display = "none";
+      document.getElementById("btnAsignarIntegrador").style.display = "none";
+      document.getElementById("exportarSiniestros").style.display = "none";
+      document.getElementById("btnDocsMostrar").style.display = "none";
+      document.getElementById("btnLink").style.display = "none";
+      document.getElementById("btnMovimientos").style.display = "none";
+      }
   });
 }
 //funcion para mostrar la cantidad de siniestros
@@ -1746,11 +1758,6 @@ function enviarCorreo() {
     alert(result);
   });
 }
-
-/////////////////////////////
-//funciones todavia no utilizadas
-////////////////////////////
-
 function datosValidados() {
   let id = document.getElementById("idOculto").value;
   $.ajax({
@@ -1820,4 +1827,17 @@ function datosValidados() {
       document.getElementById("liTipoAuto").textContent = "Tipo: Sin validar";
     }
   });
+}
+
+/////////////////////////////
+//funciones todavia no utilizadas
+////////////////////////////
+
+function usuarioConsultaAtlas(){
+  $.ajax({
+    method: "GET",
+    url:rutaInicial+"PrivilegiosUsuarios"
+  }).done(function (response){
+    console.log(response);
+  })
 }

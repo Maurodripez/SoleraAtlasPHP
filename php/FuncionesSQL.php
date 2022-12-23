@@ -75,6 +75,20 @@ function ConsultasSelectCualquiera($sql, $rutaConexion, $nombreJson)
     }
     echo json_encode($datos);
 }
+function ConsultasSelectCualquiera2($sql, $rutaConexion, $nombreJson)
+{
+    require $rutaConexion;
+    $stmt = $DBcon->prepare($sql);
+    $stmt->execute();
+
+    $datos = array();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        $datos[$nombreJson][] = $row;
+    }
+    return ($datos);
+}
 function ObtenerValorCualquiera($sql, $rutaConexion)
 {
     require $rutaConexion;
