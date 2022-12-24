@@ -75,7 +75,7 @@ function ConsultasSelectCualquiera($sql, $rutaConexion, $nombreJson)
     }
     echo json_encode($datos);
 }
-function ConsultasSelectCualquiera2($sql, $rutaConexion, $nombreJson)
+function ConsultasSelectCualquieraNoJson($sql, $rutaConexion, $nombreJson)
 {
     require $rutaConexion;
     $stmt = $DBcon->prepare($sql);

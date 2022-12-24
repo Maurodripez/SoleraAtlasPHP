@@ -36,7 +36,7 @@ switch ($accion) {
             $fechaAnterior = $fecha;
             $fecha = date("Y-m-d", strtotime($fecha . "- $diasMes days"));
             $sql = "SELECT count(fechaCarga) as conteo, MONTHNAME('$fechaAnterior') as mes FROM infosiniestro where fechaCarga<='$fechaAnterior' and fechaCarga>'$fecha'";
-            echo json_encode(ConsultasSelectCualquiera2($sql, "../Conexion.php", "Asignados")) . "//";
+            echo json_encode(ConsultasSelectCualquieraNoJson($sql, "../Conexion.php", "Asignados")) . "//";
             //echo $fecha . "\n";
         }
         break;
@@ -57,13 +57,76 @@ switch ($accion) {
             //echo $diasMes . "\n";
             $fechaAnterior = $fecha;
             $fecha = date("Y-m-d", strtotime($fecha . "- $diasMes days"));
-            $sql = "SELECT count(fechaCarga) as conteo, MONTHNAME('$fechaAnterior') as mes FROM infosiniestro where fechaCarga<='$fechaAnterior' and fechaCarga>'$fecha'";
-            $sql = "select count(estacionProceso) from estadoproceso,infosiniestro "
+            $sql = "select count(estacionProceso) as conteo,MONTHNAME('$fechaAnterior') as mes from estadoproceso,infosiniestro "
                 . " where estacionProceso='Terminado' and fechaCarga<='$fechaAnterior' and fechaCarga>'$fecha'"
-                . " and fkIdRegistroEstadoProceso=idRegistro group by estacionProceso";
-            echo json_encode(ConsultasSelectCualquiera2($sql, "../Conexion.php", "Entregados")) . "//";
+                . " and fkIdRegistroEstadoProceso=idRegistro";
+            echo json_encode(ConsultasSelectCualquieraNoJson($sql, "../Conexion.php", "Entregados")) . "//";
             //echo $fecha . "\n";
         }
+        break;
+    case "FoliosFechas":
+        for ($i = 0; $i < 4; $i++) {
+            if ($i == 0) {
+                $fechaInicial = 0;
+                $fechaFinal = 3;
+            }
+            if ($i == 1) {
+                $fechaInicial = 3;
+                $fechaFinal = 6;
+            }
+            if ($i == 2) {
+                $fechaInicial = 6;
+                $fechaFinal = 15;
+            }
+            if ($i == 3) {
+                $fechaInicial = 15;
+                $fechaFinal = 31;
+            }
+            $sql = "select count(fechaSeguimiento) as conteo from fechasseguimiento "
+                . " where datediff(CURDATE(), fechaSeguimiento)>=$fechaInicial and datediff(CURDATE(), fechaSeguimiento)<$fechaFinal";
+            echo json_encode(ConsultasSelectCualquieraNoJson($sql, "../Conexion.php", "FoliosFechas")) . "//";
+        }
+        break;
+    case "ReporteDocumentos":
+        $documentos = [
+            "factura",
+            "secuencia",
+            "certificadopropiedad",
+            "copiacertificado",
+            "pedimento",
+            "rfv",
+            "verificacion",
+            "baja",
+            "conoceatucliente",
+            "consentimiento",
+            "averiguacionprevia",
+            "avisopfp",
+            "otros",
+            "oficioliberacion",
+            "oficiocancelacion",
+            "facturamotor",
+            "llaves",
+            "facturaatlas",
+            "acreditacion",
+            "tenencias",
+        ];
+        foreach ($documentos as $docs) {
+            if ($documentos != "") {
+                $sql = "select count($docs) as conteo, $docs from docsaprobadosatlas"
+                    . " where $docs='true'";
+                echo json_encode(ConsultasSelectCualquieraNoJson($sql, "../Conexion.php", "Documentos")) . "//$docs//";
+            }
+        }
+        break;
+    case "PorcentajeDocs":
+        $sql = "select count(porcentajeDocs) conteo,porcentajeDocs from docsaprobadosatlas,fechasseguimiento "
+            . " where datediff(CURDATE(), fechaSeguimiento)<30 and fkDocsAtlas=fkidRegistro group by porcentajeDocs";
+        ConsultasSelectCualquiera($sql, "../Conexion.php", "Documentos");
+        break;
+    case "PorcentajeTotal":
+        $sql = "select count(porcentajeTotal) conteo,porcentajeTotal from docsaprobadosatlas,fechasseguimiento "
+            . " where datediff(CURDATE(), fechaSeguimiento)<30 and fkDocsAtlas=fkidRegistro group by porcentajeTotal";
+        ConsultasSelectCualquiera($sql, "../Conexion.php", "Documentos");
         break;
 }
 function ultimoDiaMesActual()
