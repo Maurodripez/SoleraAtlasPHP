@@ -62,7 +62,8 @@ header('Location: ../index.html');
                             <option value="supervisor">Supervisor</option>
                             <option value="teamlider">Teamlider</option>
                             <option value="integrador">Integrador</option>
-                            <option value="operador">Operador</option>
+                            <option value="operadorSolera">Operador Solera</option>
+                            <option value="operadorAtlas">Operador Atlas</option>
                             <option value="consulta">Consulta</option>
                         </select>
                     </div>

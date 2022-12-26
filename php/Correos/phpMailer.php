@@ -15,8 +15,8 @@ require '../../PHPMailer/src/SMTP.php';
 // Inicio
 $mail = new PHPMailer(true);
 $email = $_POST['email'];
+$sAsunto = "Seguimiento a su siniestro";
 $asegurado = $_POST['asegurado'];
-$sAsunto = "correo de prueba";
 try {
     // Configuracion SMTP
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                         // Mostrar salida (Desactivar en producción)
@@ -27,21 +27,21 @@ try {
     $mail->Password  = 'Seas.Soprte.2022';              // Contraseña SMTP
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port  = 587;
-    $mail->setFrom('prueba@bestcontact.mx', 'Usuario y password para plataforma');                // Remitente del correo
+    $mail->setFrom('prueba@bestcontact.mx', 'Seguros Atlas');                // Remitente del correo
     // Destinatarios
     $mail->addAddress($email, $asegurado);  // Email y nombre del destinatario
 
     // Contenido del correo
     $mail->isHTML(true);
     $mail->Subject = $sAsunto;
-    $mail->Body  = cuerpoCorreo();
+    $mail->Body  = cuerpoCorreo($asegurado);
     $mail->AltBody = 'Contenido del correo en texto plano para los clientes de correo que no soporten HTML';
     $mail->send();
     echo 'El correo se ha enviado';
 } catch (Exception $e) {
     echo "El mensaje no se ha enviado. Mailer Error: {$mail->ErrorInfo}";
 }
-function cuerpoCorreo()
+function cuerpoCorreo($asegurado)
 {
     $usuario = $_POST["usuario"];
     $password = $_POST["password"];
@@ -59,6 +59,7 @@ function cuerpoCorreo()
             height='250px'
             src='http://bestcontact.mx/Solera/Atlas/Imagenes Solera/solera-holdings-llc-vector-logo-2022.png' />
         <h1 align='center' style='color: #524daa;'>Bienvenido</h1>
+        <h1 align='center' style='color: #524daa;'>$asegurado</h1>
         <div style='background-color:rgb(255, 255, 255); height: 100vh; border: none;'>
             <h2 style='color: #605ca8;'>Hola, buen dia, por este medio le hacemos llegar su usuario y password, para el
                 acceso a la plataforma y

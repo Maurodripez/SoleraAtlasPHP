@@ -1,6 +1,6 @@
 var contador = 0;
 var contadorSeg = 0;
-let rutaInicial = "../../php/";
+let rutaInicial = "../php/";
 $(document).ready(function () {
   obtenerSesion();
   datosPorDefecto();
@@ -85,7 +85,10 @@ function obtenerSesion() {
       result.Siniestros[0].privilegios === "supervisor"
     ) {
       $(".btnEliminar").show(); //muestro mediante clase
-    }else if(result.Siniestros[0].privilegios === "operadorAtlas" || result.Siniestros[0].privilegios === "consulta"){
+    } else if (
+      result.Siniestros[0].privilegios === "operadorAtlas" ||
+      result.Siniestros[0].privilegios === "consulta"
+    ) {
       console.log("entra");
       document.getElementById("divAgregarSiniestro").style.display = "none";
       document.getElementById("gDatosBtn").style.display = "none";
@@ -96,7 +99,7 @@ function obtenerSesion() {
       document.getElementById("btnDocsMostrar").style.display = "none";
       document.getElementById("btnLink").style.display = "none";
       document.getElementById("btnMovimientos").style.display = "none";
-      }
+    }
   });
 }
 //funcion para mostrar la cantidad de siniestros
@@ -1589,15 +1592,31 @@ function operadoresAtlas() {
 function guardarCita() {
   let siniestro = document.getElementById("txtSiniestro").value;
   $.ajax({
-    url: "../../php/Citas/ConsultasCitas.php",
+    url: rutaInicial + "Citas/ConsultasCitas.php",
     type: "POST",
     data: {
       siniestro,
       accion: "ValidarCita",
     },
   }).done(function (result) {
+    let fechaValidar = obtenerFechaConvertida(0)+"";
+    if (document.getElementById("txtFechaDatos").value <= fechaValidar) {
+      alert("Por favor, selecciona una fecha valida");
+      return;
+    }
     if (document.getElementById("txtAsesor").value == "Asesor") {
       alert("Por favor, selecciona un asesor");
+      return;
+    }
+    if (document.getElementById("txtTitulo").value == "") {
+      alert("Por favor, proporciona un titulo");
+      return;
+    }
+    if (
+      document.getElementById("txtHoraInicio").value >=
+      document.getElementById("txtHoraFinal").value
+    ) {
+      alert("Por favor, selecciona un horario valido");
       return;
     }
     //se valida si ya se tiene una cita
@@ -1614,7 +1633,7 @@ function guardarCita() {
       let start = `${fecha} ${horaInicio}:00`;
       let end = `${fecha} ${horaFin}:00`;
       $.ajax({
-        url: "../../php/citas/AgregarEvento.php",
+        url: rutaInicial + "Citas/AgregarEvento.php",
         data: {
           title: document.getElementById("txtTitulo").value,
           start,
@@ -1828,16 +1847,27 @@ function datosValidados() {
     }
   });
 }
+function obtenerFechaConvertida(n) {
+  const date = new Date();
+  date.setDate(date.getDate() - n);
+  const pad = (n) => n.toString().padStart(2, "0");
+
+  const yyyy = date.getFullYear(),
+    mm = pad(date.getMonth() + 1),
+    dd = pad(date.getDate());
+
+  return `${yyyy}-${mm}-${dd}`;
+}
 
 /////////////////////////////
 //funciones todavia no utilizadas
 ////////////////////////////
 
-function usuarioConsultaAtlas(){
+function usuarioConsultaAtlas() {
   $.ajax({
     method: "GET",
-    url:rutaInicial+"PrivilegiosUsuarios"
-  }).done(function (response){
+    url: rutaInicial + "PrivilegiosUsuarios",
+  }).done(function (response) {
     console.log(response);
-  })
+  });
 }

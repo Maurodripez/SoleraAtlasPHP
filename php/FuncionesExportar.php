@@ -22,11 +22,11 @@ function ExportarSiniestros($sqlExport)
 
     # Escribir encabezado de los productos
     $encabezado = [
-        "fechaSeguimiento", "fechaTermino", "idRegistro", "numSiniestro", "poliza", "afectado",
-        "tipoDeCaso", "cobertura", "fechaSiniestro", "estado", "ciudad", "region", "ubicacionTaller", "financiado",
-        "regimenFiscal", "estatusCliente", "comentariosCliente", "fechaCarga", "fechaDecreto", "usuarioCarga", "estatusSeguimientoSin",
-        "usuarioAsignadoSin", "fechaAsignacion", "marca", "tipo", "modelo", "numSerie", "valorIndemnizacion", "valorComercial", " placas",
-        " estacionProceso", " estatusOperativo", "subEstatusProceso", "usuarioSeguimiento"
+        "FECHA SEGUIMIENTO", "FECHATERMINO", "ID", "SINIESTRO", "POLIZA", "AFECTADO",
+        "TIPO DE CASO", "COBERTURA", "FECHA SINIESTRO", "ESTADO", "CIUDAD", "REGION", "UBICACION TALLER", "FINANCIADO",
+        "REGIMEN FISCAL", "ESTATUS CLIENTE", "COMENTARIOS", "FECHA CARGA", "FECHA DECRETO", "USUARIO DE CARGA", "ESTATUS SEGUIMIENTO",
+        "USUARIO ASIGNADO", "FECHA ASIGNACION", "MARCA", "TIPO", "MODELO", "NUMERO SERIE", "VALOR INDEMNIZACION", "VALOR COMERCIAL", "PLACAS",
+        "ESTACION", " ESTATUS", "SUB ESTATUS", "USUARIO EN SEGUIMIENTO"
     ];
     # El último argumento es por defecto A1 pero lo pongo para que se explique mejor
     $hojaSiniestros->fromArray($encabezado, null, 'A1');
@@ -62,15 +62,15 @@ function ExportarSiniestros($sqlExport)
         $hojaSiniestros->setCellValue("W" . $numeroDeFila, $siniestros->fechaAsignacion);
         $hojaSiniestros->setCellValue("X" . $numeroDeFila, $siniestros->marca);
         $hojaSiniestros->setCellValue("Y" . $numeroDeFila, $siniestros->tipo);
-        $hojaSiniestros->setCellValue("AA" . $numeroDeFila, $siniestros->modelo);
-        $hojaSiniestros->setCellValue("AB" . $numeroDeFila, $siniestros->numSerie);
-        $hojaSiniestros->setCellValue("AC" . $numeroDeFila, $siniestros->valorIndemnizacion);
-        $hojaSiniestros->setCellValue("AD" . $numeroDeFila, $siniestros->valorComercial);
-        $hojaSiniestros->setCellValue("AE" . $numeroDeFila, $siniestros->placas);
-        $hojaSiniestros->setCellValue("AF" . $numeroDeFila, $siniestros->estacionProceso);
-        $hojaSiniestros->setCellValue("AG" . $numeroDeFila, $siniestros->estatusOperativo);
-        $hojaSiniestros->setCellValue("AH" . $numeroDeFila, $siniestros->subEstatusProceso);
-        $hojaSiniestros->setCellValue("AI" . $numeroDeFila, $siniestros->usuarioSeguimiento);
+        $hojaSiniestros->setCellValue("Z" . $numeroDeFila, $siniestros->modelo);
+        $hojaSiniestros->setCellValue("AA" . $numeroDeFila, $siniestros->numSerie);
+        $hojaSiniestros->setCellValue("AB" . $numeroDeFila, $siniestros->valorIndemnizacion);
+        $hojaSiniestros->setCellValue("AC" . $numeroDeFila, $siniestros->valorComercial);
+        $hojaSiniestros->setCellValue("AD" . $numeroDeFila, $siniestros->placas);
+        $hojaSiniestros->setCellValue("AE" . $numeroDeFila, $siniestros->estacionProceso);
+        $hojaSiniestros->setCellValue("AF" . $numeroDeFila, $siniestros->estatusOperativo);
+        $hojaSiniestros->setCellValue("AG" . $numeroDeFila, $siniestros->subEstatusProceso);
+        $hojaSiniestros->setCellValue("AH" . $numeroDeFila, $siniestros->usuarioSeguimiento);
 
         $numeroDeFila++;
     }
