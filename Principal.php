@@ -16,7 +16,7 @@ header('Location: ./index.html');
   <link rel="stylesheet" href="./Estilos/Principal.css">
   <link rel="icon" type="image/jpg" href="./Imagenes Solera/solera-squareLogo-1641391060257.png" />
   <script src="./js/Principal.js"></script>
-  <title>Document</title>
+  <title>Solera Atlas</title>
 </head>
 
 <body>

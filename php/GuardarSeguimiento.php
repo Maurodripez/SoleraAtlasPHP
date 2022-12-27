@@ -143,7 +143,6 @@ switch ($accion) {
                 "tenencias" => $_POST["checkboxTenencias"],
                 "facturamotor" => $_POST["checkboxFacturaMotor"],
                 "llaves" => $_POST["checkboxLlaves"],
-                "conoceatucliente" => $_POST["checkboxFormatoCliente"],
                 "consentimiento" => $_POST["checkboxLFPDPPP"],
                 "averiguacionprevia" => $_POST["checkboxAveriguacion"],
                 "acreditacion" => $_POST["checkboxAcreditacion"],
@@ -151,6 +150,10 @@ switch ($accion) {
                 "otros" => $_POST["checkboxOtros"],
                 "oficioliberacion" => $_POST["checkboxLiberacion"],
                 "oficiocancelacion" => $_POST["checkboxCancelacion"],
+                "conoceatucliente" => $_POST["checkboxFormatoCliente"],
+                "finiquito" => $_POST["checkboxFormatoFiniquito"],
+                "refactura" => $_POST["checkboxRefactura"],
+                "cedula" => $_POST["checkboxCedula"],
             ];
             $contadorDocs = 0;
             foreach ($docsAprobados as $item => $docsAprobados) {

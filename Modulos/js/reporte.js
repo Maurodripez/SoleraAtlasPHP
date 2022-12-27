@@ -10,8 +10,21 @@ function datosMapa() {
     dataType: "json",
     data: {
       accion: "infoMapa",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
   }).done(function (result) {
+    console.log(result);
     for (let i in result.Estados) {
       if (
         result.Estados[i].cantidad <= 4 &&
@@ -49,6 +62,29 @@ function foliosArea() {
       accion: "foliosArea",
     },
     success: function (result) {
+      console.log(result);
+      let totalSiniestros = 0;
+      for (let i in result.Estacion) {
+        totalSiniestros += parseInt(result.Estacion[i].conteo);
+      }
+      console.log(totalSiniestros);
+      console.log((result.Estacion[0].conteo / totalSiniestros) * 100);
+      document.getElementById("canceladoPorcentaje").textContent =
+        ((result.Estacion[0].conteo / totalSiniestros) * 100).toFixed(2) + "%";
+      document.getElementById("procesoPorcentaje").textContent =
+        ((result.Estacion[1].conteo / totalSiniestros) * 100).toFixed(2) + "%";
+      document.getElementById("nuevoPorcentaje").textContent =
+        ((result.Estacion[2].conteo / totalSiniestros) * 100).toFixed(2) + "%";
+      document.getElementById("terminadoPorcentaje").textContent =
+        ((result.Estacion[3].conteo / totalSiniestros) * 100).toFixed(2) + "%";
+
+      document.getElementById("nuevo").textContent = result.Estacion[2].conteo;
+      document.getElementById("proceso").textContent =
+        result.Estacion[1].conteo;
+      document.getElementById("cancelado").textContent =
+        result.Estacion[0].conteo;
+      document.getElementById("terminado").textContent =
+        result.Estacion[3].conteo;
       let options = {
         chart: {
           type: "bar",
@@ -79,7 +115,6 @@ function foliosArea() {
       );
       chart.render();
       //dona
-      console.log(result.Estacion[0].conteo);
       options = {
         series: [
           parseInt(result.Estacion[0].conteo),
@@ -662,6 +697,36 @@ function porcentajeTotal() {
   });
 }
 $(document).ready(() => {
+  $("#btnBuscar").on("click", function (e) {
+    if (
+      document.getElementById("fechaCargaInicio").value.length === 0 ||
+      document.getElementById("fechaCargaFinal").value.length===0
+    ) {
+      document.getElementById("fechaCargaInicio").value =
+        obtenerFechaConvertida(30);
+        document.getElementById("fechaCargaFinal").value =
+        obtenerFechaConvertida(0);
+    }
+    if (
+      document.getElementById("fechaSeguimientoInicio").value.length === 0 ||
+      document.getElementById("fechaSeguimientoFinal").value.length===0
+    ) {
+      document.getElementById("fechaSeguimientoInicio").value =
+        obtenerFechaConvertida(30);
+        document.getElementById("fechaSeguimientoFinal").value =
+        obtenerFechaConvertida(0);
+    }
+    datosMapa();
+  });
+  //fechas por defecto
+  document.getElementById("fechaCargaInicio").value =
+  obtenerFechaConvertida(30);
+  document.getElementById("fechaCargaFinal").value =
+  obtenerFechaConvertida(0);
+  document.getElementById("fechaSeguimientoInicio").value =
+  obtenerFechaConvertida(30);
+  document.getElementById("fechaSeguimientoFinal").value =
+  obtenerFechaConvertida(0);
   datosMapa();
   foliosArea();
   estatusSeguimiento();
@@ -809,4 +874,15 @@ function casosRegiones() {
       chart.render();
     },
   });
+}
+function obtenerFechaConvertida(n) {
+  const date = new Date();
+  date.setDate(date.getDate() - n);
+  const pad = (n) => n.toString().padStart(2, "0");
+
+  const yyyy = date.getFullYear(),
+    mm = pad(date.getMonth() + 1),
+    dd = pad(date.getDate());
+
+  return `${yyyy}-${mm}-${dd}`;
 }

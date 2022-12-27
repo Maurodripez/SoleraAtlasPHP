@@ -707,8 +707,8 @@ header('Location: ../index.html');
                         <button id="limpiarRegistro" type="button" class="btn btn-primary">
                             Limpiar
                         </button>
-                        <a id="exportarSiniestros" href="../Excels/Siniestros.xlsx" download="Siniestros.xlsx" class="btn btn-primary"
-                            role="button">Exportar</a>
+                        <a id="exportarSiniestros" href="../Excels/Siniestros.xlsx" download="Siniestros.xlsx"
+                            class="btn btn-primary" role="button">Exportar</a>
                         <button id="btnMovimientos" onclick="mostrarMovsPorDefecto()" type="button"
                             class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#movimientosUsuarios">
                             Movimientos
@@ -1773,8 +1773,9 @@ header('Location: ../index.html');
                                             <div class="divDatosValidados col px-md-3">
                                                 <div class="btnDatosValidados">
                                                     <p>
-                                                        <a class="btn btn-primary" id="btnDatosValidados" data-bs-toggle="collapse"
-                                                            href="#datosValidados" role="button" aria-expanded="false"
+                                                        <a class="btn btn-primary" id="btnDatosValidados"
+                                                            data-bs-toggle="collapse" href="#datosValidados"
+                                                            role="button" aria-expanded="false"
                                                             aria-controls="datosValidados">
                                                             Datos validados
                                                         </a>
@@ -1784,7 +1785,7 @@ header('Location: ../index.html');
                                         </div>
                                         <div class="row">
                                             <div class="collapse" id="datosValidados">
-                                                <div class="card card-body">    
+                                                <div class="card card-body">
                                                     <ul id="filaUnoUl" class="list-group list-group-horizontal">
                                                         <li id="liNombre" class="list-group-item"></li>
                                                         <li id="liSiniestro" class="list-group-item"></li>
@@ -2573,6 +2574,7 @@ header('Location: ../index.html');
                                 <div class="accordion-body">
                                     <div id="divListaDocsAprobados">
                                         <ul class="list-group list-group-flush">
+                                        <h5>Documentos usuarios</h5>
                                             <div class="row">
                                                 <li class="col list-group-item list-group-item-sm">
                                                     <input class="form-check-input" type="checkbox" value=""
@@ -2684,24 +2686,6 @@ header('Location: ../index.html');
                                             <div class="row">
                                                 <li class="col list-group-item list-group-item-sm">
                                                     <input class="form-check-input" type="checkbox" value=""
-                                                        id="checkboxFormatoCliente">
-                                                    <label class="form-check-label" for="checkboxFormatoCliente">
-                                                        Formato conoce a tu cliente
-                                                    </label>
-                                                </li>
-                                                <li class="col list-group-item list-group-item-sm">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="checkboxLFPDPPP">
-                                                    <label class="form-check-label" for="checkboxLFPDPPP">
-                                                        Consentimiento LFPDPPP
-                                                    </label>
-                                                </li>
-                                            </div>
-                                        </ul>
-                                        <ul class="list-group list-group-flush">
-                                            <div class="row">
-                                                <li class="col list-group-item list-group-item-sm">
-                                                    <input class="form-check-input" type="checkbox" value=""
                                                         id="checkboxAveriguacion">
                                                     <label class="form-check-label" for="checkboxAveriguacion">
                                                         Averiguación previa
@@ -2753,6 +2737,59 @@ header('Location: ../index.html');
                                             </div>
                                         </ul>
                                         <ul class="list-group list-group-flush">
+                                            <div class="row">
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <label class="form-check-label">
+
+                                                    </label>
+                                                </li>
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxLFPDPPP">
+                                                    <label class="form-check-label" for="checkboxLFPDPPP">
+                                                        Consentimiento LFPDPPP
+                                                    </label>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <h5>Documentos Atlas</h5>
+                                        <ul class="list-group list-group-flush">
+                                            <div class="row">
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxFormatoFiniquito">
+                                                    <label class="form-check-label" for="checkboxFormatoFiniquito">
+                                                        Formato finiquito
+                                                    </label>
+                                                </li>
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxRefactura">
+                                                    <label class="form-check-label" for="checkboxRefactura">
+                                                        Formato refactura
+                                                    </label>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <ul class="list-group list-group-flush">
+                                            <div class="row">
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxCedula">
+                                                    <label class="form-check-label" for="checkboxCedula">
+                                                        Cedula corta
+                                                    </label>
+                                                </li>
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxFormatoCliente">
+                                                    <label class="form-check-label" for="checkboxFormatoCliente">
+                                                        Formato conoce a tu cliente
+                                                    </label>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <ul class="list-group list-group-flush">
                                             <div class="col-12" style="text-align: center">
                                                 <button id="btnDocsAprobados" onclick="guardarDocsAprobados(this.id)"
                                                     type="button" class="mb-3 mt-3 btn btn-primary">Guardar</button>
@@ -2764,75 +2801,95 @@ header('Location: ../index.html');
                                             <select id="tipoArchivoCargado" name="tipoArchivo"
                                                 class="form-select form-select-sm" aria-label="Default select example">
                                                 <option selected>Selecciona...</option>
-                                                <option id="selectFactura" value="Factura" name="iFrameFactura">Factura
-                                                </option>
-                                                <option id="selectfacturaAtlas" value="Factura a favor de Seguros Atlas"
-                                                    name="iFrameFavorAtlas">Factura a favor de Seguros
-                                                    Atlas</option>
-                                                <option id="selectSecuencia" value="Secuencia de facturas"
-                                                    name="iFrameSecuencia">Secuencia de
-                                                    facturas
-                                                </option>
-                                                <option id="selectBajaPlacas" value="Baja de placas" name="iFrameBaja">
-                                                    Baja de placas
-                                                </option>
-                                                <option id="selectCertificado" value="Certificado Propiedad"
-                                                    name="iFrameCertificado">
-                                                    Certificado Propiedad</option>
-                                                <option id="selectCertificadoCopia" value="Copia certificado propiedad"
-                                                    name="iFrameCopiaCertificado">
-                                                    Copia certificado propiedad</option>
-                                                <option id="selectPedimento" value="Pedimento de Importacion"
-                                                    name="iFrameImportacion">Pedimento de Importacion</option>
-                                                <option id="selectR.F.V." value=" R.F.V." name="iFrameRFV">R.F.V.
-                                                </option>
-                                                <option id="selectBajaPermiso" value="Baja de permiso de internacion"
-                                                    name="iFramePermiso">
-                                                    Baja de permiso de internacion
-                                                </option>
-                                                <option id="selectVerificacion" value="Verificacion"
-                                                    name="iFrameVerificacion">
-                                                    Verificacion
-                                                </option>
-                                                <option id="selectTenencias" value="Tenencias" name="iFrameTenencia">
-                                                    Tenencias</option>
-                                                <option id="selectMotor" value="Factura del motor"
-                                                    name="iFrameFacturaMotor">
-                                                    Factura del motor</option>
-                                                <option id="selectLlaves" value="Llaves" name="iFrameLlaves">
-                                                    Llaves
-                                                </option>
-                                                <option id="selectConoce" value="Formato conoce a tu cliente"
-                                                    name="iFrameConoce">
-                                                    Formato conoce a tu cliente
-                                                </option>
-                                                <option id="selectLFPDPPP" value="Consentimiento LFPDPPP"
-                                                    name="iFrameLFPDPPP">
-                                                    Consentimiento LFPDPPP
-                                                </option>
-                                                <option id="selectAveriguacion" value="Averiguación previa"
-                                                    name="iFrameAveriguacion">
-                                                    Averiguación previa
-                                                </option>
-                                                <option id="selectAcreditacion" value="Acreditacion de propiedad"
-                                                    name="iFrameAcreditacion">
-                                                    Acreditacion de propiedad
-                                                </option>
-                                                <option id="selectPFP" value="Aviso a PFP" name="iFrameAviso">
-                                                    Aviso a PFP
-                                                </option>
-                                                <option id="selectOtros" value="Otros" name="iFrameOtros">
-                                                    Otros
-                                                </option>
-                                                <option id="selectOficioLiberacion" value="Oficio de liberacion"
-                                                    name="iFrameOficio">
-                                                    Oficio de liberacion
-                                                </option>
-                                                <option id="selectOficioCancelacion"
-                                                    value="Oficio de cancelacion del robo"
-                                                    name="iFrameOficioCancelacion">
-                                                    Oficio de cancelacion del robo
-                                                </option>
+                                                <optgroup label="Usuario">
+                                                    <option id="selectFactura" value="Factura" name="iFrameFactura">
+                                                        Factura
+                                                    </option>
+                                                    <option id="selectfacturaAtlas"
+                                                        value="Factura a favor de Seguros Atlas"
+                                                        name="iFrameFavorAtlas">Factura a favor de Seguros
+                                                        Atlas</option>
+                                                    <option id="selectSecuencia" value="Secuencia de facturas"
+                                                        name="iFrameSecuencia">Secuencia de
+                                                        facturas
+                                                    </option>
+                                                    <option id="selectBajaPlacas" value="Baja de placas"
+                                                        name="iFrameBaja">
+                                                        Baja de placas
+                                                    </option>
+                                                    <option id="selectCertificado" value="Certificado Propiedad"
+                                                        name="iFrameCertificado">
+                                                        Certificado Propiedad</option>
+                                                    <option id="selectCertificadoCopia"
+                                                        value="Copia certificado propiedad"
+                                                        name="iFrameCopiaCertificado">
+                                                        Copia certificado propiedad</option>
+                                                    <option id="selectPedimento" value="Pedimento de Importacion"
+                                                        name="iFrameImportacion">Pedimento de Importacion</option>
+                                                    <option id="selectR.F.V." value=" R.F.V." name="iFrameRFV">R.F.V.
+                                                    </option>
+                                                    <option id="selectBajaPermiso"
+                                                        value="Baja de permiso de internacion" name="iFramePermiso">
+                                                        Baja de permiso de internacion
+                                                    </option>
+                                                    <option id="selectVerificacion" value="Verificacion"
+                                                        name="iFrameVerificacion">
+                                                        Verificacion
+                                                    </option>
+                                                    <option id="selectTenencias" value="Tenencias"
+                                                        name="iFrameTenencia">
+                                                        Tenencias</option>
+                                                    <option id="selectMotor" value="Factura del motor"
+                                                        name="iFrameFacturaMotor">
+                                                        Factura del motor</option>
+                                                    <option id="selectLlaves" value="Llaves" name="iFrameLlaves">
+                                                        Llaves
+                                                    </option>
+                                                    <option id="selectLFPDPPP" value="Consentimiento LFPDPPP"
+                                                        name="iFrameLFPDPPP">
+                                                        Consentimiento LFPDPPP
+                                                    </option>
+                                                    <option id="selectAveriguacion" value="Averiguación previa"
+                                                        name="iFrameAveriguacion">
+                                                        Averiguación previa
+                                                    </option>
+                                                    <option id="selectAcreditacion" value="Acreditacion de propiedad"
+                                                        name="iFrameAcreditacion">
+                                                        Acreditacion de propiedad
+                                                    </option>
+                                                    <option id="selectPFP" value="Aviso a PFP" name="iFrameAviso">
+                                                        Aviso a PFP
+                                                    </option>
+                                                    <option id="selectOtros" value="Otros" name="iFrameOtros">
+                                                        Otros
+                                                    </option>
+                                                    <option id="selectOficioLiberacion" value="Oficio de liberacion"
+                                                        name="iFrameOficio">
+                                                        Oficio de liberacion
+                                                    </option>
+                                                    <option id="selectOficioCancelacion"
+                                                        value="Oficio de cancelacion del robo"
+                                                        name="iFrameOficioCancelacion">
+                                                        Oficio de cancelacion del robo
+                                                    </option>
+                                                </optgroup>
+                                                <optgroup label="Atlas">
+                                                    <option id="selectConoce" value="Formato conoce a tu cliente"
+                                                        name="iFrameConoce">
+                                                        Formato conoce a tu cliente
+                                                    </option>
+                                                    <option id="selectFiniquito" value="Formato finiquito"
+                                                        name="iFrameConoce">
+                                                        Formato finiquito
+                                                    </option>
+                                                    <option id="selectRefactura" value="Formato refactura"
+                                                        name="iFrameConoce">
+                                                        Formato refactura
+                                                    </option>
+                                                    <option id="selectCedula" value="Cedula corta" name="iFrameConoce">
+                                                        Cedula corta
+                                                    </option>
+                                                </optgroup>
                                             </select>
                                         </div>
 

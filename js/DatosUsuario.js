@@ -26,7 +26,7 @@ function acordeonCerrado() {
   let iFrame;
   $("#btnFactura").on("click", function () {
     img = document.getElementById("iFrameFactura");
-    iFrame = document.getElementById("iFrameIFrameIdentificacion");
+    iFrame = document.getElementById("iFrameIFrameFactura");
     if (document.querySelector("#btnFactura.collapsed")) {
       iFrame.style.display = "none";
       img.style.display = "none";
@@ -120,14 +120,6 @@ function acordeonCerrado() {
       img.style.display = "none";
     }
   });
-  $("#btnConoce").on("click", function () {
-    img = document.getElementById("iFrameConoce");
-    iFrame = document.getElementById("iFrameIFrameConoce");
-    if (document.querySelector("#btnConoce.collapsed")) {
-      iFrame.style.display = "none";
-      img.style.display = "none";
-    }
-  });
   $("#btnLFPDPPP").on("click", function () {
     img = document.getElementById("iFrameLFPDPPP");
     iFrame = document.getElementById("iFrameIFrameLFPDPPP");
@@ -184,6 +176,38 @@ function acordeonCerrado() {
       img.style.display = "none";
     }
   });
+  $("#btnConoce").on("click", function () {
+    img = document.getElementById("iFrameConoce");
+    iFrame = document.getElementById("iFrameIFrameConoce");
+    if (document.querySelector("#btnConoce.collapsed")) {
+      iFrame.style.display = "none";
+      img.style.display = "none";
+    }
+  });
+  $("#btnFiniquito").on("click", function () {
+    img = document.getElementById("iFrameFiniquito");
+    iFrame = document.getElementById("iFrameIFrameFiniquito");
+    if (document.querySelector("#btnFiniquito.collapsed")) {
+      iFrame.style.display = "none";
+      img.style.display = "none";
+    }
+  });
+  $("#btnRefactura").on("click", function () {
+    img = document.getElementById("iFrameRefactura");
+    iFrame = document.getElementById("iFrameIFrameRefactura");
+    if (document.querySelector("#btnRefactura.collapsed")) {
+      iFrame.style.display = "none";
+      img.style.display = "none";
+    }
+  });
+  $("#btnCedula").on("click", function () {
+    img = document.getElementById("iFrameCedula");
+    iFrame = document.getElementById("iFrameIFrameCedula");
+    if (document.querySelector("#btnCedula.collapsed")) {
+      iFrame.style.display = "none";
+      img.style.display = "none";
+    }
+  });
 }
 function mostrarImagenFrame(getIdUl, nombreImagen) {
   let idRegistro = document.getElementById("sesionActual").textContent;
@@ -234,7 +258,7 @@ function cargarImagenIframe(getId, getImg, getIframe) {
 }
 function imagenSeleccionada() {
   $(document).on("click", ".ulFactura", function () {
-    cargarImagenIframe(this.id, "iFrameFactura", "iFrameIFrameIdentificacion");
+    cargarImagenIframe(this.id, "iFrameFactura", "iFrameIFrameFactura");
   });
   $(document).on("click", ".ulSecuencia", function () {
     cargarImagenIframe(this.id, "iFrameSecuencia", "iFrameIFrameSecuencia");
@@ -281,9 +305,6 @@ function imagenSeleccionada() {
   $(document).on("click", ".ulLlaves", function () {
     cargarImagenIframe(this.id, "iFrameLlaves", "iFrameIFrameLlaves");
   });
-  $(document).on("click", ".ulConoce", function () {
-    cargarImagenIframe(this.id, "iFrameConoce", "iFrameIFrameConoce");
-  });
   $(document).on("click", ".ulLFPDPPP", function () {
     cargarImagenIframe(this.id, "iFrameLFPDPPP", "iFrameIFrameLFPDPPP");
   });
@@ -316,6 +337,18 @@ function imagenSeleccionada() {
       "iFrameOficioCancelacion",
       "iFrameIframeOficioCancelacion"
     );
+  });
+  $(document).on("click", ".ulConoce", function () {
+    cargarImagenIframe(this.id, "iFrameConoce", "iFrameIFrameConoce");
+  });
+  $(document).on("click", ".ulFiniquito", function () {
+    cargarImagenIframe(this.id, "iFrameFiniquito", "iFrameIFrameFiniquito");
+  });
+  $(document).on("click", ".ulRefactura", function () {
+    cargarImagenIframe(this.id, "iFrameRefactura", "iFrameIFrameRefactura");
+  });
+  $(document).on("click", ".ulCedula", function () {
+    cargarImagenIframe(this.id, "iFrameCedula", "iFrameIFrameCedula");
   });
 }
 async function subirImagen(getId) {
@@ -381,13 +414,7 @@ async function subirImagen(getId) {
   if (id === "imgLlaves") {
     documento = "Llaves";
     $inputArchivos = document.querySelector("#inputLlaves");
-    files = $("#inputLlaves")[0].files[0];
     iFrame = "iFrameLlaves";
-  }
-  if (id === "imgConoce") {
-    documento = "Formato conoce a tu cliente";
-    $inputArchivos = document.querySelector("#inputFormato");
-    iFrame = "iFrameConoce";
   }
   if (id === "imgLFPDPPP") {
     documento = "Consentimiento LFPDPPP";
@@ -424,6 +451,26 @@ async function subirImagen(getId) {
     $inputArchivos = document.querySelector("#inputCancelacion");
     iFrame = "iFrameOficioCancelacion";
   }
+  if (id === "imgConoce") {
+    documento = "Formato conoce a tu cliente";
+    $inputArchivos = document.querySelector("#imgConoce");
+    iFrame = "iFrameConoce";
+  }
+  if (id === "imgFiniquito") {
+    documento = "Formato finiquito";
+    $inputArchivos = document.querySelector("#inputFiniquito");
+    iFrame = "iFrameFiniquito";
+  }
+  if (id === "imgRefactura") {
+    documento = "Formato refactura";
+    $inputArchivos = document.querySelector("#inputRefactura");
+    iFrame = "iFrameRefactura";
+  }
+  if (id === "imgCedula") {
+    documento = "Cedula corta";
+    $inputArchivos = document.querySelector("#inputCedula");
+    iFrame = "iFrameCedula";
+  }
   let sesionActual = document.getElementById("sesionActual").textContent;
   const archivosParaSubir = $inputArchivos.files;
   if (archivosParaSubir.length <= 0) {
@@ -447,7 +494,6 @@ async function subirImagen(getId) {
   const respuesta = await respuestaRaw.json();
   if (respuesta === true) {
     mostrarImagenFrame();
-    document.getElementById("iFrameTenencia").style.display = "";
     //validarSiExiste();
     alert("Éxito al subir");
   } else {

@@ -3,7 +3,38 @@ include "../FuncionesSQL.php";
 $accion = $_POST['accion'];
 switch ($accion) {
     case "infoMapa": {
-            $sql = "select count(estado) as cantidad, estado from infosiniestro group by estado";
+            $fechaCargaInicio = $_POST['fechaCargaInicio'];
+            $fechaCargaFinal = $_POST['fechaCargaFinal'];
+            $estacion = $_POST['estacion'];
+            $estatus = $_POST['estatus'];
+            $subEstatus = $_POST['subEstatus'];
+            $fechaSeguimientoInicio = $_POST['fechaSeguimientoInicio'];
+            $fechaSeguimientoFinal = $_POST['fechaSeguimientoFinal'];
+            $region = $_POST['region'];
+            $estado = $_POST['estado'];
+            $cobertura = $_POST['cobertura'];
+            if ($estacion == "Selecciona...") {
+                $estacion = "";
+            }
+            if ($estatus == "Selecciona...") {
+                $estatus = "";
+            }
+            if ($subEstatus == "Selecciona...") {
+                $subEstatus = "";
+            }
+            if ($region == "Selecciona...") {
+                $region = "";
+            }
+            if ($estado == "Selecciona...") {
+                $estado = "";
+            }
+            if ($cobertura == "Selecciona...") {
+                $cobertura = "";
+            }
+            $sql = "select count(estado) as cantidad, estado from infosiniestro,fechasseguimiento,estadoproceso where fechaCarga>'$fechaCargaInicio' and fechaCarga<'$fechaCargaFinal'"
+                . " and fechaSeguimiento>'$fechaSeguimientoInicio' and fechaSeguimiento<'$fechaSeguimientoFinal' and estacionProceso like '%$estacion%' and estatusOperativo like '%$estatus%'"
+                . " and subEstatusProceso like '%$subEstatus%' and region like '%$region%' and estado like '%$estado%' and cobertura like '%$cobertura%'"
+                . " and fkidRegistro=idRegistro and fkIdRegistroEstadoProceso=idRegistro group by estado";
             ConsultasSelectCualquiera($sql, '../Conexion.php', 'Estados');
             break;
         }

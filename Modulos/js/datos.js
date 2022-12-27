@@ -732,9 +732,6 @@ function guardarDocsAprobados() {
     "checkboxFacturaMotor"
   ).checked;
   let checkboxLlaves = document.getElementById("checkboxLlaves").checked;
-  let checkboxFormatoCliente = document.getElementById(
-    "checkboxFormatoCliente"
-  ).checked;
   let checkboxLFPDPPP = document.getElementById("checkboxLFPDPPP").checked;
   let checkboxAveriguacion = document.getElementById(
     "checkboxAveriguacion"
@@ -750,6 +747,16 @@ function guardarDocsAprobados() {
     "checkboxCancelacion"
   ).checked;
   let idEditableActual = document.getElementById("idOculto").value;
+  let checkboxFormatoCliente = document.getElementById(
+    "checkboxFormatoCliente"
+  ).checked;
+  let checkboxFormatoFiniquito = document.getElementById(
+    "checkboxFormatoFiniquito"
+  ).checked;
+  let checkboxRefactura = document.getElementById("checkboxRefactura").checked;
+  console.log(checkboxRefactura);
+  let checkboxCedula = document.getElementById("checkboxCedula").checked;
+  console.log(checkboxCedula);
   $.ajax({
     method: "POST",
     url: rutaInicial + "GuardarSeguimiento.php",
@@ -774,6 +781,9 @@ function guardarDocsAprobados() {
       checkboxOtros,
       checkboxLiberacion,
       checkboxCancelacion,
+      checkboxFormatoFiniquito,
+      checkboxRefactura,
+      checkboxCedula,
       idEditableActual,
       accion: "ValidarDocs",
     },
@@ -853,11 +863,6 @@ function mostrarDocsAprobados() {
       } else {
         document.getElementById("checkboxLlaves").checked = false;
       }
-      if (result.Siniestros[0].conoceatucliente === "true") {
-        document.getElementById("checkboxFormatoCliente").checked = true;
-      } else {
-        document.getElementById("checkboxFormatoCliente").checked = false;
-      }
       if (result.Siniestros[0].consentimiento === "true") {
         document.getElementById("checkboxLFPDPPP").checked = true;
       } else {
@@ -892,6 +897,26 @@ function mostrarDocsAprobados() {
         document.getElementById("checkboxCancelacion").checked = true;
       } else {
         document.getElementById("checkboxCancelacion").checked = false;
+      }
+      if (result.Siniestros[0].conoceatucliente === "true") {
+        document.getElementById("checkboxFormatoCliente").checked = true;
+      } else {
+        document.getElementById("checkboxFormatoCliente").checked = false;
+      }
+      if (result.Siniestros[0].cedula === "true") {
+        document.getElementById("checkboxCedula").checked = true;
+      } else {
+        document.getElementById("checkboxCedula").checked = false;
+      }
+      if (result.Siniestros[0].refactura === "true") {
+        document.getElementById("checkboxRefactura").checked = true;
+      } else {
+        document.getElementById("checkboxRefactura").checked = false;
+      }
+      if (result.Siniestros[0].finiquito === "true") {
+        document.getElementById("checkboxFormatoFiniquito").checked = true;
+      } else {
+        document.getElementById("checkboxFormatoFiniquito").checked = false;
       }
       let porcentajeBarra = document.getElementById("progresoDocsAprobados");
       porcentajeBarra.style.width = result.Siniestros[0].porcentajeDocs + "%";
@@ -1599,7 +1624,7 @@ function guardarCita() {
       accion: "ValidarCita",
     },
   }).done(function (result) {
-    let fechaValidar = obtenerFechaConvertida(0)+"";
+    let fechaValidar = obtenerFechaConvertida(0) + "";
     if (document.getElementById("txtFechaDatos").value <= fechaValidar) {
       alert("Por favor, selecciona una fecha valida");
       return;
