@@ -12,7 +12,6 @@ header('Location: ./index.html');
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="Estilos/stylesheet.css" />
   <link rel="stylesheet" href="./Estilos/Principal.css">
   <link rel="icon" type="image/jpg" href="./Imagenes Solera/solera-squareLogo-1641391060257.png" />
   <script src="./js/Principal.js"></script>
@@ -50,6 +49,15 @@ header('Location: ./index.html');
               d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
           </svg>
           Reporte</a>
+          <a id="Agenda" onclick="controlIframe(this.id)" class="nav-link text-white" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-calendar-day"
+            viewBox="0 0 16 16">
+            <path
+              d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z" />
+            <path
+              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+          </svg>
+          Agenda</a>
         <a id="Asignacion" onclick="controlIframe(this.id)" class="nav-link text-white" href="#"><svg
             xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cloud-upload"
             viewBox="0 0 16 16">
@@ -59,15 +67,6 @@ header('Location: ./index.html');
               d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z" />
           </svg>
           Asigncion</a>
-        <a id="Agenda" onclick="controlIframe(this.id)" class="nav-link text-white" href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-calendar-day"
-            viewBox="0 0 16 16">
-            <path
-              d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z" />
-            <path
-              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-          </svg>
-          Agenda</a>
         <a id="Encuesta" onclick="controlIframe(this.id)" class="nav-link text-white" href="#"><svg
             xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pie-chart"
             viewBox="0 0 16 16">
@@ -100,7 +99,7 @@ header('Location: ./index.html');
 
   <nav class="topnav">
     <a class="navbar-brand text-white font-size: 1.6rem" href="#">
-      <img src="./Imagenes Solera/solera_white.png" alt="LogoSolera" width="150px" height="30px">
+      <img src="./Imagenes Solera/log-aseg-562.png" alt="LogoSolera" width="150px" height="30px">
     </a>
     <a href="#" onclick="openNav()">
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
@@ -114,11 +113,10 @@ header('Location: ./index.html');
   </nav>
 
   <div id="main">
-
     <!-- Add all your websites page content here  -->
     <div class="embed-container ">
-      <iframe id="controladorIframe" style="border: none" name="iframeControl" scrolling="auto"
-        class="responsive-iframe" allowfullscreen src="ModuloPrincipal.php"></iframe>
+      <iframe id="controladorIframe" name="iframeControl" scrolling="auto"
+        class="responsive-iframe" src="ModuloPrincipal.php"></iframe>
     </div>
   </div>
 </body>

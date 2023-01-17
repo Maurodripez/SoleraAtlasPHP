@@ -64,6 +64,9 @@ $(document).ready(function () {
   $("#btnEnviarCorreo").click(function () {
     enviarCorreo();
   });
+  $("#btnWhatsApp").click(function () {
+    whatsApp();
+  });
   //////////////////////
   $("#btnDatosValidados").click(function () {
     datosValidados();
@@ -381,6 +384,21 @@ function datosPorDefecto() {
     mostrarTabla(result);
   });
 }
+async function progresoTotal(id) {
+  let url = "../php/ProgresoTotal.php";
+  let data = new FormData();
+  data.append("accion", "ProgresoTotal");
+  data.append("id", id);
+  let resultado = await fetch(url, {
+    method: "POST",
+    body: data,
+  }).then((response) => {
+    return response.json();
+  });
+  let barra = document.getElementById("porcentajeTotal");
+  barra.textContent = resultado.Total[0].porcentajeTotal + "%";
+  barra.style.width = resultado.Total[0].porcentajeTotal + "%";
+}
 function busquedaPorDias(getId) {
   let checkTerminados = document.getElementById("terminadosBtn");
   let checkSeguimiento = document.getElementById("enSeguimientoBtn");
@@ -596,6 +614,7 @@ function mostrarInfoSiniestro(get) {
       estaciones();
       document.getElementById("divSeguimiento").style.display = "";
       document.getElementById("divGuardarImagenes").style.display = "none";
+      progresoTotal(get);
       //el arreglo que se crea se lo agregagmos a cada boton que hay
     },
   });
@@ -710,6 +729,16 @@ function asignarIntegrador() {
   });
 }
 function guardarDocsAprobados() {
+  let checkboxComprobante = document.getElementById(
+    "checkboxComprobante"
+  ).checked;
+  let checkboxTarjeta = document.getElementById("checkboxTarjeta").checked;
+  let checkboxIdentificacion = document.getElementById(
+    "checkboxIdentificacion"
+  ).checked;
+  let checkboxSituacion = document.getElementById("checkboxSituacion").checked;
+  let checkboxCurp = document.getElementById("checkboxCurp").checked;
+  let checkboxEstado = document.getElementById("checkboxEstado").checked;
   let checkboxFactura = document.getElementById("checkboxFactura").checked;
   let checkboxFacturaAtlas = document.getElementById(
     "checkboxFacturaAtlas"
@@ -761,6 +790,12 @@ function guardarDocsAprobados() {
     method: "POST",
     url: rutaInicial + "GuardarSeguimiento.php",
     data: {
+      checkboxComprobante,
+      checkboxTarjeta,
+      checkboxIdentificacion,
+      checkboxSituacion,
+      checkboxCurp,
+      checkboxEstado,
       checkboxFactura,
       checkboxFacturaAtlas,
       checkboxSecuencia,
@@ -803,6 +838,36 @@ function mostrarDocsAprobados() {
       accion: "DocsAprobados",
     },
     success: function (result) {
+      if (result.Siniestros[0].comprobante === "true") {
+        document.getElementById("checkboxComprobante").checked = true;
+      } else {
+        document.getElementById("checkboxComprobante").checked = false;
+      }
+      if (result.Siniestros[0].circulacion === "true") {
+        document.getElementById("checkboxTarjeta").checked = true;
+      } else {
+        document.getElementById("checkboxTarjeta").checked = false;
+      }
+      if (result.Siniestros[0].identificacion === "true") {
+        document.getElementById("checkboxIdentificacion").checked = true;
+      } else {
+        document.getElementById("checkboxIdentificacion").checked = false;
+      }
+      if (result.Siniestros[0].situacion === "true") {
+        document.getElementById("checkboxSituacion").checked = true;
+      } else {
+        document.getElementById("checkboxSituacion").checked = false;
+      }
+      if (result.Siniestros[0].curp === "true") {
+        document.getElementById("checkboxCurp").checked = true;
+      } else {
+        document.getElementById("checkboxCurp").checked = false;
+      }
+      if (result.Siniestros[0].estadocuenta === "true") {
+        document.getElementById("checkboxEstado").checked = true;
+      } else {
+        document.getElementById("checkboxEstado").checked = false;
+      }
       if (result.Siniestros[0].factura === "true") {
         document.getElementById("checkboxFactura").checked = true;
       } else {
@@ -1005,7 +1070,98 @@ function enviarImagenes() {
   $("#btnSubirDoc").on("click", function () {
     let idRegistro = document.getElementById("idOculto").value;
     let nombreArchivo = document.getElementById("tipoArchivoCargado").value;
-    let iFrame = document.getElementById("tipoArchivoCargado").name;
+    let iFrame;
+    if (nombreArchivo === "Identificacion oficial") {
+      iFrame = "iFrameIdentificacion";
+    }
+    if (nombreArchivo === "Situacion fiscal") {
+      iFrame = "iFrameSituacion";
+    }
+    if (nombreArchivo === "Curp") {
+      iFrame = "iFrameCurp";
+    }
+    if (nombreArchivo === "Estado de cuenta") {
+      iFrame = "iFrameEstado";
+    }
+    if (nombreArchivo === "Comprobante de domicilio") {
+      iFrame = "iFrameComprobante";
+    }
+    if (nombreArchivo === "Tarjeta de circulacion") {
+      iFrame = "iFrameTarjeta";
+    }
+    if (nombreArchivo === "Factura") {
+      iFrame = "iFrameFactura";
+    }
+    if (nombreArchivo === "Factura a favor de Seguros Atlas") {
+      iFrame = "iFrameFavorAtlas";
+    }
+    if (nombreArchivo === "Secuencia de facturas") {
+      iFrame = "iFrameSecuencia";
+    }
+    if (nombreArchivo === "Baja de placas") {
+      iFrame = "iFrameBaja";
+    }
+    if (nombreArchivo === "Certificado Propiedad") {
+      iFrame = "iFrameCertificado";
+    }
+    if (nombreArchivo === "Copia certificado propiedad") {
+      iFrame = "iFrameCopiaCertificado";
+    }
+    if (nombreArchivo === "Pedimento de Importacion") {
+      iFrame = "iFrameImportacion";
+    }
+    if (nombreArchivo === "R.F.V.") {
+      iFrame = "iFrameRFV";
+    }
+    if (nombreArchivo === "Baja de permiso de internacion") {
+      iFrame = "iFramePermiso";
+    }
+    if (nombreArchivo === "Verificacion") {
+      iFrame = "iFrameVerificacion";
+    }
+    if (nombreArchivo === "Tenencias") {
+      iFrame = "iFrameTenencia";
+    }
+    if (nombreArchivo === "Factura del motor") {
+      iFrame = "iFrameFacturaMotor";
+    }
+    if (nombreArchivo === "Llaves") {
+      iFrame = "iFrameLlaves";
+    }
+    if (nombreArchivo === "Consentimiento LFPDPPP") {
+      iFrame = "iFrameLFPDPPP";
+    }
+    if (nombreArchivo === "Averiguación previa") {
+      iFrame = "iFrameAveriguacion";
+    }
+    if (nombreArchivo === "Acreditacion de propiedad") {
+      iFrame = "iFrameAcreditacion";
+    }
+    if (nombreArchivo === "Aviso a PFP") {
+      iFrame = "iFrameAviso";
+    }
+    if (nombreArchivo === "Otros") {
+      iFrame = "iFrameOtros";
+    }
+    if (nombreArchivo === "Oficio de liberacion") {
+      iFrame = "iFrameOficio";
+    }
+    if (nombreArchivo === "Oficio de cancelacion del robo") {
+      iFrame = "iFrameOficioCancelacion";
+    }
+    if (nombreArchivo === "Formato conoce a tu cliente") {
+      iFrame = "iFrameConoce";
+    }
+    if (nombreArchivo === "Formato finiquito") {
+      iFrame = "iFrameFiniquito";
+    }
+    if (nombreArchivo === "Formato refactura") {
+      iFrame = "iFrameRefactura";
+    }
+    if (nombreArchivo === "Cedula corta") {
+      iFrame = "iFrameCedula";
+    }
+    alert(iFrame);
     let formData = new FormData();
     let files = $("#archivoCargado")[0].files[0];
     formData.append("file", files);
@@ -1075,9 +1231,10 @@ function descargarEnZip() {
     let idRegistro = document.getElementById("idOculto").value;
     $.ajax({
       method: "POST",
-      url: "../../Documentos/Ids/DescargarDocumentos.php",
+      url: "../Documentos/Ids/DescargarDocumentos.php",
       data: {
         idRegistro,
+        accion: "ZipTodo",
       },
     }).done(function () {
       let btnDescargar = document.getElementById("linkDescargarZip");
@@ -1085,6 +1242,15 @@ function descargarEnZip() {
       console.log("entra");
     });
   });
+}
+function whatsApp() {
+  let numero = document.getElementById("telefonoPrincipal").value;
+  let siniestro = document.getElementById("numSiniestro").value;
+  let mensaje = `Buen%20día.%20Me%20comunico%20de%20Seguros%20Atlas%20en%20relación%20al%20siniestro%20${siniestro}%20mismo%20que%20ha%20sido%20determinado%20como%20pérdida%20total/%20por%20daño%20material%20/%20robo%20total%20(COLISION),%20quedamos%20a%20sus%20órdenes%20para%20poder%20apoyarlo%20a%20tramitar%20su%20indemnización.%20Nos%20puede%20contactar%20de%20lunes%20a%20viernes%20de%209%20de%20la%20mañana%20a%20las%206%20de%20la%20tarde,%20donde%20con%20gusto%20lo%20atenderemos.`;
+  let btnWhats = document.createElement("a");
+  btnWhats.setAttribute("href", `https://wa.me/${numero}?text=${mensaje}`);
+  btnWhats.setAttribute("target", "_blank");
+  btnWhats.click();
 }
 function convertirPDF(getId) {
   let sinComas = getId.split(",");
@@ -1119,7 +1285,7 @@ function tablaImagenes(txtIdRegistro) {
         onclick='mostrarImagenSelect(this.id)' type='button' class='btn btn-primary'>Ver</button>
         <button id='Pdf,${result.Siniestros[i].fkImagen},${result.Siniestros[i].nombreImagen}'
         onclick='convertirPDF(this.id)' type='button' class='btn btn-primary'>Pdf</button>
-        <a class='btn btn-success' href='../../Documentos/Ids/${result.Siniestros[i].fkImagen}/${result.Siniestros[i].nombreImagen}' download='${result.Siniestros[i].nombreImagen}'>
+        <a class='btn btn-success' href='../Documentos/Ids/${result.Siniestros[i].fkImagen}/${result.Siniestros[i].nombreImagen}' download='${result.Siniestros[i].nombreImagen}'>
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'
         stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'
         class='feather feather-download'>

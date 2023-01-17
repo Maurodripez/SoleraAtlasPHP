@@ -107,9 +107,23 @@ body {
 }
 #encabezadoDatos {
   font-size: 30px;
+  color: #ffffff;
+}
+.letreroModal{
+  color: aliceblue;
+  background-color: #605ca8;
+}
+.letreroCedulas{
+  background-color: #9190c3;
 }
 .fechaInput {
   border: none;
+}
+.btnEjecutar{
+  background-color: #605ca8;
+}
+.btnEjecutar:hover{
+  background-color: #494681;
 }
 .fSeguimientoClass {
   width: 100%;
@@ -193,4 +207,7 @@ img {
   object-fit: cover;
   width: 100%;
   height: 500px;
+}
+body {
+  padding: 0px 10px 0px 10px;
 }

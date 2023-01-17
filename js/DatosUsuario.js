@@ -350,12 +350,59 @@ function imagenSeleccionada() {
   $(document).on("click", ".ulCedula", function () {
     cargarImagenIframe(this.id, "iFrameCedula", "iFrameIFrameCedula");
   });
+  $(document).on("click", ".ulIdentificacion", function () {
+    cargarImagenIframe(this.id, "iFrameIdentificacion", "iFrameIFrameIdentificacion");
+  });
+  $(document).on("click", ".ulSituacion", function () {
+    cargarImagenIframe(this.id, "iFrameSituacion", "iFrameIFrameSituacion");
+  });
+  $(document).on("click", ".ulCurp", function () {
+    cargarImagenIframe(this.id, "iFrameCurp", "iFrameIFrameCurp");
+  });
+  $(document).on("click", ".ulEstado", function () {
+    cargarImagenIframe(this.id, "iFrameEstado", "iFrameIFrameEstado");
+  });
+  $(document).on("click", ".ulComprobante", function () {
+    cargarImagenIframe(this.id, "iFrameComprobante", "iFrameIFrameComprobante");
+  });
+  $(document).on("click", ".ulTarjeta", function () {
+    cargarImagenIframe(this.id, "iFrameTarjeta", "iFrameIFrameTarjeta");
+  });
 }
 async function subirImagen(getId) {
   let id = getId;
   let documento;
-  let files;
   let $inputArchivos;
+  if (id === "imgIdentificacion") {
+    documento = "Identificacion oficial";
+    $inputArchivos = document.querySelector("#inputIdentificacion");
+    iFrame = "iFrameIdentificacion";
+  }
+  if (id === "imgSituacion") {
+    documento = "Situacion fiscal";
+    $inputArchivos = document.querySelector("#inputSituacion");
+    iFrame = "iFrameSituacion";
+  }
+  if (id === "imgCurp") {
+    documento = "Curp";
+    $inputArchivos = document.querySelector("#inputCurp");
+    iFrame = "iFrameCurp";
+  }
+  if (id === "imgEstado") {
+    documento = "Factura";
+    $inputArchivos = document.querySelector("#inputEstado");
+    iFrame = "iFrameEstado";
+  }
+  if (id === "imgComprobante") {
+    documento = "Factura";
+    $inputArchivos = document.querySelector("#inputComprobante");
+    iFrame = "iFrameComprobante";
+  }
+  if (id === "imgTarjeta") {
+    documento = "Factura";
+    $inputArchivos = document.querySelector("#inputTarjeta");
+    iFrame = "iFrameTarjeta";
+  }
   if (id === "imgFactura") {
     documento = "Factura";
     $inputArchivos = document.querySelector("#inputFactura");
@@ -485,7 +532,7 @@ async function subirImagen(getId) {
   }
   // Los enviamos
   const respuestaRaw = await fetch(
-    `../php/upload.php?idRegistro=${sesionActual}&nombreArchivo=${documento}&iFrame=${iFrame}`,
+    `./php/upload.php?idRegistro=${sesionActual}&nombreArchivo=${documento}&iFrame=${iFrame}`,
     {
       method: "POST",
       body: formData,

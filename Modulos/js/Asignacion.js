@@ -80,7 +80,7 @@ async function cargarExcel() {
     let fechaDecretacion = contenido[x][15].toISOString().split("T")[0];
     $.ajax({
       method: "POST",
-      url: "../../php/AgregarSiniestro.php",
+      url: "../php/AgregarSiniestro.php",
       data: {
         numSiniestro: contenido[x][0],
         fechaSiniestro,

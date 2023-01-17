@@ -8,7 +8,7 @@ $(document).ready(function () {
   $("#desplegarInfoAdicional").on("click", function () {
     infoAdicional();
   });
-  var calendar = $("#calendar").fullCalendar({
+  $("#calendar").fullCalendar({
     header: {
       left: "prev,next today",
       center: "title",

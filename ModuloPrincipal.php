@@ -5,7 +5,7 @@ header('Location: ./index.html');
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <script src="./js/jquery-3.6.1.js"></script>
@@ -49,7 +49,7 @@ header('Location: ./index.html');
             </form>
         </div>
     </div>
-    <div class="accordion p-4" id="accordionPanelsStayOpenExample">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                 <button class="acordeonPrincipal accordion-button" type="button" data-bs-toggle="collapse"

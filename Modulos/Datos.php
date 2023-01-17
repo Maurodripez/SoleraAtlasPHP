@@ -29,7 +29,7 @@ header('Location: ../index.html');
         <div class="col text-left display-6 p-2">
             <nav class="navbar bg-light">
                 <div class="container-fluid">
-                    <span style="display: none" class="navbar-brand mb-0 h1">Modulo Principal</span>
+
                 </div>
             </nav>
         </div>
@@ -49,11 +49,11 @@ header('Location: ../index.html');
         </div>
     </div>
     <nav class="navbar bg-light">
-        <div class="container-fluid">
-            <span id="encabezadoDatos" class="navbar-brand mb-0 h1">Seguimiento cedulas seguros Solera</span>
+        <div class="container-fluid letreroCedulas">
+            <span id="encabezadoDatos" class="navbar-brand mb-0 h1">Seguimiento cedulas seguros Solera Atlas</span>
         </div>
     </nav>
-    <div class="accordion p-4" id="accordionPanelsStayOpenExample">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                 <button class="acordeonPrincipal accordion-button" type="button" data-bs-toggle="collapse"
@@ -387,9 +387,6 @@ header('Location: ../index.html');
                                                 name="txtFechaCarga">
                                         </div>
                                     </div>
-                                    <a style="display: none" id="btnDescargarExcel"
-                                        href="http://localhost:8080/SoleraWeb/json/siniestros.xls"
-                                        download="Reporte.xls">descargar</a>
                                 </ul>
                             </div>
                         </div>
@@ -558,9 +555,6 @@ header('Location: ../index.html');
                                                 name="txtFechaCarga" readonly>
                                         </div>
                                     </div>
-                                    <a style="display: none" id="btnDescargarExcel"
-                                        href="http://localhost:8080/SoleraWeb/json/siniestros.xls"
-                                        download="Reporte.xls">descargar</a>
                                 </ul>
                             </div>
                         </div>
@@ -1175,13 +1169,18 @@ header('Location: ../index.html');
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header letreroModal">
                     <h5 class="modal-title" id="staticBackdropLabel">
-                        Actualiza Cedula SOLERA
+                        Insertar registro
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <nav class="navbar bg-light">
+                        <div class="container-fluid letreroCedulas">
+                            <span id="encabezadoDatos" class="navbar-brand mb-0 h1">Seguimiento cedulas seguros Solera
+                                Atlas</span>
+                    </nav>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <button type="button" id="btnSeguimiento" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" width="25" height="25" fill="none"
@@ -1208,14 +1207,13 @@ header('Location: ../index.html');
                                 <path
                                     d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                             </svg></label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" />
-                        <label class="btn btn-outline-primary" for="btnradio4"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                            <button type="button" id="btnWhatsApp" style="background-color: #57ce63;" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#ffffff"
+                                class="bi bi-whatsapp" viewBox="0 0 16 16">
                                 <path
                                     d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
-                            </svg></label>
-
+                            </svg>
+                        </button>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="btnradio5"><svg xmlns="http://www.w3.org/2000/svg"
                                 width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
@@ -1237,6 +1235,17 @@ header('Location: ../index.html');
                     </div>
                     <!--div para mostrar el seguimiento-->
                     <div id="divSeguimiento" style="display:''">
+                        <div class="col pb-2">
+                            <div class="row">
+                                <label style="text-align: center;"><strong>Progreso total</strong></label>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                    id="porcentajeTotal" role="progressbar" aria-label="Animated striped example"
+                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="background:#605ca8">
+                                    0%</div>
+                            </div>
+                        </div>
                         <div class="accordion accordion-flush" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-headingOne">
@@ -1773,7 +1782,7 @@ header('Location: ../index.html');
                                             <div class="divDatosValidados col px-md-3">
                                                 <div class="btnDatosValidados">
                                                     <p>
-                                                        <a class="btn btn-primary" id="btnDatosValidados"
+                                                        <a class="btn btn-primary btnEjecutar" id="btnDatosValidados"
                                                             data-bs-toggle="collapse" href="#datosValidados"
                                                             role="button" aria-expanded="false"
                                                             aria-controls="datosValidados">
@@ -2055,7 +2064,8 @@ header('Location: ../index.html');
                             <!--centrar texto con esta funcion-->
                             <div style="text-align: center">
                                 <div class="p-2">
-                                    <button id="gDatosBtn" onclick="GuardarRegistros()" class="btn btn-info pt-2 pb-2">
+                                    <button id="gDatosBtn" onclick="GuardarRegistros()"
+                                        class="btnEjecutar btn btn-info pt-2 pb-2">
                                         Guardar Datos
                                     </button>
                                 </div>
@@ -2375,8 +2385,9 @@ header('Location: ../index.html');
                                                         </div>
                                                     </div>
                                                     <div class="col mb-3 mt-3">
-                                                        <button id="btnOffCanvasCita" class="btn" type="button"
-                                                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasCita"
+                                                        <button id="btnOffCanvasCita" class="btn btnEjecutar"
+                                                            type="button" data-bs-toggle="offcanvas"
+                                                            data-bs-target="#offcanvasCita"
                                                             aria-controls="offcanvasCita">Generar Cita</button>
 
                                                         <div class="offcanvas offcanvas-end" tabindex="-1"
@@ -2510,7 +2521,7 @@ header('Location: ../index.html');
                                             </div>
                                             <div class="mb-3" style="text-align: center">
                                                 <button id="insertarSeguimiento" onclick="InsertarSeguimiento()"
-                                                    class="btn btn-info">
+                                                    class="btn btnEjecutar">
                                                     Insertar seguimiento
                                                 </button>
                                             </div>
@@ -2532,7 +2543,7 @@ header('Location: ../index.html');
                                             </div>
                                             <div class="col">
                                                 <button onclick="asignarIntegrador()" id="btnAsignarIntegrador"
-                                                    class="btn btn-primary">
+                                                    class="btn btnEjecutar">
                                                     Asignar integrador
                                                 </button>
                                             </div>
@@ -2574,7 +2585,7 @@ header('Location: ../index.html');
                                 <div class="accordion-body">
                                     <div id="divListaDocsAprobados">
                                         <ul class="list-group list-group-flush">
-                                        <h5>Documentos usuarios</h5>
+                                            <h5>Documentos usuarios</h5>
                                             <div class="row">
                                                 <li class="col list-group-item list-group-item-sm">
                                                     <input class="form-check-input" type="checkbox" value=""
@@ -2588,6 +2599,42 @@ header('Location: ../index.html');
                                                         id="checkboxFacturaAtlas">
                                                     <label class="form-check-label" for="checkboxFacturaAtlas">
                                                         Factura a favor de Seguros Atlas
+                                                    </label>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <ul class="list-group list-group-flush">
+                                            <div class="row">
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxIdentificacion">
+                                                    <label class="form-check-label" for="checkboxIdentificacion">
+                                                        Identificacion oficial
+                                                    </label>
+                                                </li>
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxSituacion">
+                                                    <label class="form-check-label" for="checkboxSituacion">
+                                                        Situacion fiscal
+                                                    </label>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <ul class="list-group list-group-flush">
+                                            <div class="row">
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxCurp">
+                                                    <label class="form-check-label" for="checkboxCurp">
+                                                        Curp
+                                                    </label>
+                                                </li>
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxEstado">
+                                                    <label class="form-check-label" for="checkboxEstado">
+                                                        Estado de cuenta
                                                     </label>
                                                 </li>
                                             </div>
@@ -2642,6 +2689,24 @@ header('Location: ../index.html');
                                                         id="checkboxRFV">
                                                     <label class="form-check-label" for="checkboxRFV">
                                                         R.F.V.
+                                                    </label>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <ul class="list-group list-group-flush">
+                                            <div class="row">
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxComprobante">
+                                                    <label class="form-check-label" for="checkboxComprobante">
+                                                        Comprobante de domicilio
+                                                    </label>
+                                                </li>
+                                                <li class="col list-group-item list-group-item-sm">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="checkboxTarjeta">
+                                                    <label class="form-check-label" for="checkboxTarjeta">
+                                                        Tarjeta de circulacion
                                                     </label>
                                                 </li>
                                             </div>
@@ -2752,21 +2817,21 @@ header('Location: ../index.html');
                                                 </li>
                                             </div>
                                         </ul>
-                                        <h5>Documentos Atlas</h5>
+                                        <h5>DOCUMENTOS ATLAS</h5>
                                         <ul class="list-group list-group-flush">
                                             <div class="row">
                                                 <li class="col list-group-item list-group-item-sm">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="checkboxFormatoFiniquito">
                                                     <label class="form-check-label" for="checkboxFormatoFiniquito">
-                                                        Formato finiquito
+                                                        FORMATO FINIQUITO
                                                     </label>
                                                 </li>
                                                 <li class="col list-group-item list-group-item-sm">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="checkboxRefactura">
                                                     <label class="form-check-label" for="checkboxRefactura">
-                                                        Formato refactura
+                                                        FORMATO REFACTURA
                                                     </label>
                                                 </li>
                                             </div>
@@ -2777,14 +2842,14 @@ header('Location: ../index.html');
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="checkboxCedula">
                                                     <label class="form-check-label" for="checkboxCedula">
-                                                        Cedula corta
+                                                        CEDULA CORTA
                                                     </label>
                                                 </li>
                                                 <li class="col list-group-item list-group-item-sm">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="checkboxFormatoCliente">
                                                     <label class="form-check-label" for="checkboxFormatoCliente">
-                                                        Formato conoce a tu cliente
+                                                        FORMATO CONOCE A TU CLIENTE
                                                     </label>
                                                 </li>
                                             </div>
@@ -2802,6 +2867,25 @@ header('Location: ../index.html');
                                                 class="form-select form-select-sm" aria-label="Default select example">
                                                 <option selected>Selecciona...</option>
                                                 <optgroup label="Usuario">
+                                                    <option id="selectIdentificacion" value="Identificacion oficial"
+                                                        name="iFrameIdentificacion">Identificacion oficial
+                                                    </option>
+                                                    <option id="selectSituacion" value="Situacion fiscal"
+                                                        name="iFrameSituacion">
+                                                        Situacion fiscal
+                                                    </option>
+                                                    <option id="selectCurp" value="Curp" name="iFrameCurp">
+                                                        Curp</option>
+                                                    <option id="selectEstado" value="Estado de cuenta"
+                                                        name="iFrameEstado">
+                                                        Estado de cuenta</option>
+                                                    <option id="selectComprobantes" value="Comprobante de domicilio"
+                                                        name="iFrameComprobante">
+                                                        Comprobante de domicilio</option>
+                                                    <option id="selectTarjeta" value="Tarjeta de circulacion"
+                                                        name="iFrameTarjeta">
+                                                        Tarjeta de circulacion
+                                                    </option>
                                                     <option id="selectFactura" value="Factura" name="iFrameFactura">
                                                         Factura
                                                     </option>
@@ -2826,7 +2910,7 @@ header('Location: ../index.html');
                                                         Copia certificado propiedad</option>
                                                     <option id="selectPedimento" value="Pedimento de Importacion"
                                                         name="iFrameImportacion">Pedimento de Importacion</option>
-                                                    <option id="selectR.F.V." value=" R.F.V." name="iFrameRFV">R.F.V.
+                                                    <option id="selectR.F.V." value="R.F.V." name="iFrameRFV">R.F.V.
                                                     </option>
                                                     <option id="selectBajaPermiso"
                                                         value="Baja de permiso de internacion" name="iFramePermiso">
@@ -2928,8 +3012,13 @@ header('Location: ../index.html');
                                                  0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
                                         </svg>
                                     </button>
+                                    <button type="button" id="btnZipAprobados" class="btn btn-success">
+                                        Aprobados
+                                    </button>
                                     <a style="display: none" id="linkDescargarZip"
                                         href='../Documentos/Ids/archivosZip/documentos.zip'>documentos.zip</a>
+                                    <a style="display: none" id="linkDescargarZip"
+                                        href='../Documentos/Ids/archivosZip/documentosAprobados.zip'>documentos.zip</a>
                                     <table class="table table-hover col float-end text-center">
                                         <thead>
                                             <tr>

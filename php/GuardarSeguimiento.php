@@ -131,6 +131,12 @@ switch ($accion) {
         }
     case "ValidarDocs": {
             $docsAprobados = [
+                "comprobante" => $_POST["checkboxComprobante"],
+                "circulacion" => $_POST["checkboxTarjeta"],
+                "identificacion" => $_POST["checkboxIdentificacion"],
+                "situacion" => $_POST["checkboxSituacion"],
+                "curp" => $_POST["checkboxCurp"],
+                "estadocuenta" => $_POST["checkboxEstado"],
                 "factura" => $_POST["checkboxFactura"],
                 "facturaatlas" => $_POST["checkboxFacturaAtlas"],
                 "secuencia" => $_POST["checkboxSecuencia"],

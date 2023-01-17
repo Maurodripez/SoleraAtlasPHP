@@ -193,8 +193,8 @@ header('Location: ./LoginUsuarios.html');
                                     </div>
                                 </div>
                                 <img id="iFrameFactura" src="" alt="" style="display: none;">
-                                <iframe id="iFrameIFrameFactura" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameFactura" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                             </div>
                         </div>
                         <div class="col">
@@ -249,8 +249,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameSecuencia" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameSecuencia" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameSecuencia" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -308,8 +308,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameCertificado" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameCertificado" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameCertificado" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -367,8 +367,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameCopiaCertificado" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameCopiaCertificado" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameCopiaCertificado" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -426,8 +426,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameImportacion" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameImportacion" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameImportacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -482,8 +482,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFramePermiso" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFramePermiso" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFramePermiso" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -537,8 +537,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameRFV" style="display: none;"src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameRFV" style="display: none;" src="" width="100%" height="500vh"
+                                    frameborder="0"></iframe>
                                 <img id="iFrameRFV" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -595,8 +595,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameVerificacion" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameVerificacion" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameVerificacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -651,8 +651,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameTenencia" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameTenencia" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameTenencia" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -708,7 +708,7 @@ header('Location: ./LoginUsuarios.html');
                                     </div>
                                 </div>
                                 <iframe id="iFrameIFrameBaja" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                    frameborder="0"></iframe>
                                 <img id="iFrameBaja" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -765,8 +765,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameFacturaMotor" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameFacturaMotor" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameFacturaMotor" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -822,8 +822,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameLlaves" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameLlaves" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameLlaves" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -878,8 +878,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameLFPDPPP" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameLFPDPPP" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameLFPDPPP" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -936,8 +936,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameAveriguacion" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameAveriguacion" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameAveriguacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -994,8 +994,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameAcreditacion" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameAcreditacion" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameAcreditacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -1051,7 +1051,7 @@ header('Location: ./LoginUsuarios.html');
                                     </div>
                                 </div>
                                 <iframe id="iFrameIFrameAviso" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                    frameborder="0"></iframe>
                                 <img id="iFrameAviso" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -1106,7 +1106,7 @@ header('Location: ./LoginUsuarios.html');
                                     </div>
                                 </div>
                                 <iframe id="iFrameIFrameOtros" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                    frameborder="0"></iframe>
                                 <img id="iFrameOtros" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -1161,8 +1161,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameOficio" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameOficio" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameOficio" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -1221,8 +1221,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIframeOficioCancelacion" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIframeOficioCancelacion" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameOficioCancelacion" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -1239,8 +1239,8 @@ header('Location: ./LoginUsuarios.html');
                                     <div id="imagenConoce" class="accordion-body">
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
-                                                <input class="form-control form-control-sm" type="file"
-                                                    id="inputConoce" multiple="" />
+                                                <input class="form-control form-control-sm" type="file" id="inputConoce"
+                                                    multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gConoce" type="submit"
@@ -1277,8 +1277,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameConoce" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameConoce" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameConoce" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -1333,8 +1333,8 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameFiniquito" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameFiniquito" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameFiniquito" style="display: none;" src="" alt="">
                             </div>
                         </div>
@@ -1380,6 +1380,7 @@ header('Location: ./LoginUsuarios.html');
                                                     </svg>
                                                 </a>
                                             </div>
+
                                             <div class="collapse" id="collapseRefactura">
                                                 <div class="card card-body">
                                                     <ul id="ulRefactura" class="list-group">
@@ -1389,17 +1390,17 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameRefactura" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameRefactura" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameRefactura" style="display: none;" src="" alt="">
                             </div>
                         </div>
                         <div class="col">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingThree">
-                                    <button value="Cedula corta" id="btnCedula"
-                                        class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#Cedula" aria-expanded="false" aria-controls="collapseThree">
+                                    <button value="Cedula corta" id="btnCedula" class="accordion-button collapsed"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#Cedula"
+                                        aria-expanded="false" aria-controls="collapseThree">
                                         Cedula corta
                                     </button>
                                 </h2>
@@ -1407,8 +1408,8 @@ header('Location: ./LoginUsuarios.html');
                                     <div id="imagenCedula" class="accordion-body">
                                         <div class="row">
                                             <div class="file-select botonCargarDoc col-8">
-                                                <input class="form-control form-control-sm" type="file"
-                                                    id="inputCedula" multiple="" />
+                                                <input class="form-control form-control-sm" type="file" id="inputCedula"
+                                                    multiple="" />
                                             </div>
                                             <div class="btn-group col-4" role="group">
                                                 <button onclick="subirImagen(this.id)" name="gCedula" type="submit"
@@ -1445,9 +1446,351 @@ header('Location: ./LoginUsuarios.html');
                                         </div>
                                     </div>
                                 </div>
-                                <iframe id="iFrameIFrameCedula" style="display: none;" src="" width="100%" height="500vh"
-                                        frameborder="0"></iframe>
+                                <iframe id="iFrameIFrameCedula" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
                                 <img id="iFrameCedula" style="display: none;" src="" alt="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button value="Identificacion oficial" id="btnIdentificacion"
+                                        class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#Identificacion" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Identificacion oficial
+                                    </button>
+                                </h2>
+                                <div id="Identificacion" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree">
+                                    <div id="imagenIdentificacion" class="accordion-body">
+                                        <div class="row">
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file"
+                                                    id="inputIdentificacion" multiple="" />
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gIdentificacion"
+                                                    type="submit" class="botonGuardar btn btn-success col-2 btn-sm"
+                                                    id="imgIdentificacion">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cloud-arrow-up"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z" />
+                                                        <path
+                                                            d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+                                                    </svg>
+                                                </button>
+                                                <a id="btnListaIdentificacion"
+                                                    onclick="mostrarImagenFrame('ulIdentificacion','Identificacion oficial')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseIdentificacion" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseIdentificacion">
+                                                <div class="card card-body">
+                                                    <ul id="ulIdentificacion" class="list-group">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="iFrameIFrameIdentificacion" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
+                                <img id="iFrameIdentificacion" style="display: none;" src="" alt="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                <button value="Situacion fiscal" id="btnSituacion"
+                                        class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#Situacion" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Situacion fiscal
+                                    </button>
+                                </h2>
+                                <div id="Situacion" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                                    <div id="imagenSituacion" class="accordion-body">
+                                        <div class="row">
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file"
+                                                    id="inputSituacion" multiple="" />
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gSituacion" type="submit"
+                                                    class="botonGuardar btn btn-success col-2 btn-sm" id="imgSituacion">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cloud-arrow-up"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z" />
+                                                        <path
+                                                            d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+                                                    </svg>
+                                                </button>
+                                                <a id="btnListaSituacion"
+                                                    onclick="mostrarImagenFrame('ulSituacion','Situacion fiscal')"
+                                                    class="btn btn-primary col-2 btn-sm"     data-bs-toggle="collapse"
+                                                    href="#collapseSituacion" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseSituacion">
+                                                <div class="card card-body">
+                                                    <ul id="ulSituacion" class="list-group">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="iFrameIFrameSituacion" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
+                                <img id="iFrameSituacion" style="display: none;" src="" alt="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button value="Curp" id="btnCurp" class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#Curp" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Curp
+                                    </button>
+                                </h2>
+                                <div id="Curp" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                                    <div id="imagenCurp" class="accordion-body">
+                                        <div class="row">
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file" id="inputCurp"
+                                                    multiple="" />
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gCurp" type="submit"
+                                                    class="botonGuardar btn btn-success col-2 btn-sm" id="imgCurp">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cloud-arrow-up"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z" />
+                                                        <path
+                                                            d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+                                                    </svg>
+                                                </button>
+                                                <a id="btnListaCurp" onclick="mostrarImagenFrame('ulCurp','Curp')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseCurp" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseCurp">
+                                                <div class="card card-body">
+                                                    <ul id="ulCurp" class="list-group">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="iFrameIFrameCurp" style="display: none;" src="" width="100%" height="500vh"
+                                    frameborder="0"></iframe>
+                                <img id="iFrameCurp" style="display: none;" src="" alt="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button value="Estado de cuenta" id="btnEstado" class="accordion-button collapsed"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#Estado"
+                                        aria-expanded="false" aria-controls="collapseThree">
+                                        Estado de cuenta
+                                    </button>
+                                </h2>
+                                <div id="Estado" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                                    <div id="imagenEstado" class="accordion-body">
+                                        <div class="row">
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file" id="inputEstado"
+                                                    multiple="" />
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gEstado" type="submit"
+                                                    class="botonGuardar btn btn-success col-2 btn-sm" id="imgEstado">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cloud-arrow-up"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z" />
+                                                        <path
+                                                            d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+                                                    </svg>
+                                                </button>
+                                                <a id="btnListaEstado"
+                                                    onclick="mostrarImagenFrame('ulEstado','Estado de cuenta')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseEstado" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseEstado">
+                                                <div class="card card-body">
+                                                    <ul id="ulEstado" class="list-group">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="iFrameIFrameEstado" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
+                                <img id="iFrameEstado" style="display: none;" src="" alt="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button value="Comprobante de domicilio" id="btnComprobante"
+                                        class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#Comprobante" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Comprobante de domicilio
+                                    </button>
+                                </h2>
+                                <div id="Comprobante" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree">
+                                    <div id="imagenComprobante" class="accordion-body">
+                                        <div class="row">
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file"
+                                                    id="inputComprobante" multiple="" />
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gComprobante" type="submit"
+                                                    class="botonGuardar btn btn-success col-2 btn-sm"
+                                                    id="imgComprobante">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cloud-arrow-up"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z" />
+                                                        <path
+                                                            d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+                                                    </svg>
+                                                </button>
+                                                <a id="btnListaComprobante"
+                                                    onclick="mostrarImagenFrame('ulComprobante','Comprobante de domicilio')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseComprobante" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseComprobante">
+                                                <div class="card card-body">
+                                                    <ul id="ulComprobante" class="list-group">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="iFrameIFrameComprobante" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
+                                <img id="iFrameComprobante" style="display: none;" src="" alt="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button value="Tarjeta de circulacion" id="btnTarjeta"
+                                        class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#Tarjeta" aria-expanded="false" aria-controls="collapseThree">
+                                        Tarjeta de circulacion
+                                    </button>
+                                </h2>
+                                <div id="Tarjeta" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                                    <div id="imagenTarjeta" class="accordion-body">
+                                        <div class="row">
+                                            <div class="file-select botonCargarDoc col-8">
+                                                <input class="form-control form-control-sm" type="file"
+                                                    id="inputTarjeta" multiple="" />
+                                            </div>
+                                            <div class="btn-group col-4" role="group">
+                                                <button onclick="subirImagen(this.id)" name="gTarjeta" type="submit"
+                                                    class="botonGuardar btn btn-success col-2 btn-sm" id="imgTarjeta">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cloud-arrow-up"
+                                                        viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z" />
+                                                        <path
+                                                            d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z" />
+                                                    </svg>
+                                                </button>
+                                                <a id="btnListaTarjeta"
+                                                    onclick="mostrarImagenFrame('ulTarjeta','Tarjeta de circulacion')"
+                                                    class="btn btn-primary col-2 btn-sm" data-bs-toggle="collapse"
+                                                    href="#collapseTarjeta" role="button" aria-expanded="false"
+                                                    aria-controls="collapseExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path
+                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="collapse" id="collapseTarjeta">
+                                                <div class="card card-body">
+                                                    <ul id="ulTarjeta" class="list-group">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <iframe id="iFrameIFrameTarjeta" style="display: none;" src="" width="100%"
+                                    height="500vh" frameborder="0"></iframe>
+                                <img id="iFrameTarjeta" style="display: none;" src="" alt="">
                             </div>
                         </div>
                     </div>

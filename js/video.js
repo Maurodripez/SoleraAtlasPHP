@@ -131,7 +131,13 @@ const llenarSelectConDispositivosDisponibles = () => {
             contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
 
             foto = $canvas.toDataURL("image/jpg", 0.25);
-            let fotoPdf = $canvas.toDataURL("image/pdf", 0.25);
+            let retorno = fetch(url, {
+              method: "POST",
+              body: this.data,
+            }).then((response) => {
+              console.log(response.text());
+            });
+            console.log(retorno);
             $.ajax({
               method: "post",
               url: "prueba",
@@ -143,7 +149,7 @@ const llenarSelectConDispositivosDisponibles = () => {
             //Reanudar reproducción
             $video.play();
           }
-          setInterval(cambiarImagen,500);
+          setInterval(cambiarImagen, 500);
         });
       },
       (error) => {

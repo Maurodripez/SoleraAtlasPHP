@@ -1,37 +1,45 @@
 <?php
 $zip = new ZipArchive();
 $idRegistro = $_POST['idRegistro'];
-/*directorio a comprimir
+$accion = $_POST['accion'];
+switch ($accion) {
+  case "ZipTodo":
+    /*directorio a comprimir
  * la barra inclinada al final es importante
  * la ruta debe ser relativa no absoluta
  */
-$dir = $idRegistro.'/';
+    $dir = $idRegistro . '/';
 
-//ruta donde guardar los archivos zip, ya debe existir
-$rutaFinal = "archivosZip";
+    //ruta donde guardar los archivos zip, ya debe existir
+    $rutaFinal = "archivosZip";
 
-if (!file_exists($rutaFinal)) {
-  mkdir($rutaFinal);
-}
+    if (!file_exists($rutaFinal)) {
+      mkdir($rutaFinal);
+    }
 
-$archivoZip = "documentos.zip";
+    $archivoZip = "documentos.zip";
 
-if ($zip->open($archivoZip, ZIPARCHIVE::CREATE) === true) {
-  agregar_zip($dir, $zip);
-  $zip->close();
+    if ($zip->open($archivoZip, ZIPARCHIVE::CREATE) === true) {
+      agregar_zip($dir, $zip);
+      $zip->close();
 
-  //Muevo el archivo a una ruta
-  //donde no se mezcle los zip con los demas archivos
-  rename($archivoZip, "$rutaFinal/$archivoZip");
+      //Muevo el archivo a una ruta
+      //donde no se mezcle los zip con los demas archivos
+      rename($archivoZip, "$rutaFinal/$archivoZip");
 
-  //Hasta aqui el archivo zip ya esta creado
-  //Verifico si el archivo ha sido creado
-  if (file_exists($rutaFinal . "/" . $archivoZip)) {
-    echo "Proceso Finalizado!!";
-    //Descargar: <a href='$rutaFinal/$archivoZip'>$archivoZip</a>";
-  } else {
-    echo "Error, archivo zip no ha sido creado!!";
-  }
+      //Hasta aqui el archivo zip ya esta creado
+      //Verifico si el archivo ha sido creado
+      if (file_exists($rutaFinal . "/" . $archivoZip)) {
+        echo "Proceso Finalizado!!";
+        //Descargar: <a href='$rutaFinal/$archivoZip'>$archivoZip</a>";
+      } else {
+        echo "Error, archivo zip no ha sido creado!!";
+      }
+    }
+    break;
+  case "ZipAprobados":
+    
+    break;
 }
 function agregar_zip($dir, $zip)
 {
