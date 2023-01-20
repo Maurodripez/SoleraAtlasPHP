@@ -1161,7 +1161,6 @@ function enviarImagenes() {
     if (nombreArchivo === "Cedula corta") {
       iFrame = "iFrameCedula";
     }
-    alert(iFrame);
     let formData = new FormData();
     let files = $("#archivoCargado")[0].files[0];
     formData.append("file", files);

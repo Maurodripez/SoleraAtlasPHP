@@ -97,13 +97,24 @@ function ObtenerValorCualquiera($sql, $rutaConexion)
         return $row[0];
     }
 }
+function ObtenerValoresCualquiera($sql, $rutaConexion)
+{
+    $datos = array();
+    require $rutaConexion;
+    $stmt = $DBcon->query($sql);
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $datos[] = $row;
+    }
+    return $datos;
+}
 function ActualizarCualquierSiniestro($sql, $rutaConexion)
 {
     require $rutaConexion;
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();
 }
-function SelectSinNombreJson($sql,$rutaConexion){
+function SelectSinNombreJson($sql, $rutaConexion)
+{
     require $rutaConexion;
     $stmt = $DBcon->prepare($sql);
     $stmt->execute();

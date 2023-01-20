@@ -130,6 +130,8 @@ switch ($accion) {
             break;
         }
     case "ValidarDocs": {
+            $identificacion = "Identificacion oficial";
+            $situacion = "Situacion fiscal";
             $docsAprobados = [
                 "comprobante" => $_POST["checkboxComprobante"],
                 "circulacion" => $_POST["checkboxTarjeta"],
@@ -164,6 +166,105 @@ switch ($accion) {
             $contadorDocs = 0;
             foreach ($docsAprobados as $item => $docsAprobados) {
                 if ($docsAprobados == "true") {
+                    switch ($item) {
+                        case "comprobante":
+                            $docAMover = "Comprobante de domicilio";
+                            break;
+                        case "circulacion":
+                            $docAMover = "Tarjeta de circulacion";
+                            break;
+                        case "identificacion":
+                            $docAMover = "Identificacion oficial";
+                            break;
+                        case "situacion":
+                            $docAMover = "Situacion fiscal";
+                            break;
+                        case "curp":
+                            $docAMover = "Curp";
+                            break;
+                        case "estadocuenta":
+                            $docAMover = "Estado de cuenta";
+                            break;
+                        case "factura":
+                            $docAMover = "Factura";
+                            break;
+                        case "facturaatlas":
+                            $docAMover = "Factura a favor de Seguros Atlas";
+                            break;
+                        case "secuencia":
+                            $docAMover = "Secuencia de facturas";
+                            break;
+                        case "certificadopropiedad":
+                            $docAMover = "Certificado Propiedad";
+                            break;
+                        case "copiacertificado":
+                            $docAMover = "Copia certificado propiedad";
+                            break;
+                        case "pedimento":
+                            $docAMover = "Pedimento de Importacion";
+                            break;
+                        case "baja":
+                            $docAMover = "Baja de permiso de internacion";
+                            break;
+                        case "rfv":
+                            $docAMover = "R.F.V.";
+                            break;
+                        case "verificacion":
+                            $docAMover = "Verificacion";
+                            break;
+                        case "tenencias":
+                            $docAMover = "Tenencias";
+                            break;
+                        case "facturamotor":
+                            $docAMover = "Factura del motor";
+                            break;
+                        case "llaves":
+                            $docAMover = "Llaves";
+                            break;
+                        case "consentimiento":
+                            $docAMover = "Consentimiento LFPDPPP";
+                            break;
+                        case "averiguacionprevia":
+                            $docAMover = "Averiguación previa";
+                            break;
+                        case "acreditacion":
+                            $docAMover = "Acreditacion de propiedad";
+                            break;
+                        case "avisopfp":
+                            $docAMover = "Aviso a PFP";
+                            break;
+                        case "otros":
+                            $docAMover = "Otros";
+                            break;
+                        case "oficioliberacion":
+                            $docAMover = "Oficio de liberacion";
+                            break;
+                        case "oficiocancelacion":
+                            $docAMover = "Oficio de cancelacion del robo";
+                            break;
+                        case "conoceatucliente":
+                            $docAMover = "Formato conoce a tu cliente";
+                            break;
+                        case "finiquito":
+                            $docAMover = "Formato finiquito";
+                            break;
+                        case "refactura":
+                            $docAMover = "Formato refactura";
+                            break;
+                        case "cedula":
+                            $docAMover = "Cedula corta";
+                            break;
+
+                    }
+                    $resultado = array();
+                    echo $item;
+                    $sql = "SELECT nombreImagen FROM imagenes WHERE nombreOriginal='$docAMover' AND fkImagen=$idEditableActual";
+                    $resultado = (ObtenerValoresCualquiera($sql, "./Conexion.php"));
+                    foreach ($resultado as $index => $resultado) {
+                        $nombre = $resultado['nombreImagen'];
+                        rename("../Documentos/Ids/$idEditableActual/$nombre", "../Documentos/Ids/$idEditableActual/Validados/$nombre");
+                        echo $nombre . "/";
+                    }
                     $contadorDocs += 5;
                 }
                 $sql = "UPDATE docsaprobadosatlas SET $item='$docsAprobados' WHERE fkDocsAtlas=$idEditableActual";
@@ -171,7 +272,6 @@ switch ($accion) {
             }
             $sql = "UPDATE docsaprobadosatlas SET porcentajeDocs = $contadorDocs WHERE fkDocsAtlas=$idEditableActual";
             ActualizarSiniestro($sql);
-            echo "Actualizacion con exito";
             break;
         }
 }
