@@ -53,6 +53,9 @@ $(document).ready(function () {
   $("#btnGuardarCita").click(function () {
     guardarCita();
   });
+  $("#btnZipAprobados").click(function () {
+    descargarDoscAprobados();
+  });
   //funcion para limpiar el regitro
   $("#limpiarRegistro").click(function () {
     $(".filtrosBusqueda").val($(".filtrosBusqueda option:first").val());
@@ -499,6 +502,22 @@ function descargar() {
     },
   }).done(function (result) {
     console.log(result);
+  });
+}
+function descargarDoscAprobados() {
+  console.log(document.getElementById("idOculto").value);
+  let id= document.getElementById("idOculto").value;
+  $.ajax({
+    method: "POST",
+    url: rutaInicial + "ImagenAPDF.php",
+    data: {
+      id,
+    },
+  }).done(function () {
+    let descarga = document.createElement("a");
+    descarga.href =`../Documentos/Ids/${id}/Validados/documento.pdf`;
+    descarga.setAttribute("target", "_blank");
+    descarga.click();
   });
 }
 function funcionAjaxParaFiltros(filtro, getId) {
