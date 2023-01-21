@@ -44,8 +44,12 @@ switch ($accion) {
             break;
         }
     case "estatusSeguimiento": {
+            $fechaCargaInicio = $_POST['fechaCargaInicio'];
+            $fechaCargaFinal = $_POST['fechaCargaFinal'];
+            $fechaSeguimientoInicio = $_POST['fechaSeguimientoInicio'];
+            $fechaSeguimientoFinal = $_POST['fechaSeguimientoFinal'];
             $sql = "select count(estatusSeguimientoSin) as conteo,estatusSeguimientoSin from infosiniestro,fechasseguimiento "
-                . " where datediff(CURDATE(), fechaSeguimiento)<=30 and fkidRegistro=idRegistro group by estatusSeguimientoSin";
+                . " where fechaCarga>='$fechaCargaInicio' and fechaCarga<'$fechaCargaFinal' and fechaSeguimiento>='$fechaSeguimientoInicio' and fechaSeguimiento<'$fechaSeguimientoFinal'  and fkidRegistro=idRegistro group by estatusSeguimientoSin";
             ConsultasSelectCualquiera($sql, '../Conexion.php', "Estatus");
             break;
         }
@@ -56,12 +60,12 @@ switch ($accion) {
         //echo $mesActual-1;
         //generar reporte por mes
         for ($i = 0; $i <= 11; $i++) {
-            if ($mesActual == 0) {
-                $mesActual = 12;
-                $annoActual -= 1;
-            }
             //echo "Mes:" . $mesActual - $i . "\n";
             $diasMes = cal_days_in_month(CAL_GREGORIAN, $mesActual - $i, $annoActual);
+            if ($mesActual == 1) {
+                $mesActual = 13;
+                $annoActual -= 1;
+            }
             //$fehcaMesActual = new DateTime($fecha);
             //echo $diasMes . "\n";
             $fechaAnterior = $fecha;
@@ -78,12 +82,12 @@ switch ($accion) {
         //echo $mesActual-1;
         //generar reporte por mes
         for ($i = 0; $i <= 11; $i++) {
-            if ($mesActual == 0) {
-                $mesActual = 12;
-                $annoActual -= 1;
-            }
             //echo "Mes:" . $mesActual - $i . "\n";
             $diasMes = cal_days_in_month(CAL_GREGORIAN, $mesActual - $i, $annoActual);
+            if ($mesActual == 1) {
+                $mesActual = 13;
+                $annoActual -= 1;
+            }
             //$fehcaMesActual = new DateTime($fecha);
             //echo $diasMes . "\n";
             $fechaAnterior = $fecha;

@@ -1,4 +1,5 @@
 <?php
+
 use \setasign\Fpdi\Fpdi;
 
 require '../fpdf/fpdf.php';
@@ -7,7 +8,6 @@ include "./FuncionesSQL.php";
 class PDF extends FPDF
 {
 }
-
 // Creación del objeto de la clase heredada
 $pdf = new PDF();
 $pdf->AliasNbPages();
@@ -28,14 +28,14 @@ try {
         }
     }
     $pdf->Output('F', "../Documentos/Ids/$id/Validados/validado.pdf");
-    $pdf = new Fpdi();
-    $pdf->setFont('Helvetica');
+    $pdfi = new Fpdi();
+    $pdfi->setFont('Helvetica');
     try {
-        $pageCount = $pdf->setSourceFile("../Documentos/Ids/837/Validados/validado.pdf");
+        $pageCount = $pdfi->setSourceFile("../Documentos/Ids/837/Validados/validado.pdf");
         for ($i = 1; $i <= $pageCount; $i++) {
             $pdf->AddPage();
-            $template = $pdf->importPage($i);
-            $pdf->useImportedPage($template, 0, 0);
+            $template = $pdfi->importPage($i);
+            $pdfi->useImportedPage($template, 0, 0);
         }
         $sql = "select nombreImagen,nombreOriginal from imagenes where fkImagen=837 and validada=1";
         $resultado = ObtenerValoresCualquiera($sql, "./Conexion.php");
@@ -44,19 +44,19 @@ try {
             $nombreOriginal = $resultado['nombreOriginal'];
             $extension = pathinfo($nombre, PATHINFO_EXTENSION);
             if ($extension == "pdf") {
-                $pageCount = $pdf->setSourceFile("../Documentos/Ids/837/Validados/$nombre");
+                $pageCount = $pdfi->setSourceFile("../Documentos/Ids/837/Validados/$nombre");
                 for ($i = 1; $i <= $pageCount; $i++) {
                     $pdf->AddPage();
                     $pdf->Text(10, 10, $nombreOriginal);
-                    $template = $pdf->importPage($i);
-                    $pdf->useImportedPage($template, 0, 0);
+                    $template = $pdfi->importPage($i);
+                    $pdfi->useImportedPage($template, 0, 0);
                 }
             }
         }
+        $pdfi->Output('F', "../Documentos/Ids/$id/Validados/documento.pdf");
+    } catch (\Throwable $th) {
         $pdf->Output('F', "../Documentos/Ids/$id/Validados/documento.pdf");
-    } catch (\Throwable$th) {
-        echo "error";
     }
-} catch (\Throwable$th) {
+} catch (\Throwable $th) {
     echo 'Error: ' . $th->getMessage();
 }

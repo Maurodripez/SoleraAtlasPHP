@@ -1207,21 +1207,22 @@ header('Location: ../index.html');
                                 <path
                                     d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                             </svg></label>
-                            <button type="button" id="btnWhatsApp" style="background-color: #57ce63;" class="btn">
+                        <button type="button" id="btnWhatsApp" style="background-color: #57ce63;" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#ffffff"
                                 class="bi bi-whatsapp" viewBox="0 0 16 16">
                                 <path
                                     d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
                             </svg>
                         </button>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" />
-                        <label class="btn btn-outline-primary" for="btnradio5"><svg xmlns="http://www.w3.org/2000/svg"
-                                width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                        <button id="btnCamera" class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-camera" viewBox="0 0 16 16">
                                 <path
                                     d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z" />
                                 <path
                                     d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
-                            </svg></label>
+                            </svg>
+                        </button>
                         <button id="btnLink" style="background-color:#FF1F00;" class="btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round" stroke="#ffffff" class="bi bi-link"
@@ -1570,8 +1571,8 @@ header('Location: ../index.html');
                                                         <option selected>
                                                             Selecciona...
                                                         </option>
-                                                        <option value="Todos-Ninguna">
-                                                            Todos-Ninguna</option>
+                                                        <option value="CDMX-Zona metropolitana-CDMX-Estado de Mexico">
+                                                            CDMX-Zona metropolitana-CDMX-Estado de Mexico</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1587,59 +1588,8 @@ header('Location: ../index.html');
                                                             d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
                                                     </svg>
                                                     <select class="form-select" id="region" required>
-                                                        <option selected>
-                                                            Todos-Ninguna
-                                                        </option>
-                                                        <option value="Layout ZG A: Guadalajara-Colima-Nayarit">
-                                                            Layout ZG A:
-                                                            Guadalajara-Colima-Nayarit
-                                                        </option>
-                                                        <option value="Layout ZG B: Acapulco-Toluca-Pachuca-Cuernavaca">
-                                                            Layout ZG B:
-                                                            Acapulco-Toluca-Pachuca-Cuernavaca
-                                                        </option>
-                                                        <option
-                                                            value="Layout ZG Layout ZG C: Puebla-Queretaro-Tlaxcala">
-                                                            Layout ZG Layout ZG C:
-                                                            Puebla-Queretaro-Tlaxcala
-                                                        </option>
-                                                        <option
-                                                            value="Layout ZG D: Merida-Cancun-Tuxtla-Villahermosa-Campeche">
-                                                            Layout ZG D:
-                                                            Merida-Cancun-Tuxtla-Villahermosa-Campeche
-                                                        </option>
-                                                        <option
-                                                            value="Layout ZG E: Leon, San Luis Potosi-Aguascalientes-Morelia-Tamaulipas-Zacatecas">
-                                                            Layout ZG E: Leon, San Luis
-                                                            Potosi-Aguascalientes-Morelia-Tamaulipas-Zacatecas
-                                                        </option>
-                                                        <option value="Layout ZG F: CDMX-Estado de Mexico">
-                                                            Layout ZG F: CDMX-Estado de
-                                                            Mexico
-                                                        </option>
-                                                        <option
-                                                            value="Layout ZG G: Coatzacualcos-Oaxaca-Veracruz-Xalapa">
-                                                            Layout ZG G:
-                                                            Coatzacualcos-Oaxaca-Veracruz-Xalapa
-                                                        </option>
-                                                        <option value="Layout ZG H: Monterrey">
-                                                            H:
-                                                            Layout ZG Monterrey</option>
-                                                        <option
-                                                            value="Layout ZG I: Chihuahua-Cd. Juarez-Reynosa-Saltillo-Tampico-Torreon-Nuevo Laredo-Durango">
-                                                            Layout ZG I: Chihuahua-Cd.
-                                                            Juarez-Reynosa-Saltillo-Tampico-Torreon-Nuevo
-                                                            Laredo-Durango
-                                                        </option>
-                                                        <option
-                                                            value="Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur">
-                                                            Layout ZG J: Mexicali-Cd.
-                                                            Obregon-Culiacan-Hermosillo-Los
-                                                            Mochis-Tijuana Baja
-                                                            California-Baja California Sur
-                                                        </option>
-                                                        <option value="Todos/Ninguno">
-                                                            Todos/Ninguno</option>
+                                                    <option value="CDMX-Zona metropolitana-CDMX-Estado de Mexico">
+                                                            CDMX-Zona metropolitana-CDMX-Estado de Mexico</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3012,7 +2962,10 @@ header('Location: ../index.html');
                                                  0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
                                         </svg>
                                     </button>
-                                    <button type="button" id="btnZipAprobados" class="btn btn-success">
+                                    <button type="button" id="btnZipAprobados" class="btn btn-success"
+                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-custom-class="custom-tooltip" data-toggle="btnDescargaValidado"
+                                        data-bs-title="Algunos pdfs son incompatibles y no se pueden cargar, favor de descargarlos de manera individual">
                                         Aprobados
                                     </button>
                                     <a style="display: none" id="linkDescargarZip"
@@ -3052,6 +3005,10 @@ header('Location: ../index.html');
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="divScreenshot" style="display: none;">
+                    <canvas id="canvas" style="display:'';"></canvas>
+
                 </div>
                 <div id="divLink" style="display: none">
                     <div class="row">

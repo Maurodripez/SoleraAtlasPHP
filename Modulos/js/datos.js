@@ -2,6 +2,7 @@ var contador = 0;
 var contadorSeg = 0;
 let rutaInicial = "../php/";
 $(document).ready(function () {
+  $('[data-toggle="btnDescargaValidado"]').tooltip();
   obtenerSesion();
   datosPorDefecto();
   cantidadSiniestros(0, 3, "de0a2");
@@ -505,7 +506,6 @@ function descargar() {
   });
 }
 function descargarDoscAprobados() {
-  console.log(document.getElementById("idOculto").value);
   let id= document.getElementById("idOculto").value;
   $.ajax({
     method: "POST",
@@ -1083,6 +1083,12 @@ function mostrarDivsModal() {
     document.getElementById("divSeguimiento").style.display = "none";
     document.getElementById("divGuardarImagenes").style.display = "none";
     document.getElementById("divLink").style.display = "";
+  });
+  document.getElementById("btnCamera").addEventListener("click", function () {
+    document.getElementById("divSeguimiento").style.display = "none";
+    document.getElementById("divGuardarImagenes").style.display = "none";
+    document.getElementById("divLink").style.display = "none";
+    document.getElementById("divScreenshot").style.display = "";
   });
 }
 function enviarImagenes() {

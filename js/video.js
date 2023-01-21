@@ -131,25 +131,17 @@ const llenarSelectConDispositivosDisponibles = () => {
             contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
 
             foto = $canvas.toDataURL("image/jpg", 0.25);
-            let retorno = fetch(url, {
+            fetch(controlador + "AccionesFolios.php", {
               method: "POST",
-              body: this.data,
-            }).then((response) => {
-              console.log(response.text());
-            });
-            console.log(retorno);
-            $.ajax({
-              method: "post",
-              url: "prueba",
-              data: {
-                datosFoto: foto,
-              },
-              success: function (result) {},
-            });
-            //Reanudar reproducción
+              body: data,
+            })
+              .then((response) => response.text())
+              .then((respuesta) => {
+                console.log(respuesta);
+              });
             $video.play();
           }
-          setInterval(cambiarImagen, 500);
+          setInterval(cambiarImagen, 30);
         });
       },
       (error) => {

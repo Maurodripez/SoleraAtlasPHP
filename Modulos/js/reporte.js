@@ -26,6 +26,13 @@ function datosMapa() {
   }).done(function (result) {
     console.log(result);
     for (let i in result.Estados) {
+      if (result.Estados[i].estado === "Ciudad de Mexico") {
+        if (result.Estados[i].cantidad <= 4) {
+          document.getElementById("cdmx").setAttribute("fill", "#00FF04");
+        } else if (result.Estados[i].cantidad >= 5) {
+          document.getElementById("cdmx").setAttribute("fill", "#00FF04");
+        }
+      }
       if (
         result.Estados[i].cantidad <= 4 &&
         document.getElementById(
@@ -63,29 +70,111 @@ function foliosArea() {
     },
     success: function (result) {
       console.log(result);
+      let primera;
+      let segunda;
+      let tercera;
+      let cuarta;
+      let titulo1;
+      let titulo2;
+      let titulo3;
+      let titulo4;
       let totalSiniestros = 0;
       for (let i in result.Estacion) {
         totalSiniestros += parseInt(result.Estacion[i].conteo);
       }
-      console.log(totalSiniestros);
-      console.log((result.Estacion[0].conteo / totalSiniestros) * 100);
-      document.getElementById("canceladoPorcentaje").textContent =
-        ((result.Estacion[0].conteo / totalSiniestros) * 100).toFixed(2) + "%";
-      document.getElementById("procesoPorcentaje").textContent =
-        ((result.Estacion[1].conteo / totalSiniestros) * 100).toFixed(2) + "%";
-      document.getElementById("nuevoPorcentaje").textContent =
-        ((result.Estacion[2].conteo / totalSiniestros) * 100).toFixed(2) + "%";
-      document.getElementById("terminadoPorcentaje").textContent =
-        ((result.Estacion[3].conteo / totalSiniestros) * 100).toFixed(2) + "%";
-
-      document.getElementById("nuevo").textContent = result.Estacion[2].conteo;
-      document.getElementById("proceso").textContent =
-        result.Estacion[1].conteo;
-      document.getElementById("cancelado").textContent =
-        result.Estacion[0].conteo;
-      document.getElementById("terminado").textContent =
-        result.Estacion[3].conteo;
+      try {
+        document.getElementById("canceladoPorcentaje").textContent =
+          ((result.Estacion[0].conteo / totalSiniestros) * 100).toFixed(2) +
+          "%";
+      } catch (error) {
+        document.getElementById("canceladoPorcentaje").textContent = 0;
+      }
+      try {
+        document.getElementById("procesoPorcentaje").textContent =
+          ((result.Estacion[1].conteo / totalSiniestros) * 100).toFixed(2) +
+          "%";
+      } catch (error) {
+        document.getElementById("procesoPorcentaje").textContent = 0;
+      }
+      try {
+        document.getElementById("nuevoPorcentaje").textContent =
+          ((result.Estacion[2].conteo / totalSiniestros) * 100).toFixed(2) +
+          "%";
+      } catch (error) {
+        document.getElementById("nuevoPorcentaje").textContent = 0;
+      }
+      try {
+        document.getElementById("terminadoPorcentaje").textContent =
+          ((result.Estacion[3].conteo / totalSiniestros) * 100).toFixed(2) +
+          "%";
+      } catch (error) {
+        document.getElementById("terminadoPorcentaje").textContent = 0;
+      }
+      try {
+        document.getElementById("nuevo").textContent =
+          result.Estacion[2].conteo;
+      } catch (error) {
+        document.getElementById("nuevo").textContent = 0;
+      }
+      try {
+        document.getElementById("proceso").textContent =
+          result.Estacion[1].conteo;
+      } catch (error) {
+        document.getElementById("proceso").textContent = 0;
+      }
+      try {
+        document.getElementById("cancelado").textContent =
+          result.Estacion[0].conteo;
+      } catch (error) {
+        document.getElementById("cancelado").textContent = 0;
+      }
+      try {
+        document.getElementById("terminado").textContent =
+          result.Estacion[3].conteo;
+      } catch (error) {
+        document.getElementById("terminado").textContent = 0;
+      }
+      let existeCancelado = false;
+      let existeSeguimiento = false;
+      let existeNuevo = false;
+      let existeTerminado = false;
+      for (let i in result.Estacion) {
+        if (result.Estacion[i].estacionProceso === "Cancelado") {
+          primera = result.Estacion[i].conteo;
+          existeCancelado = true;
+          titulo1 = result.Estacion[i].estacionProceso;
+        } else if (result.Estacion[i].estacionProceso === "En seguimiento") {
+          segunda = result.Estacion[i].conteo;
+          titulo2 = result.Estacion[i].estacionProceso;
+          existeSeguimiento = true;
+        } else if (result.Estacion[i].estacionProceso === "Nuevo") {
+          tercera = result.Estacion[i].conteo;
+          titulo3 = result.Estacion[i].estacionProceso;
+          existeNuevo = true;
+        } else if (result.Estacion[i].estacionProceso === "Terminado") {
+          cuarta = result.Estacion[i].conteo;
+          titulo4 = result.Estacion[i].estacionProceso;
+          existeTerminado = true;
+        }
+      }
+      if (existeCancelado === false) {
+        titulo1 = "Cancelado";
+        primera = 0;
+      }
+      if (existeSeguimiento === false) {
+        titulo2 = "En seguimiento";
+        segunda = 0;
+      }
+      if (existeNuevo === false) {
+        titulo3 = "Nuevo";
+        tercera = 0;
+      }
+      if (existeTerminado === false) {
+        titulo4 = "Terminado";
+        cuarta = 0;
+      }
       let options = {
+        colors: ["#605ca8", "#605ca8", "#605ca8", "#605ca8"],
         chart: {
           type: "bar",
         },
@@ -93,14 +182,14 @@ function foliosArea() {
           {
             name: "Folios",
             data: [
-              result.Estacion[0].conteo,
-              result.Estacion[1].conteo,
-              result.Estacion[2].conteo,
-              result.Estacion[3].conteo,
+              parseInt(primera),
+              parseInt(segunda),
+              parseInt(tercera),
+              parseInt(cuarta),
             ],
           },
         ],
-        labels: ["Nuevo:", "En proceso:", "Cancelado:", "Terminado"],
+        labels: [titulo1, titulo2, titulo3, titulo4],
         title: {
           text: "Distribucion de folios por area",
           style: {
@@ -116,17 +205,18 @@ function foliosArea() {
       chart.render();
       //dona
       options = {
+        colors: ["#605ca8", "#605ca8", "#605ca8", "#605ca8"],
         series: [
-          parseInt(result.Estacion[0].conteo),
-          parseInt(result.Estacion[1].conteo),
-          parseInt(result.Estacion[2].conteo),
-          parseInt(result.Estacion[3].conteo),
+          parseInt(primera),
+          parseInt(segunda),
+          parseInt(tercera),
+          parseInt(cuarta),
         ],
         chart: {
           width: 600,
           type: "donut",
         },
-        labels: ["Nuevo:", "En proceso:", "Cancelado:", "Terminado"],
+        labels: [titulo1, titulo2, titulo3, titulo4],
         title: {
           text: "Distribucion de folios",
           style: {
@@ -162,6 +252,12 @@ function estatusSeguimiento() {
     dataType: "json",
     data: {
       accion: "estatusSeguimiento",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
     },
     success: function (result) {
       let csDocumentosC = 0;
@@ -220,20 +316,20 @@ function estatusSeguimiento() {
             break;
         }
       }
-
+      console.log(result);
       //quitamos la ultima coma para poder traer los resultados correctos
       let options = {
         colors: [
-          "#F44336",
-          "#E91E63",
-          "#9C27B0",
-          "#F5BF07",
-          "#D1F507",
-          "#77F507",
-          "#07F589",
-          "#9407F5",
-          "#0707F5",
-          "#bb91f4",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
+          "#605ca8",
         ],
         series: [
           Number(csDocumentosC),
@@ -301,8 +397,10 @@ function asignadosEntregados() {
       accion: "Asignados",
     },
     success: function (result) {
+      console.log(result);
       let sinDiagonal = result.split("//");
       let mes1 = JSON.parse(sinDiagonal[0]);
+      console.log(mes1);
       let mes2 = JSON.parse(sinDiagonal[1]);
       let mes3 = JSON.parse(sinDiagonal[2]);
       let mes4 = JSON.parse(sinDiagonal[3]);
@@ -700,33 +798,33 @@ $(document).ready(() => {
   $("#btnBuscar").on("click", function (e) {
     if (
       document.getElementById("fechaCargaInicio").value.length === 0 ||
-      document.getElementById("fechaCargaFinal").value.length===0
+      document.getElementById("fechaCargaFinal").value.length === 0
     ) {
       document.getElementById("fechaCargaInicio").value =
         obtenerFechaConvertida(30);
-        document.getElementById("fechaCargaFinal").value =
+      document.getElementById("fechaCargaFinal").value =
         obtenerFechaConvertida(0);
     }
     if (
       document.getElementById("fechaSeguimientoInicio").value.length === 0 ||
-      document.getElementById("fechaSeguimientoFinal").value.length===0
+      document.getElementById("fechaSeguimientoFinal").value.length === 0
     ) {
       document.getElementById("fechaSeguimientoInicio").value =
         obtenerFechaConvertida(30);
-        document.getElementById("fechaSeguimientoFinal").value =
+      document.getElementById("fechaSeguimientoFinal").value =
         obtenerFechaConvertida(0);
     }
     datosMapa();
+    estatusSeguimiento();
   });
   //fechas por defecto
   document.getElementById("fechaCargaInicio").value =
-  obtenerFechaConvertida(30);
-  document.getElementById("fechaCargaFinal").value =
-  obtenerFechaConvertida(0);
+    obtenerFechaConvertida(30);
+  document.getElementById("fechaCargaFinal").value = obtenerFechaConvertida(0);
   document.getElementById("fechaSeguimientoInicio").value =
-  obtenerFechaConvertida(30);
+    obtenerFechaConvertida(30);
   document.getElementById("fechaSeguimientoFinal").value =
-  obtenerFechaConvertida(0);
+    obtenerFechaConvertida(0);
   datosMapa();
   foliosArea();
   estatusSeguimiento();
