@@ -395,15 +395,12 @@ if (!isset($_SESSION['usuario'])) {
                         <button type="button" class="btn btn-primary">Limpiar</button>
                         <button type="button" class="btn btn-primary">Exportar</button>
                         <button class="btn btn-primary" id="btnGraficaValores" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#graficaValores" aria-expanded="false" aria-controls="graficaValores">
+                            data-bs-target="#graficaValores-collapse" aria-expanded="false" aria-controls="graficaValores-collapse">
                             Valores
                         </button>
                     </div>
                     </p>
-                    <div class="collapse" id="graficaValores">
-                        <button class="btn btn-primary pb-2" id="btnFiltroValores">
-                            Filtrar
-                        </button>
+                    <div class="collapse" id="graficaValores-collapse">
                         <div class="card card-body">
                             <div id="graficaValores">
                             </div>

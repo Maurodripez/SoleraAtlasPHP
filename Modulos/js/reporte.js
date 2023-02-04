@@ -372,6 +372,7 @@ function valores() {
         options
       );
       chart.render();
+      chart.render();
     })
     .catch((error) => {
       alert("Ha ocurrido un error");
@@ -455,7 +456,7 @@ function estatusSeguimiento() {
             break;
         }
       }
-      console.log(result);
+      //console.log(result);
       //quitamos la ultima coma para poder traer los resultados correctos
       let options = {
         colors: [
@@ -529,138 +530,130 @@ function estatusSeguimiento() {
   });
 }
 function asignadosEntregados() {
-  $.ajax({
+  let data = new FormData();
+  data.append("accion", "Asignados");
+  data.append(
+    "fechaCargaInicio",
+    document.getElementById("fechaCargaInicio").value
+  );
+  data.append(
+    "fechaCargaFinal",
+    document.getElementById("fechaCargaFinal").value
+  );
+  data.append(
+    "fechaSeguimientoInicio",
+    document.getElementById("fechaSeguimientoInicio").value
+  );
+  data.append(
+    "fechaSeguimientoFinal",
+    document.getElementById("fechaSeguimientoFinal").value
+  );
+  fetch(rutaInicial + "InformacionMapas.php", {
     method: "POST",
-    url: rutaInicial + "InformacionMapas.php",
-    data: {
-      accion: "Asignados",
-      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
-      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
-      estacion: document.getElementById("txtEstacion").value,
-      estatus: document.getElementById("txtEstatus").value,
-      subEstatus: document.getElementById("txtSubEstatus").value,
-      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
-        .value,
-      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
-        .value,
-      region: document.getElementById("txtRegion").value,
-      estado: document.getElementById("txtEstado").value,
-      cobertura: document.getElementById("txtCobertura").value,
-    },
-    success: function (result) {
-      console.log(result);
-      let sinDiagonal = result.split("//");
-      let mes1 = JSON.parse(sinDiagonal[0]);
-      console.log(mes1);
-      let mes2 = JSON.parse(sinDiagonal[1]);
-      let mes3 = JSON.parse(sinDiagonal[2]);
-      let mes4 = JSON.parse(sinDiagonal[3]);
-      let mes5 = JSON.parse(sinDiagonal[4]);
-      let mes6 = JSON.parse(sinDiagonal[5]);
-      let mes7 = JSON.parse(sinDiagonal[6]);
-      let mes8 = JSON.parse(sinDiagonal[7]);
-      let mes9 = JSON.parse(sinDiagonal[8]);
-      let mes10 = JSON.parse(sinDiagonal[9]);
-      let mes11 = JSON.parse(sinDiagonal[10]);
-      let mes12 = JSON.parse(sinDiagonal[11]);
-      $.ajax({
-        method: "POST",
-        url: rutaInicial + "InformacionMapas.php",
-        data: {
-          accion: "Entregados",
-          fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
-          fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
-          estacion: document.getElementById("txtEstacion").value,
-          estatus: document.getElementById("txtEstatus").value,
-          subEstatus: document.getElementById("txtSubEstatus").value,
-          fechaSeguimientoInicio: document.getElementById(
-            "fechaSeguimientoInicio"
-          ).value,
-          fechaSeguimientoFinal: document.getElementById(
-            "fechaSeguimientoFinal"
-          ).value,
-          region: document.getElementById("txtRegion").value,
-          estado: document.getElementById("txtEstado").value,
-          cobertura: document.getElementById("txtCobertura").value,
-        },
-        success: function (data) {
-          let sinDiagonal2 = data.split("//");
-          options = {
-            series: [
-              {
-                name: "Asignados",
-                data: [
-                  mes12.Asignados[0].conteo,
-                  mes11.Asignados[0].conteo,
-                  mes10.Asignados[0].conteo,
-                  mes9.Asignados[0].conteo,
-                  mes8.Asignados[0].conteo,
-                  mes7.Asignados[0].conteo,
-                  mes6.Asignados[0].conteo,
-                  mes5.Asignados[0].conteo,
-                  mes4.Asignados[0].conteo,
-                  mes3.Asignados[0].conteo,
-                  mes2.Asignados[0].conteo,
-                  mes1.Asignados[0].conteo,
-                ],
-              },
-              {
-                name: "Entregados",
-                data: [
-                  JSON.parse(sinDiagonal2[11]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[10]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[9]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[8]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[7]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[6]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[5]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[4]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[3]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[2]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[1]).Entregados[0].conteo,
-                  JSON.parse(sinDiagonal2[0]).Entregados[0].conteo,
-                ],
-              },
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      //console.log(result);
+      const meses = new Map([
+        ["January", { asignados: 0, entregados: 0 }],
+        ["February", { asignados: 0, entregados: 0 }],
+        ["March", { asignados: 0, entregados: 0 }],
+        ["April", { asignados: 0, entregados: 0 }],
+        ["May", { asignados: 0, entregados: 0 }],
+        ["June", { asignados: 0, entregados: 0 }],
+        ["July", { asignados: 0, entregados: 0 }],
+        ["August", { asignados: 0, entregados: 0 }],
+        ["September", { asignados: 0, entregados: 0 }],
+        ["October", { asignados: 0, entregados: 0 }],
+        ["November", { asignados: 0, entregados: 0 }],
+        ["December", { asignados: 0, entregados: 0 }],
+      ]);
+      for (let i in result.Valores) {
+        meses.set(result.Valores[i].mes, {
+          asignados: result.Valores[i].asignados,
+          entregados: result.Valores[i].entregados,
+        });
+      }
+      //console.log(meses);
+      // console.log(meses.get("October").asignados);
+      options = {
+        series: [
+          {
+            name: "Asignados",
+            data: [
+              parseInt(meses.get("January").asignados),
+              parseInt(meses.get("February").asignados),
+              parseInt(meses.get("March").asignados),
+              parseInt(meses.get("April").asignados),
+              parseInt(meses.get("May").asignados),
+              parseInt(meses.get("June").asignados),
+              parseInt(meses.get("July").asignados),
+              parseInt(meses.get("August").asignados),
+              parseInt(meses.get("September").asignados),
+              parseInt(meses.get("October").asignados),
+              parseInt(meses.get("November").asignados),
+              parseInt(meses.get("December").asignados),
             ],
-            colors: ["#605ca8", "#605ca8"],
-            chart: {
-              height: 350,
-              type: "area",
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            stroke: {
-              curve: "smooth",
-            },
-            xaxis: {
-              type: "text",
-              categories: [
-                mes12.Asignados[0].mes,
-                mes11.Asignados[0].mes,
-                mes10.Asignados[0].mes,
-                mes9.Asignados[0].mes,
-                mes8.Asignados[0].mes,
-                mes7.Asignados[0].mes,
-                mes6.Asignados[0].mes,
-                mes5.Asignados[0].mes,
-                mes4.Asignados[0].mes,
-                mes3.Asignados[0].mes,
-                mes2.Asignados[0].mes,
-                mes1.Asignados[0].mes,
-              ],
-            },
-          };
-
-          let chart = new ApexCharts(
-            document.querySelector("#foliosEntregados"),
-            options
-          );
-          chart.render();
+          },
+          {
+            name: "Entregados",
+            data: [
+              parseInt(meses.get("January").entregados),
+              parseInt(meses.get("February").entregados),
+              parseInt(meses.get("March").entregados),
+              parseInt(meses.get("April").entregados),
+              parseInt(meses.get("May").entregados),
+              parseInt(meses.get("June").entregados),
+              parseInt(meses.get("July").entregados),
+              parseInt(meses.get("August").entregados),
+              parseInt(meses.get("September").entregados),
+              parseInt(meses.get("October").entregados),
+              parseInt(meses.get("November").entregados),
+              parseInt(meses.get("December").entregados),
+            ],
+          },
+        ],
+        colors: ["#605ca8", "#605ca8"],
+        chart: {
+          height: 350,
+          type: "area",
         },
-      });
-    },
-  });
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: "smooth",
+        },
+        xaxis: {
+          type: "text",
+          categories: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+        },
+      };
+
+      let chart = new ApexCharts(
+        document.querySelector("#foliosEntregados"),
+        options
+      );
+      chart.render();
+      chart.render();
+    })
+    .catch((error) => {
+      alert("Ha ocurrido un error");
+    });
 }
 function foliosFechas() {
   $.ajax({
@@ -940,7 +933,7 @@ function porcentajeTotal() {
       cobertura: document.getElementById("txtCobertura").value,
     },
     success: function (result) {
-      console.log(result);
+      // console.log(result);
       let de0A20Conteo = 0;
       let de20A40Conteo = 0;
       let de40A60Conteo = 0;
@@ -1012,36 +1005,12 @@ function porcentajeTotal() {
     },
   });
 }
-$(document).ready(() => {
-  $("#btnGraficaValores").on("click", function (e) {
-    e.preventDefault();
-    valores();
-  });
-  $("#btnFiltroValores").on("click", function (e) {
-    e.preventDefault();
-    valores();
-  });
-  $("#btnBuscar").on("click", function (e) {
-    if (
-      document.getElementById("fechaCargaInicio").value.length === 0 ||
-      document.getElementById("fechaCargaFinal").value.length === 0
-    ) {
-      document.getElementById("fechaCargaInicio").value =
-        obtenerFechaConvertida(30);
-      document.getElementById("fechaCargaFinal").value =
-        obtenerFechaConvertida(0);
-    }
-    if (
-      document.getElementById("fechaSeguimientoInicio").value.length === 0 ||
-      document.getElementById("fechaSeguimientoFinal").value.length === 0
-    ) {
-      document.getElementById("fechaSeguimientoInicio").value =
-        obtenerFechaConvertida(30);
-      document.getElementById("fechaSeguimientoFinal").value =
-        obtenerFechaConvertida(0);
-    }
+window.addEventListener("load", (event) => {
+  document.querySelector("#btnBuscar").addEventListener("click", function (e) {
     datosMapa();
     estatusSeguimiento();
+    valores();
+    asignadosEntregados();
   });
   //fechas por defecto
   document.getElementById("fechaCargaInicio").value =
@@ -1055,6 +1024,7 @@ $(document).ready(() => {
   foliosArea();
   estatusSeguimiento();
   asignadosEntregados();
+  valores();
   foliosFechas();
   reporteDocumentos();
   porcentajeDocs();

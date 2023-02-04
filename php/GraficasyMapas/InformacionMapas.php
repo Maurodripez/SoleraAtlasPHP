@@ -29,25 +29,18 @@ switch ($accion) {
             break;
         }
     case "Asignados":
-        $mesActual = date("n");
-        $fecha = (ultimoDiaMesActual());
-        $annoActual = date("Y");
-        //echo $mesActual-1;
-        //generar reporte por mes
-        for ($i = 0; $i <= 11; $i++) {
-            //echo "Mes:" . $mesActual - $i . "\n";
-            $diasMes = cal_days_in_month(CAL_GREGORIAN, $mesActual - $i, $annoActual);
-            if ($mesActual == 1) {
-                $mesActual = 13;
-                $annoActual -= 1;
-            }
-            //$fehcaMesActual = new DateTime($fecha);
-            //echo $diasMes . "\n";
-            $fechaAnterior = $fecha;
-            $fecha = date("Y-m-d", strtotime($fecha . "- $diasMes days"));
-            $sql = "SELECT count(fechaCarga) as conteo, MONTHNAME('$fechaAnterior') as mes FROM infosiniestro where fechaCarga<='$fechaAnterior' and fechaCarga>'$fecha'";
-            echo json_encode(ConsultasSelectCualquieraNoJson($sql, "../Conexion.php", "Asignados")) . "//";
-            //echo $fecha . "\n";
+        try {
+                $sql = "SELECT MONTHNAME(fechaCarga) as mes, COUNT(idRegistro) as asignados,
+                SUM(CASE WHEN estatusSeguimientoSin = 'TERMINADO POR PROCESO COMPLETO' THEN 1 ELSE 0 END) as entregados
+                FROM infosiniestro
+                JOIN fechasseguimiento ON fkidRegistro = idRegistro
+                WHERE fechaCarga BETWEEN '$fechaCargaInicio' AND '$fechaCargaFinal'
+                AND fechaSeguimiento BETWEEN '$fechaSeguimientoInicio' AND '$fechaSeguimientoFinal'
+                GROUP BY MONTH(fechaCarga)";
+                ConsultasSelectCualquiera($sql, "../Conexion.php", "Valores");
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo $th;
         }
         break;
     case "Entregados":
@@ -139,8 +132,8 @@ switch ($accion) {
         ConsultasSelectCualquiera($sql, "../Conexion.php", "Documentos");
         break;
     case "ValoresFiltro":
-        $sql = "SELECT MONTHNAME(fechaCarga) as mes, SUM(valorComercial) as valorComercial, SUM(valorIndemnizacion) as valorIndemnizacion,"
-            . " COUNT(idRegistro) as siniestros FROM infoauto as ia JOIN infosiniestro ON idRegistro = ia.fkIdRegistro"
+        $sql = "SELECT MONTHNAME(fechaCarga) as mes, SUM(valorComercial) as valorComercial, SUM(valorIndemnizacion) as valorIndemnizacion"
+            . " FROM infoauto as ia JOIN infosiniestro ON idRegistro = ia.fkIdRegistro"
             . " JOIN fechasseguimiento as fs ON idRegistro = fs.fkIdRegistro WHERE fechaCarga BETWEEN '$fechaCargaInicio' AND '$fechaCargaFinal'"
             . " AND fechaSeguimiento BETWEEN '$fechaSeguimientoInicio' AND '$fechaSeguimientoFinal' GROUP BY MONTH(fechaCarga)";
         ConsultasSelectCualquiera($sql, "../Conexion.php", "Valores");
