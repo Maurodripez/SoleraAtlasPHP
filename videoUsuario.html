@@ -25,8 +25,9 @@
 		<button id="boton">Tomar foto</button>
 	</div>
 	<br>
-	<video width="400" height="300 muted="muted" id="video"></video>
-	<canvas id="canvas" style="display:'';"></canvas>
+	<input width="400" height="300 muted="muted" type="file" id="video" capture="camera">
+	<canvas id="canvas" style="display:none"></canvas>
+	<img id="respuestaVideo" src="" alt="">
 
 </body>
 <script src="./js/video.js"></script>

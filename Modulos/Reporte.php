@@ -1,7 +1,7 @@
 <?php
-session_start();    
+session_start();
 if (!isset($_SESSION['usuario'])) {
-header('Location: ../index.html');
+    header('Location: ../index.html');
 }
 ?>
 <!DOCTYPE html>
@@ -204,7 +204,7 @@ header('Location: ../index.html');
                         </div>
                     </div>
                     <div class="row 2">
-                    <div class="col pb-3 input-group btn-group btn-sm dropup">
+                        <div class="col pb-3 input-group btn-group btn-sm dropup">
                             <label class="input-group-text fw-bold" for="btnSeleccionaSeguimiento">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-calendar-check p-1" viewBox="0 0 16 16">
@@ -250,8 +250,8 @@ header('Location: ../index.html');
                                             <path
                                                 d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
                                         </svg>
-                                        <input id="fechaSeguimientoFinal" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]" type="text"
-                                            class="form-control input-group-append" placeholder="Fecha"
+                                        <input id="fechaSeguimientoFinal" pattern="[0-9]{4}[-][0-9]{2}[-][0-9][2]"
+                                            type="text" class="form-control input-group-append" placeholder="Fecha"
                                             name="txtFechaSeguimiento">
                                     </div>
                                 </div>
@@ -394,6 +394,20 @@ header('Location: ../index.html');
                         </button>
                         <button type="button" class="btn btn-primary">Limpiar</button>
                         <button type="button" class="btn btn-primary">Exportar</button>
+                        <button class="btn btn-primary" id="btnGraficaValores" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#graficaValores" aria-expanded="false" aria-controls="graficaValores">
+                            Valores
+                        </button>
+                    </div>
+                    </p>
+                    <div class="collapse" id="graficaValores">
+                        <button class="btn btn-primary pb-2" id="btnFiltroValores">
+                            Filtrar
+                        </button>
+                        <div class="card card-body">
+                            <div id="graficaValores">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

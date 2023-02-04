@@ -1,49 +1,24 @@
 <?php
 include "../FuncionesSQL.php";
 $accion = $_POST['accion'];
+$fechaCargaInicio = $_POST['fechaCargaInicio'];
+$fechaCargaFinal = $_POST['fechaCargaFinal'];
+$fechaSeguimientoInicio = $_POST['fechaSeguimientoInicio'];
+$fechaSeguimientoFinal = $_POST['fechaSeguimientoFinal'];
 switch ($accion) {
-    case "infoMapa": {
-            $fechaCargaInicio = $_POST['fechaCargaInicio'];
-            $fechaCargaFinal = $_POST['fechaCargaFinal'];
-            $estacion = $_POST['estacion'];
-            $estatus = $_POST['estatus'];
-            $subEstatus = $_POST['subEstatus'];
-            $fechaSeguimientoInicio = $_POST['fechaSeguimientoInicio'];
-            $fechaSeguimientoFinal = $_POST['fechaSeguimientoFinal'];
-            $region = $_POST['region'];
-            $estado = $_POST['estado'];
-            $cobertura = $_POST['cobertura'];
-            if ($estacion == "Selecciona...") {
-                $estacion = "";
-            }
-            if ($estatus == "Selecciona...") {
-                $estatus = "";
-            }
-            if ($subEstatus == "Selecciona...") {
-                $subEstatus = "";
-            }
-            if ($region == "Selecciona...") {
-                $region = "";
-            }
-            if ($estado == "Selecciona...") {
-                $estado = "";
-            }
-            if ($cobertura == "Selecciona...") {
-                $cobertura = "";
-            }
-            $sql = "select count(estado) as cantidad, estado from infosiniestro,fechasseguimiento,estadoproceso where fechaCarga>'$fechaCargaInicio' and fechaCarga<'$fechaCargaFinal'"
-                . " and fechaSeguimiento>'$fechaSeguimientoInicio' and fechaSeguimiento<'$fechaSeguimientoFinal' and estacionProceso like '%$estacion%' and estatusOperativo like '%$estatus%'"
-                . " and subEstatusProceso like '%$subEstatus%' and region like '%$region%' and estado like '%$estado%' and cobertura like '%$cobertura%'"
-                . " and fkidRegistro=idRegistro and fkIdRegistroEstadoProceso=idRegistro group by estado";
+    case "infoMapa":{
+            $sql = "select count(estado) as cantidad, estado from infosiniestro,fechasseguimiento where fechaCarga>'$fechaCargaInicio'"
+                . " and fechaCarga<'$fechaCargaFinal' and fechaSeguimiento>'$fechaSeguimientoInicio' and fechaSeguimiento<'$fechaSeguimientoFinal'"
+                . " and fkidRegistro=idRegistro group by estado";
             ConsultasSelectCualquiera($sql, '../Conexion.php', 'Estados');
             break;
         }
-    case "foliosArea": {
+    case "foliosArea":{
             $sql = "select count(estacionProceso) as conteo, estacionProceso from estadoproceso group by estacionProceso";
             ConsultasSelectCualquiera($sql, '../Conexion.php', "Estacion");
             break;
         }
-    case "estatusSeguimiento": {
+    case "estatusSeguimiento":{
             $fechaCargaInicio = $_POST['fechaCargaInicio'];
             $fechaCargaFinal = $_POST['fechaCargaFinal'];
             $fechaSeguimientoInicio = $_POST['fechaSeguimientoInicio'];
@@ -162,6 +137,13 @@ switch ($accion) {
         $sql = "select count(porcentajeTotal) conteo,porcentajeTotal from docsaprobadosatlas,fechasseguimiento "
             . " where datediff(CURDATE(), fechaSeguimiento)<30 and fkDocsAtlas=fkidRegistro group by porcentajeTotal";
         ConsultasSelectCualquiera($sql, "../Conexion.php", "Documentos");
+        break;
+    case "ValoresFiltro":
+        $sql = "SELECT MONTHNAME(fechaCarga) as mes, SUM(valorComercial) as valorComercial, SUM(valorIndemnizacion) as valorIndemnizacion,"
+            . " COUNT(idRegistro) as siniestros FROM infoauto as ia JOIN infosiniestro ON idRegistro = ia.fkIdRegistro"
+            . " JOIN fechasseguimiento as fs ON idRegistro = fs.fkIdRegistro WHERE fechaCarga BETWEEN '$fechaCargaInicio' AND '$fechaCargaFinal'"
+            . " AND fechaSeguimiento BETWEEN '$fechaSeguimientoInicio' AND '$fechaSeguimientoFinal' GROUP BY MONTH(fechaCarga)";
+        ConsultasSelectCualquiera($sql, "../Conexion.php", "Valores");
         break;
 }
 function ultimoDiaMesActual()

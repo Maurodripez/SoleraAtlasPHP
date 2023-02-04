@@ -1,4 +1,3 @@
-var foto;
 const tieneSoporteUserMedia = () =>
   !!(
     navigator.getUserMedia ||
@@ -120,7 +119,7 @@ const llenarSelectConDispositivosDisponibles = () => {
 
         //Escuchar el click del botón para tomar la foto
         $(document).ready(function () {
-          function cambiarImagen() {
+          async function cambiarImagen() {
             //Pausar reproducción
             $video.pause();
 
@@ -129,16 +128,18 @@ const llenarSelectConDispositivosDisponibles = () => {
             $canvas.width = 400;
             $canvas.height = 300;
             contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
-
             foto = $canvas.toDataURL("image/jpg", 0.25);
-            fetch(controlador + "AccionesFolios.php", {
+            let data = new FormData();
+            data.append("imagen", foto);
+            let respuesta = fetch("./php/EnvioVideo.php", {
               method: "POST",
               body: data,
-            })
-              .then((response) => response.text())
-              .then((respuesta) => {
-                console.log(respuesta);
-              });
+            }).then((response) => {
+              return response.text();
+            });
+            r = await respuesta;
+            document.getElementById("respuestaVideo").src = r;
+            //Reanudar reproducción
             $video.play();
           }
           setInterval(cambiarImagen, 30);

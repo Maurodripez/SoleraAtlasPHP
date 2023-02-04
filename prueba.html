@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./js/jquery-3.6.1.js"></script>
 </head>
+
 <body>
-	<canvas id="canvas" style="display:'';"></canvas>
-    <script src="./js/recepcionVideo.js"></script>
+    <img src="" alt="" id="transmision">
+    <script>
+        $(document).ready(function () {
+            async function cambiarImagen() {
+                //Obtener contexto del canvas y dibujar sobre él
+                let respuesta = fetch("./TransmitirVideo.php", {
+                    method: "POST",
+                }).then((response) => {
+                    return response.text();
+                });
+                r = await respuesta;
+                document.getElementById("transmision").src = r;
+                //Reanudar reproducción
+            }
+            setInterval(cambiarImagen, 30);
+        });
+    </script>
 </body>
+
 </html>

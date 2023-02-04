@@ -24,7 +24,6 @@ function datosMapa() {
       cobertura: document.getElementById("txtCobertura").value,
     },
   }).done(function (result) {
-    console.log(result);
     for (let i in result.Estados) {
       if (result.Estados[i].estado === "Ciudad de Mexico") {
         if (result.Estados[i].cantidad <= 4) {
@@ -67,9 +66,20 @@ function foliosArea() {
     dataType: "json",
     data: {
       accion: "foliosArea",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
     success: function (result) {
-      console.log(result);
       let primera;
       let segunda;
       let tercera;
@@ -243,7 +253,130 @@ function foliosArea() {
     },
   });
 }
+function valores() {
+  let data = new FormData();
+  data.append("accion", "ValoresFiltro");
+  data.append(
+    "fechaCargaInicio",
+    document.getElementById("fechaCargaInicio").value
+  );
+  data.append(
+    "fechaCargaFinal",
+    document.getElementById("fechaCargaFinal").value
+  );
+  data.append(
+    "fechaSeguimientoInicio",
+    document.getElementById("fechaSeguimientoInicio").value
+  );
+  data.append(
+    "fechaSeguimientoFinal",
+    document.getElementById("fechaSeguimientoFinal").value
+  );
+  fetch(rutaInicial + "InformacionMapas.php", {
+    method: "POST",
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+      const meses = new Map([
+        ["January", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["February", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["March", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["April", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["May", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["June", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["July", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["August", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["September", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["October", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["November", { valorIndemnizacion: 0, valorComercial: 0 }],
+        ["December", { valorIndemnizacion: 0, valorComercial: 0 }],
+      ]);
+      for (let i in result.Valores) {
+        meses.set(result.Valores[i].mes, {
+          valorIndemnizacion: result.Valores[i].valorIndemnizacion,
+          valorComercial: result.Valores[i].valorComercial,
+        });
+      }
+      console.log(meses);
+      options = {
+        series: [
+          {
+            name: "Valor comercial",
+            data: [
+              meses.get("January").valorComercial,
+              meses.get("February").valorComercial,
+              meses.get("March").valorComercial,
+              meses.get("April").valorComercial,
+              meses.get("May").valorComercial,
+              meses.get("June").valorComercial,
+              meses.get("July").valorComercial,
+              meses.get("August").valorComercial,
+              meses.get("September").valorComercial,
+              meses.get("October").valorComercial,
+              meses.get("November").valorComercial,
+              meses.get("December").valorComercial,
+            ],
+          },
+          {
+            name: "Valor indemnizacion",
+            data: [
+              meses.get("January").valorIndemnizacion,
+              meses.get("February").valorIndemnizacion,
+              meses.get("March").valorIndemnizacion,
+              meses.get("April").valorIndemnizacion,
+              meses.get("May").valorIndemnizacion,
+              meses.get("June").valorIndemnizacion,
+              meses.get("July").valorIndemnizacion,
+              meses.get("August").valorIndemnizacion,
+              meses.get("September").valorIndemnizacion,
+              meses.get("October").valorIndemnizacion,
+              meses.get("November").valorIndemnizacion,
+              meses.get("December").valorIndemnizacion,
+            ],
+          },
+        ],
+        colors: ["#605ca8", "#605ca8"],
+        chart: {
+          height: 350,
+          type: "area",
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: "smooth",
+        },
+        xaxis: {
+          type: "text",
+          categories: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+        },
+      };
 
+      let chart = new ApexCharts(
+        document.querySelector("#graficaValores"),
+        options
+      );
+      chart.render();
+    })
+    .catch((error) => {
+      alert("Ha ocurrido un error");
+    });
+}
 function estatusSeguimiento() {
   //inicia grafica de seguimiento
   $.ajax({
@@ -254,10 +387,16 @@ function estatusSeguimiento() {
       accion: "estatusSeguimiento",
       fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
       fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
       fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
         .value,
       fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
         .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
     success: function (result) {
       let csDocumentosC = 0;
@@ -395,6 +534,18 @@ function asignadosEntregados() {
     url: rutaInicial + "InformacionMapas.php",
     data: {
       accion: "Asignados",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
     success: function (result) {
       console.log(result);
@@ -417,6 +568,20 @@ function asignadosEntregados() {
         url: rutaInicial + "InformacionMapas.php",
         data: {
           accion: "Entregados",
+          fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+          fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+          estacion: document.getElementById("txtEstacion").value,
+          estatus: document.getElementById("txtEstatus").value,
+          subEstatus: document.getElementById("txtSubEstatus").value,
+          fechaSeguimientoInicio: document.getElementById(
+            "fechaSeguimientoInicio"
+          ).value,
+          fechaSeguimientoFinal: document.getElementById(
+            "fechaSeguimientoFinal"
+          ).value,
+          region: document.getElementById("txtRegion").value,
+          estado: document.getElementById("txtEstado").value,
+          cobertura: document.getElementById("txtCobertura").value,
         },
         success: function (data) {
           let sinDiagonal2 = data.split("//");
@@ -457,6 +622,7 @@ function asignadosEntregados() {
                 ],
               },
             ],
+            colors: ["#605ca8", "#605ca8"],
             chart: {
               height: 350,
               type: "area",
@@ -502,6 +668,18 @@ function foliosFechas() {
     url: rutaInicial + "InformacionMapas.php",
     data: {
       accion: "FoliosFechas",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
   }).done(function (result) {
     let sinDiagonal = result.split("//");
@@ -520,6 +698,7 @@ function foliosFechas() {
           align: "center",
         },
       },
+      colors: ["#605ca8"],
       series: [
         {
           name: "Folios",
@@ -562,6 +741,18 @@ function reporteDocumentos() {
     url: rutaInicial + "InformacionMapas.php",
     data: {
       accion: "ReporteDocumentos",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
     success: function (result) {
       let sinDiagonal = result.split("//");
@@ -597,6 +788,7 @@ function reporteDocumentos() {
             ],
           },
         ],
+        colors: ["#605ca8", "#605ca8", "#605ca8", "#605ca8", "#605ca8"],
         labels: [
           sinDiagonal[1],
           sinDiagonal[3],
@@ -643,6 +835,18 @@ function porcentajeDocs() {
     dataType: "json",
     data: {
       accion: "PorcentajeDocs",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
     success: function (result) {
       let de0A20Conteo = 0;
@@ -683,6 +887,7 @@ function porcentajeDocs() {
           width: "650px",
           type: "bar",
         },
+        colors: ["#605ca8", "#605ca8", "#605ca8", "#605ca8", "#605ca8"],
         series: [
           {
             name: "Documentos",
@@ -721,6 +926,18 @@ function porcentajeTotal() {
     dataType: "json",
     data: {
       accion: "PorcentajeTotal",
+      fechaCargaInicio: document.getElementById("fechaCargaInicio").value,
+      fechaCargaFinal: document.getElementById("fechaCargaFinal").value,
+      estacion: document.getElementById("txtEstacion").value,
+      estatus: document.getElementById("txtEstatus").value,
+      subEstatus: document.getElementById("txtSubEstatus").value,
+      fechaSeguimientoInicio: document.getElementById("fechaSeguimientoInicio")
+        .value,
+      fechaSeguimientoFinal: document.getElementById("fechaSeguimientoFinal")
+        .value,
+      region: document.getElementById("txtRegion").value,
+      estado: document.getElementById("txtEstado").value,
+      cobertura: document.getElementById("txtCobertura").value,
     },
     success: function (result) {
       console.log(result);
@@ -763,6 +980,7 @@ function porcentajeTotal() {
           width: "650px",
           type: "bar",
         },
+        colors: ["#605ca8", "#605ca8", "#605ca8", "#605ca8", "#605ca8"],
         series: [
           {
             name: "Procentaje Total",
@@ -795,6 +1013,14 @@ function porcentajeTotal() {
   });
 }
 $(document).ready(() => {
+  $("#btnGraficaValores").on("click", function (e) {
+    e.preventDefault();
+    valores();
+  });
+  $("#btnFiltroValores").on("click", function (e) {
+    e.preventDefault();
+    valores();
+  });
   $("#btnBuscar").on("click", function (e) {
     if (
       document.getElementById("fechaCargaInicio").value.length === 0 ||
@@ -844,135 +1070,6 @@ $(document).ready(() => {
 ////////////////////////////////
 //funciones utilizadas
 ////////////////////////////////
-
-function casosRegiones() {
-  //grafica de regiones//
-  $.ajax({
-    method: "POST",
-    url: "../DatosReporte",
-    data: {
-      accion: "porRegiones",
-    },
-    success: function (result) {
-      let aC = 0;
-      let bC = 0;
-      let cC = 0;
-      let dC = 0;
-      let eC = 0;
-      let fC = 0;
-      let gC = 0;
-      let hC = 0;
-      let iC = 0;
-      let jC = 0;
-      let sinComas = result.split(",");
-      for (let i = 0; i < sinComas.length; i = i + 2) {
-        //se hace para hacer el calculo del procentaje de cada caso
-        porcentaje = (sinComas[i - 1] * 100) / sinComas[sinComas.length - 1];
-        switch (sinComas[i]) {
-          case "Layout ZG A: Guadalajara-Colima-Nayarit":
-            aC = sinComas[i + 1];
-            break;
-          case "Layout ZG B: Acapulco-Toluca-Pachuca-Cuernavaca":
-            bC = sinComas[i + 1];
-            break;
-          case "Layout ZG C: Puebla-Queretaro-Tlaxcala":
-            cC = sinComas[i + 1];
-            break;
-          case "Layout ZG D: Merida-Cancun-Tuxtla-Villahermosa-Campeche":
-            dC = sinComas[i + 1];
-            break;
-          case "Layout ZG E: Leon, San Luis Potosi-Aguascalientes-Morelia-Tamaulipas-Zacatecas":
-            eC = sinComas[i + 1];
-            break;
-          case "NLayout ZG F: CDMX-Estado de Mexico":
-            fC = sinComas[i + 1];
-            break;
-          case "SLayout ZG G: Coatzacualcos-Oaxaca-Veracruz-Xalapa":
-            gC = sinComas[i + 1];
-            break;
-          case "Layout ZG H: Monterrey":
-            hC = sinComas[i + 1];
-            break;
-          case "Layout ZG I: Chihuahua-Cd. Juarez-Reynosa-Saltillo-Tampico-Torreon-Nuevo Laredo-Durango":
-            iC = sinComas[i + 1];
-            break;
-          case "Layout ZG J: Mexicali-Cd. Obregon-Culiacan-Hermosillo-Los Mochis-Tijuana Baja California-Baja California Sur":
-            jC = sinComas[i + 1];
-            break;
-        }
-      }
-
-      //quitamos la ultima coma para poder traer los resultados correctos
-      let options = {
-        colors: [
-          "#F44336",
-          "#E91E63",
-          "#9C27B0",
-          "#F5BF07",
-          "#D1F507",
-          "#77F507",
-          "#07F589",
-          "#9407F5",
-          "#0707F5",
-        ],
-        series: [
-          Number(aC),
-          Number(bC),
-          Number(cC),
-          Number(dC),
-          Number(eC),
-          Number(fC),
-          Number(gC),
-          Number(hC),
-          Number(iC),
-          Number(jC),
-        ],
-        chart: {
-          width: 650,
-          type: "pie",
-        },
-        labels: [
-          "Layout ZG A",
-          "Layout ZG B",
-          "Layout ZG C",
-          "Layout ZG D",
-          "Layout ZG E",
-          "Layout ZG F",
-          "Layout ZG G",
-          "Layout ZG H",
-          "Layout ZG I",
-          "Layout ZG J",
-        ],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200,
-              },
-              legend: {
-                position: "bottom",
-              },
-            },
-          },
-        ],
-        title: {
-          text: "folios por region",
-          style: {
-            fontSize: "27px",
-            align: "center",
-          },
-        },
-      };
-
-      let chart = new ApexCharts(
-        document.querySelector("#regionesGrafica"),
-        options
-      );
-      chart.render();
-    },
-  });
-}
 function obtenerFechaConvertida(n) {
   const date = new Date();
   date.setDate(date.getDate() - n);
